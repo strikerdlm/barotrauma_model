@@ -1,0 +1,27 @@
+Statistical Analysis Results
+===========================
+
+1. ET Dysfunction and Pressure Differential Relationship
+Correlation: 0.1735
+P-value: 1.8315e-278
+R² Score: 0.0301
+Regression Coefficient: 55.0798
+Regression Intercept: 255.1633
+
+2. Descent Rate Group Correlations
+Low: r=0.2650, p=2.7677e-168
+Medium-Low: r=0.1590, p=1.9992e-67
+Medium-High: r=0.1347, p=1.4588e-37
+High: r=0.0716, p=2.8729e-13
+
+3. Category-based Pressure Analysis
+ANOVA F-statistic: 425.2855
+ANOVA p-value: 3.6798e-272
+
+Pressure Differential Summary by Category:
+                mean        std         min        max
+category                                              
+mild      277.281183  86.502603   37.464901  430.43129
+moderate  290.488441  83.940831   94.304165  430.43129
+normal    260.489569  90.096549    0.000000  430.43129
+severe    297.253236  83.027313  155.804165  430.43129
