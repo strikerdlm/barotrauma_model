@@ -1,0 +1,7 @@
+,et_dysfunction,descent_rate,max_pressure_diff,et_locked_percent,barotitis_percent,baromyringitis_percent
+et_dysfunction,1.0,-0.555,0.2898,0.9142,0.9142,0.8883
+descent_rate,-0.555,1.0,0.0958,-0.5358,-0.5358,-0.5114
+max_pressure_diff,0.2898,0.0958,1.0,0.3276,0.3276,0.3853
+et_locked_percent,0.9142,-0.5358,0.3276,1.0,1.0,0.9741
+barotitis_percent,0.9142,-0.5358,0.3276,1.0,1.0,0.9741
+baromyringitis_percent,0.8883,-0.5114,0.3853,0.9741,0.9741,1.0

@@ -1,0 +1,7 @@
+,max_pressure_diff,max_pressure_diff,max_pressure_diff,max_pressure_diff,mean_pressure_diff,mean_pressure_diff,et_locked_percent,et_locked_percent,et_locked_percent,et_locked_percent,barotitis_percent,barotitis_percent,barotitis_percent,barotitis_percent,baromyringitis_percent,baromyringitis_percent,baromyringitis_percent,baromyringitis_percent,time_above_passive,time_above_passive,time_above_lock,time_above_lock,max_ascent_dp,max_ascent_dp,max_descent_dp,max_descent_dp
+,mean,std,min,max,mean,std,mean,std,min,max,mean,std,min,max,mean,std,min,max,mean,std,mean,std,mean,max,mean,max
+category,,,,,,,,,,,,,,,,,,,,,,,,,,
+mild,244.21,107.7,38.27,430.42,150.92,120.37,43.17,33.49,0.0,75.0,43.17,33.49,0.0,75.0,36.79,31.88,0.0,71.11,68.31,34.02,55.3,40.87,197.05,429.34,212.26,429.31
+moderate,315.5,84.32,121.45,430.42,253.64,65.89,88.84,7.06,4.76,93.75,88.84,7.06,4.76,93.75,79.18,16.13,0.0,89.13,95.19,3.96,88.84,7.06,302.12,429.34,281.26,429.31
+normal,171.24,113.54,36.56,430.45,24.82,53.19,3.44,11.99,0.0,64.17,3.44,11.99,0.0,64.17,2.91,10.96,0.0,61.25,26.07,19.89,7.32,20.31,69.26,427.56,157.94,430.45
+severe,327.68,81.0,184.41,430.42,260.37,57.6,110.41,2.11,101.54,113.57,110.41,2.11,101.54,113.57,97.91,4.28,86.4,105.0,94.96,1.26,92.01,1.76,314.94,429.34,307.39,429.31

@@ -1,0 +1,11 @@
+Metric,Value
+ANOVA F-statistic (Pressure by Category),109.7194277225752
+ANOVA p-value (Pressure by Category),1.2183619968564506e-59
+Chi-square (Risk Distribution),170.8530643953869
+Chi-square p-value,3.19431302212188e-30
+ET Lock ANOVA F-statistic,1678.5271318530233
+ET Lock ANOVA p-value,0.0
+Regression R² Score,0.34810120401100486
+Descent Rate Coefficient,0.008565006476035822
+Dysfunction Coefficient,322.7739718110307
+Regression Intercept,101.00771704225278
