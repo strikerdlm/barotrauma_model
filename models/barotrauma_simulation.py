@@ -3,13 +3,15 @@ Barotrauma simulation core module for unpressurized aircraft
 All pressure values in mmHg, altitudes in feet, rates in ft/min
 """
 
-from dataclasses import dataclass
 import numpy as np
-from typing import Dict, Optional
-from flight_profile import FlightProfile
+from typing import Dict
+from .flight_profile import FlightProfile
 
 class BarotraumaSimulation:
-    """Main simulation class for barotrauma calculations with physiological parameters"""
+    """Main simulation class for barotrauma calculations.
+
+    Includes a simple physiology-informed model for ET function and TM load.
+    """
     
     # Physiological constants
     ET_LENGTH = 35.0  # mm
@@ -66,18 +68,19 @@ class BarotraumaSimulation:
         
         # Pressure thresholds become more sensitive with dysfunction
         self.et_lock_threshold = self.ET_LOCK_THRESHOLD * (1.0 - 0.5 * dysfunction)
-        self.passive_opening_threshold = self.PASSIVE_OPENING_THRESHOLD * (1.0 + dysfunction)
+        self.passive_opening_threshold = (
+            self.PASSIVE_OPENING_THRESHOLD * (1.0 + dysfunction)
+        )
         
         # Risk amplification factor increases with dysfunction
         self.risk_amplification = 1.0 + (2.0 * dysfunction)  # More amplification with worse dysfunction
     
     def calculate_risk_factor(self, descent_rate: float) -> float:
-        """
-        Calculate risk factor with logarithmic scaling and dysfunction-based amplification
-        
+        """Calculate risk factor with logarithmic scaling and amplification.
+
         Args:
             descent_rate: Descent rate in ft/min (positive value)
-            
+
         Returns:
             Risk factor (0.0 to 1.0)
         """
@@ -90,7 +93,10 @@ class BarotraumaSimulation:
         else:
             # Logarithmic increase above safe rate
             excess_ratio = descent_rate / self.safe_descent_rate
-            log_factor = np.log(excess_ratio) / np.log(self.critical_descent_rate / self.safe_descent_rate)
+            log_factor = (
+                np.log(excess_ratio)
+                / np.log(self.critical_descent_rate / self.safe_descent_rate)
+            )
             
             # Risk increases more sharply with dysfunction
             max_additional_risk = 1.0 - self.base_risk
@@ -98,7 +104,9 @@ class BarotraumaSimulation:
         
         return np.clip(risk, 0.0, 1.0)
     
-    def calculate_et_opening_probability(self, pressure_diff: float, altitude_rate: float, dt: float) -> float:
+    def calculate_et_opening_probability(
+        self, pressure_diff: float, altitude_rate: float, dt: float
+    ) -> float:
         """Calculate physiologically-based ET opening probability"""
         dysfunction = self.flight.et_dysfunction
         
@@ -176,7 +184,10 @@ class BarotraumaSimulation:
             et_opens = np.random.random() < et_prob
             
             # Check for ET lock condition
-            et_locked = abs(current_diff) > (self.et_lock_threshold / (1.0 + risk_factor))
+            et_locked = (
+                abs(current_diff)
+                > (self.et_lock_threshold / (1.0 + risk_factor))
+            )
             results['ET_locked'][i] = et_locked
             
             if et_opens and not et_locked:
@@ -194,6 +205,9 @@ class BarotraumaSimulation:
             # Barotrauma conditions adjusted by risk factor
             threshold_factor = 1.0 / (1.0 + risk_factor)
             results['barotitis'][i] = abs(results['dP'][i]) > (self.et_lock_threshold * threshold_factor)
-            results['baromyringitis'][i] = abs(results['dP'][i]) > (self.MEMBRANE_RUPTURE_THRESHOLD * threshold_factor)
+            results['baromyringitis'][i] = (
+                abs(results['dP'][i])
+                > (self.MEMBRANE_RUPTURE_THRESHOLD * threshold_factor)
+            )
         
         return results
