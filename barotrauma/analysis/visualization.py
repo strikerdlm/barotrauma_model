@@ -6,6 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
 import plotly.graph_objects as go
+import io
+import tempfile
+import os
+import warnings
 import seaborn as sns
 from typing import Dict, List, Optional
 import pandas as pd
@@ -97,6 +101,88 @@ class BarotraumaVisualizer:
             template='plotly_white'
         )
         return fig
+
+    # ---------- Optional backends: Matplotlib 3D, PyVista, Mayavi ---------- #
+    def plot_3d_surface_matplotlib(self, time: np.ndarray, altitude: np.ndarray,
+                                   delta_p: np.ndarray,
+                                   title: str = 'ΔP Surface (Matplotlib 3D)'):
+        """Static 3D surface using Matplotlib's mplot3d."""
+        T, A = np.meshgrid(time, altitude)
+        Z = delta_p
+        if Z.ndim == 1:
+            Z = np.tile(Z, (len(altitude), 1))
+
+        fig = plt.figure(figsize=(10, 7))
+        ax = fig.add_subplot(111, projection='3d')
+        surf = ax.plot_surface(T, A, Z, cmap='viridis', linewidth=0, antialiased=True)
+        ax.set_xlabel('Time (min)')
+        ax.set_ylabel('Altitude (ft)')
+        ax.set_zlabel('ΔP (mmHg)')
+        ax.set_title(title)
+        fig.colorbar(surf, shrink=0.5, aspect=10)
+        fig.tight_layout()
+        return fig
+
+    def plot_3d_surface_pyvista(self, time: np.ndarray, altitude: np.ndarray,
+                                 delta_p: np.ndarray,
+                                 screenshot_path: str | None = None):
+        """3D surface using PyVista. Returns screenshot path or bytes.
+
+        Notes: In web apps like Streamlit, interactive VTK windows are not
+        supported out-of-the-box. We render a high-res screenshot instead.
+        """
+        try:
+            import pyvista as pv
+        except Exception as e:
+            warnings.warn(
+                'PyVista not available. Install with `pip install pyvista vtk`.'
+            )
+            raise
+
+        T, A = np.meshgrid(time, altitude)
+        Z = delta_p
+        if Z.ndim == 1:
+            Z = np.tile(Z, (len(altitude), 1))
+
+        grid = pv.StructuredGrid(T, A, Z)
+        plotter = pv.Plotter(off_screen=True)
+        plotter.add_mesh(grid, cmap='viridis', smooth_shading=True)
+        plotter.set_background('white')
+
+        if screenshot_path is None:
+            tmpdir = tempfile.mkdtemp(prefix='pyvista_')
+            screenshot_path = os.path.join(tmpdir, 'pyvista_surface.png')
+        plotter.show(screenshot=screenshot_path, auto_close=True)
+        return screenshot_path
+
+    def plot_3d_surface_mayavi(self, time: np.ndarray, altitude: np.ndarray,
+                               delta_p: np.ndarray,
+                               screenshot_path: str | None = None):
+        """3D surface using Mayavi (screenshot output)."""
+        try:
+            from mayavi import mlab
+        except Exception:
+            warnings.warn(
+                'Mayavi not available. Install with `pip install mayavi` or conda-forge.'
+            )
+            raise
+
+        T, A = np.meshgrid(time, altitude)
+        Z = delta_p
+        if Z.ndim == 1:
+            Z = np.tile(Z, (len(altitude), 1))
+
+        mlab.figure(size=(800, 600), bgcolor=(1, 1, 1))
+        surf = mlab.surf(T, A, Z, colormap='viridis')
+        mlab.axes(xlabel='Time (min)', ylabel='Altitude (ft)', zlabel='ΔP (mmHg)')
+        mlab.outline()
+
+        if screenshot_path is None:
+            tmpdir = tempfile.mkdtemp(prefix='mayavi_')
+            screenshot_path = os.path.join(tmpdir, 'mayavi_surface.png')
+        mlab.savefig(screenshot_path)
+        mlab.close(all=True)
+        return screenshot_path
 
     def plot_risk_analysis(self, df: pd.DataFrame):
         """Plot risk analysis from database"""

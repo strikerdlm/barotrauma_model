@@ -8,6 +8,7 @@ from barotrauma.models.chamber_risk import (
 )
 from barotrauma.analysis.visualization import BarotraumaVisualizer
 from barotrauma.analysis.statistics import StatisticalAnalyzer
+import os
 
 
 st.set_page_config(page_title="Hypobaric Chamber Barotrauma Risk",
@@ -79,6 +80,29 @@ with tab1:
         delta_p=np.tile(result.delta_P_mmHg, (len(result.altitude_ft), 1)),
     )
     st.plotly_chart(fig3d, use_container_width=True)
+    # Optional: PyVista & Mayavi screenshots if libraries available
+    cols = st.columns(2)
+    try:
+        screenshot_pv = visual.plot_3d_surface_pyvista(
+            time=result.time_s,
+            altitude=result.altitude_ft,
+            delta_p=np.tile(result.delta_P_mmHg, (len(result.altitude_ft), 1)),
+        )
+        if os.path.exists(screenshot_pv):
+            cols[0].image(screenshot_pv, caption='PyVista 3D Surface (screenshot)')
+    except Exception:
+        pass
+
+    try:
+        screenshot_mv = visual.plot_3d_surface_mayavi(
+            time=result.time_s,
+            altitude=result.altitude_ft,
+            delta_p=np.tile(result.delta_P_mmHg, (len(result.altitude_ft), 1)),
+        )
+        if os.path.exists(screenshot_mv):
+            cols[1].image(screenshot_mv, caption='Mayavi 3D Surface (screenshot)')
+    except Exception:
+        pass
     st.caption(
         "During descent, ambient pressure rises. Without equalization,"
         " middle-ear pressure lags, pulling the TM inward. Valsalva helps"
