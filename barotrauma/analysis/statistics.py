@@ -10,6 +10,7 @@ import numpy as np
 from scipy import stats
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
+import pandas as pd
 
 @dataclass
 class RiskAssessment:
@@ -37,6 +38,33 @@ class StatisticalAnalyzer:
             'moderate': (0.05, 0.25),
             'high': (0.25, 1.0)
         }
+        
+    def compute_metrics(self, simulation_results: Dict[str, np.ndarray]) -> Dict[str, float]:
+        """Compute key validation metrics from simulation results."""
+        dP = simulation_results['dP']
+        eq = simulation_results.get('equalization_rate', np.zeros_like(dP))
+        metrics = {
+            'max_abs_deltaP_mmHg': float(np.max(np.abs(dP))),
+            'mean_abs_deltaP_mmHg': float(np.mean(np.abs(dP))),
+            'time_above_lock_frac': float(np.mean(np.abs(dP) > 90.0)),
+            'time_above_rupture_frac': float(np.mean(np.abs(dP) > 150.0)),
+            'mean_equalization_rate': float(np.mean(eq)),
+        }
+        return metrics
+    
+    def metrics_dataframe(self, scenarios: List[Dict],
+                          results_list: List[Dict[str, np.ndarray]]) -> pd.DataFrame:
+        """Assemble a tidy DataFrame of metrics across scenarios."""
+        rows = []
+        for scenario, results in zip(scenarios, results_list):
+            m = self.compute_metrics(results)
+            row = {
+                'et_severity': scenario.get('et_severity', 'n/a'),
+                'descent_rate_ft_min': scenario.get('descent_rate_ft_min', np.nan),
+                **m,
+            }
+            rows.append(row)
+        return pd.DataFrame(rows)
         
     def calculate_confidence_interval(self, 
                                    pressure_data: np.ndarray,

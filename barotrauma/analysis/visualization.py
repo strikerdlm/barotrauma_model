@@ -4,6 +4,8 @@ Visualization Tools for Middle Ear Barotrauma Analysis
 
 import numpy as np
 import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+import plotly.graph_objects as go
 import seaborn as sns
 from typing import Dict, List, Optional
 import pandas as pd
@@ -42,6 +44,60 @@ class BarotraumaVisualizer:
         plt.tight_layout()
         return fig
     
+    def plot_3d_pressure_surface(self, time: np.ndarray, altitude: np.ndarray,
+                                 delta_p: np.ndarray, title: str =
+                                 "ΔP Surface (Time vs Altitude)"):
+        """Interactive 3D surface of ΔP(time, altitude) using Plotly."""
+        # Ensure proper grid
+        T, A = np.meshgrid(time, altitude)
+        Z = delta_p
+        if Z.ndim == 1:
+            # Attempt to reshape if provided as vector for each time
+            Z = np.tile(Z, (len(altitude), 1))
+
+        fig = go.Figure(data=go.Surface(z=Z, x=T, y=A, colorscale='Viridis'))
+        fig.update_layout(
+            title=title,
+            scene=dict(
+                xaxis_title='Time (min)',
+                yaxis_title='Altitude (ft)',
+                zaxis_title='ΔP (mmHg)'
+            ),
+            autosize=True,
+            template='plotly_white'
+        )
+        return fig
+
+    def plot_3d_equalization_field(self, time: np.ndarray, eq_rate: np.ndarray,
+                                   delta_p: np.ndarray,
+                                   title: str = '3D Equalization Field'):
+        """3D scatter of equalization speed vs time vs ΔP."""
+        fig = go.Figure(
+            data=go.Scatter3d(
+                x=time,
+                y=delta_p,
+                z=eq_rate,
+                mode='markers',
+                marker=dict(
+                    size=3,
+                    color=np.abs(delta_p),
+                    colorscale='Viridis',
+                    showscale=True,
+                    colorbar=dict(title='|ΔP|')
+                )
+            )
+        )
+        fig.update_layout(
+            title=title,
+            scene=dict(
+                xaxis_title='Time (s)',
+                yaxis_title='ΔP (mmHg)',
+                zaxis_title='Equalization speed (mmHg/s)'
+            ),
+            template='plotly_white'
+        )
+        return fig
+
     def plot_risk_analysis(self, df: pd.DataFrame):
         """Plot risk analysis from database"""
         fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
