@@ -102,6 +102,49 @@ class BarotraumaVisualizer:
         )
         return fig
 
+    def plot_tm_surface(self, time: np.ndarray, altitude: np.ndarray,
+                         tm_disp_ml: np.ndarray,
+                         title: str = 'TM Displacement Surface (mL)'):
+        """Interactive 3D surface of TM displacement."""
+        T, A = np.meshgrid(time, altitude)
+        Z = tm_disp_ml
+        if Z.ndim == 1:
+            Z = np.tile(Z, (len(altitude), 1))
+        fig = go.Figure(data=go.Surface(z=Z, x=T, y=A, colorscale='Viridis'))
+        fig.update_layout(
+            title=title,
+            scene=dict(
+                xaxis_title='Time (min)',
+                yaxis_title='Altitude (ft)',
+                zaxis_title='TM displacement (mL)'
+            ),
+            template='plotly_white'
+        )
+        return fig
+
+    def plot_risk_heatmap(self, severities: List[str], rates: np.ndarray,
+                           score_matrix: np.ndarray,
+                           title: str = 'Risk Heatmap (ET severity × descent rate)'):
+        """Interactive heatmap of risk scores across severities and descent rates."""
+        fig = go.Figure(
+            data=go.Heatmap(
+                z=score_matrix,
+                x=rates,
+                y=severities,
+                colorscale='YlOrRd',
+                zmin=0,
+                zmax=1,
+                colorbar=dict(title='Risk')
+            )
+        )
+        fig.update_layout(
+            title=title,
+            xaxis_title='Descent rate (ft/min)',
+            yaxis_title='ET severity',
+            template='plotly_white'
+        )
+        return fig
+
     # ---------- Optional backends: Matplotlib 3D, PyVista, Mayavi ---------- #
     def plot_3d_surface_matplotlib(self, time: np.ndarray, altitude: np.ndarray,
                                    delta_p: np.ndarray,
