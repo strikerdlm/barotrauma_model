@@ -123,6 +123,12 @@ with tab2:
         delta_p=result.delta_P_mmHg,
     )
     st.plotly_chart(cloud3d, use_container_width=True)
+    tm3d = visual.plot_tm_surface(
+        time=result.time_s,
+        altitude=result.altitude_ft,
+        tm_disp_ml=np.tile(result.tm_displacement_ml, (len(result.altitude_ft), 1)),
+    )
+    st.plotly_chart(tm3d, use_container_width=True)
     st.caption(
         "Equalization speed reflects ET function and descent rate; TM"
         " displacement reflects tension per compliance."
@@ -133,9 +139,24 @@ with tab3:
     rates = np.linspace(1000, 10000, 19)
     _, scores = model.risk_vs_descent_rate(scenario, rates)
     st.line_chart({"Risk Score": scores}, x=rates)
-    st.caption(
-        "Risk increases nonlinearly beyond severity-specific safe rates."
-    )
+    # Build small heatmap: rows = severities, cols = rates
+    severities = ["mild", "moderate", "severe"]
+    score_matrix = []
+    for sev in severities:
+        scn = ChamberScenario(
+            start_altitude_ft=float(start_alt),
+            descent_rate_ft_min=float(descent_rate),
+            et_severity=sev,
+            enable_valsava=enable_valsava,
+            valsalva_interval_s=float(valsalva_interval),
+            tympanum_volume_ml=float(tympanum_ml),
+            mastoid_volume_ml=float(mastoid_ml),
+        )
+        _, ssev = model.risk_vs_descent_rate(scn, rates)
+        score_matrix.append(ssev)
+    heat = visual.plot_risk_heatmap(severities, rates, np.array(score_matrix))
+    st.plotly_chart(heat, use_container_width=True)
+    st.caption("Risk increases nonlinearly beyond severity-specific safe rates.")
 
 # Statistical metrics summary
 metrics = stats.compute_metrics(
