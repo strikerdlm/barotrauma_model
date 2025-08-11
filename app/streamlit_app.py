@@ -1,7 +1,7 @@
 import numpy as np
 import streamlit as st
 
-from models.chamber_risk import (
+from barotrauma.models.chamber_risk import (
     HypobaricChamberRiskModel,
     ChamberScenario,
     ET_SEVERITY_TO_DYSFUNCTION,

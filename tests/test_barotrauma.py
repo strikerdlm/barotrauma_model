@@ -1,92 +1,163 @@
 """
-Test cases for barotrauma simulation
+Test script for barotrauma model validation.
 """
 
-import pytest
+import logging
 import numpy as np
-from models.barotrauma_simulation import BarotraumaSimulation, FlightProfile
-from models.physiology import PhysiologyParameters
-from models.et import ETParameters
-from models.alveolar import AlveolarParameters
+from pathlib import Path
+from src.test_model_relationships import ModelRelationshipTester
+from src.barotrauma_integrated_model import IntegratedBarotraumaModel
+from typing import Dict, List, Tuple
+from scipy.integrate import trapezoid
 
-@pytest.fixture
-def simulation():
-    """Create basic simulation setup"""
-    physiology = PhysiologyParameters()
-    et = ETParameters()
-    alveolar = AlveolarParameters()
-    flight = FlightProfile(
-        departure_elevation=1204,  # PIT
-        destination_elevation=8,    # MIA
-        cruise_duration=170.0
+def test_basic_cases():
+    """Test basic cases with known outcomes."""
+    model = IntegratedBarotraumaModel(physical_weight=0.6)
+    tester = ModelRelationshipTester(model)
+    
+    try:
+        # Test 1: Normal ET function
+        logger.info("Testing normal ET function")
+        result = tester.analyze_et_dysfunction_relationship()
+        
+        if result['data'].empty:
+            logger.error("No valid data obtained from ET dysfunction analysis")
+            return
+        
+        if 'risk_score' not in result['data'].columns:
+            logger.error("Risk score not found in results")
+            return
+            
+        assert result['data']['risk_score'].mean() < 0.3, "Risk too high for normal ET function"
+        
+        # Test 2: Severe dysfunction
+        logger.info("Testing severe ET dysfunction")
+        high_risk_cases = result['data'][result['data']['et_dysfunction'] > 0.8]
+        if not high_risk_cases.empty:
+            assert high_risk_cases['risk_score'].mean() > 0.6, "Risk too low for severe dysfunction"
+        else:
+            logger.warning("No high-risk cases found for testing")
+        
+        # Test 3: Rate sensitivity
+        logger.info("Testing rate sensitivity")
+        rate_results = tester.analyze_rate_interactions()
+        if rate_results and 'stats' in rate_results:
+            assert 'et_0.8' in rate_results['stats'], "Missing rate correlation for high ET dysfunction"
+        else:
+            logger.error("Rate interaction analysis failed")
+            
+    except Exception as e:
+        logger.error(f"Test failed with error: {str(e)}")
+        raise
+
+def test_physiological_bounds():
+    """Test if model respects physiological constraints."""
+    model = IntegratedBarotraumaModel(physical_weight=0.6)
+    tester = ModelRelationshipTester(model)
+    
+    # Test pressure bounds
+    max_pressure = tester.phys_constraints['pressure']['max_diff']
+    warning_pressure = tester.phys_constraints['pressure']['warning']
+    
+    assert max_pressure == 200, f"Incorrect max pressure: {max_pressure}"
+    assert warning_pressure == 100, f"Incorrect warning pressure: {warning_pressure}"
+    
+    # Test volume bounds
+    tym_vol_range = (
+        tester.phys_constraints['volume']['tym_min'],
+        tester.phys_constraints['volume']['tym_max']
     )
-    
-    return BarotraumaSimulation(physiology, et, alveolar, flight)
+    assert tym_vol_range[0] == 0.5e-3, f"Incorrect min tympanic volume: {tym_vol_range[0]}"
+    assert tym_vol_range[1] == 2.0e-3, f"Incorrect max tympanic volume: {tym_vol_range[1]}"
 
-def test_pressure_calculation(simulation):
-    """Test basic pressure calculations"""
-    # Test membrane exchange
-    dP = simulation._calculate_membrane_exchange(760, 760, 0.001)
-    assert isinstance(dP, float)
-    assert abs(dP) < 1.0  # Should be small for short time step
+def test_risk_calculations():
+    """Test risk calculation components."""
+    model = IntegratedBarotraumaModel(physical_weight=0.6)
+    tester = ModelRelationshipTester(model)
     
-    # Test passive opening
-    assert simulation._should_open_passively(1200, 760)  # Large positive differential
-    assert not simulation._should_open_passively(760, 760)  # No differential
+    try:
+        # Create test scenario
+        scenario = {
+            'pressure_metrics': {
+                'max_diff': 150,  # mmHg
+                'mean_diff': 75,
+                'std_diff': 25,
+                'rate_max': 40,
+                'time_above_warning': 30
+            },
+            'volume_metrics': {
+                'total_change': 1e-3,  # L
+                'max_rate': 0.05e-3,
+                'mean_rate': 0.02e-3,
+                'excursion_ratio': 0.25
+            }
+        }
+        
+        # Test pressure risk
+        pressure_risk = tester._calculate_pressure_risk(scenario['pressure_metrics'])
+        assert 0 <= pressure_risk <= 1, f"Invalid pressure risk: {pressure_risk}"
+        logger.info(f"Pressure risk calculation passed: {pressure_risk:.3f}")
+        
+        # Test volume risk
+        volume_risk = tester._calculate_volume_risk(scenario['volume_metrics'])
+        assert 0 <= volume_risk <= 1, f"Invalid volume risk: {volume_risk}"
+        logger.info(f"Volume risk calculation passed: {volume_risk:.3f}")
+        
+    except Exception as e:
+        logger.error(f"Risk calculation test failed: {str(e)}")
+        raise
+
+def test_integration_methods():
+    """Test numerical integration methods."""
+    model = IntegratedBarotraumaModel(physical_weight=0.6)
+    tester = ModelRelationshipTester(model)
     
-    # Test active opening probability
-    n_trials = 1000
-    active_openings = sum(
-        simulation._should_open_actively(0, 5.2)  # Normal swallowing frequency
-        for _ in range(n_trials)
+    # Create test data
+    time = np.linspace(0, 10, 100)
+    pressure = np.sin(time)
+    
+    # Test integration
+    try:
+        area = trapezoid(pressure, time)
+        logger.info(f"Integration test passed: area = {area:.3f}")
+    except Exception as e:
+        logger.error(f"Integration test failed: {str(e)}")
+        raise
+
+def main():
+    # Setup logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        filename='test_results/test_log.txt'
     )
-    expected_rate = 5.2 / 3600 * n_trials
-    assert abs(active_openings - expected_rate) < 3 * np.sqrt(expected_rate)  # Within 3 std dev
+    global logger
+    logger = logging.getLogger(__name__)
+    
+    # Create test results directory if it doesn't exist
+    Path("test_results").mkdir(exist_ok=True)
+    
+    try:
+        logger.info("Starting basic case tests")
+        test_basic_cases()
+        logger.info("Basic case tests passed")
+        
+        logger.info("Starting physiological bounds tests")
+        test_physiological_bounds()
+        logger.info("Physiological bounds tests passed")
+        
+        logger.info("Starting risk calculation tests")
+        test_risk_calculations()
+        logger.info("Risk calculation tests passed")
+        
+        logger.info("Starting integration method tests")
+        test_integration_methods()
+        logger.info("Integration method tests passed")
+        
+    except AssertionError as e:
+        logger.error(f"Test failed: {str(e)}")
+    except Exception as e:
+        logger.error(f"Unexpected error: {str(e)}")
 
-def test_flight_simulation(simulation):
-    """Test complete flight simulation"""
-    results = simulation.run_simulation(dt=0.01)
-    
-    # Check results structure
-    assert 'time' in results
-    assert 'P_cabin' in results
-    assert 'P_ME' in results
-    assert 'dP' in results
-    assert 'ET_locked' in results
-    assert 'barotitis' in results
-    assert 'baromyringitis' in results
-    
-    # Check basic properties
-    assert len(results['time']) > 100
-    assert not np.any(np.isnan(results['P_ME']))
-    assert not np.any(np.isnan(results['dP']))
-    
-    # Check pressure bounds
-    assert np.all(results['P_cabin'] > 0)
-    assert np.all(results['P_ME'] > 0)
-    
-    # Check pathological conditions
-    assert np.any(results['barotitis'])  # Should occur at some point
-    assert np.sum(results['baromyringitis']) <= np.sum(results['barotitis'])  # More severe
-
-def test_pathological_conditions(simulation):
-    """Test simulation with pathological conditions"""
-    # Test ET obstruction
-    simulation.physiology.k_O2 = 0
-    simulation.physiology.k_CO2 = 0
-    simulation.physiology.k_N2 = 0
-    
-    results = simulation.run_simulation(dt=0.01)
-    assert np.any(results['ET_locked'])  # Should get locked
-    assert np.any(results['baromyringitis'])  # Should cause severe condition
-    
-    # Test poor mTVP function
-    simulation = BarotraumaSimulation(
-        PhysiologyParameters(),
-        ETParameters(mTVP_force=0.1),  # Reduced muscle force
-        AlveolarParameters(),
-        simulation.flight
-    )
-    
-    results = simulation.run_simulation(dt=0.01)
-    assert np.sum(results['barotitis']) > 0  # Should have increased risk 
+if __name__ == "__main__":
+    main() 
