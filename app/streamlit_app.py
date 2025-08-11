@@ -6,6 +6,8 @@ from barotrauma.models.chamber_risk import (
     ChamberScenario,
     ET_SEVERITY_TO_DYSFUNCTION,
 )
+from barotrauma.analysis.visualization import BarotraumaVisualizer
+from barotrauma.analysis.statistics import StatisticalAnalyzer
 
 
 st.set_page_config(page_title="Hypobaric Chamber Barotrauma Risk",
@@ -46,6 +48,8 @@ scenario = ChamberScenario(
 
 model = HypobaricChamberRiskModel()
 result = model.simulate_descent(scenario)
+visual = BarotraumaVisualizer()
+stats = StatisticalAnalyzer()
 
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Risk Score", f"{result.risk_score:.2f}",
@@ -68,6 +72,13 @@ with tab1:
         },
         x=result.time_s,
     )
+    # 3D interactive surface of ΔP vs time vs altitude
+    fig3d = visual.plot_3d_pressure_surface(
+        time=result.time_s,
+        altitude=result.altitude_ft,
+        delta_p=np.tile(result.delta_P_mmHg, (len(result.altitude_ft), 1)),
+    )
+    st.plotly_chart(fig3d, use_container_width=True)
     st.caption(
         "During descent, ambient pressure rises. Without equalization,"
         " middle-ear pressure lags, pulling the TM inward. Valsalva helps"
@@ -82,6 +93,12 @@ with tab2:
         },
         x=result.time_s,
     )
+    cloud3d = visual.plot_3d_equalization_field(
+        time=result.time_s,
+        eq_rate=result.equalization_rate_mmHg_s,
+        delta_p=result.delta_P_mmHg,
+    )
+    st.plotly_chart(cloud3d, use_container_width=True)
     st.caption(
         "Equalization speed reflects ET function and descent rate; TM"
         " displacement reflects tension per compliance."
@@ -95,6 +112,16 @@ with tab3:
     st.caption(
         "Risk increases nonlinearly beyond severity-specific safe rates."
     )
+
+# Statistical metrics summary
+metrics = stats.compute_metrics(
+    {
+        'dP': result.delta_P_mmHg,
+        'equalization_rate': result.equalization_rate_mmHg_s,
+    }
+)
+st.subheader("Validation Metrics")
+st.json(metrics)
 
 st.divider()
 st.markdown(
