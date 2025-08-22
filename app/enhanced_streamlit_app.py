@@ -25,6 +25,19 @@ from barotrauma.analysis.visualization import BarotraumaVisualizer
 from barotrauma.analysis.enhanced_visualization import EnhancedBarotraumaVisualizer
 from barotrauma.analysis.statistics import StatisticalAnalyzer
 
+try:
+    from streamlit_echarts import st_echarts, JsCode
+    ECHARTS_AVAILABLE = True
+except Exception:
+    ECHARTS_AVAILABLE = False
+
+    class JsCode(str):
+        pass
+
+    def st_echarts(options, height="400px", width="100%", key=None, theme=None):
+        st.warning("ECharts is not available. Install `streamlit-echarts` to enable these charts.")
+        return None
+
 # Page configuration
 st.set_page_config(
     page_title="Advanced Barotrauma Risk Analysis",
@@ -273,13 +286,14 @@ with col5:
 # Main visualization tabs
 st.header("📈 Detailed Analysis")
 
-tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6, tab7 = st.tabs([
     "🎯 Risk vs ET Dysfunction",
     "🌐 3D Risk Surfaces",
     "📉 Time Series Analysis",
     "🎪 Pressure Dynamics",
     "🔮 Predictions",
-    "📊 Dashboard"
+    "📊 Dashboard",
+    "🧭 ECharts"
 ])
 
 with tab1:
@@ -465,7 +479,7 @@ with tab3:
             np.max(data['volume']) * 1000,
             np.mean(data['eq_rate'])
         ]
-    stats_df.index = ['Max |ΔP| (mmHg)', 'Mean |ΔP| (mmHg)', 'Max Volume (mL)', 'Mean Eq. Rate (mmHg/s)']
+    stats_df.index = ['Max |ΔP| (mmHg)', 'Mean |ΔP| (mmHg)', 'Max Volume (µL)', 'Mean Eq. Rate (mmHg/s)']
     st.dataframe(stats_df.round(2), use_container_width=True)
 
 with tab4:
@@ -775,6 +789,125 @@ with tab6:
                 file_name=f"session_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv"
             )
+
+# ---------------- ECharts Visuals Tab ---------------- #
+with tab7:
+    st.subheader("ECharts Visuals (Interactive)")
+
+    if not ECHARTS_AVAILABLE:
+        st.info("Install `streamlit-echarts` to enable rich ECharts visualizations: pip install streamlit-echarts")
+    else:
+        # Layout for multiple charts
+        c1, c2 = st.columns(2)
+
+        # Gauge: Risk Score
+        with c1:
+            option_gauge = {
+                "title": {"text": "Risk Score Gauge"},
+                "tooltip": {"formatter": "{a} <br/>{b}: {c}"},
+                "series": [
+                    {
+                        "name": "Risk",
+                        "type": "gauge",
+                        "min": 0,
+                        "max": 1,
+                        "splitNumber": 10,
+                        "axisLine": {
+                            "lineStyle": {
+                                "width": 12,
+                                "color": [
+                                    [0.3, "#91cc75"],
+                                    [0.6, "#fac858"],
+                                    [1.0, "#ee6666"]
+                                ]
+                            }
+                        },
+                        "progress": {"show": True, "width": 12},
+                        "pointer": {"itemStyle": {"color": "#2f4554"}},
+                        "detail": {"formatter": "{value}", "valueAnimation": True},
+                        "data": [{"value": float(result.risk_score), "name": "Risk"}],
+                    }
+                ]
+            }
+            st_echarts(option_gauge, height="320px", key="gauge")
+
+        # Line: Pressure and ΔP over Time
+        with c2:
+            t_minutes = (result.time_s / 60.0).tolist()
+            option_line = {
+                "title": {"text": "Pressure & ΔP Over Time"},
+                "tooltip": {"trigger": "axis"},
+                "legend": {"data": ["Ambient", "Middle Ear", "ΔP"]},
+                "xAxis": {"type": "category", "data": [round(float(x), 2) for x in t_minutes], "name": "Time (min)"},
+                "yAxis": {"type": "value", "name": "Pressure (mmHg)"},
+                "dataZoom": [{"type": "inside"}, {"type": "slider"}],
+                "series": [
+                    {"name": "Ambient", "type": "line", "smooth": True, "data": result.P_amb_mmHg.tolist()},
+                    {"name": "Middle Ear", "type": "line", "smooth": True, "data": result.P_ME_mmHg.tolist()},
+                    {"name": "ΔP", "type": "line", "smooth": True, "lineStyle": {"type": "dashed"}, "data": result.delta_P_mmHg.tolist()},
+                ],
+            }
+            st_echarts(option_line, height="320px", key="line")
+
+        # Heatmap: Risk vs Severity × Descent Rate
+        st.markdown("#### Risk Heatmap (ECharts)")
+        heatmap_data = []
+        for i, sev in enumerate(severities):
+            for j, rate in enumerate(rates):
+                heatmap_data.append([j, i, round(float(score_matrix[i][j]), 3)])
+        option_heatmap = {
+            "tooltip": {"position": "top"},
+            "grid": {"height": "60%", "top": "10%"},
+            "xAxis": {"type": "category", "data": [int(r) for r in rates], "name": "Descent rate (ft/min)"},
+            "yAxis": {"type": "category", "data": severities, "name": "ET severity"},
+            "visualMap": {"min": 0, "max": 1, "orient": "horizontal", "left": "center", "bottom": 0},
+            "series": [
+                {
+                    "name": "Risk",
+                    "type": "heatmap",
+                    "data": heatmap_data,
+                    "label": {"show": False},
+                    "emphasis": {"itemStyle": {"shadowBlur": 10, "shadowColor": "rgba(0, 0, 0, 0.5)"}},
+                }
+            ],
+        }
+        st_echarts(option_heatmap, height="420px", key="heatmap")
+
+        # Scatter: Risk vs ET Dysfunction colored by Descent Rate
+        st.markdown("#### Risk vs ET Dysfunction (colored by Descent Rate)")
+        history_df = st.session_state.history.copy()
+        if len(history_df) > 0:
+            scatter_source = [
+                [float(row.et_dysfunction), float(row.descent_rate), float(row.risk_score)]
+                for _, row in history_df.iterrows()
+            ]
+        else:
+            scatter_source = [[et_dysfunction_numeric, float(descent_rate), float(result.risk_score)]]
+
+        option_scatter = {
+            "tooltip": {"trigger": "item"},
+            "xAxis": {"type": "value", "name": "ET Dysfunction", "min": 0, "max": 1},
+            "yAxis": {"type": "value", "name": "Risk Score", "min": 0, "max": 1},
+            "visualMap": {
+                "type": "continuous",
+                "dimension": 1,
+                "min": 1000,
+                "max": 10000,
+                "text": ["Descent Rate", ""],
+                "inRange": {"color": ["#91cc75", "#fac858", "#ee6666"]},
+            },
+            "dataset": {"source": scatter_source},
+            "series": [
+                {
+                    "type": "scatter",
+                    "encode": {"x": 0, "y": 2, "tooltip": [0, 1, 2]},
+                    "symbolSize": JsCode("function (data) { return 6 + data[2] * 10; }")
+                }
+            ],
+        }
+        st_echarts(option_scatter, height="420px", key="scatter")
+
+    st.caption("Charts powered by Apache ECharts")
 
 # Footer
 st.divider()
