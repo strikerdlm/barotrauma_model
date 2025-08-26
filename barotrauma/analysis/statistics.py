@@ -7,10 +7,18 @@ including confidence intervals and risk assessments.
 """
 
 import numpy as np
-from scipy import stats
+# Make SciPy optional for environments without heavy deps
+try:
+	from scipy import stats as scipy_stats  # type: ignore
+except Exception:  # pragma: no cover - optional dependency
+	scipy_stats = None  # Fallback handled in calculate_confidence_interval
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
-import pandas as pd
+# Make pandas optional (only required for metrics_dataframe)
+try:
+	import pandas as pd  # type: ignore
+except Exception:  # pragma: no cover - optional dependency
+	pd = None  # type: ignore
 
 @dataclass
 class RiskAssessment:
@@ -53,8 +61,12 @@ class StatisticalAnalyzer:
         return metrics
     
     def metrics_dataframe(self, scenarios: List[Dict],
-                          results_list: List[Dict[str, np.ndarray]]) -> pd.DataFrame:
-        """Assemble a tidy DataFrame of metrics across scenarios."""
+                          results_list: List[Dict[str, np.ndarray]]) -> 'pd.DataFrame':
+        """Assemble a tidy DataFrame of metrics across scenarios.
+        Requires pandas; raises if unavailable.
+        """
+        if pd is None:
+            raise ImportError("pandas is required for metrics_dataframe but is not installed")
         rows = []
         for scenario, results in zip(scenarios, results_list):
             m = self.compute_metrics(results)
@@ -64,7 +76,7 @@ class StatisticalAnalyzer:
                 **m,
             }
             rows.append(row)
-        return pd.DataFrame(rows)
+        return pd.DataFrame(rows)  # type: ignore
         
     def calculate_confidence_interval(self, 
                                    pressure_data: np.ndarray,
@@ -79,10 +91,17 @@ class StatisticalAnalyzer:
         Returns:
             Tuple of (lower bound, upper bound)
         """
-        sem = np.std(pressure_data) / np.sqrt(df)
-        t_value = stats.t.ppf((1 + self.confidence_level) / 2, df-1)
+        sem = float(np.std(pressure_data)) / float(np.sqrt(max(df, 1)))
+        # Prefer Student's t from SciPy if available; otherwise normal approx
+        if scipy_stats is not None:
+            t_value = float(scipy_stats.t.ppf((1 + self.confidence_level) / 2, max(df - 1, 1)))
+        else:
+            # Normal approximation for common confidence levels
+            level_rounded = round(self.confidence_level, 2)
+            z_map = {0.90: 1.645, 0.95: 1.96, 0.99: 2.576}
+            t_value = float(z_map.get(level_rounded, 1.96))
         
-        mean_value = np.mean(pressure_data)
+        mean_value = float(np.mean(pressure_data))
         ci_lower = mean_value - t_value * sem
         ci_upper = mean_value + t_value * sem
         
@@ -99,8 +118,8 @@ class StatisticalAnalyzer:
             RiskAssessment object
         """
         # Calculate probabilities
-        barotitis_prob = np.mean(simulation_results['barotitis'])
-        baromyringitis_prob = np.mean(simulation_results['baromyringitis'])
+        barotitis_prob = float(np.mean(simulation_results['barotitis']))
+        baromyringitis_prob = float(np.mean(simulation_results['baromyringitis']))
         
         # Calculate confidence interval for pressure differential
         ci = self.calculate_confidence_interval(
