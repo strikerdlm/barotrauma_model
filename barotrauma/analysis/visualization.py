@@ -3,28 +3,47 @@ Visualization Tools for Middle Ear Barotrauma Analysis
 """
 
 import numpy as np
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+# Make matplotlib optional
+try:
+	import matplotlib.pyplot as plt  # type: ignore
+	from mpl_toolkits.mplot3d import Axes3D  # noqa: F401
+except Exception:  # pragma: no cover - optional dependency
+	plt = None  # type: ignore
 import plotly.graph_objects as go
 import io
 import tempfile
 import os
 import warnings
-import seaborn as sns
+# Make seaborn optional
+try:
+	import seaborn as sns  # type: ignore
+except Exception:  # pragma: no cover - optional dependency
+	sns = None  # type: ignore
 from typing import Dict, List, Optional
-import pandas as pd
+# Make pandas optional
+try:
+	import pandas as pd  # type: ignore
+except Exception:  # pragma: no cover - optional dependency
+	pd = None  # type: ignore
 
 class BarotraumaVisualizer:
     """Visualization tools for barotrauma simulation results"""
     
     def __init__(self, style: str = 'seaborn'):
         """Initialize visualizer with style"""
-        plt.style.use(style)
+        if plt is not None:
+            try:
+                plt.style.use(style)
+            except Exception:
+                pass
         
     def plot_pressure_dynamics(self, 
                              results: Dict[str, np.ndarray],
                              title: Optional[str] = None):
         """Plot pressure dynamics during flight"""
+        if plt is None:
+            warnings.warn('matplotlib not available; skip static plot generation')
+            return None
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10))
         
         # Pressure differentials
@@ -150,6 +169,9 @@ class BarotraumaVisualizer:
                                    delta_p: np.ndarray,
                                    title: str = 'ΔP Surface (Matplotlib 3D)'):
         """Static 3D surface using Matplotlib's mplot3d."""
+        if plt is None:
+            warnings.warn('matplotlib not available; skip static 3D surface plot')
+            return None
         T, A = np.meshgrid(time, altitude)
         Z = delta_p
         if Z.ndim == 1:
@@ -218,8 +240,6 @@ class BarotraumaVisualizer:
         mlab.figure(size=(800, 600), bgcolor=(1, 1, 1))
         surf = mlab.surf(T, A, Z, colormap='viridis')
         mlab.axes(xlabel='Time (min)', ylabel='Altitude (ft)', zlabel='ΔP (mmHg)')
-        mlab.outline()
-
         if screenshot_path is None:
             tmpdir = tempfile.mkdtemp(prefix='mayavi_')
             screenshot_path = os.path.join(tmpdir, 'mayavi_surface.png')
@@ -229,6 +249,9 @@ class BarotraumaVisualizer:
 
     def plot_risk_analysis(self, df: pd.DataFrame):
         """Plot risk analysis from database"""
+        if sns is None:
+            warnings.warn('seaborn not available; skip risk analysis plot')
+            return None
         fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
         
         # Risk distribution
@@ -253,6 +276,9 @@ class BarotraumaVisualizer:
     
     def plot_statistical_summary(self, df: pd.DataFrame):
         """Plot statistical summary of results"""
+        if sns is None:
+            warnings.warn('seaborn not available; skip statistical summary plot')
+            return None
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
         
         # Risk correlation matrix
