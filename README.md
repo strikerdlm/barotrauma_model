@@ -206,3 +206,33 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 <p align="center">
   <strong>🛡️ Advancing Aviation Safety Through Computational Physiology 🛡️</strong>
 </p>
+
+## Streamlit Simulation & Validation App
+
+A new Streamlit interface is available to run the simulation with configurable parameters, visualize outputs, and compute model-quality metrics against real validation data.
+
+- App file: `app/simulation_validation_app.py`
+- Validation data: `tests/data/paper_validation.json`
+
+### Minimal install (user site)
+
+If your environment is managed (PEP 668), install only the minimal packages needed for the app into your user site:
+
+```bash
+pip3 install --user --break-system-packages streamlit plotly pandas numpy matplotlib
+```
+
+### Run the app
+
+From the repository root:
+
+```bash
+~/.local/bin/streamlit run app/simulation_validation_app.py --server.headless=true --server.port=8501
+```
+
+Then open the URL printed in the terminal. Use the sidebar to configure the flight profile and physiology. The app will:
+
+- Plot cabin and middle-ear pressures, ΔP with clinical thresholds, altitude and risk over time
+- Compute internal metrics (max/mean |ΔP|, time in risk states)
+- Compute RMSE and max error vs the published pressure chamber dataset (no synthetic data)
+- Provide a tidy preview and CSV download of the simulation results
