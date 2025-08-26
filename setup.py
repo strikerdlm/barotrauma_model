@@ -17,7 +17,7 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 setup(
     name="barotrauma-model",
     version="1.0.0",
-    author="Dr. Daniel Malpica",
+    author="Dr. Diego L Malpica (Aerospace Medicine) ORCID: https://orcid.org/0000-0002-2257-4940",
     author_email="dlmalpica@me.com",
     description="Physiological Risk Assessment for Aviation Medicine: Middle Ear Barotrauma Modeling",
     long_description=long_description,

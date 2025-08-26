@@ -197,7 +197,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-**Dr. Daniel Malpica** - [@strikerdlm](https://github.com/strikerdlm) - dlmalpica@me.com
+**Dr. Diego L Malpica (Aerospace Medicine)** - ORCID: https://orcid.org/0000-0002-2257-4940
 
 **Project Link**: [https://github.com/strikerdlm/barotrauma_model](https://github.com/strikerdlm/barotrauma_model)
 
