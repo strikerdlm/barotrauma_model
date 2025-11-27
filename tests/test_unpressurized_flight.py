@@ -16,12 +16,15 @@ from models.et import ETParameters
 from models.alveolar import AlveolarParameters
 
 @dataclass
-class UnpressurizedFlightProfile(FlightProfile):
+class UnpressurizedFlightProfile:
     """Extended flight profile for unpressurized aircraft"""
+    descent_rate: float  # feet/min - required, so listed first
     max_altitude: float = 25000.0  # feet
     cruise_altitude: float = 25000.0  # feet
     cruise_duration: float = 10.0  # minutes
-    descent_rate: float  # feet/min
+    ascent_duration: float = 15.0  # minutes
+    departure_elevation: float = 0.0  # feet
+    destination_elevation: float = 0.0  # feet
     
     def calculate_cabin_pressure(self, time: float, initial_pressure: float) -> float:
         """
