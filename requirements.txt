@@ -11,3 +11,6 @@ pyvista>=0.43.0
 vtk>=9.2.0
 mayavi>=4.8.1
 streamlit-echarts>=0.4.0
+
+# Valsalva Video Analysis (optional - for video processing)
+opencv-python>=4.5.0
