@@ -61,6 +61,149 @@ Our deterministic approach captures:
 - **Pressure Tracking**: Real-time ΔP monitoring with clinical thresholds
 - **Valsalva Modeling**: Periodic equalization attempts with effectiveness scaling
 
+## 🎥 NEW: Valsalva Video Analysis for Barotrauma Risk Prediction
+
+### Overview
+
+This module enables **video-based assessment of Valsalva maneuver quality** using endoscopic recordings to predict middle ear barotrauma risk. Designed for hypobaric chamber medical directors to objectively assess Eustachian tube function.
+
+### Scientific Basis
+
+The Valsalva maneuver analysis is based on:
+- **Kanick & Doyle (2005)**: Mathematical model of middle ear pressure regulation
+- **Bayoumy et al. (2021)**: Tympanic membrane retraction management
+- **Ryan et al. (2018)**: Prevention of otic barotrauma in aviation
+
+```
+Valsalva Assessment Pipeline
+├── 🎬 Endoscopic Video Input (both ears)
+├── 👁️ TM Region Detection & Tracking
+├── 📊 Optical Flow Analysis for Movement
+├── 📈 Feature Extraction
+│   ├── Max displacement amplitude
+│   ├── Response latency
+│   ├── Movement smoothness
+│   └── Bilateral asymmetry
+├── 🤖 ML Risk Prediction
+│   ├── Logistic Regression (interpretable)
+│   ├── Gradient Boosting (accuracy)
+│   └── Hybrid Physics+ML (robust)
+└── 📋 Clinical Recommendations
+```
+
+### Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Bilateral Analysis** | Simultaneous analysis of left and right ear movements |
+| **Quality Grading** | EXCELLENT → GOOD → FAIR → POOR → FAILED |
+| **Physics Integration** | Maps video features to ET dysfunction parameters |
+| **ML Enhancement** | Learns from control outcomes for improved accuracy |
+| **Clinical Reports** | Auto-generated reports with recommendations |
+| **Control Database** | Record outcomes for model calibration |
+
+### Launch Valsalva Assessment App
+
+```bash
+streamlit run app/valsalva_assessment_app.py
+```
+
+### Python API
+
+```python
+from barotrauma.models.valsalva_video_analysis import (
+    TMMovementFeatures,
+    BilateralValsalvaResult,
+    ValsalvaRiskPredictor,
+)
+from barotrauma.models.valsalva_chamber_integration import (
+    IntegratedBarotraumaAssessment,
+    quick_assess,
+)
+
+# Quick assessment from displacement values
+assessment = quick_assess(
+    left_displacement=0.75,   # 0-1 scale
+    right_displacement=0.65,
+    patient_id="P001"
+)
+
+print(f"Risk Score: {assessment.final_risk_score:.2f}")
+print(f"Category: {assessment.final_risk_category}")
+print(f"Max Descent Rate: {assessment.recommended_max_descent_rate:.0f} ft/min")
+
+# Full assessment with clinical history
+from barotrauma.models.valsalva_video_analysis import TMMovementFeatures
+
+left_features = TMMovementFeatures(
+    max_displacement=0.75,
+    response_latency=0.5,
+    movement_smoothness=0.8,
+    movement_completeness=0.75,
+)
+
+right_features = TMMovementFeatures(
+    max_displacement=0.65,
+    response_latency=0.6,
+    movement_smoothness=0.7,
+    movement_completeness=0.70,
+)
+
+valsalva_result = BilateralValsalvaResult(
+    left_ear=left_features,
+    right_ear=right_features,
+)
+
+system = IntegratedBarotraumaAssessment()
+assessment = system.assess_from_valsalva(
+    valsalva_result=valsalva_result,
+    patient_id="P001",
+    clinical_history={
+        'age': 35,
+        'previous_barotrauma': False,
+        'current_uri': False,
+    }
+)
+```
+
+### Training with Control Data
+
+As hypobaric chamber medical director, you can improve model accuracy by recording outcomes:
+
+```python
+# After hypobaric exposure, record actual outcome
+system.add_control_outcome(
+    assessment,
+    actual_outcome="no_barotrauma"  # or "mild", "moderate", "severe"
+)
+
+# After collecting enough controls (≥20), train the ML model
+system.train_ml_model(min_controls=20)
+
+# Save trained model for future use
+system.save_state(Path("./model_state"))
+```
+
+### Valsalva Quality Grading
+
+| Grade | Displacement | Latency | Clinical Interpretation |
+|-------|-------------|---------|------------------------|
+| EXCELLENT | ≥0.8 | <0.5s | Normal ET function |
+| GOOD | ≥0.6 | <1.0s | Mildly reduced function |
+| FAIR | ≥0.3 | <2.0s | Moderate dysfunction |
+| POOR | ≥0.1 | Any | Significant dysfunction |
+| FAILED | <0.1 | Any | Severe dysfunction/obstruction |
+
+### Risk Category Mapping
+
+| Valsalva Grade | ET Dysfunction | Recommended Descent Rate |
+|----------------|----------------|-------------------------|
+| EXCELLENT | 0.15 (minimal) | Up to 6000 ft/min |
+| GOOD | 0.35 (mild) | Up to 4000 ft/min |
+| FAIR | 0.55 (moderate) | Up to 2500 ft/min |
+| POOR | 0.75 (mod-severe) | ≤1500 ft/min |
+| FAILED | 0.90 (severe) | ≤1000 ft/min |
+
 ### Interactive Dashboard
 - **Parameter Control**: Sliders for all physiological and flight variables
 - **Real-time Visualization**: Pressure curves, equalization rates, TM displacement  
