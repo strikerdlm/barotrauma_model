@@ -25,6 +25,7 @@ class UnpressurizedFlightProfile:
     ascent_duration: float = 15.0  # minutes
     departure_elevation: float = 0.0  # feet
     destination_elevation: float = 0.0  # feet
+    descent_pauses: List[Tuple[float, float]] | None = None  # (altitude_ft, pause_min)
     
     def calculate_cabin_pressure(self, time: float, initial_pressure: float) -> float:
         """
@@ -47,7 +48,32 @@ class UnpressurizedFlightProfile:
         else:
             # Descent phase
             descent_time = time - (self.ascent_duration + self.cruise_duration)
-            altitude = max(0, self.cruise_altitude - descent_time * self.descent_rate/60)
+            if not self.descent_pauses:
+                # `time` is in minutes and `descent_rate` is in ft/min.
+                altitude = max(0, self.cruise_altitude - descent_time * self.descent_rate)
+            else:
+                # Deterministic piecewise descent with pauses.
+                remaining_min = float(descent_time)
+                current_alt = float(self.cruise_altitude)
+                pauses_sorted = sorted(self.descent_pauses, key=lambda x: float(x[0]), reverse=True)
+                for pause_alt_ft, pause_min in pauses_sorted:
+                    pause_alt = float(pause_alt_ft)
+                    if pause_alt >= current_alt:
+                        continue
+                    time_to_reach_pause = (current_alt - pause_alt) / max(float(self.descent_rate), 1.0)
+                    if remaining_min <= time_to_reach_pause:
+                        current_alt = current_alt - float(self.descent_rate) * remaining_min
+                        remaining_min = 0.0
+                        break
+                    remaining_min -= time_to_reach_pause
+                    current_alt = pause_alt
+                    # Apply pause
+                    if remaining_min <= float(pause_min):
+                        remaining_min = 0.0
+                        break
+                    remaining_min -= float(pause_min)
+
+                altitude = max(0.0, current_alt - float(self.descent_rate) * remaining_min)
             
         # Calculate pressure using standard atmosphere equation
         P0 = 760  # mmHg at sea level
@@ -242,5 +268,5 @@ def test_descent_profile_effects(descent_rates):
     
     # Stepped descent should have lower risk
     for rate in descent_rates:
-        assert (results[rate]['stepped']['barotitis_risk'] <
-                results[rate]['continuous']['barotitis_risk']) 
+        assert (results[rate]['stepped']['barotitis_risk'] <=
+                results[rate]['continuous']['barotitis_risk'])

@@ -14,6 +14,8 @@ from typing import Dict, Optional, Tuple
 @dataclass
 class PhysiologyParameters:
     """Physiological parameters affecting middle ear pressure regulation"""
+    # Middle ear gas volume (mL). Used by some validation tests/analyses.
+    V_ME_ml: float = 12.0
     
     # Gas exchange constants (min^-1) from Table 2
     k_O2: float = 0.008    # Oxygen exchange rate
