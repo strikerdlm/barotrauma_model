@@ -215,6 +215,7 @@ system.save_state(Path("./model_state"))
 Launch the **Streamlit** app for real-time risk assessment:
 
 ```bash
+pip install -e .
 streamlit run app/streamlit_app.py
 ```
 
@@ -223,6 +224,25 @@ streamlit run app/streamlit_app.py
 - 📈 **Live Plotting**: Pressure differentials, equalization kinetics
 - ⚠️ **Risk Metrics**: Real-time scoring with clinical thresholds
 - 🔄 **Scenario Testing**: Rapid parameter sweeps for safety analysis
+
+### Additional Streamlit Apps
+- **Modern risk dashboard (recommended)**: `app/streamlit_app.py`
+  - Uses `barotrauma.models.chamber_risk` (deterministic chamber-descent model)
+  - Optimized for fast “what-if” exploration (cached sensitivity/heatmap calculations)
+- **Advanced analysis dashboard**: `app/enhanced_streamlit_app.py`
+  - Adds 3D surfaces, scenario saving/comparison, and optional ECharts visuals
+- **Simulation + paper-style validation**: `app/simulation_validation_app.py`
+  - Uses the deterministic legacy simulator in `models/`
+  - Computes RMSE and max error vs `tests/data/paper_validation.json`
+
+Run any of them via:
+
+```bash
+pip install -e .
+streamlit run app/enhanced_streamlit_app.py
+# or
+streamlit run app/simulation_validation_app.py
+```
 
 ## 📦 Installation
 
