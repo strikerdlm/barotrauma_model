@@ -1,18 +1,25 @@
 """
 Simple validation script for barotrauma model parameters.
 """
-import os
+from __future__ import annotations
+
 import sys
+from pathlib import Path
 
-# Add the current directory to the Python path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-if current_dir not in sys.path:
-    sys.path.append(current_dir)
-
-from barotrauma_simulation_10 import BarotraumaSimulation, simulate_flight_profile
 import numpy as np
 
-def validate_single_flight(params, et_dysfunction=0.5):
+# Ensure project root is importable when running as a script/module.
+_ROOT = Path(__file__).resolve().parents[1]
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
+
+from core.barotrauma_simulation_10 import (  # noqa: E402
+    BarotraumaSimulation,
+    simulate_flight_profile,
+)
+
+
+def validate_single_flight(params: dict, et_dysfunction: float = 0.5) -> dict | None:
     """Run a single flight simulation and return key metrics."""
     # Basic flight profile
     flight_profile = {
