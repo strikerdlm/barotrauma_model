@@ -144,6 +144,8 @@ class TestModelValidation:
         Validate buffering mechanisms 
         (Figure 7 in paper)
         """
+        from scipy.interpolate import interp1d
+
         # Test different VME and RA combinations
         vme_values = [1, 4, 7, 10, 13, 16]  # ml
         ra_values = np.linspace(0, 40, 20)   # mmHg/cc/min
@@ -156,9 +158,12 @@ class TestModelValidation:
                 et = ETParameters(compliance=ra)
                 sim = base_simulation
                 sim.et = et
+                # Ensure the simulator can observe the VME sweep.
+                sim.physiology.V_ME_ml = float(vme)
                 
                 result = sim.run_simulation()
-                results[vme].append(np.max(np.abs(result['dP'])))
+                # Use terminal pressure gradient (signed) for comparison.
+                results[vme].append(float(result["dP"][-1]))
         
         # Compare with paper data
         paper_results = paper_data['buffering']

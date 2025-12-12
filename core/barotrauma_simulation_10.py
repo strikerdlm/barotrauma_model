@@ -70,15 +70,22 @@ class AdvancedPhysiologicalMEModel:
     - Risk assessment with simpler thresholds
     """
     def __init__(self, params: Dict = None, seed: int = 42):
+        """
+        Initialize the model.
+
+        Notes:
+        - This model contains stochastic swallow-triggered ET openings. To keep runs
+          reproducible, a dedicated RNG is used instead of seeding NumPy globally.
+        """
         if params is None:
             params = {}
         self.params = PhysiologicalParameters()
         
         # Override any parameters from dict
-        for k,v in params.items():
+        for k, v in params.items():
             setattr(self.params, k, v)
         
-        np.random.seed(seed)
+        self._rng = np.random.default_rng(seed)
         
         # Initial partial pressures in ME
         self.P_O2_init = 40.0
@@ -134,7 +141,7 @@ class AdvancedPhysiologicalMEModel:
         swallow_rate = self.mod_swallow_rate(delta_P_h2o)
         lambda_swallow = (swallow_rate / 3600.0)*(1.0 - 0.5*self.params.et_dysfunction)
         dt = 0.001
-        return (np.random.rand() < lambda_swallow*dt)
+        return bool(self._rng.random() < lambda_swallow * dt)
 
     def et_passive_opening(self, delta_P_h2o: float) -> bool:
         threshold = self.params.ET_passive_threshold*(1.0 + 2.0*self.params.et_dysfunction)
@@ -288,39 +295,38 @@ class AdvancedPhysiologicalMEModel:
             'risk': risk
         }
 
-# Example usage of the improved model
-import numpy as np
-import matplotlib.pyplot as plt
+if __name__ == "__main__":
+    # Example usage of the improved model (only runs when executed directly).
+    import matplotlib.pyplot as plt
 
-# Define a simple altitude function: ascend from 0 to 8000 ft in 15 min, cruise 15 min
-def altitude_func(time_s):
-    if time_s <= 900:
-        return 8000*(time_s/900)   # linear ascent over 15 min
-    else:
-        return 8000                # cruise altitude
+    # Define a simple altitude function: ascend from 0 to 8000 ft in 15 min, cruise 15 min
+    def altitude_func(time_s):
+        if time_s <= 900:
+            return 8000 * (time_s / 900)   # linear ascent over 15 min
+        return 8000                        # cruise altitude
 
-# Create model instance with some ET dysfunction and valsalva enabled
-params = {
-    'et_dysfunction': 0.3,
-    'perform_valsava': True
-}
-model = AdvancedPhysiologicalMEModel(params=params)
+    # Create model instance with some ET dysfunction and valsalva enabled
+    params = {
+        'et_dysfunction': 0.3,
+        'perform_valsava': True
+    }
+    model = AdvancedPhysiologicalMEModel(params=params)
 
-# Simulate 30 min at 1 second steps
-t = np.linspace(0, 1800, 1801)  # every 1s for 30 min
-results = model.simulate_flight(t, altitude_func)
+    # Simulate 30 min at 1 second steps
+    t = np.linspace(0, 1800, 1801)  # every 1s for 30 min
+    results = model.simulate_flight(t, altitude_func)
 
-# Plot delta_P over time
-plt.figure(figsize=(10,5))
-plt.plot(results['time'], results['delta_P']*13.6, label='Delta P (mmH2O)')
-plt.title('Middle Ear vs Ambient Pressure Differential')
-plt.xlabel('Time (s)')
-plt.ylabel('Delta P (mmH2O)')
-plt.legend()
-plt.grid(True)
-plt.show()
+    # Plot delta_P over time
+    plt.figure(figsize=(10, 5))
+    plt.plot(results['time'], results['delta_P'] * 13.6, label='Delta P (mmH2O)')
+    plt.title('Middle Ear vs Ambient Pressure Differential')
+    plt.xlabel('Time (s)')
+    plt.ylabel('Delta P (mmH2O)')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
 
-# Print risk distribution
-unique, counts = np.unique(results['risk'], return_counts=True)
-for u,c in zip(unique, counts):
-    print(f"Risk {u}: {(c/len(results['risk']))*100:.2f}%")
+    # Print risk distribution
+    unique, counts = np.unique(results['risk'], return_counts=True)
+    for u, c in zip(unique, counts):
+        print(f"Risk {u}: {(c/len(results['risk']))*100:.2f}%")
