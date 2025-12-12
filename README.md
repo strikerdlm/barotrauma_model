@@ -298,6 +298,32 @@ The model has been validated against:
 - ✅ **Risk Categorization**: 85%+ agreement with clinical assessments  
 - ✅ **Safety Thresholds**: Conservative bounds verified against injury data
 
+## 🧭 Reliability Roadmap (Simulation + Validation)
+
+This roadmap focuses on making predictions **more reliable**, not just “more complex”.
+
+1. **Data + ground truth (highest leverage)**
+   - Define event labels (e.g., TEED grade, symptoms, otoscopy findings) and time window.
+   - Standardize inputs: descent profile, Valsalva cadence, ET function proxies, URI/allergy status.
+   - Create train/validation splits that respect subject leakage (no same-subject in both sets).
+
+2. **Calibration (probabilities must mean what they say)**
+   - Track **Brier score**, **calibration curve**, and **expected calibration error (ECE)**.
+   - Use post-hoc calibration (Platt / isotonic) and report calibrated vs uncalibrated.
+
+3. **Uncertainty + robustness**
+   - Report confidence bands (sensitivity to plausible parameter ranges).
+   - Add stress tests: extreme descent rates, missing Valsalva, borderline ET dysfunction.
+   - Add “out-of-distribution” checks (flag inputs beyond validated envelopes).
+
+4. **External + prospective validation**
+   - Validate on a separate chamber cohort and on a different chamber protocol.
+   - Prospectively log predictions vs outcomes; monitor drift.
+
+5. **Decision support evaluation**
+   - Add **decision curve analysis** / net benefit for operational thresholds.
+   - Optimize thresholds for safety-critical use (minimize false negatives for “High risk”).
+
 ## 🎯 Model Accuracy Improvements
 
 This section documents the model accuracy characteristics and strategies for improving predictions.

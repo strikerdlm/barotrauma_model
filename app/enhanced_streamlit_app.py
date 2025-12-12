@@ -84,6 +84,8 @@ This advanced system provides:
 # Initialize session state for historical data
 if 'history' not in st.session_state:
     st.session_state.history = pd.DataFrame(columns=['timestamp', 'et_dysfunction', 'descent_rate', 'risk_score'])
+if "saved_scenarios" not in st.session_state:
+    st.session_state.saved_scenarios = []
 
 # Sidebar configuration
 with st.sidebar:
@@ -204,6 +206,31 @@ with st.sidebar:
             0.5, 2.0, 1.0, 0.1,
             help="Tympanic membrane compliance relative to normal"
         )
+
+    st.divider()
+    st.subheader("📌 Scenario Comparison")
+    if st.button("Save current scenario", use_container_width=True):
+        st.session_state.saved_scenarios.append(
+            {
+                "timestamp": datetime.now().isoformat(timespec="seconds"),
+                "scenario_type": scenario_type,
+                "start_altitude_ft": float(start_alt),
+                "descent_rate_ft_min": float(descent_rate),
+                "et_severity": str(et_severity),
+                "enable_valsalva": bool(enable_valsalva),
+                "valsalva_interval_s": float(valsalva_interval),
+                "tympanum_volume_ml": float(tympanum_ml),
+                "mastoid_volume_ml": float(mastoid_ml),
+            }
+        )
+        st.success("Saved. See the Dashboard tab for comparison.")
+
+    col_clear, col_count = st.columns([1, 1])
+    with col_clear:
+        if st.button("Clear saved", use_container_width=True):
+            st.session_state.saved_scenarios = []
+    with col_count:
+        st.metric("Saved", value=str(len(st.session_state.saved_scenarios)))
 
 # Main content area
 # Create scenario and run simulation
@@ -391,6 +418,7 @@ with tab2:
         
         # Collect data points for 3D scatter
         n_samples = 50
+        rng = np.random.default_rng(42)
         pressure_vals = []
         volume_vals = []
         risk_vals = []
@@ -398,8 +426,8 @@ with tab2:
         
         for _ in range(n_samples):
             # Random sampling of parameters
-            rand_et = np.random.uniform(0, 1)
-            rand_descent = np.random.uniform(1000, 10000)
+            rand_et = float(rng.uniform(0.0, 1.0))
+            rand_descent = float(rng.uniform(1000.0, 10000.0))
             
             # Map to severity
             if rand_et < 0.35:
@@ -789,6 +817,62 @@ with tab6:
                 file_name=f"session_history_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv",
                 mime="text/csv"
             )
+
+# ---------------- Scenario Comparison (Dashboard) ---------------- #
+    st.markdown("#### Saved Scenario Comparison")
+    if st.session_state.saved_scenarios:
+        saved_df = pd.DataFrame(st.session_state.saved_scenarios)
+        st.dataframe(saved_df, use_container_width=True)
+
+        # Compute risk for each saved scenario deterministically
+        comparison_rows = []
+        for row in st.session_state.saved_scenarios:
+            scn = ChamberScenario(
+                start_altitude_ft=float(row["start_altitude_ft"]),
+                descent_rate_ft_min=float(row["descent_rate_ft_min"]),
+                et_severity=severity_mapping.get(row["et_severity"], "moderate"),
+                enable_valsava=bool(row["enable_valsalva"]),
+                valsalva_interval_s=float(row["valsalva_interval_s"]),
+                tympanum_volume_ml=float(row["tympanum_volume_ml"]),
+                mastoid_volume_ml=float(row["mastoid_volume_ml"]),
+            )
+            res_cmp = model.simulate_descent(scn)
+            comparison_rows.append(
+                {
+                    "timestamp": row["timestamp"],
+                    "scenario_type": row["scenario_type"],
+                    "start_altitude_ft": row["start_altitude_ft"],
+                    "descent_rate_ft_min": row["descent_rate_ft_min"],
+                    "et_severity": row["et_severity"],
+                    "risk_score": float(res_cmp.risk_score),
+                    "risk_category": str(res_cmp.risk_category),
+                    "max_abs_deltaP_mmHg": float(np.max(np.abs(res_cmp.delta_P_mmHg))),
+                }
+            )
+
+        cmp_df = pd.DataFrame(comparison_rows)
+        st.dataframe(cmp_df.sort_values("timestamp"), use_container_width=True)
+
+        fig_cmp = go.Figure()
+        fig_cmp.add_trace(
+            go.Bar(
+                x=cmp_df["timestamp"],
+                y=cmp_df["risk_score"],
+                name="Risk score",
+                marker_color="rgba(28, 131, 225, 0.8)",
+            )
+        )
+        fig_cmp.update_layout(
+            title="Saved Scenarios: Risk Score Comparison",
+            xaxis_title="Saved timestamp",
+            yaxis_title="Risk score (0-1)",
+            yaxis=dict(range=[0, 1]),
+            height=320,
+            template="plotly_white",
+        )
+        st.plotly_chart(fig_cmp, use_container_width=True)
+    else:
+        st.info("Save scenarios from the sidebar to compare them here.")
 
 # ---------------- ECharts Visuals Tab ---------------- #
 with tab7:
