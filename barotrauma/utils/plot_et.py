@@ -1,72 +1,65 @@
+"""barotrauma.utils.plot_et
+
+Quick diagnostic plot: ET dysfunction vs barotrauma risk.
+
+This script uses the deterministic legacy simulator in `models/`.
 """
-Simple script to plot ET dysfunction vs barotrauma risk.
-"""
-import os
-import sys
+
+from __future__ import annotations
+
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Add parent directory to Python path
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
+from models.barotrauma_simulation import BarotraumaSimulation
+from models.flight_profile import FlightProfile
 
-from src.barotrauma_simulation_10 import BarotraumaSimulation, simulate_flight_profile
+_MMHG_TO_MMH2O = 13.6
 
-# Base parameters
-params = {
-    'R_A': 0.3,
-    'T_A': 0.1,
-    'P_ET_open': 8,
-    'P_ET_close': 0,
-    'k_MEM': {'O2': 0.015, 'CO2': 0.025, 'N2': 0.0008, 'H2O': 0.035},
-    'V_tym': 1.5e-3,
-    'V_mas': 7.75e-3,
-    'mastoid_compliance': 2e-5
-}
 
-# Flight profile
-flight_profile = {
-    'initial_altitude_ft': 0,
-    'final_altitude_ft': 35000,
-    'climb_rate_ft_min': 2000,
-    'descent_rate_ft_min': 2000,
-    'cruise_duration_min': 10
-}
+def main() -> None:
+    flight_profile = {
+        "cruise_altitude": 35000.0,
+        "ascent_rate": 2000.0,
+        "descent_rate": 2000.0,
+        "cruise_duration": 10.0,
+    }
 
-print("Running simulations...")
-et_values = np.linspace(0, 1, 11)  # Test 11 points from 0 to 1
-risk_scores = []
-pressure_diffs = []
+    et_values = np.linspace(0.0, 1.0, 11)
+    risk_scores: list[float] = []
+    max_abs_dp_mmhg: list[float] = []
 
-for et in et_values:
-    # Run simulation
-    scenario = {**flight_profile, **params, 'et_dysfunction': et}
-    sim = BarotraumaSimulation(scenario)
-    time_array, _, _, P_cabin_func, altitude_func = simulate_flight_profile(**flight_profile)
-    result = sim.simulate_flight(time_array, P_cabin_func, altitude_func)
-    
-    if result is not None:
-        _, _, _, delta_P, risk, risk_score = result
-        risk_scores.append(risk_score)
-        pressure_diffs.append(np.max(np.abs(delta_P)))
-        print(f"ET Dysfunction: {et:.1f}, Risk Score: {risk_score:.2f}, "
-              f"Max Pressure Diff: {np.max(np.abs(delta_P)):.2f} mmHg")
+    for et in et_values:
+        flight = FlightProfile(
+            cruise_altitude=float(flight_profile["cruise_altitude"]),
+            ascent_rate=float(flight_profile["ascent_rate"]),
+            descent_rate=float(flight_profile["descent_rate"]),
+            cruise_duration=float(flight_profile["cruise_duration"]),
+            et_dysfunction=float(et),
+        )
+        sim = BarotraumaSimulation(flight)
+        results = sim.run_simulation(dt=0.1)
 
-# Create plot
-plt.figure(figsize=(10, 6))
-plt.plot(et_values, risk_scores, 'b-o', linewidth=2, label='Risk Score')
-plt.plot(et_values, np.array(pressure_diffs)/100, 'r--o', linewidth=2, 
-         label='Max Pressure Diff (scaled)')
+        rf = np.asarray(results["risk_factor"], dtype=float)
+        dp_mmh2o = np.asarray(results["dP"], dtype=float)
 
-plt.xlabel('ET Dysfunction Level')
-plt.ylabel('Risk Score / Normalized Pressure')
-plt.title('ET Dysfunction vs Barotrauma Risk')
-plt.grid(True)
-plt.legend()
+        risk_scores.append(float(np.max(rf)))
+        max_abs_dp_mmhg.append(float(np.max(np.abs(dp_mmh2o)) / _MMHG_TO_MMH2O))
 
-plt.savefig('et_risk_analysis.png')
-plt.show()
+    plt.figure(figsize=(10, 6))
+    plt.plot(et_values, risk_scores, "b-o", linewidth=2, label="Risk score (max risk_factor)")
+    plt.plot(et_values, np.asarray(max_abs_dp_mmhg) / 100.0, "r--o", linewidth=2, label="Max |ΔP| (mmHg, /100)")
 
-print("\nAnalysis complete. Results saved to 'et_risk_analysis.png'") 
+    plt.xlabel("ET dysfunction (0=normal, 1=severe)")
+    plt.ylabel("Risk / normalized pressure")
+    plt.title("ET dysfunction vs barotrauma risk")
+    plt.grid(True)
+    plt.legend()
+
+    out = "et_risk_analysis.png"
+    plt.savefig(out, dpi=150)
+    plt.show()
+    print(f"Saved: {out}")
+
+
+if __name__ == "__main__":
+    main()

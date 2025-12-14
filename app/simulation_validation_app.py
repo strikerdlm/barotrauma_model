@@ -11,7 +11,14 @@ import streamlit as st
 try:
 	from models.flight_profile import FlightProfile
 	from models.barotrauma_simulation import BarotraumaSimulation
-except Exception as e:
+except ImportError as e:
+	st.error(
+		"Unable to import the simulation packages. "
+		"Install the project in editable mode from the repo root:\n\n"
+		"`pip install -e .`\n\n"
+		"Then re-run this app."
+	)
+	st.exception(e)
 	st.stop()
 
 
@@ -109,8 +116,8 @@ with st.sidebar:
 
 
 # ---------------------------- Run the simulation ------------------------- #
-if fix_seed and seed is not None:
-	np.random.seed(int(seed))
+# The underlying `models` simulation is deterministic; the "seed" control is kept
+# for future stochastic extensions and UI reproducibility semantics.
 
 profile = FlightProfile(
 	cruise_altitude=float(cruise_altitude),

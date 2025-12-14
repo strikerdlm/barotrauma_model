@@ -10,11 +10,6 @@ import pandas as pd
 import streamlit as st
 import plotly.graph_objects as go
 from datetime import datetime
-import sys
-import os
-
-# Add parent directory to path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from barotrauma.models.chamber_risk import (
     HypobaricChamberRiskModel,
@@ -28,7 +23,7 @@ from barotrauma.analysis.statistics import StatisticalAnalyzer
 try:
     from streamlit_echarts import st_echarts, JsCode
     ECHARTS_AVAILABLE = True
-except Exception:
+except ImportError:
     ECHARTS_AVAILABLE = False
 
     class JsCode(str):
@@ -86,6 +81,9 @@ if 'history' not in st.session_state:
     st.session_state.history = pd.DataFrame(columns=['timestamp', 'et_dysfunction', 'descent_rate', 'risk_score'])
 if "saved_scenarios" not in st.session_state:
     st.session_state.saved_scenarios = []
+
+# Keep session state bounded to prevent unbounded in-memory growth.
+MAX_HISTORY_ROWS = 500
 
 # Sidebar configuration
 with st.sidebar:
@@ -259,6 +257,8 @@ new_record = pd.DataFrame([{
     'risk_score': result.risk_score
 }])
 st.session_state.history = pd.concat([st.session_state.history, new_record], ignore_index=True)
+if len(st.session_state.history) > MAX_HISTORY_ROWS:
+    st.session_state.history = st.session_state.history.tail(MAX_HISTORY_ROWS).reset_index(drop=True)
 
 # Key metrics display
 st.header("📊 Risk Assessment Summary")

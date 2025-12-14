@@ -31,6 +31,48 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# --------------------------------------------------------------------------- #
+# Cached helpers (performance + UI responsiveness)
+# --------------------------------------------------------------------------- #
+@st.cache_resource(show_spinner=False)
+def _get_model() -> HypobaricChamberRiskModel:
+    return HypobaricChamberRiskModel()
+
+
+@st.cache_data(show_spinner=False)
+def _risk_vs_descent_rate_cached(
+    scenario: ChamberScenario, rates_ft_min: np.ndarray
+) -> tuple[np.ndarray, np.ndarray]:
+    model = _get_model()
+    return model.risk_vs_descent_rate(scenario, rates_ft_min)
+
+
+@st.cache_data(show_spinner=False)
+def _risk_heatmap_cached(
+    start_alt_ft: float,
+    enable_valsalva: bool,
+    valsalva_interval_s: float,
+    tympanum_volume_ml: float,
+    mastoid_volume_ml: float,
+    rates_ft_min: np.ndarray,
+) -> tuple[list[str], list[np.ndarray]]:
+    model = _get_model()
+    severities = ["mild", "moderate", "severe"]
+    score_matrix: list[np.ndarray] = []
+    for sev in severities:
+        scn = ChamberScenario(
+            start_altitude_ft=float(start_alt_ft),
+            descent_rate_ft_min=float(rates_ft_min[0]),
+            et_severity=sev,
+            enable_valsava=bool(enable_valsalva),
+            valsalva_interval_s=float(valsalva_interval_s),
+            tympanum_volume_ml=float(tympanum_volume_ml),
+            mastoid_volume_ml=float(mastoid_volume_ml),
+        )
+        _rates, ssev = model.risk_vs_descent_rate(scn, rates_ft_min)
+        score_matrix.append(ssev)
+    return severities, score_matrix
+
 # Custom CSS for modern styling
 st.markdown("""
 <style>
@@ -275,7 +317,7 @@ scenario = ChamberScenario(
     mastoid_volume_ml=float(mastoid_ml),
 )
 
-model = HypobaricChamberRiskModel()
+model = _get_model()
 result = model.simulate_descent(scenario)
 visual = BarotraumaVisualizer()
 stats = StatisticalAnalyzer()
@@ -525,7 +567,7 @@ with tab3:
     # Risk vs Descent Rate
     st.markdown("#### Risk Score vs Descent Rate")
     rates = np.linspace(1000, 10000, 37)
-    _, scores = model.risk_vs_descent_rate(scenario, rates)
+    _, scores = _risk_vs_descent_rate_cached(scenario, rates)
     
     fig_sensitivity = go.Figure()
     
@@ -567,20 +609,14 @@ with tab3:
     
     # Risk Heatmap
     st.markdown("#### Risk Heatmap: Severity × Descent Rate")
-    severities = ["mild", "moderate", "severe"]
-    score_matrix = []
-    for sev in severities:
-        scn = ChamberScenario(
-            start_altitude_ft=float(start_alt),
-            descent_rate_ft_min=float(descent_rate),
-            et_severity=sev,
-            enable_valsava=enable_valsalva,
-            valsalva_interval_s=float(valsalva_interval),
-            tympanum_volume_ml=float(tympanum_ml),
-            mastoid_volume_ml=float(mastoid_ml),
-        )
-        _, ssev = model.risk_vs_descent_rate(scn, rates)
-        score_matrix.append(ssev)
+    severities, score_matrix = _risk_heatmap_cached(
+        start_alt_ft=float(start_alt),
+        enable_valsalva=bool(enable_valsalva),
+        valsalva_interval_s=float(valsalva_interval),
+        tympanum_volume_ml=float(tympanum_ml),
+        mastoid_volume_ml=float(mastoid_ml),
+        rates_ft_min=rates,
+    )
     
     fig_heat = go.Figure(data=go.Heatmap(
         z=score_matrix,
