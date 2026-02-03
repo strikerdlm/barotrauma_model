@@ -1,0 +1,43 @@
+{
+  "name": "barotrauma-dashboard",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Publication-ready safety management dashboard for barotrauma risk assessment during hypobaric chamber operations",
+  "author": "Aerospace Medicine Research",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.24",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.6",
+    "echarts-gl": "^2.0.9",
+    "framer-motion": "^12.30.1",
+    "lucide-react": "^0.563.0",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/node": "^24.10.10",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.5.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vite": "^7.2.4"
+  }
+}

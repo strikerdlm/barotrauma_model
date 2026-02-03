@@ -1,0 +1,176 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap');
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+  /* Colors */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+  --color-primary-950: #082f49;
+
+  --color-risk-low: #22c55e;
+  --color-risk-moderate: #eab308;
+  --color-risk-high: #ef4444;
+
+  --color-dark-100: #1e293b;
+  --color-dark-200: #0f172a;
+  --color-dark-300: #020617;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-display: 'Outfit', 'Inter', sans-serif;
+
+  /* Animations */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-gradient: gradient 8s ease infinite;
+}
+
+@keyframes gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* Base Styles */
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    @apply bg-dark-300 text-gray-100 antialiased;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(139, 92, 246, 0.1) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(14, 165, 233, 0.08) 0px, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-dark-200;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-primary-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-primary-600;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-dark-200/80 backdrop-blur-sm border border-white/5 rounded-2xl p-6;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .metric-card {
+    @apply bg-gradient-to-br from-dark-100/80 to-dark-200/60 backdrop-blur-sm;
+    @apply border border-white/5 rounded-xl p-4;
+    @apply transition-all duration-300 hover:border-primary-500/30;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .metric-value {
+    @apply font-mono text-2xl font-semibold;
+  }
+
+  .metric-label {
+    @apply text-gray-400 text-sm font-medium;
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary-600 to-primary-500;
+    @apply text-white font-medium px-6 py-2.5 rounded-xl;
+    @apply hover:from-primary-500 hover:to-primary-400;
+    @apply transition-all duration-200;
+    @apply active:scale-[0.98];
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.25);
+  }
+
+  .btn-secondary {
+    @apply bg-white/5 border border-white/10 text-gray-200;
+    @apply font-medium px-6 py-2.5 rounded-xl;
+    @apply hover:bg-white/10 hover:border-white/20;
+    @apply transition-all duration-200;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold;
+  }
+
+  .badge-low {
+    @apply bg-risk-low/20 text-risk-low border border-risk-low/30;
+  }
+
+  .badge-moderate {
+    @apply bg-risk-moderate/20 text-risk-moderate border border-risk-moderate/30;
+  }
+
+  .badge-high {
+    @apply bg-risk-high/20 text-risk-high border border-risk-high/30;
+  }
+
+  .section-title {
+    @apply text-xl font-semibold text-white mb-4;
+    font-family: 'Outfit', 'Inter', sans-serif;
+  }
+
+  .tab {
+    @apply px-4 py-2 text-sm font-medium text-gray-400 rounded-lg;
+    @apply transition-all duration-200;
+    @apply hover:text-white hover:bg-white/5;
+  }
+
+  .tab-active {
+    @apply bg-primary-500/20 text-primary-400 border border-primary-500/30;
+  }
+
+  .chart-container {
+    @apply w-full h-[400px] rounded-xl overflow-hidden;
+  }
+
+  .tooltip-custom {
+    @apply bg-dark-200/95 backdrop-blur-md border border-white/10 rounded-lg px-3 py-2;
+    @apply text-sm text-gray-200;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-400 via-purple-400 to-primary-400 bg-clip-text text-transparent;
+    background-size: 200% auto;
+  }
+
+  .glow {
+    box-shadow: 0 0 40px rgba(14, 165, 233, 0.3);
+  }
+
+  .glow-sm {
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+  }
+}
