@@ -3,13 +3,38 @@ barotrauma.v2.et_dynamics
 =========================
 
 Eustachian-tube mechanics: passive opening, active (muscle-assisted) opening
-driven by swallow events and Valsalva, and Patulous-ET state handling.
+driven by swallow events and Valsalva, Patulous-ET state handling, and the
+ascent/descent asymmetric aperture model introduced in v2.1.
 
-Physics follows Kanick & Doyle 2005 with post-2005 refinements:
+Asymmetry (physiology)
+----------------------
+- **Ascent** (positive ΔP, ME > ambient): Boyle's law buffers the ME as ambient
+  drops; the TM pushes outward, expanding V_ME and relieving some overpressure.
+  More importantly, the ME overpressure pushes OUT against the cartilaginous
+  portion of the ET, opening it passively at P_O' ≈ 26 mmHg and dumping excess
+  gas ME → NP. Net: trivial clearance, ΔP bounded near P_O'.
+- **Descent** (negative ΔP, ambient > ME): the ME underpressure pulls the TM
+  IN, shrinking V_ME; ambient rises faster than Boyle can offset. The
+  nasopharyngeal tissue pressure now COLLAPSES the cartilaginous ET lumen from
+  the NP side. Passive opening is NOT possible from this direction — only
+  active nasopharyngeal overpressure (Valsalva, Toynbee, mTVP activation via
+  swallowing) can force the tube open, and each such attempt fights progressive
+  lumen collapse. Hagen-Poiseuille flow scales as r^4, so a modest radius drop
+  translates into a dramatic flow reduction.
+
+``aperture_factor()`` models this continuous NP-side collapse as a steep Hill
+function of |ΔP|, further tightened by the instantaneous pressure-change rate
+(mucosal viscoelastic response). All clearance paths (active swallow,
+Valsalva) multiply their effective FGE by the aperture factor, reproducing the
+clinical observation that rapid chamber descents produce disproportionately
+more barotrauma than slow descents of equivalent total ΔP.
+
+Physics also follows Kanick & Doyle 2005 with post-2005 refinements:
 - Alper 2020 (PMID 32176133) paired pre/post-BDET P_O' / P_C' distributions.
 - Mandel 2016 (PMID 26626132) per-swallow Fractional Gradient Equalized.
-- Ghadiali group time-varying R_A (applied as Valsalva bolus multiplier here;
-  full FEM out of scope for v2.0 — see FUTURE_WORK.md).
+- Ghadiali group time-varying R_A (Ghadiali 2010 PMID 20413236; Malik &
+  Ghadiali 2019 PMID 29395489) inspires the rate-dependent aperture term;
+  full FEM is out of scope.
 
 The module exposes pure numeric functions rather than a class-with-state so the
 integrator in ``engine.py`` can call them cheaply in tight loops.
@@ -35,6 +60,73 @@ class EtStepState:
     last_valsalva_time_s: float = -1e9
     is_locked: bool = False               # persistent ET lock flag
     lock_time_s: float = -1e9
+    prev_delta_p_mmHg: float = 0.0        # for rate estimation
+
+
+# --------------------------------------- ascent/descent asymmetric aperture -
+# Anchors chosen so that at moderate |ΔP| (below ~60 mmHg) the tube flows
+# close to unimpeded — this preserves the Kanick-Doyle healthy-ear behavior
+# (<15 mmHg ΔP at 300 ft/min airline descent) — while retaining steep
+# collapse at the high-|ΔP| regime where swallow clearance starts failing.
+APERTURE_FREE_ZONE_MMHG: float = 40.0      # below this, aperture = 1.0
+APERTURE_HALF_MMHG: float = 110.0          # half-aperture point on descent
+APERTURE_HILL_N: float = 3.0               # steepness beyond the free zone
+APERTURE_RATE_COEF: float = 0.15           # tightening per mmHg/s rate
+APERTURE_RATE_CAP_MMHG_S: float = 3.0      # clip rate contribution at ~7000 ft/min
+
+
+def aperture_factor(
+    delta_p_mmHg: float,
+    rate_mmHg_s: float,
+    et: EtFunction,
+    modifiers: Modifiers,
+) -> float:
+    """
+    Effective ET lumen patency on the NP side, returned as the multiplicative
+    factor applied to all active clearance attempts (swallow FGE, Valsalva
+    push, etc.). Range [0, 1]; 1.0 means the tube opens and flows freely,
+    0.0 means the tube is fully collapsed.
+
+    Mechanism
+    ---------
+    On **ascent** (ΔP > 0) the tube pops open passively from the ME side and
+    vents cheaply; aperture is effectively 1.0 (clearance is limited by P_O'
+    and P_C' in ``passive_equilibration_mmHg``, not by aperture).
+
+    On **descent** (ΔP < 0) the NP tissue pressure compresses the
+    cartilaginous lumen. Aperture follows a Hill function of |ΔP| centered
+    on an individual half-aperture threshold. Inflammation (URI, CRS)
+    tightens the threshold — mucosal edema collapses the tube at lower
+    applied ΔP. Rapid pressure change (dP/dt) additionally tightens the
+    threshold because the mucosa's viscoelastic response lags, concentrating
+    stress on the collapsible segment.
+
+    Patulous-S1 patients have the opposite behavior (aperture saturated at
+    1.0 across all descent profiles); this is handled in engine.py with a
+    hard-zero override and is not re-duplicated here.
+    """
+    # Ascent: cheap passive venting — full aperture for active pathways too.
+    if delta_p_mmHg >= 0:
+        return 1.0
+
+    abs_dp = -delta_p_mmHg
+
+    # Inflammation tightens: sqrt damping keeps the effect meaningful without
+    # runaway collapse at very high ra_mult values.
+    inflammation_tightening = max(1.0, modifiers.ra_mult) ** 0.5
+
+    # Rate tightening: faster pressure growth -> lower effective ΔP_half.
+    r = max(0.0, min(rate_mmHg_s, APERTURE_RATE_CAP_MMHG_S))
+    rate_tightening = 1.0 + APERTURE_RATE_COEF * r
+
+    free_zone = APERTURE_FREE_ZONE_MMHG / inflammation_tightening
+    if abs_dp <= free_zone:
+        return 1.0
+
+    dp_half = APERTURE_HALF_MMHG / (inflammation_tightening * rate_tightening)
+    excess = abs_dp - free_zone
+    half_excess = max(dp_half - free_zone, 1.0)
+    return 1.0 / (1.0 + (excess / half_excess) ** APERTURE_HILL_N)
 
 
 # ---------------------------------------------- passive ET openings ----
@@ -87,15 +179,22 @@ def active_swallow_equalization(
     modifiers: Modifiers,
     dt_s: float,
     is_descent: bool,
+    rate_mmHg_s: float = 0.0,
 ) -> float:
     """
     Gas transfer during a single swallow-induced active opening.
 
     Uses the Fractional Gradient Equalized approach (Mandel 2016) scaled by
-    severity and URI modifiers. Returns the NEW ΔP (mmHg) after the event.
+    severity and URI modifiers, and further modulated by the NP-side
+    aperture factor (``aperture_factor``) so that descent-rate-dependent
+    lumen collapse progressively defeats each swallow's ability to equalize.
+
+    Returns the NEW ΔP (mmHg) after the event.
     """
     fge = et.fge_controls * modifiers.eq_rate_mult
     fge = max(0.0, min(1.0, fge))
+    # Aperture-limited effective clearance (Hagen-Poiseuille-informed)
+    fge *= aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
     new_delta = delta_p_mmHg * (1.0 - fge)
     return new_delta
 
@@ -115,26 +214,28 @@ def valsalva_pressurization_mmHg(
     delta_p_mmHg: float,
     et: EtFunction,
     modifiers: Modifiers,
+    rate_mmHg_s: float = 0.0,
 ) -> float:
     """
     Simulate a successful Valsalva pulse: if the Valsalva-generated NP pressure
     overcomes the NP-side ET opening threshold (adjusted for Valsalva shift),
     gas flows NP→ME and ΔP is brought toward zero.
 
-    Valsalva efficacy is modulated by the URI / PET modifiers.
+    Valsalva efficacy is modulated by URI/PET modifiers AND by the
+    descent-aperture factor — a fast-growing |ΔP| collapses the lumen faster
+    than the Valsalva pulse can reopen it, so each unsuccessful Valsalva
+    contributes progressively less.
     """
     # Probability of success — Kanick-Doyle passive NP threshold + Valsalva bonus
     np_threshold = et.passive_opening_mmHg_np + C.VALSALVA_OPENING_SHIFT_MMHG
 
     # Valsalva-induced P_NP excess (a bolus ~50 mmHg in typical subjects).
-    # We represent this as an effective NP-side "push" amplitude.
     valsalva_push_mmHg = 50.0 * modifiers.valsalva_mult
 
     if -delta_p_mmHg > np_threshold - valsalva_push_mmHg:
-        # Sufficient NP overpressure to open the tube. Equalize FGE fraction.
         fge = min(1.0, 0.6 * et.fge_controls * modifiers.valsalva_mult)
+        fge *= aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
         return delta_p_mmHg * (1.0 - fge)
-    # Valsalva attempted but failed. No change.
     return delta_p_mmHg
 
 
