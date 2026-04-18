@@ -233,8 +233,15 @@ def valsalva_pressurization_mmHg(
     valsalva_push_mmHg = 50.0 * modifiers.valsalva_mult
 
     if -delta_p_mmHg > np_threshold - valsalva_push_mmHg:
-        fge = min(1.0, 0.6 * et.fge_controls * modifiers.valsalva_mult)
-        fge *= aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
+        # Valsalva delivers forcible NP overpressure capable of clearing 50-70%
+        # of the gradient per successful pulse (literature; not the 32% FGE
+        # baseline that applies to passive swallows). Aperture scaling is
+        # square-rooted because the muscular push can partially override
+        # progressive lumen collapse — brute-force reopening — so Valsalva
+        # degrades less sharply than a passive swallow as aperture narrows.
+        valsalva_base = 0.55 * modifiers.valsalva_mult
+        ap = aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
+        fge = min(1.0, valsalva_base * (ap ** 0.5))
         return delta_p_mmHg * (1.0 - fge)
     return delta_p_mmHg
 
