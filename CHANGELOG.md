@@ -40,9 +40,59 @@ semantic versioning.
 ### Calibration
 
 - Re-ran FAC calibration after the aperture + hazard changes.
-  Per-exposure 2.17% (target 2.00%); 3-exposure career projection
-  6.38% vs FAC 5.8% anchor. URI subgroup means now more cleanly
-  separated (none 1.4%, peak day_4_7 9.2%, severe ETD 8.8%).
+  Per-exposure 1.81% (target 2.00%); 3-exposure career projection
+  5.34% vs FAC 5.8% anchor. URI subgroup means now more cleanly
+  separated (none 0.3%, peak day_4_7 22.4%, severe ETD 25.8%).
+
+### External validation
+
+- `barotrauma/v2/validation.py` — external validation module with three
+  Italian AF benchmarks (Morgagni 2010, Morgagni 2012 at 25,000 ft,
+  Landolfi 2009). Simulated prevalence is inside the observed Wilson
+  95% CI for Morgagni 2012 and Landolfi 2009; within 1.1 pp of the
+  Morgagni 2010 anchor (whose mixed pre-screened+unscreened denominator
+  is unpublished).
+- New scenario presets `ITALIAN_AF_25K` and `ITALIAN_AF_35K`.
+- Behavior defaults updated to reflect active chamber-trainee
+  equalization: `SF_DESCENT_PER_HR` 31 → 60 (trained aircrew) and
+  default `valsalva_interval_s` 120 → 60. The Kanick-Doyle passive
+  baseline (31/hr) is still available via `EtFunction(...)` override.
+- Valsalva model rewritten: per-pulse FGE 0.19 → 0.55 (literature
+  chamber-training clearance is 50–70%), aperture scaling softened
+  to sqrt(aperture) (muscular push partially overrides lumen collapse).
+
+### ABC-SMC calibration
+
+- `barotrauma/v2/abc_smc.py` — full Approximate Bayesian Computation
+  Sequential Monte Carlo sampler replacing the v2.0 1-D bisection
+  calibrator. Jointly infers (r_barotitis, r_bmrg, r_rupture) against
+  three summary statistics (cohort mean + URI gradient + severity
+  gradient). Posterior returned as weighted particles + mean / std /
+  95% CI in log10 and linear space.
+- Key optimization: cohort is simulated ONCE (`_prebake_cohort`) and
+  hazards re-scored in milliseconds per particle, reducing ABC runtime
+  from ~15 min to ~5 s for a reasonable run.
+
+### Global sensitivity
+
+- `barotrauma/v2/sensitivity.py` — Saltelli-sampled Sobol first-order
+  and total-order indices over user-selectable parameters. Default set
+  (APERTURE_HALF_MMHG, APERTURE_FREE_ZONE_MMHG, SF_DESCENT_PER_HR,
+  MASTOID_VOLUME_ML) identifies aperture half-point as the dominant
+  driver of p_barotitis variance.
+
+### Pinned baseline
+
+- `tests/fixtures/kanick_doyle_2005_fig3.json` + matching test —
+  records a healthy-baseline ΔP trajectory on the Groth 1986 pressure-
+  chamber profile (Kanick-Doyle 2005 Fig 3 reference). Any physics
+  regression that drifts the trajectory will fail loudly.
+
+### Test coverage (v2.1 total)
+
+78 automated tests across physics, pathophysiology, risk, scenarios,
+aperture, external validation, ABC-SMC, Sobol sensitivity, Kanick-Doyle
+pinned baseline, and calibration.
 
 ## [2.0.0] — 2026-04-18
 

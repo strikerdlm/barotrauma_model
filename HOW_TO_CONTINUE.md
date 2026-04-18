@@ -15,6 +15,20 @@ without re-deriving the plan.
 
 ## Priorities — in order
 
+Items 2, 3, 4, 5 from the v2.0 roadmap are now **delivered in v2.1**:
+
+- [x] (2) External validation against Italian AF cohorts — see
+      `barotrauma/v2/validation.py` and `tests/test_v2_validation.py`.
+- [x] (3) ABC-SMC multi-parameter calibration — see
+      `barotrauma/v2/abc_smc.py` and `tests/test_v2_abc_smc.py`.
+- [x] (4) Sobol global sensitivity — see `barotrauma/v2/sensitivity.py`
+      and `tests/test_v2_sensitivity.py`.
+- [x] (5) Kanick-Doyle Fig 3 pinned baseline test — see
+      `tests/fixtures/kanick_doyle_2005_fig3.json` and
+      `tests/test_v2_kanick_doyle_fig3.py`.
+
+Remaining open items below.
+
 ### 1. Publish the FAC 5.8% cohort
 
 The most load-bearing anchor in the model is currently unpublished. Until
