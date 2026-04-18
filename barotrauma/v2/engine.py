@@ -141,6 +141,11 @@ def simulate(
         p_amb_i = float(p_ambient[i])
         descending = bool(descent_rate[i] > 100.0)   # ≥100 ft/min
 
+        # Ambient-pressure rate of change (mmHg/s). Positive on descent —
+        # used by the descent-aperture model to tighten the lumen when
+        # pressure is rising fast (viscoelastic mucosal response).
+        rate_mmHg_s = float(p_ambient[i] - p_ambient[i - 1]) / max(dt, 1e-9)
+
         # --- 1) transmucosal drift (slow, small effect per step) ----------
         me.gas = transmucosal_exchange_step(me.gas, dt)
 
@@ -185,7 +190,10 @@ def simulate(
             if (t - step.last_swallow_time_s) >= sint:
                 jitter = rng.uniform(-0.2, 0.2) * sint
                 step.last_swallow_time_s = t + jitter
-                dp = active_swallow_equalization(dp, et_eff, modifiers, dt, descending)
+                dp = active_swallow_equalization(
+                    dp, et_eff, modifiers, dt, descending,
+                    rate_mmHg_s=rate_mmHg_s,
+                )
                 et_open[i] = True
                 swallow_events.append(t)
 
@@ -196,7 +204,9 @@ def simulate(
                 and descending
             ):
                 step.last_valsalva_time_s = t
-                dp = valsalva_pressurization_mmHg(dp, et_eff, modifiers)
+                dp = valsalva_pressurization_mmHg(
+                    dp, et_eff, modifiers, rate_mmHg_s=rate_mmHg_s,
+                )
                 et_open[i] = True
                 valsalva_events.append(t)
 
