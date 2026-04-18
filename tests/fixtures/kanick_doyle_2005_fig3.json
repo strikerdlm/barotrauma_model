@@ -1,0 +1,113 @@
+{
+  "profile": "GROTH_1986_VALIDATION",
+  "patient": "PatientState() \u2014 healthy baseline (all defaults)",
+  "rng_seed": 2026,
+  "dt_s": 0.1,
+  "max_abs_delta_p_mmHg": 17.885688220017187,
+  "p_barotitis": 0.0,
+  "risk_category": "low",
+  "samples": [
+    {
+      "t_s": 0.0,
+      "altitude_ft": 0.0,
+      "p_ambient_mmHg": 760.0,
+      "delta_p_mmHg": 0.0
+    },
+    {
+      "t_s": 5.0,
+      "altitude_ft": 160.0,
+      "p_ambient_mmHg": 755.9468114058734,
+      "delta_p_mmHg": 2.721950784949513
+    },
+    {
+      "t_s": 10.0,
+      "altitude_ft": 320.0,
+      "p_ambient_mmHg": 751.9152390456672,
+      "delta_p_mmHg": 5.919518789090262
+    },
+    {
+      "t_s": 15.0,
+      "altitude_ft": 480.0,
+      "p_ambient_mmHg": 747.9051676369174,
+      "delta_p_mmHg": 9.92959019784007
+    },
+    {
+      "t_s": 20.0,
+      "altitude_ft": 640.0,
+      "p_ambient_mmHg": 743.9164825119775,
+      "delta_p_mmHg": 13.918275322780005
+    },
+    {
+      "t_s": 25.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 30.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 35.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 40.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 45.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 50.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 17.885688220017187
+    },
+    {
+      "t_s": 55.0,
+      "altitude_ft": 800.0,
+      "p_ambient_mmHg": 739.9490696147403,
+      "delta_p_mmHg": 12.162267989611685
+    },
+    {
+      "t_s": 60.0,
+      "altitude_ft": 640.0,
+      "p_ambient_mmHg": 743.9164825119775,
+      "delta_p_mmHg": 8.194855092374496
+    },
+    {
+      "t_s": 65.0,
+      "altitude_ft": 480.0,
+      "p_ambient_mmHg": 747.9051676369174,
+      "delta_p_mmHg": 4.3020382854809895
+    },
+    {
+      "t_s": 70.0,
+      "altitude_ft": 320.0,
+      "p_ambient_mmHg": 751.9152390456672,
+      "delta_p_mmHg": 1.5917641578936355
+    },
+    {
+      "t_s": 75.0,
+      "altitude_ft": 160.0,
+      "p_ambient_mmHg": 755.9468114058734,
+      "delta_p_mmHg": -1.1295483935622315
+    },
+    {
+      "t_s": 79.0,
+      "altitude_ft": 32.0,
+      "p_ambient_mmHg": 759.1876274281608,
+      "delta_p_mmHg": -3.314870068346522
+    }
+  ]
+}
