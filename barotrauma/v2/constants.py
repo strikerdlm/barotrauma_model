@@ -60,9 +60,15 @@ FGE_ADULT_CONTROLS_CI: tuple[float, float] = (0.21, 0.43)
 FGE_ADULT_RECURRENT_AOM: float = 0.16
 FGE_ADULT_RECURRENT_AOM_CI: tuple[float, float] = (0.08, 0.24)
 
-# Swallow frequencies (KD2005 Table ref 53)
+# Swallow frequencies. Kanick-Doyle 2005 Table ref 53 (Tideholm et al.)
+# measured 31/hr during descent in passive subjects; trained chamber aircrew
+# routinely hit ~60/hr (every ~60 s) because they are instructed to clear
+# pro-actively (chew gum, swallow, Toynbee, Valsalva) whenever symptoms
+# hint at a pressure gradient. The default here is the trained-aircrew
+# value; set ``EtFunction(swallow_freq_per_hr_descent=31.0)`` to use the
+# Kanick-Doyle passive baseline.
 SF_CRUISE_PER_HR: float = 5.2
-SF_DESCENT_PER_HR: float = 31.0
+SF_DESCENT_PER_HR: float = 60.0
 
 # ---------------------------------------- Obstructive ET severity ----
 # Multipliers applied to the normal ET parameters by severity class.

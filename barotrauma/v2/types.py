@@ -103,8 +103,10 @@ class EtFunction:
     # Active (muscle-assisted) opening
     active_resistance_mmHg_ml_min: float = 2.0    # R_A
     active_open_duration_s: float = 0.25          # T_A
-    swallow_freq_per_hr_cruise: float = 5.2       # S_f at rest
-    swallow_freq_per_hr_descent: float = 31.0     # S_f during descent
+    swallow_freq_per_hr_cruise: float = 5.2       # S_f at rest (KD2005)
+    swallow_freq_per_hr_descent: float = 60.0     # S_f during descent
+                                                  # (trained aircrew — 31.0 for
+                                                  # Kanick-Doyle passive baseline)
     fge_controls: float = 0.32                    # Fractional gradient equalized
                                                   # per swallow (Mandel 2016)
 
@@ -142,7 +144,7 @@ class PatientState:
 
     # Behavior during exposure
     enable_valsalva: bool = True
-    valsalva_interval_s: float = 120.0
+    valsalva_interval_s: float = 60.0   # every ~60 s in chamber trainees
     habitual_sniffer: bool = False      # Shindo 2025 type-B/C tymp in 42.6%
 
     def validate(self) -> None:
