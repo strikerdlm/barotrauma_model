@@ -104,6 +104,44 @@ SLOW_DESCENT_1K_FT_MIN = ChamberProfile(
     ),
 )
 
+# ------------------------------------ Italian AF (Morgagni / Landolfi) -
+# Standard Italian Air Force chamber training. Morgagni 2010 PMID 20824995
+# used a "standard high-altitude profile" (25,000 ft); Morgagni 2012 PMID
+# 22764614 reported both 25,000 ft and 35,000 ft profiles. Landolfi 2009
+# PMID 20027855 used 25,000 ft Italian AF training. Exact profile params
+# are not published verbatim; these reconstructions match the published
+# envelope (pre-oxygenation, moderate ascent, 15-min hold, controlled
+# descent ≤ 3,000 ft/min).
+ITALIAN_AF_25K = ChamberProfile(
+    name="Italian AF 25,000 ft (Morgagni 2010/2012, Landolfi 2009)",
+    start_altitude_ft=0.0,
+    segments=(
+        ChamberSegment(duration_s=1800, end_altitude_ft=0,
+                       label="30-min O2 preoxygenation"),
+        ChamberSegment(duration_s=750, end_altitude_ft=25000,
+                       label="ascent 2,000 ft/min"),
+        ChamberSegment(duration_s=900, end_altitude_ft=25000,
+                       label="hold 15 min"),
+        ChamberSegment(duration_s=500, end_altitude_ft=0,
+                       label="descent 3,000 ft/min"),
+    ),
+)
+
+ITALIAN_AF_35K = ChamberProfile(
+    name="Italian AF 35,000 ft (Morgagni 2012)",
+    start_altitude_ft=0.0,
+    segments=(
+        ChamberSegment(duration_s=1800, end_altitude_ft=0,
+                       label="30-min O2 preoxygenation"),
+        ChamberSegment(duration_s=1050, end_altitude_ft=35000,
+                       label="ascent 2,000 ft/min"),
+        ChamberSegment(duration_s=300, end_altitude_ft=35000,
+                       label="hold 5 min"),
+        ChamberSegment(duration_s=700, end_altitude_ft=0,
+                       label="descent 3,000 ft/min"),
+    ),
+)
+
 # ---------------------------- Groth 1986 pressure-chamber (Kanick-Doyle validation) -
 GROTH_1986_VALIDATION = ChamberProfile(
     name="Groth 1986 pressure chamber (Kanick-Doyle validation)",
@@ -121,6 +159,8 @@ PRESETS: dict[str, ChamberProfile] = {
     "usafsam_type_i": USAFSAM_TYPE_I,
     "usafsam_type_ii_rd": USAFSAM_TYPE_II_RD,
     "israeli_af_post_2022": ISRAELI_AF_POST_2022,
+    "italian_af_25k": ITALIAN_AF_25K,
+    "italian_af_35k": ITALIAN_AF_35K,
     "fac_bogota_default": FAC_BOGOTA_DEFAULT,
     "commercial_cabin_descent": COMMERCIAL_CABIN_DESCENT,
     "rapid_descent_10k": RAPID_DESCENT_10K_FT_MIN,
