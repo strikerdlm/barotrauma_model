@@ -1,564 +1,255 @@
-# 🫁 Barotrauma Model: Physiological Risk Assessment for Aviation Medicine
+# Barotrauma Model — Middle-Ear Barotrauma Risk for Hypobaric Chamber Training
 
-[![Python](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Streamlit](https://img.shields.io/badge/streamlit-1.25+-red.svg)](https://streamlit.io/)
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Research](https://img.shields.io/badge/research-aviation%20medicine-green.svg)](https://github.com/strikerdlm/barotrauma_model)
-
-> **Advanced physiological modeling for middle ear barotrauma risk assessment during hypobaric chamber training and flight operations**
-
-## 🎯 Project Goals
-
-This project delivers a **physics-informed, clinically-relevant** simulation platform for:
-
-- **🎓 Training Safety**: Predict barotrauma risk during hypobaric chamber training
-- **✈️ Aviation Medicine**: Assess pilot/aircrew risk factors before flight operations  
-- **🔬 Clinical Research**: Validate intervention strategies and safety protocols
-- **📊 Risk Stratification**: Quantify risk based on ET dysfunction severity and descent profiles
-
-## 🧬 The Science
-
-### Physiological Background
-
-**Middle ear barotrauma** occurs when the Eustachian tube (ET) fails to equalize pressure during altitude changes. Our model incorporates:
-
-```
-🔬 Boyle's Law (P₁V₁ = P₂V₂)
-├── Pressure differentials across tympanic membrane
-├── Volume changes in middle ear cavity
-└── ET dysfunction impact on equalization
-
-🦻 Eustachian Tube Function
-├── Opening thresholds (passive vs. active)
-├── Dysfunction severity mapping (mild → severe)
-└── Valsalva maneuver effectiveness
-
-⚠️ Risk Thresholds
-├── ET Lock: >90 mmHg differential
-├── Barotitis: Sustained pressure >100 mmHg  
-└── Tympanic rupture: >150 mmHg
-```
-
-### Model Physics
-
-Our deterministic approach captures:
-- **Pressure-volume relationships** during descent (1000-10000 ft/min)
-- **ET dysfunction effects** on equalization kinetics
-- **Tympanic membrane compliance** and displacement limits
-- **Clinical risk categorization** (Low/Moderate/High)
-
-## 🚀 Model Capabilities
-
-### Core Simulation Engine
-- **Physiology-informed**: Based on Kanick & Doyle (2005) and clinical literature
-- **Deterministic**: Reproducible results for clinical decision-making  
-- **Real-time**: Interactive parameter adjustment and visualization
-- **Validated**: Against experimental data and clinical observations
-
-### Risk Assessment Features
-- **ET Dysfunction Grading**: Mild (0.35) → Moderate (0.60) → Severe (0.85)
-- **Descent Rate Analysis**: Safety envelopes for 1000-10000 ft/min
-- **Pressure Tracking**: Real-time ΔP monitoring with clinical thresholds
-- **Valsalva Modeling**: Periodic equalization attempts with effectiveness scaling
-
-## 🎥 NEW: Valsalva Video Analysis for Barotrauma Risk Prediction
-
-### Overview
-
-This module enables **video-based assessment of Valsalva maneuver quality** using endoscopic recordings to predict middle ear barotrauma risk. Designed for hypobaric chamber medical directors to objectively assess Eustachian tube function.
-
-### Scientific Basis
-
-The Valsalva maneuver analysis is based on:
-- **Kanick & Doyle (2005)**: Mathematical model of middle ear pressure regulation
-- **Bayoumy et al. (2021)**: Tympanic membrane retraction management
-- **Ryan et al. (2018)**: Prevention of otic barotrauma in aviation
-
-```
-Valsalva Assessment Pipeline
-├── 🎬 Endoscopic Video Input (both ears)
-├── 👁️ TM Region Detection & Tracking
-├── 📊 Optical Flow Analysis for Movement
-├── 📈 Feature Extraction
-│   ├── Max displacement amplitude
-│   ├── Response latency
-│   ├── Movement smoothness
-│   └── Bilateral asymmetry
-├── 🤖 ML Risk Prediction
-│   ├── Logistic Regression (interpretable)
-│   ├── Gradient Boosting (accuracy)
-│   └── Hybrid Physics+ML (robust)
-└── 📋 Clinical Recommendations
-```
-
-### Key Features
-
-| Feature | Description |
-|---------|-------------|
-| **Bilateral Analysis** | Simultaneous analysis of left and right ear movements |
-| **Quality Grading** | EXCELLENT → GOOD → FAIR → POOR → FAILED |
-| **Physics Integration** | Maps video features to ET dysfunction parameters |
-| **ML Enhancement** | Learns from control outcomes for improved accuracy |
-| **Clinical Reports** | Auto-generated reports with recommendations |
-| **Control Database** | Record outcomes for model calibration |
-
-### Launch Valsalva Assessment App
-
-```bash
-streamlit run app/valsalva_assessment_app.py
-```
-
-### Python API
-
-```python
-from barotrauma.models.valsalva_video_analysis import (
-    TMMovementFeatures,
-    BilateralValsalvaResult,
-    ValsalvaRiskPredictor,
-)
-from barotrauma.models.valsalva_chamber_integration import (
-    IntegratedBarotraumaAssessment,
-    quick_assess,
-)
-
-# Quick assessment from displacement values
-assessment = quick_assess(
-    left_displacement=0.75,   # 0-1 scale
-    right_displacement=0.65,
-    patient_id="P001"
-)
-
-print(f"Risk Score: {assessment.final_risk_score:.2f}")
-print(f"Category: {assessment.final_risk_category}")
-print(f"Max Descent Rate: {assessment.recommended_max_descent_rate:.0f} ft/min")
-
-# Full assessment with clinical history
-from barotrauma.models.valsalva_video_analysis import TMMovementFeatures
-
-left_features = TMMovementFeatures(
-    max_displacement=0.75,
-    response_latency=0.5,
-    movement_smoothness=0.8,
-    movement_completeness=0.75,
-)
-
-right_features = TMMovementFeatures(
-    max_displacement=0.65,
-    response_latency=0.6,
-    movement_smoothness=0.7,
-    movement_completeness=0.70,
-)
-
-valsalva_result = BilateralValsalvaResult(
-    left_ear=left_features,
-    right_ear=right_features,
-)
-
-system = IntegratedBarotraumaAssessment()
-assessment = system.assess_from_valsalva(
-    valsalva_result=valsalva_result,
-    patient_id="P001",
-    clinical_history={
-        'age': 35,
-        'previous_barotrauma': False,
-        'current_uri': False,
-    }
-)
-```
-
-### Training with Control Data
-
-As hypobaric chamber medical director, you can improve model accuracy by recording outcomes:
-
-```python
-# After hypobaric exposure, record actual outcome
-system.add_control_outcome(
-    assessment,
-    actual_outcome="no_barotrauma"  # or "mild", "moderate", "severe"
-)
-
-# After collecting enough controls (≥20), train the ML model
-system.train_ml_model(min_controls=20)
-
-# Save trained model for future use
-system.save_state(Path("./model_state"))
-```
-
-### Valsalva Quality Grading
-
-| Grade | Displacement | Latency | Clinical Interpretation |
-|-------|-------------|---------|------------------------|
-| EXCELLENT | ≥0.8 | <0.5s | Normal ET function |
-| GOOD | ≥0.6 | <1.0s | Mildly reduced function |
-| FAIR | ≥0.3 | <2.0s | Moderate dysfunction |
-| POOR | ≥0.1 | Any | Significant dysfunction |
-| FAILED | <0.1 | Any | Severe dysfunction/obstruction |
-
-### Risk Category Mapping
-
-| Valsalva Grade | ET Dysfunction | Recommended Descent Rate |
-|----------------|----------------|-------------------------|
-| EXCELLENT | 0.15 (minimal) | Up to 6000 ft/min |
-| GOOD | 0.35 (mild) | Up to 4000 ft/min |
-| FAIR | 0.55 (moderate) | Up to 2500 ft/min |
-| POOR | 0.75 (mod-severe) | ≤1500 ft/min |
-| FAILED | 0.90 (severe) | ≤1000 ft/min |
-
-### Interactive Dashboard
-- **Parameter Control**: Sliders for all physiological and flight variables
-- **Real-time Visualization**: Pressure curves, equalization rates, TM displacement  
-- **Risk Analytics**: Risk vs. descent rate relationships
-- **Clinical Insights**: Safety recommendations based on individual profiles
-
-## 🖥️ Interactive Interface
-
-Launch the **Streamlit** app for real-time risk assessment:
-
-```bash
-pip install -e .
-streamlit run app/streamlit_app.py
-```
-
-### Key Features:
-- 🎛️ **Dynamic Controls**: ET severity, altitude profiles, descent rates
-- 📈 **Live Plotting**: Pressure differentials, equalization kinetics
-- ⚠️ **Risk Metrics**: Real-time scoring with clinical thresholds
-- 🔄 **Scenario Testing**: Rapid parameter sweeps for safety analysis
-
-### Additional Streamlit Apps
-- **Modern risk dashboard (recommended)**: `app/streamlit_app.py`
-  - Uses `barotrauma.models.chamber_risk` (deterministic chamber-descent model)
-  - Optimized for fast “what-if” exploration (cached sensitivity/heatmap calculations)
-- **Advanced analysis dashboard**: `app/enhanced_streamlit_app.py`
-  - Adds 3D surfaces, scenario saving/comparison, and optional ECharts visuals
-- **Simulation + paper-style validation**: `app/simulation_validation_app.py`
-  - Uses the deterministic legacy simulator in `models/`
-  - Computes RMSE and max error vs `tests/data/paper_validation.json`
-
-Run any of them via:
-
-```bash
-pip install -e .
-streamlit run app/enhanced_streamlit_app.py
-# or
-streamlit run app/simulation_validation_app.py
-```
-
-## 📦 Installation
-
-### Prerequisites
-- Python 3.8+
-- Conda environment (recommended)
-
-### Quick Start
-```bash
-# Clone the repository
-git clone https://github.com/strikerdlm/barotrauma_model.git
-cd barotrauma_model
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Launch interactive app
-streamlit run app/streamlit_app.py
-```
-
-### Development Setup
-```bash
-# Create conda environment
-conda create -n barotrauma python=3.9
-conda activate barotrauma
-
-# Install in development mode
-pip install -e .
-```
-
-## 🧪 Usage Examples
-
-### Basic Risk Assessment
-```python
-from barotrauma.models.chamber_risk import HypobaricChamberRiskModel, ChamberScenario
-
-# Configure scenario
-scenario = ChamberScenario(
-    start_altitude_ft=25000,
-    descent_rate_ft_min=3000,
-    et_severity="moderate",
-    enable_valsava=True
-)
-
-# Run simulation
-model = HypobaricChamberRiskModel()
-result = model.simulate_descent(scenario)
-
-print(f"Risk Score: {result.risk_score:.2f}")
-print(f"Risk Category: {result.risk_category}")
-print(f"Max |ΔP|: {max(abs(result.delta_P_mmHg)):.1f} mmHg")
-```
-
-### Parametric Analysis
-```python
-# Risk vs descent rate sweep
-rates = np.linspace(1000, 10000, 50)
-_, risk_scores = model.risk_vs_descent_rate(scenario, rates)
-
-# Identify safety envelope
-safe_rates = rates[risk_scores < 0.3]  # Low risk threshold
-```
-
-## 📊 Model Validation
-
-The model has been validated against:
-- **Clinical Studies**: Kanick & Doyle (2005), recent aviation medicine literature
-- **Experimental Data**: Hypobaric chamber studies with measured outcomes
-- **Physiological Constraints**: Anatomical limits and pressure thresholds
-
-### Key Validation Metrics:
-- ✅ **Pressure Predictions**: ±15% accuracy vs. experimental measurements
-- ✅ **Risk Categorization**: 85%+ agreement with clinical assessments  
-- ✅ **Safety Thresholds**: Conservative bounds verified against injury data
-
-## 🧭 Reliability Roadmap (Simulation + Validation)
-
-This roadmap focuses on making predictions **more reliable**, not just “more complex”.
-
-1. **Data + ground truth (highest leverage)**
-   - Define event labels (e.g., TEED grade, symptoms, otoscopy findings) and time window.
-   - Standardize inputs: descent profile, Valsalva cadence, ET function proxies, URI/allergy status.
-   - Create train/validation splits that respect subject leakage (no same-subject in both sets).
-
-2. **Calibration (probabilities must mean what they say)**
-   - Track **Brier score**, **calibration curve**, and **expected calibration error (ECE)**.
-   - Use post-hoc calibration (Platt / isotonic) and report calibrated vs uncalibrated.
-
-3. **Uncertainty + robustness**
-   - Report confidence bands (sensitivity to plausible parameter ranges).
-   - Add stress tests: extreme descent rates, missing Valsalva, borderline ET dysfunction.
-   - Add “out-of-distribution” checks (flag inputs beyond validated envelopes).
-
-4. **External + prospective validation**
-   - Validate on a separate chamber cohort and on a different chamber protocol.
-   - Prospectively log predictions vs outcomes; monitor drift.
-
-5. **Decision support evaluation**
-   - Add **decision curve analysis** / net benefit for operational thresholds.
-   - Optimize thresholds for safety-critical use (minimize false negatives for “High risk”).
-
-## 🎯 Model Accuracy Improvements
-
-This section documents the model accuracy characteristics and strategies for improving predictions.
-
-### Current Model Accuracy Profile
-
-| Metric | Value | Target | Notes |
-|--------|-------|--------|-------|
-| Risk Score Correlation | 0.87 | >0.90 | vs. clinical outcomes |
-| Pressure Prediction RMSE | 12.5 mmHg | <10 mmHg | vs. chamber measurements |
-| Risk Categorization Accuracy | 85% | >90% | Low/Moderate/High classification |
-| False Positive Rate (High Risk) | 8% | <5% | Conservative by design |
-| False Negative Rate (High Risk) | 3% | <2% | Safety-critical metric |
-
-### Model Components and Their Accuracy Contributions
-
-```
-Risk Score = 0.45 × Peak_ΔP_Component + 0.30 × Lock_Time_Component + 0.25 × Descent_Factor
-              ↓                           ↓                            ↓
-         High accuracy              Moderate accuracy           Well-calibrated
-         (±10% error)               (±15% error)                (±5% error)
-```
-
-#### 1. Pressure Differential Prediction
-The model uses Boyle's Law and standard atmosphere equations:
-```python
-P_ambient = 760 × exp(-altitude / 29921)  # mmHg
-ΔP = P_ME - P_ambient  # Middle ear - ambient pressure differential
-```
-
-**Accuracy factors:**
-- Standard atmosphere approximation: ±2%
-- ET equalization kinetics: ±10-15%
-- Valsalva effectiveness modeling: ±20%
-
-#### 2. ET Dysfunction Mapping
-| Clinical Severity | Dysfunction Value | Equalization Rate Factor |
-|------------------|-------------------|--------------------------|
-| Mild | 0.35 | 0.79× baseline |
-| Moderate | 0.60 | 0.64× baseline |
-| Severe | 0.85 | 0.49× baseline |
-
-#### 3. Risk Score Calibration
-The risk score integrates multiple physiological indicators:
-- **Peak pressure component** (45% weight): Well-validated against injury data
-- **Lock time component** (30% weight): Based on ET physiology literature
-- **Descent rate factor** (25% weight): Calibrated to safe/critical rate envelopes
-
-### Strategies for Improving Model Accuracy
-
-#### A. Data-Driven Calibration
-1. **Collect validation data**: Gather pressure measurements from hypobaric chamber studies
-2. **Parameter optimization**: Use optimization to tune equalization rate constants
-3. **Cross-validation**: Split clinical data for training/testing
-
-```python
-# Example: Parameter tuning approach
-from scipy.optimize import minimize
-
-def objective(params, measured_data):
-    model_predictions = simulate_with_params(params)
-    return np.sum((model_predictions - measured_data)**2)
-
-optimal_params = minimize(objective, initial_params, args=(clinical_data,))
-```
-
-#### B. Physiological Refinements
-1. **Add individual anatomical variation**:
-   - Tympanum volume: 0.5–3.0 mL (current: 1.0 mL default)
-   - Mastoid volume: 3.0–15.0 mL (current: 7.75 mL default)
-
-2. **Enhance ET dynamics**:
-   - Model swallow-induced equalization events
-   - Add temperature-dependent gas properties
-   - Include mucosal compliance effects
-
-3. **Implement pathological states**:
-   - Upper respiratory infection effects
-   - Allergic inflammation modeling
-   - Post-surgical anatomical changes
-
-#### C. Machine Learning Enhancement
-Consider hybrid approaches combining physics with ML:
-
-```python
-# Hybrid model concept
-class HybridBarotraumaModel:
-    def __init__(self):
-        self.physics_model = HypobaricChamberRiskModel()
-        self.ml_correction = load_trained_model("correction_net.pkl")
-    
-    def predict(self, scenario):
-        physics_result = self.physics_model.simulate_descent(scenario)
-        ml_adjustment = self.ml_correction.predict(scenario_features)
-        return physics_result.risk_score + ml_adjustment
-```
-
-#### D. Uncertainty Quantification
-Implement confidence intervals for risk predictions:
-
-| Risk Score | Confidence Interval | Clinical Interpretation |
-|------------|---------------------|------------------------|
-| 0.0–0.3 | ±0.05 | Low risk (proceed normally) |
-| 0.3–0.6 | ±0.08 | Moderate risk (enhanced monitoring) |
-| 0.6–1.0 | ±0.10 | High risk (intervention required) |
-
-### Validation Test Suite
-
-Run the validation tests to verify model accuracy:
-
-```bash
-# Run all validation tests
-python -m pytest tests/test_barotrauma.py tests/test_model_validation.py -v
-
-# Expected output: 14 tests passing
-# - Risk monotonicity tests
-# - Physiological bounds tests
-# - Sensitivity analysis tests
-```
-
-### Known Limitations
-
-1. **Altitude range**: Model validated for 0–40,000 ft; extrapolation beyond may reduce accuracy
-2. **Rapid pressure changes**: Very fast descents (>10,000 ft/min) may exceed model assumptions
-3. **Individual variation**: Model uses population-average parameters; individual anatomy varies
-4. **Pathological states**: Current model has limited representation of disease states
-
-### Future Accuracy Improvements Roadmap
-
-| Phase | Enhancement | Expected Improvement |
-|-------|-------------|---------------------|
-| 1 | Clinical data integration | +5% categorization accuracy |
-| 2 | Anatomical variation modeling | +3% pressure prediction accuracy |
-| 3 | ML residual correction | +2% overall accuracy |
-| 4 | Real-time sensor integration | +10% personalized accuracy |
-
-## 🛠️ Technical Architecture
-
-```
-barotrauma_model/
-├── 🧬 models/
-│   ├── chamber_risk.py          # Core hypobaric simulation
-│   ├── integrated_model.py      # ML-enhanced predictions  
-│   └── physiology.py           # Biological parameter sets
-├── 🎮 app/
-│   └── streamlit_app.py        # Interactive dashboard
-├── 🔬 analysis/
-│   ├── statistical_analysis.py # Population studies
-│   └── visualization.py       # Advanced plotting
-└── 📊 results/                 # Validation data & figures
-```
-
-## 🤝 Contributing
-
-We welcome contributions from:
-- **Aviation Medicine Researchers**: Clinical validation and use cases
-- **Physiologists**: Model refinement and parameter validation
-- **Software Engineers**: Performance optimization and new features
-- **UI/UX Designers**: Enhanced visualization and user experience
-
-### Development Guidelines:
-1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)  
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
-
-## 📚 References
-
-- **Kanick, D.J. & Doyle, B.J.** (2005). Barotrauma during air travel: predictions of a mathematical model. *J Appl Physiol* 98: 1592-1602
-- **Van Huyse, P.** (1975). The middle ear model for studying pressure variations. *Acta Otolaryngol* 80: 340-350
-- **Keefe, D.H.** (1984). Acoustical wave propagation in cylindrical ducts. *J Acoust Soc Am* 75: 58-62
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-**Dr. Diego L Malpica (Aerospace Medicine)** - ORCID: https://orcid.org/0000-0002-2257-4940
-
-**Project Link**: [https://github.com/strikerdlm/barotrauma_model](https://github.com/strikerdlm/barotrauma_model)
+[![Version](https://img.shields.io/badge/version-2.0.0-informational.svg)](CHANGELOG.md)
+
+Physics-informed, pathophysiology-aware middle-ear barotrauma (MEB) risk
+simulator. Calibrated to the Colombian Aerospace Force (FAC) 10-year
+hypobaric-chamber cohort — 5.8% career MEB prevalence, URI and ET
+dysfunction as the dominant risk factors.
+
+**Maintainer:** Dr. Diego L. Malpica, MD — Aerospace Medicine, Colombia
+([ORCID 0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940))
 
 ---
 
-<p align="center">
-  <strong>🛡️ Advancing Aviation Safety Through Computational Physiology 🛡️</strong>
-</p>
+## What this model does
 
-## Streamlit Simulation & Validation App
+Given a patient (anatomy + ET function + URI/PET/rhinitis state + medications)
+and a chamber profile (ascent, hold, descent, or rapid decompression), it
+returns:
 
-A new Streamlit interface is available to run the simulation with configurable parameters, visualize outputs, and compute model-quality metrics against real validation data.
+- **ΔP trajectory** (P_ME − P_ambient) through the exposure
+- **Per-exposure probabilities** for three outcomes:
+  - Barotitis media (Teed I+, ≥18 mmHg absolute ΔP)
+  - Baromyringitis (Teed III–IV hemorrhage, ≥96 mmHg)
+  - Tympanic-membrane rupture (Teed V, ≥150 mmHg)
+- **Dominant risk factor** (URI / PET-S2 / severe obstruction / descent
+  physics / etc.)
+- **Recommended safe descent rate** for that patient
+- Optional **95% credible intervals** via Monte-Carlo over physiology priors
 
-- App file: `app/simulation_validation_app.py`
-- Validation data: `tests/data/paper_validation.json`
+---
 
-### Minimal install (user site)
+## Scientific anchor
 
-If your environment is managed (PEP 668), install only the minimal packages needed for the app into your user site:
+- **Physics core**: Kanick & Doyle 2005 ([PMID 15608090](https://pubmed.ncbi.nlm.nih.gov/15608090/))
+  + Doyle 2017 ([PMID 28917121](https://pubmed.ncbi.nlm.nih.gov/28917121/))
+  species-resolved gas exchange + Alper 2020 ([PMID 32176133](https://pubmed.ncbi.nlm.nih.gov/32176133/))
+  parameter distributions.
+- **URI pathophysiology**: 6-state temporal modifier table (days 1–3, 4–7,
+  8–14, 15–21, 22–28) derived from Buchman 1994, McBride 1989, Doyle 1999,
+  Chen 2022 (ETDQ-7 meta-analysis).
+- **Patulous ET**: 4-state model (S1 baseline patent → S2 inflammation-
+  induced closure → S3 habitual sniffer → S4 post-plug) per Ikeda
+  2020/2024, Shindo 2025.
+- **Hazard model**: three-threshold cumulative hazard, fitted against the
+  Italian AF ([Morgagni 2010/2012](https://pubmed.ncbi.nlm.nih.gov/22764614/))
+  per-exposure barotitis rate (1.5–2.5%) and projected to the FAC 5.8%
+  career anchor.
+- Every constant and modifier in `barotrauma/v2/constants.py` has a citation.
+
+Full literature briefs live in [`docs/research_notes/`](docs/research_notes/):
+
+- [`01_mathematical_models.md`](docs/research_notes/01_mathematical_models.md)
+- [`02_uri_et_dysfunction.md`](docs/research_notes/02_uri_et_dysfunction.md)
+- [`03_patulous_et.md`](docs/research_notes/03_patulous_et.md)
+- [`04_chamber_epidemiology.md`](docs/research_notes/04_chamber_epidemiology.md)
+- [`05_ml_bayesian_hazard.md`](docs/research_notes/05_ml_bayesian_hazard.md)
+
+---
+
+## Install
 
 ```bash
-pip3 install --user --break-system-packages streamlit plotly pandas numpy matplotlib
+git clone https://github.com/strikerdlm/barotrauma_model
+cd barotrauma_model
+pip install -e .
 ```
 
-### Run the app
+Requires Python ≥ 3.8, numpy, scipy. Full requirements in
+[`requirements.txt`](requirements.txt).
 
-From the repository root:
+---
+
+## Quick start
+
+```python
+from barotrauma.v2 import simulate, PatientState, EtFunction
+from barotrauma.v2.scenarios import FAC_BOGOTA_DEFAULT, USAFSAM_TYPE_I
+
+# Healthy pilot, FAC chamber profile
+result = simulate(PatientState(), FAC_BOGOTA_DEFAULT)
+print(result.risk.p_barotitis)            # ~0.012 (1.2%)
+print(result.risk.risk_category())        # "low"
+print(result.risk.dominant_risk_factor)   # "Baseline"
+
+# Pilot with peak-URI (day 4–7) and allergic rhinitis, USAFSAM Type I
+risky = PatientState(uri="day_4_7", rhinitis="allergic")
+r2 = simulate(risky, USAFSAM_TYPE_I)
+print(r2.risk.p_barotitis)               # ~0.08 → HIGH
+print(r2.risk.dominant_risk_factor)       # "Acute URI (day_4_7)"
+print(r2.risk.recommended_max_descent_ft_min)
+```
+
+Available chamber profiles:
+
+| Key | Description |
+|---|---|
+| `USAFSAM_TYPE_I` | 25,000 ft, 2,000 ft/min ascent, 5,000 ft/min descent |
+| `USAFSAM_TYPE_II_RD` | Rapid decompression 8,000 → 35,000 ft in 1 s |
+| `ISRAELI_AF_POST_2022` | 45-min O₂ preoxygenation + 25,000 ft (Nakdimon PMID 36309795) |
+| `FAC_BOGOTA_DEFAULT` | Bogotá-sited chamber (starts at 8,530 ft) |
+| `COMMERCIAL_CABIN_DESCENT` | 600 ft/min cabin descent (Kanick-Doyle reference) |
+| `RAPID_DESCENT_10K_FT_MIN` | Worst-case stress test |
+| `SLOW_DESCENT_1K_FT_MIN` | Best-case slow descent |
+| `GROTH_1986_VALIDATION` | Kanick-Doyle 2005 Fig 3 validation profile |
+
+---
+
+## Model states
+
+### URI timecourse
+| State | Mechanism | RA × | MEB RR |
+|---|---|---|---|
+| `none` | Baseline | 1.0 | 1.0 |
+| `day_1_3` | Early onset | 2.0 | 2.5 |
+| `day_4_7` | Peak dysfunction | 3.5 | 4.25 |
+| `day_8_14` | Recovery | 1.8 | 2.0 |
+| `day_15_21` | Residual | 1.3 | 1.3 |
+| `day_22_28` | Near-baseline | 1.1 | 1.1 |
+
+### Patulous Eustachian Tube (PET)
+| State | Behavior | Barotrauma risk |
+|---|---|---|
+| `normal` | No PET | Baseline |
+| `s1` | Baseline patent | Rupture-protective (Kanick-Doyle) |
+| `s2` | PET + inflammation / recumbency | **HIGH** — paradoxical closure |
+| `s3` | Habitual sniffer | Elevated (sustained −ME pressure) |
+| `s4` | Post-Kobayashi plug | Stenotic-equivalent |
+
+### Chronic rhinitis
+| State | RA × | MEB RR |
+|---|---|---|
+| `none` | 1.0 | 1.0 |
+| `allergic` | 1.3 | 1.5 |
+| `chronic_rhinosinusitis` | 1.5 | 2.0 |
+
+### Medications
+| Medication | Baseline RR | RR in PET |
+|---|---|---|
+| `none` | 1.00 | 1.00 |
+| `pseudoephedrine_oral` | 0.70 | **1.40** (paradoxical) |
+| `oxymetazoline_topical` | 0.95 | **1.40** (paradoxical) |
+| `intranasal_steroid` | 0.65 | 0.65 |
+| `antihistamine_spray` | 0.70 | 0.70 |
+
+---
+
+## Calibration
+
+The hazard-rate constants in `constants.py` ship pre-calibrated. To
+re-calibrate against a different cohort or target prevalence:
 
 ```bash
-~/.local/bin/streamlit run app/simulation_validation_app.py --server.headless=true --server.port=8501
+python -m barotrauma.v2.calibration --target 0.02 --n 400 --save
 ```
 
-Then open the URL printed in the terminal. Use the sidebar to configure the flight profile and physiology. The app will:
+This performs log-space bisection on `HAZARD_BAROTITIS_R` until the cohort
+mean per-exposure `p_barotitis` matches the target. Results are written to
+`barotrauma/v2/calibrated.json` and auto-loaded on next import.
 
-- Plot cabin and middle-ear pressures, ΔP with clinical thresholds, altitude and risk over time
-- Compute internal metrics (max/mean |ΔP|, time in risk states)
-- Compute RMSE and max error vs the published pressure chamber dataset (no synthetic data)
-- Provide a tidy preview and CSV download of the simulation results
+Default FAC anchor: 2.0% per-exposure in pre-screened aircrew → 5.8% career
+over ~3 exposures, matching the FAC 10-year cohort.
+
+---
+
+## Testing
+
+```bash
+pip install pytest
+pytest tests/test_v2_physics.py tests/test_v2_pathophysiology.py \
+       tests/test_v2_risk.py tests/test_v2_scenarios.py
+# Slow (runs calibration loops):
+pytest tests/test_v2_calibration.py
+```
+
+---
+
+## Repository structure
+
+```
+barotrauma_model/
+├── barotrauma/
+│   ├── v2/                  # current model — build against this
+│   │   ├── types.py          # PatientState, ChamberProfile, SimulationResult
+│   │   ├── constants.py      # All physiology constants, with citations
+│   │   ├── atmosphere.py     # altitude ↔ pressure, profile discretization
+│   │   ├── anatomy.py        # population priors for mastoid volume, etc.
+│   │   ├── pathophysiology.py # URI/PET/rhinitis modifier state machine
+│   │   ├── et_dynamics.py    # Eustachian-tube opening mechanics
+│   │   ├── middle_ear.py     # TM displacement, trans-mucosal gas exchange
+│   │   ├── scenarios.py      # chamber-profile presets
+│   │   ├── engine.py         # main integrator → SimulationResult
+│   │   ├── risk.py           # three-threshold hazard model
+│   │   ├── calibration.py    # ABC-style bisection calibration
+│   │   └── calibrated.json   # persisted hazard constants (auto-loaded)
+│   └── legacy/              # frozen v1 stack, do not extend
+├── tests/
+│   ├── test_v2_physics.py
+│   ├── test_v2_pathophysiology.py
+│   ├── test_v2_risk.py
+│   ├── test_v2_scenarios.py
+│   └── test_v2_calibration.py
+├── docs/
+│   ├── model_card.md         # inputs/outputs/limitations
+│   ├── research_notes/       # 5 structured literature briefs
+│   └── README.md
+├── app/                     # Streamlit dashboard (legacy; see HOW_TO_CONTINUE)
+├── CHANGELOG.md
+├── HOW_TO_CONTINUE.md       # roadmap for next iterations
+├── MIGRATION.md             # v1 → v2 API migration
+└── README.md
+```
+
+---
+
+## Known limitations (v2.0)
+
+- The FAC 5.8% anchor is currently unpublished DIMAE cohort data. Treat as
+  internal priors until formally published.
+- TM rupture threshold (150 mmHg) is a conservative placeholder; real TM
+  rupture pressures are higher (~600–750 mmHg in biomechanical studies).
+  The v2 hazard at 150 mmHg should be interpreted as "imminent rupture risk."
+- **`p_barotitis` is NOT monotonic in descent rate.** The barotitis hazard
+  exponent is sub-quadratic, so dose-time integral dominates — a slow,
+  long descent can out-score a fast, brief descent for Teed-I transudative
+  risk. Peak |ΔP| and `p_rupture` remain monotonic. See
+  [`docs/model_card.md`](docs/model_card.md) §6 for the physiological
+  rationale. Rule of thumb: compare the full triple
+  (`p_barotitis`, `p_baromyringitis`, `p_rupture`), not `p_barotitis` alone.
+- No per-subject machine-learning head is implemented (see
+  `HOW_TO_CONTINUE.md`). Training data are not yet available.
+- Valsalva is modeled as an idealized bolus every 120 s. The published FEM
+  (Ghadiali group) time-varying R_A is not used in v2.0.
+- Multiple sequential chamber exposures within a day are not modeled (no
+  inter-exposure ME gas-composition carry-over).
+
+See [`docs/model_card.md`](docs/model_card.md) for the full assumption and
+modeler-prior list.
+
+---
+
+## License
+
+MIT. See [LICENSE](LICENSE).
+
+## Citation
+
+Preferred citation (manuscript in prep):
+
+> Malpica, D.L. (2026). *barotrauma_model v2: Physics-informed middle-ear
+> barotrauma risk prediction for hypobaric-chamber training, anchored to the
+> Colombian Aerospace Force cohort.* Version 2.0.0.
+> https://github.com/strikerdlm/barotrauma_model
