@@ -161,9 +161,9 @@ RUPTURE_THRESHOLD_MMHG: float = 150.0                          # Teed V (conserv
 # are overwritten on import if ``calibrated.json`` is present in this
 # package directory.
 HAZARD_BAROTITIS_R: float = 5.0e-5         # 1/(mmHg^n · s)
-HAZARD_BAROTITIS_N: float = 1.2
+HAZARD_BAROTITIS_N: float = 1.8            # peak-leaning (v2.1) — was 1.2
 HAZARD_BAROMYRINGITIS_R: float = 1.5e-6
-HAZARD_BAROMYRINGITIS_N: float = 2.0
+HAZARD_BAROMYRINGITIS_N: float = 2.5
 HAZARD_RUPTURE_R: float = 5.0e-8
 HAZARD_RUPTURE_N: float = 3.0
 
