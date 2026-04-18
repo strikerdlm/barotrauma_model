@@ -4,6 +4,46 @@ All notable changes to `barotrauma_model`. Follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); project uses
 semantic versioning.
 
+## [2.1.0] — 2026-04-18
+
+### Added
+
+- **`aperture_factor()`** in `barotrauma/v2/et_dynamics.py` — continuous
+  descent-side Eustachian-tube lumen collapse model. Captures the
+  clinical observation that rapid chamber descents cause
+  disproportionately more barotrauma than slow ones of equivalent total
+  ΔP, which v2.0 could not reproduce because it only scored a
+  dose-time integral. Hill function with a "free zone" below ~40 mmHg
+  (preserving Kanick-Doyle healthy-ear behaviour), Hagen-Poiseuille-
+  inspired r^4 steepness, rate-dependent tightening (viscoelastic
+  mucosal lag), and inflammation tightening.
+- `tests/test_v2_aperture.py` — unit + end-to-end coverage for the
+  aperture asymmetry, free-zone behaviour, rate tightening, and the
+  clinical peak-barotitis-at-2,000-3,000-ft/min observation.
+
+### Changed
+
+- Active swallow and Valsalva pathways now multiply their effective FGE
+  by `aperture_factor(ΔP, rate, et, modifiers)`.
+- Engine loop computes per-step `rate_mmHg_s` from ambient-pressure
+  derivative and passes it to the ET-clearance functions.
+- `HAZARD_BAROTITIS_N`: 1.2 → 1.8 (peak-weighted). `HAZARD_BAROMYRINGITIS_N`:
+  2.0 → 2.5. The v2.0 sub-quadratic form let dose-time dominate and
+  produced the paradoxical "slow descent worse for barotitis" result
+  in isolation; with the aperture model + peak-weighted exponents the
+  barotitis peak-rate now lies in the 2,000-3,000 ft/min zone, matching
+  Italian AF chamber data.
+- `HAZARD_BAROTITIS_R` bisection lower bound in `calibration.py` widened
+  from 1e-7 to 1e-10 (the peak-weighted form needs much smaller rate
+  constants).
+
+### Calibration
+
+- Re-ran FAC calibration after the aperture + hazard changes.
+  Per-exposure 2.17% (target 2.00%); 3-exposure career projection
+  6.38% vs FAC 5.8% anchor. URI subgroup means now more cleanly
+  separated (none 1.4%, peak day_4_7 9.2%, severe ETD 8.8%).
+
 ## [2.0.0] — 2026-04-18
 
 ### Added
