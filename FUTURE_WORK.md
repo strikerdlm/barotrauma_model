@@ -1,4 +1,10 @@
-# 🔭 Future Work and Roadmap
+# Future Work and Roadmap (v1 — historical)
+
+> **Status: Historical document.** This roadmap predates the v2 rewrite
+> (2026-04). Most of the near-term items here are now delivered in
+> `barotrauma/v2/`. Prioritized next-steps for v2 live in
+> [`HOW_TO_CONTINUE.md`](HOW_TO_CONTINUE.md). The text below is kept for
+> continuity with pre-v2 discussions.
 
 Author: Dr. Diego Malpica ([ORCID: 0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940))
 
