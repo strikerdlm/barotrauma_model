@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.0.0-informational.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.1.0-informational.svg)](CHANGELOG.md)
 
 Physics-informed, pathophysiology-aware middle-ear barotrauma (MEB) risk
 simulator. Calibrated to the Colombian Aerospace Force (FAC) 10-year
@@ -18,7 +18,20 @@ dysfunction as the dominant risk factors.
 
 Given a patient (anatomy + ET function + URI/PET/rhinitis state + medications)
 and a chamber profile (ascent, hold, descent, or rapid decompression), it
-returns:
+simulates middle-ear pressure dynamics **asymmetrically**:
+
+- **Ascent** (P_ambient falling, ME relatively overpressurized): Boyle-law
+  TM expansion buffers the gradient; the ET opens passively on the ME side
+  at ~26 mmHg and vents cheaply. Clearance is easy.
+- **Descent** (P_ambient rising, ME underpressurized): Boyle compresses the
+  ME gas; the cartilaginous ET lumen is collapsed from the NP side by
+  tissue pressure. Passive opening is impossible — only active swallow or
+  Valsalva can force the tube open, and each attempt fights progressive
+  Hagen-Poiseuille-style aperture collapse (see `aperture_factor` in
+  `et_dynamics.py`). Clearance is hard, and harder with faster descent,
+  mucosal inflammation, or Patulous-ET paradoxical closure.
+
+It returns:
 
 - **ΔP trajectory** (P_ME − P_ambient) through the exposure
 - **Per-exposure probabilities** for three outcomes:
