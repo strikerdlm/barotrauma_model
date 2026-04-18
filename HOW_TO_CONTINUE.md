@@ -150,6 +150,44 @@ When a labeled cohort exists (FAC, institutional, or pooled multi-cohort):
 The scaffolding exists in `barotrauma/legacy/models/ml_risk_model.py` —
 port it to `barotrauma/v2/ml.py` and connect to the v2 engine outputs.
 
+### 9. Modern Node.js interactive web application (post-model-freeze)
+
+**Deferred until the model is complete, externally validated, and
+stable.** Once the physics core stops churning, the next big deliverable
+is a production-grade web application so clinicians, researchers, and
+aviation-medicine trainees can run the model without Python. Target
+experience:
+
+- **Stack**: Node.js backend + Next.js / React frontend (TypeScript).
+  Tailwind CSS + shadcn/ui or Radix primitives for the design system.
+  Framer Motion for transitions. Dark/light themes. Fully responsive.
+- **Visualization**: interactive ΔP trajectory, altitude profile, TM
+  displacement, ET-open event raster, and hazard-stratified probability
+  curves. Recharts or ECharts for 2-D; optional three.js / D3-force
+  for a 3-D middle-ear schematic that animates TM retraction and ET
+  state in real time. Monte-Carlo uncertainty fans overlaid on every
+  plot. Exportable as SVG / PNG / PDF for clinical reports.
+- **UX**: patient-builder wizard (anatomy, URI staging, PET state,
+  medications), chamber-profile presets with live editing, one-click
+  re-simulate, comparison mode (A vs B profiles or patients side-by-
+  side). Clinical-decision-support panel showing dominant risk factor,
+  recommended max descent rate, and plain-language explanation of
+  *why*. Shareable permalinks that encode patient + profile in the URL.
+- **Deployment**: Vercel / Netlify static frontend + Python simulator
+  invoked via serverless Python function or WASM-compiled numeric core
+  (e.g. Pyodide) so the whole thing runs in the browser with no
+  server-side simulation cost. Version-pinned to a specific v2.x
+  release of the Python package.
+- **Quality bar**: Lighthouse 95+ across performance, accessibility,
+  and best practices. WCAG 2.2 AA. Full keyboard navigation. Strict
+  TypeScript, tested with Playwright end-to-end.
+
+**Do not start this before** the Python model hits v2.3+ stability
+(Ghadiali FEM extension, Doyle 2017 multi-pathway gas exchange, and the
+FAC cohort paper all finalized). Shipping a web UI that tracks a still-
+moving model creates churn; ship it once the underlying physics is
+frozen.
+
 ## Contributor workflow
 
 1. Read the briefs. Do NOT add constants without a citation.
