@@ -1,0 +1,23 @@
+{
+  "parameters": [
+    "APERTURE_HALF_MMHG",
+    "APERTURE_FREE_ZONE_MMHG",
+    "SF_DESCENT_PER_HR",
+    "MASTOID_VOLUME_ML"
+  ],
+  "first_order": [
+    1.9955808106942805,
+    0.2741975253828071,
+    0.27339361099137544,
+    0.3065444074133915
+  ],
+  "total_order": [
+    1.8374255714203824,
+    0.08304834096861123,
+    0.18355748694844856,
+    0.16240266080996144
+  ],
+  "variance_total": 9.210070700880457e-05,
+  "n_samples": 32,
+  "n_evaluations": 192
+}
