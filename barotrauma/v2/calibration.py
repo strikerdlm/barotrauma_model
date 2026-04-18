@@ -196,7 +196,7 @@ def calibrate_hazard_constants(
     r_bmrg_ratio = r_bmrg_orig / r_baro_orig
     r_rupt_ratio = r_rupt_orig / r_baro_orig
 
-    lo, hi = 1.0e-7, 5.0e-3
+    lo, hi = 1.0e-10, 5.0e-3
     achieved = float("nan")
     iters = 0
 
