@@ -147,6 +147,22 @@ class PatientState:
     valsalva_interval_s: float = 60.0   # every ~60 s in chamber trainees
     habitual_sniffer: bool = False      # Shindo 2025 type-B/C tymp in 42.6%
 
+    # v2.3.0 covariates (docs/research_notes/06_2025_2026_updates.md)
+    sensory_neuropathy: bool = False
+    """Voigt 2025 (PMID 41429031): risk factor for MEB in HBOT pooled MA.
+    RR applied in pathophysiology.modifiers_for_patient via
+    constants.SENSORY_NEUROPATHY_RR."""
+
+    impaired_volitional_equalization: bool = False
+    """Lee 2025 (PMID 40364015, 40288902): altered mental status OR
+    2.50-3.16 across two HBOT cohorts. Applies to sedated HBOT,
+    intoxicated aeromedical evacuation, post-op altered sensorium."""
+
+    glp1_exposure: bool = False
+    """Sudhoff 2025 (PMID 40721956): semaglutide/tirzepatide-induced PET
+    via Ostmann fat-pad atrophy during 8.2-18.7% weight loss. Low
+    confidence (case series). Applied as a narrow precautionary modifier."""
+
     def validate(self) -> None:
         self.anatomy.validate()
         self.et.validate()
