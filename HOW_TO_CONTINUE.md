@@ -9,46 +9,69 @@ contributor can resume without re-deriving the plan.
 
 ## ⭐ Next step (start here)
 
-**Submit the manuscript to *Aerospace Medicine and Human Performance*
-(AMHP), and in parallel, publish the FAC 10-year cohort as either a
-short report or as supplementary data to the manuscript.**
+**Complete the AMHP submission portal upload and sign the four required
+forms; immediately afterward, start the v2.3.0 roadmap informed by the
+2025–2026 literature scan.**
 
-Why this is the single highest-leverage step:
+The manuscript, cover letter, author page, and two TIFF figures are
+ready (`docs/manuscript.md`, `docs/cover_letter.md`,
+`docs/manuscript_author_page.md`, `docs/figures/`). The AMHP compliance
+audit has been run and every FAIL has been resolved. The remaining
+blocking actions are operational, not scientific.
 
-- The model, tests, calibration, external validation, sensitivity
-  analysis, and uncertainty quantification are all finished. Continuing
-  to add code features without publishing what exists is pure churn.
-- The FAC 5.8% anchor is the load-bearing empirical hook for the whole
-  framework. Every other priority (per-TEED recalibration, career
-  modeling, hybrid-ML training) becomes trivial once the cohort is a
-  published citation rather than "DIMAE unpublished".
-- External users (other air forces, ENT clinicians) will trust, adopt,
-  and contribute against a peer-reviewed paper. They will not trust an
-  open-source repo backed by an internal dataset.
-- The manuscript is already drafted (`docs/manuscript.md`). The
-  remaining work is AMHP formatting, author-checklist completion,
-  cover-letter, and submission — a week of focused writing, not a
-  month of new development.
+Concrete actions, in strict order:
 
-Concrete actions, in order:
+1. **Forms** — download the four AMHP forms from Editorial Manager and
+   sign each:
+   - Author Checklist (corresponding author)
+   - Copyright Release Form (author)
+   - Conflict of Interest Form (author)
+   - Agreement to Pay Extra Charges — **skip**; submission requests B&W
+     print.
+2. **IRB / ethics documentation** — secure a DIMAE ethics-board memo
+   confirming de-identified-registry approval for the FAC cohort data.
+   Upload as supplementary material.
+3. **Editorial Manager submission** — use the `amhp-submit` skill's
+   `upload` mode for the step-by-step portal walkthrough. Files in
+   required order: cover_letter → manuscript → manuscript_author_page →
+   figure1 → figure2 → signed forms. Select article type "Research
+   Article".
+4. **Suggest reviewers** in the portal — the five candidates already
+   drafted in `docs/cover_letter.md` (Doyle, Alper, Ghadiali, Morgagni,
+   Landolfi). Confirm each has a current institutional email.
+5. **PDF proof review** — download and verify the system-generated PDF
+   in Editorial Manager: title page depersonalized, double-spaced,
+   page-numbered, tables Roman-numerated after references, figures
+   NOT embedded in body.
+6. **Submit** and save the AMHP manuscript ID from the acknowledgment
+   email.
+7. **GitHub Release** — tag the current repository state as
+   `v2.2.1-manuscript` with a release note linking the manuscript PDF.
 
-1. Use the `amhp-submit` skill to run a compliance audit on
-   `docs/manuscript.md` (applies the Feb 2026 AMHP Instructions for
-   Authors). Fix any formatting gaps the audit flags.
-2. Obtain IRB/ethics documentation for the FAC registry. If the data
-   is already de-identified aggregate, this is typically a memo from
-   the DIMAE ethics board.
-3. Draft the AMHP cover letter and suggest 3–5 reviewers (candidates:
-   W. J. Doyle, C. M. Alper, S. N. Ghadiali, F. Morgagni,
-   A. Landolfi).
-4. Complete the AMHP author-checklist forms (copyright, conflict of
-   interest, human-subjects statement).
-5. Submit via AMHP Editorial Manager.
-6. In parallel: open a GitHub Release tagged `v2.2.0-manuscript` that
-   pins the repository state cited in the paper.
+**While the manuscript is in review**, the next code deliverable is
+v2.3.0, informed by the 2025–2026 literature scan
+(`docs/research_notes/06_2025_2026_updates.md`):
 
-Do not start new code work until step 6. Subsequent priorities below
-only unblock once the anchor paper is in review.
+- **Zhang 2025 bidirectional ET vortex pumping** — add a perturbation
+  term on per-swallow FGE when P_ME < P_nasopharynx reflecting the
+  PIV-observed orifice vortex. Sensitivity-analysis axis, not a
+  first-order physics change.
+- **Holm 2026 anatomic atrophy** — parameterize anatomic susceptibility
+  from Ostmann fat-pad thickness and levator-veli-palatini volume
+  rather than age alone. Unlocks a new `PatientAnatomy` axis.
+- **Voigt 2025 sensory neuropathy** — add a categorical risk modifier.
+- **Lee 2025 altered mental status** — add an `impaired_volitional_
+  equalization` flag (mechanistically equivalent to failed-Valsalva).
+- **Sudhoff 2025 GLP-1 agonist → PET** — add a weak covariate in the
+  PET-state transition probabilities.
+- **Swords 2025 / Khan 2026 BDET effect size** — add a
+  post-BDET-treatment arm to the patient state with ETDQ-7 MD −2.03
+  (12-mo) as the prior; flag the sham-controlled null for calibration
+  against the S1 return-to-normal-ΔP behavior.
+
+Only after the AMHP manuscript is in review (likely ~2 weeks after
+submission) should the v2.3.0 code work begin. Do not start it
+concurrently with the submission — a moving model confuses reviewers.
 
 ---
 
