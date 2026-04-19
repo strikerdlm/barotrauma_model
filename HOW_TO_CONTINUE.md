@@ -1,8 +1,59 @@
-# How to Continue — v2.1 roadmap and contributor guide
+# How to Continue — v2.2 roadmap and contributor guide
 
-`barotrauma/v2/` is a complete physics-informed model. This document orders
-the next-highest-leverage work so the next session / contributor can resume
-without re-deriving the plan.
+`barotrauma/v2/` is a complete, calibrated, externally-validated physics-
+informed MEB model with 109 passing tests and a manuscript draft. This
+document orders the next-highest-leverage work so the next session /
+contributor can resume without re-deriving the plan.
+
+---
+
+## ⭐ Next step (start here)
+
+**Submit the manuscript to *Aerospace Medicine and Human Performance*
+(AMHP), and in parallel, publish the FAC 10-year cohort as either a
+short report or as supplementary data to the manuscript.**
+
+Why this is the single highest-leverage step:
+
+- The model, tests, calibration, external validation, sensitivity
+  analysis, and uncertainty quantification are all finished. Continuing
+  to add code features without publishing what exists is pure churn.
+- The FAC 5.8% anchor is the load-bearing empirical hook for the whole
+  framework. Every other priority (per-TEED recalibration, career
+  modeling, hybrid-ML training) becomes trivial once the cohort is a
+  published citation rather than "DIMAE unpublished".
+- External users (other air forces, ENT clinicians) will trust, adopt,
+  and contribute against a peer-reviewed paper. They will not trust an
+  open-source repo backed by an internal dataset.
+- The manuscript is already drafted (`docs/manuscript.md`). The
+  remaining work is AMHP formatting, author-checklist completion,
+  cover-letter, and submission — a week of focused writing, not a
+  month of new development.
+
+Concrete actions, in order:
+
+1. Use the `amhp-submit` skill to run a compliance audit on
+   `docs/manuscript.md` (applies the Feb 2026 AMHP Instructions for
+   Authors). Fix any formatting gaps the audit flags.
+2. Obtain IRB/ethics documentation for the FAC registry. If the data
+   is already de-identified aggregate, this is typically a memo from
+   the DIMAE ethics board.
+3. Draft the AMHP cover letter and suggest 3–5 reviewers (candidates:
+   W. J. Doyle, C. M. Alper, S. N. Ghadiali, F. Morgagni,
+   A. Landolfi).
+4. Complete the AMHP author-checklist forms (copyright, conflict of
+   interest, human-subjects statement).
+5. Submit via AMHP Editorial Manager.
+6. In parallel: open a GitHub Release tagged `v2.2.0-manuscript` that
+   pins the repository state cited in the paper.
+
+Do not start new code work until step 6. Subsequent priorities below
+only unblock once the anchor paper is in review.
+
+---
+
+This document orders the next-highest-leverage work so the next session /
+contributor can resume without re-deriving the plan.
 
 ## Before anything else — read these
 
