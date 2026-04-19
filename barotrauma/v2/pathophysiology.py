@@ -64,6 +64,7 @@ def modifiers_for_patient(patient: PatientState) -> Modifiers:
                                    habitual_sniffer=patient.habitual_sniffer))
     m = _apply_medication(m, patient.medication, pet=patient.pet)
     m = _compose(m, _previous_meb_modifier(patient.previous_meb))
+    m = _compose(m, _v23_covariate_modifiers(patient))
     return m
 
 
@@ -182,6 +183,39 @@ def _apply_medication(
         per_descent_rr=m.per_descent_rr * rr,
         notes=m.notes + (f"medication {med}: RR×{rr:.2f}",) if med != "none" else m.notes,
     )
+
+
+# ---------------------------------------- v2.3.0 categorical covariates -
+def _v23_covariate_modifiers(patient: PatientState) -> Modifiers:
+    """Compose modifiers for the v2.3.0 categorical covariates on
+    ``PatientState``: sensory_neuropathy, impaired_volitional_equalization,
+    glp1_exposure.
+
+    Each active flag contributes its per-descent RR multiplicatively; when
+    no flag is set, returns a no-op Modifiers(). Notes are accumulated so
+    the clinical-decision-support panel can surface which covariates
+    drove the composite risk.
+    """
+    rr = 1.0
+    notes: list[str] = []
+
+    if patient.sensory_neuropathy:
+        rr *= C.SENSORY_NEUROPATHY_RR
+        notes.append(f"Sensory neuropathy (Voigt 2025): RR×{C.SENSORY_NEUROPATHY_RR:.2f}")
+
+    if patient.impaired_volitional_equalization:
+        rr *= C.IMPAIRED_VOLITIONAL_EQUALIZATION_RR
+        notes.append(
+            f"Impaired volitional equalization (Lee 2025): RR×{C.IMPAIRED_VOLITIONAL_EQUALIZATION_RR:.2f}"
+        )
+
+    if patient.glp1_exposure:
+        rr *= C.GLP1_EXPOSURE_RR
+        notes.append(f"GLP-1 exposure (Sudhoff 2025): RR×{C.GLP1_EXPOSURE_RR:.2f}")
+
+    if not notes:
+        return Modifiers()
+    return Modifiers(per_descent_rr=rr, notes=tuple(notes))
 
 
 # -------------------------------------------------------- history ----
