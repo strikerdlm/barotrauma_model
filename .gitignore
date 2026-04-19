@@ -217,3 +217,14 @@ Thumbs.db
 .env.*.local
 config.ini
 secrets.json
+
+# FAC Cohort raw data — contains PII (Cédula, names, emails, phones).
+# Only de-identified analysis outputs belong under version control.
+docs/Cohort FAC/**/*.xlsx
+docs/Cohort FAC/**/*.xls
+docs/Cohort FAC/**/*.doc
+docs/Cohort FAC/**/*.docx
+docs/Cohort FAC/**/*.pdf
+docs/Cohort FAC/**/*.csv
+!docs/Cohort FAC/analysis/
+!docs/Cohort FAC/analysis/**

@@ -15,9 +15,9 @@ forms; immediately afterward, start the v2.3.0 roadmap informed by the
 
 The manuscript, cover letter, author page, and two TIFF figures are
 ready (`docs/manuscript.md`, `docs/cover_letter.md`,
-`docs/manuscript_author_page.md`, `docs/figures/`). The AMHP compliance
-audit has been run and every FAIL has been resolved. The remaining
-blocking actions are operational, not scientific.
+`docs/manuscript_author_page.md`, `docs/figures/`). All five AMHP
+compliance FAILs were resolved 2026-04-19 in commit `d2f439f`. The
+remaining blocking actions are operational, not scientific.
 
 Concrete actions, in strict order:
 
@@ -37,8 +37,13 @@ Concrete actions, in strict order:
    figure1 → figure2 → signed forms. Select article type "Research
    Article".
 4. **Suggest reviewers** in the portal — the five candidates already
-   drafted in `docs/cover_letter.md` (Doyle, Alper, Ghadiali, Morgagni,
-   Landolfi). Confirm each has a current institutional email.
+   drafted in `docs/cover_letter.md`: Kanick (replaced Doyle — deceased),
+   Alper, Ghadiali, Fabio Morgagni, Angelo Landolfi. Ghadiali's email
+   `ghadiali.1@osu.edu` is publicly listed and verified; Morgagni's
+   `fabio.morgagni@aeronautica.difesa.it` is 2012-authoritative but
+   needs a live check. Alper, Kanick, Landolfi emails still require
+   verification before portal entry — see
+   `docs/submission/2026-04-18_reviewer_verification_checklist.md`.
 5. **PDF proof review** — download and verify the system-generated PDF
    in Editorial Manager: title page depersonalized, double-spaced,
    page-numbered, tables Roman-numerated after references, figures
@@ -47,6 +52,20 @@ Concrete actions, in strict order:
    email.
 7. **GitHub Release** — tag the current repository state as
    `v2.2.1-manuscript` with a release note linking the manuscript PDF.
+
+**Pre-portal WARN deferrals to close** before step 3:
+
+- **WARN-1** — re-export `docs/figures/figure1_descent_rate_sensitivity.tiff`
+  and `figure2_sobol_indices.tiff` as 8-bit grayscale with alpha
+  flattened against white (AMHP IFA for B&W print). Current files are
+  RGB with alpha.
+- **WARN-2** — verify author counts on refs 11 (Doyle 1999 *Laryngoscope*,
+  7 authors — `et al.` OK per NLM) and 16 (Chen 2022 *Eur Arch
+  Otorhinolaryngol*) and expand any with ≤6 authors to full NLM lists.
+- **WARN-4** — `.docx` render with pandoc using a reference template
+  that enforces double-spacing, page numbers, table-per-page breaks,
+  and a page break before "## Figure captions." Verify by eye before
+  upload.
 
 **While the manuscript is in review**, the next code deliverable is
 v2.3.0, informed by the 2025–2026 literature scan
@@ -70,8 +89,28 @@ v2.3.0, informed by the 2025–2026 literature scan
   against the S1 return-to-normal-ΔP behavior.
 
 Only after the AMHP manuscript is in review (likely ~2 weeks after
-submission) should the v2.3.0 code work begin. Do not start it
+submission) should the v2.3.0 **code** work begin. Do not start it
 concurrently with the submission — a moving model confuses reviewers.
+
+**Parallel data-prep track — starts now, no collision with the v2.2.1
+submission:** the FAC 5.8% cohort paper (§1 below) is the single
+highest-leverage publication queued after the AMHP manuscript and is
+also the empirical anchor for v2.3.0 re-calibration. The raw data lives
+under `docs/Cohort FAC/`:
+
+- `2010_2020/` — the 2010-2020 prevalence-of-barotitis manuscript
+  (`barotrauma articulo 2020.doc`) plus two Excel databases (`Barotrauma.xlsx`,
+  `base de datos barotrauma.xls`).
+- `2025_2026/` — Jan 2025 → Apr 2026 operational data: preflight medical
+  evaluation with symptoms that denied chamber flight + vital signs
+  (`EVALUACIÓN MEDICA PRE VUELO...xlsx`), and the medical-director Spanish
+  narrative of chamber runs and barotitis cases (`FORMATO DE DIRECTOR
+  MEDICO...xlsx`).
+
+Tabulating these into structured analyzable data — prevalence per year,
+preflight-denial rate stratified by symptom, vital-sign covariates, and
+per-case Spanish narrative converted to structured fields — can happen
+in parallel with the manuscript review.
 
 ---
 
