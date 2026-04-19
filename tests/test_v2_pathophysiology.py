@@ -204,3 +204,59 @@ def test_v23_covariates_raise_simulated_risk():
         rng_seed=42,
     )
     assert with_flags.risk.p_barotitis > baseline.risk.p_barotitis
+
+
+# ----------------------------------- BDET post-treatment arm (v2.3.0) -
+def test_bdet_treated_applies_ra_and_rr_reduction():
+    """bdet_treated=True multiplies ra_mult by BDET_RA_MULT and
+    per-descent RR by BDET_PER_DESCENT_RR."""
+    base = modifiers_for_patient(PatientState())
+    treated = modifiers_for_patient(PatientState(bdet_treated=True))
+    # ra_mult compounds multiplicatively (URI/rhinitis/PET/BDET)
+    assert treated.ra_mult == pytest.approx(base.ra_mult * 0.70)
+    assert treated.per_descent_rr == pytest.approx(base.per_descent_rr * 0.65)
+    assert any("BDET-treated" in n for n in treated.notes)
+
+
+def test_bdet_default_is_noop_against_v221_baseline():
+    """Default (False) matches the v2.2.1 baseline modifier set exactly."""
+    m_default = modifiers_for_patient(PatientState())
+    m_explicit_false = modifiers_for_patient(PatientState(bdet_treated=False))
+    assert m_default.ra_mult == pytest.approx(m_explicit_false.ra_mult)
+    assert m_default.per_descent_rr == pytest.approx(m_explicit_false.per_descent_rr)
+    assert m_default.notes == m_explicit_false.notes
+
+
+def test_bdet_in_pet_flags_clinical_inconsistency():
+    """bdet_treated=True alongside a non-normal PET state surfaces a
+    "CLINICAL INCONSISTENCY" note for the CDS panel."""
+    m = modifiers_for_patient(PatientState(bdet_treated=True, pet="s3"))
+    notes_joined = " ".join(m.notes)
+    assert "CLINICAL INCONSISTENCY" in notes_joined
+    assert "s3" in notes_joined or "PET" in notes_joined
+
+
+def test_bdet_in_pet_still_applies_numerical_modifier():
+    """The contraindication flag is advisory only: BDET modifiers still
+    apply numerically so a reviewer can quantify the discrepancy."""
+    no_bdet = modifiers_for_patient(PatientState(pet="s3"))
+    with_bdet = modifiers_for_patient(PatientState(bdet_treated=True, pet="s3"))
+    # Not asserting direction — PET-S3 baseline can be dominated by the
+    # Oshima multiplier; we only verify that the BDET modifiers were
+    # actually composed in (not silently dropped).
+    assert with_bdet.per_descent_rr != pytest.approx(no_bdet.per_descent_rr)
+
+
+def test_bdet_reduces_simulated_risk_under_uri():
+    """End-to-end: BDET lowers p_barotitis for a URI day 4–7 patient on
+    the FAC Bogotá profile vs. an otherwise-identical untreated
+    control."""
+    untreated = simulate(
+        PatientState(uri="day_4_7"), FAC_BOGOTA_DEFAULT, rng_seed=42
+    )
+    treated = simulate(
+        PatientState(uri="day_4_7", bdet_treated=True),
+        FAC_BOGOTA_DEFAULT,
+        rng_seed=42,
+    )
+    assert treated.risk.p_barotitis < untreated.risk.p_barotitis
