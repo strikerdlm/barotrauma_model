@@ -54,10 +54,10 @@ No external funding supported this work. All software and data analysis were per
 
 ### Suggested reviewers
 
-1. **William J. Doyle, PhD**
-   University of Pittsburgh School of Medicine, Department of Otolaryngology
-   Pittsburgh, PA, USA
-   Rationale: Senior author of the canonical Kanick-Doyle 2005 model this manuscript extends, and of Doyle 2017 (PMID 28917121) whose multi-pathway formulation we integrate. No coauthorship on any of my work.
+1. **Stephen Chad Kanick, PhD**
+   Thayer School of Engineering, Dartmouth College
+   Hanover, NH, USA
+   Rationale: First author of the canonical Kanick-Doyle 2005 mathematical model (*J Appl Physiol* 98:1592–1602) that this manuscript extends. Quantitative biomedical engineering background (Google Scholar h-index 31+). No coauthorship with the author.
 
 2. **Cuneyt M. Alper, MD**
    Children's Hospital of Pittsburgh; Department of Otolaryngology
@@ -69,12 +69,12 @@ No external funding supported this work. All software and data analysis were per
    Columbus, OH, USA
    Rationale: Author of the 2010 and 2019 Eustachian-tube FEM papers whose mechanical framework motivates our v2.2 muscle-mechanics extension. No coauthorship with the author.
 
-4. **Francesco Morgagni, MD**
+4. **Fabio Morgagni, MD**
    Italian Air Force, Experimental Flight Centre (Pratica di Mare)
    Pomezia, Italy
    Rationale: Author of the Morgagni 2010 and 2012 cohorts used for external validation. Independent of the Colombian Aerospace Force data and of the author.
 
-5. **Andrea Landolfi, MD**
+5. **Angelo Landolfi, MD**
    Italian Air Force
    Rome, Italy
    Rationale: Author of Landolfi 2009 (PMID 20027855), one of the three Italian Air Force external-validation cohorts. No coauthorship with the author.
