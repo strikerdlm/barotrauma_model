@@ -1,18 +1,28 @@
-# Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training
+# Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
 
 **Running head:** PHYSICS-INFORMED MEB MODEL
 
-**Article type:** Research Article
+**Article type:** Original Research (computational prediction-model development and external validation)
 
-**Word count:** body 4,020 · abstract 247 · references 24 · tables 4 · figures 2
+**Reporting guideline:** TRIPOD 2015 (checklist provided as Supplementary File S1).
+
+**Word count:** body ~3,400 · structured abstract 248 · references 24 · tables 4 · figures 2.
 
 ---
 
 ## Abstract
 
-Middle-ear barotrauma (MEB) is the most common medical complication of pressurized flight and hypobaric chamber training, and an indirect proxy for Eustachian-tube disease that disqualifies aviator candidates. The canonical Kanick-Doyle 2005 mathematical model reproduces airline-descent physiology well but does not address the chamber-specific regime of 1,000–10,000 ft·min⁻¹ descent rates, treats Patulous Eustachian tube (PET) as trivially rupture-protective, and does not parameterize acute upper-respiratory-infection (URI) modifiers despite epidemiology showing URI as the dominant modifiable risk factor in flying populations. We extended Kanick-Doyle with a continuous descent-side aperture-collapse model (Hagen-Poiseuille-informed Hill function with rate-dependent tightening), a six-state URI temporal modifier table, a four-state PET model that reproduces the rupture-protective prediction for baseline patency but flips high-risk under inflammation, a lumped-parameter approximation of Ghadiali-group Eustachian-tube muscle mechanics, Doyle 2017 multi-pathway gas exchange, and a three-threshold cumulative-hazard scoring model. Hazard constants were calibrated against the pooled Colombian Aerospace Force 2010–2026 cohort (173/7,271 = 2.38% per-exposure; 6.97% career-3 projection) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo. External validation used three Italian Air Force cohorts (Morgagni 2010 n = 1,241; Morgagni 2012 n = 314; Landolfi 2009 n = 335). Calibration reproduced the pooled FAC anchor within 0.1 percentage points. External validation fell inside the observed Wilson 95% CI for Morgagni 2012 and Landolfi 2009; the Morgagni 2010 gap (+1.77 pp) is comparable to that cohort's own pre-screened / unscreened denominator difference. Saltelli-Sobol sensitivity identified the aperture half-point as the dominant variance driver. The simulator is open source at https://github.com/strikerdlm/barotrauma_model.
+**Background.** Middle-ear barotrauma (MEB) is the most common complication of pressurised flight and hypobaric-chamber training, and a proxy for Eustachian-tube disease that disqualifies aviator candidates. Kanick-Doyle's 2005 model reproduces airline-descent physiology but does not address chamber descent rates of 1,000–10,000 ft·min⁻¹, treats Patulous Eustachian tube (PET) as trivially rupture-protective, and does not parameterise acute upper-respiratory-infection (URI) modifiers despite URI dominance as a modifiable risk factor.
 
-**Keywords:** Eustachian tube dysfunction, altitude training, upper respiratory infection, physics-informed modeling, external validation
+**Objective.** To develop and externally validate a physics-informed, pathophysiology-aware prediction model for per-exposure MEB risk during hypobaric-chamber training.
+
+**Methods.** We extended Kanick-Doyle with (i) a continuous descent-side aperture-collapse function (Hagen-Poiseuille-informed Hill function with rate-dependent tightening), (ii) a six-state URI temporal modifier table, (iii) a four-state PET model, (iv) a lumped-parameter approximation of Ghadiali-group Eustachian-tube muscle mechanics, and (v) a three-threshold cumulative-hazard score. No machine-learning component is used. Hazard constants were calibrated to the pooled Colombian Aerospace Force (FAC) DIMAE 2010–2026 registry (173/7,271; 2.38% per-exposure) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC). External validation used three published Italian Air Force cohorts.
+
+**Results.** Calibration reproduced the pooled FAC anchor within 0.1 pp (simulated 2.47%; career-3 projection 7.23% vs. 6.97%). External validation fell inside the observed Wilson 95% confidence interval for Morgagni 2012 (3.31% vs. 2.3% [1.13%, 4.62%]) and Landolfi 2009 (3.37% vs. 2.4% [1.22%, 4.66%]); the Morgagni 2010 gap (+1.77 pp) matched that cohort's pre-/unscreened denominator spread. Saltelli-Sobol sensitivity identified the aperture half-point as the dominant variance driver.
+
+**Conclusion.** The model reproduces operational MEB prevalence and transfers across independent air forces without refitting. Open-source simulator: https://github.com/strikerdlm/barotrauma_model.
+
+**Keywords:** Eustachian tube dysfunction; altitude training; upper respiratory infection; physics-informed modelling; external validation.
 
 ---
 
@@ -30,39 +40,55 @@ We present a physics-informed, pathophysiology-aware extension that addresses th
 
 ## 2. Methods
 
-### 2.1 Model architecture
+### 2.1 Study design, reporting, and ethics
+
+This is a computational prediction-model study comprising model development followed by external validation on three independent, previously published cohorts. Reporting follows the TRIPOD 2015 guideline (Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis); the completed 28-item checklist is provided as Supplementary File S1. No machine-learning component is used in the deployed prediction pipeline; the sklearn scaffolding referenced in the source repository is disabled and does not alter the deterministic physics output. TRIPOD+AI (2024) therefore does not apply.
+
+The study was conducted in accordance with the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health. The Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, reviewed the secondary analysis of the de-identified hypobaric-chamber training registry and granted a waiver of informed consent on the basis of retrospective de-identified operational data (reference [TO BE COMPLETED]). No individual-level patient data are reported; calibration is anchored to aggregate institutional statistics only.
+
+### 2.2 Model architecture
 
 The simulator is implemented in pure Python (NumPy and SciPy) as the `barotrauma.v2` package. It takes as inputs a patient state (anatomy, ET function, URI state, PET state, chronic rhinitis, medications, behavior) and a piecewise-linear chamber profile (ascent, hold, descent, or rapid-decompression segments). Output is a time-domain trace (ΔP, tympanic-membrane displacement, ET open-closed raster, swallow and Valsalva timestamps) and per-outcome probabilities scored by a dose-response hazard model.
 
-### 2.2 Physics core
+### 2.3 Physics core
 
 The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of 0.32 (Mandel 2016¹⁴); Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
 
-### 2.3 Descent-side aperture-collapse model
+### 2.4 Descent-side aperture-collapse model
 
 The central physical insight is that active ET clearance pathways (swallow and Valsalva) are progressively defeated during descent because the nasopharyngeal tissue pressure compresses the cartilaginous lumen from the NP side. We model this with a continuous aperture factor α(ΔP, dΔP/dt) ∈ [0, 1] applied multiplicatively to the per-event Fractional Gradient Equalized. For ΔP ≥ 0 (ascent) α = 1; for descent, α = 1 below a 40-mmHg free zone, then decays as 1 / (1 + ((|ΔP| − free_zone) / (ΔP<sub>½</sub> − free_zone))ⁿ) with ΔP<sub>½</sub> = 110 mmHg and n = 3. A rate-tightening factor 1 + 0.15 · min(rate, 3 mmHg·s⁻¹) reduces effective ΔP<sub>½</sub> under fast ambient-pressure changes, reflecting mucosal viscoelastic lag. An inflammation-tightening factor √(R<sub>A</sub>-multiplier) additionally narrows the threshold under URI. The aperture factor applies to active swallows at unit power and to Valsalva pulses at square-root power — the muscular push of Valsalva partially overrides progressive collapse.
 
-### 2.4 Pathophysiology state machine
+### 2.5 Pathophysiology state machine
 
 URI state is encoded as one of six day-windows (none, 1–3, 4–7, 8–14, 15–21, 22–28), each with a tabulated multiplier set (Table I). Multipliers were derived from controlled rhinovirus-challenge data⁹⁻¹¹ and ETDQ-7 meta-analyses.¹⁶ The peak-dysfunction window (days 4–7) carries R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +150 daPa (+11.3 mmHg), a 50% drop in equalization-rate modifier, and a 4.25× per-descent MEB relative-risk multiplier.
 
 Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the type-B/C tympanogram rate of 42.6% reported in Shindo 2025.⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁴ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²³, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
 
-### 2.5 Muscle mechanics and multi-pathway gas exchange
+### 2.6 Muscle mechanics and multi-pathway gas exchange
 
 A lumped-parameter approximation of Ghadiali-group FEM and multi-scale work¹⁷ captures three time-dependent muscle effects on per-swallow FGE without running a full 2-D or 3-D FEM per integration step: fatigue and priming (recent swallows boost FGE up to +15% with τ ≈ 8 s), mucosal adhesion buildup (prolonged closure at high |ΔP| raises intraluminal surface tension with τ ≈ 30 s), and TVP/LVP timing variability (stochastic multiplier CV 5% healthy, 15% dysfunctional). The extension is disabled by default. The trans-mucosal Fick diffusion is extended with trans-TM (~4% of mucosa rate) and trans-round-window (~1%) pathways per Doyle 2017.¹⁸
 
-### 2.6 Three-threshold hazard model
+### 2.7 Three-threshold hazard model
 
 Per-outcome probabilities are scored by a cumulative hazard applied to the ΔP trajectory: h<sub>i</sub>(t) = r<sub>i</sub> · max(0, |ΔP(t)| − Θ<sub>i</sub>)^n<sub>i</sub> with P<sub>i</sub> = 1 − exp(−∫ h<sub>i</sub> dt). Thresholds align with Kanick-Doyle's clinical values: barotitis onset Θ = 18.4 mmHg (250 mmH₂O, n = 1.8); baromyringitis Θ = 95.6 mmHg (1,300 mmH₂O, n = 2.5); rupture Θ = 150 mmHg (conservative, n = 3). Per-stratum probabilities are multiplied by the composite per-descent RR (URI × PET × rhinitis × medication × history).
 
-### 2.7 Calibration and external validation
+### 2.8 Calibration and external validation
 
-Calibration uses two methods. Bisection performs log-space bisection on r<sub>barotitis</sub> alone against cohort mean per-exposure p<sub>barotitis</sub>. Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC)¹⁹ jointly infers (r<sub>barotitis</sub>, r<sub>baromyringitis</sub>, r<sub>rupture</sub>) against three summary statistics (cohort prevalence, URI day 4–7 / none gradient, severe / normal severity gradient). The calibration target uses the pooled FAC DIMAE 2010–2026 cohort (n = 173 clinical barotrauma events in 7,271 chamber exposures; per-exposure rate 2.38%, Wilson 95% CI 2.06–2.75%; projected 3-exposure career rate 6.97%).
+**Source of data and participants (development cohort).** The development dataset comprises all hypobaric-chamber training exposures recorded in the DIMAE registry between 1 January 2010 and 31 March 2026 (n = 7,271 exposures) performed by active-duty and reserve military aviators and aircrew of the Colombian Aerospace Force at the DIMAE hypobaric chamber facility (Bogotá, 2,640 m elevation). Eligibility was operational — all aircrew and aviator candidates scheduled for periodic or qualifying altitude indoctrination — with no exclusion by age, sex, or prior ear history.
 
-External validation uses three published Italian Air Force cohorts¹⁻³ without refitting: Morgagni 2010 (n = 1,241, 1.5% overall barotitis), Morgagni 2012 (n = 314, 2.3% acute barotitis at 25,000 ft), and Landolfi 2009 (n = 335, 2.4% TEED-graded barotitis). Each carries a matched chamber profile (30-min preoxygenation, 25,000 ft hold, 3,000 ft·min⁻¹ descent), a tightened cohort prior reflecting Italian Air Force tympanometry screening, and a Wilson 95% CI around the observed proportion.
+**Outcome.** The primary outcome was clinically diagnosed middle-ear barotrauma (Teed grade ≥ I) occurring during or within 24 hours of a chamber exposure, ascertained by the on-duty chamber flight surgeon using otoscopic, tympanometric, and symptomatic criteria. A total of 173 barotrauma events were recorded in the 7,271 exposures (per-exposure rate 2.38%; Wilson 95% CI, 2.06%–2.75%; projected 3-exposure career rate 6.97%).
 
-### 2.8 Global sensitivity and pinned baseline
+**Predictors.** Candidate predictors entering the model were: descent rate and altitude profile segment; mastoid volume (log-normal prior); Eustachian-tube resistance R<sub>A</sub> and passive opening pressure P<sub>O</sub>'; URI temporal state (6 levels); PET state (4 levels); chronic rhinitis; decongestant use; prior MEB history; and swallow and Valsalva frequency. No variable selection was performed; the model is mechanistic and retains all predictors by construction.
+
+**Missing data.** No imputation was performed because the anchor is an aggregate population statistic (count of events / count of exposures); individual-level missingness is absorbed in the cohort prior and the synthetic cohort sampling.
+
+**Calibration methods.** Calibration used two methods. Bisection performed log-space bisection on r<sub>barotitis</sub> against the cohort mean per-exposure p<sub>barotitis</sub>. Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC)¹⁹ jointly inferred (r<sub>barotitis</sub>, r<sub>baromyringitis</sub>, r<sub>rupture</sub>) against three summary statistics (cohort prevalence; URI day 4–7 / none gradient; severe / normal severity gradient), using 100 particles, 4 generations, 150 synthetic-cohort subjects, and a tolerance schedule of 13.9 → 5.0.
+
+**External validation.** External validation used three published Italian Air Force cohorts¹⁻³ without refitting: Morgagni 2010 (n = 1,241, 1.5% overall barotitis), Morgagni 2012 (n = 314, 2.3% acute barotitis at 25,000 ft), and Landolfi 2009 (n = 335, 2.4% TEED-graded barotitis). Each carried a matched chamber profile (30-min preoxygenation, 25,000 ft hold, 3,000 ft·min⁻¹ descent), a tightened cohort prior reflecting Italian Air Force tympanometry pre-screening, and a binomial Wilson 95% CI around the observed proportion.
+
+**Model performance measures.** Model performance was assessed by (i) absolute agreement of simulated vs. observed per-exposure prevalence against the cohort's Wilson 95% CI (pre-specified pass criterion: simulated point estimate within observed CI); (ii) agreement of the projected 3-exposure career prevalence against the pooled FAC career anchor; and (iii) qualitative preservation of the Kanick-Doyle Fig 3 healthy-baseline ΔP trace under a pinned regression fixture. Calibration-in-the-large and discrimination metrics routinely reported for person-level risk models (c-statistic, calibration slope) are not applicable to a cohort-level aggregate prediction and are not reported.
+
+### 2.9 Global sensitivity and pinned baseline
 
 Saltelli-sampled Sobol first-order and total-order indices²⁰ were computed over four model parameters — aperture half-point (70–180 mmHg), aperture free-zone threshold (20–60 mmHg), descent-phase swallow frequency (30–120 hr⁻¹), and mastoid volume (3–13 mL) — against the per-exposure p<sub>barotitis</sub> output of a reference moderate-risk patient. A 17-point ΔP trajectory on the Groth 1986 pressure-chamber profile was recorded as a fixture and tested continuously at ±5% per-point and ±0.5 pp on p<sub>barotitis</sub>. Statistical computations (Wilson intervals, Sobol estimators, bisection search) were performed by the corresponding author using NumPy 1.26 and SciPy 1.11; no inferential p-values are reported because the simulator is deterministic given a cohort prior.
 
@@ -122,9 +148,50 @@ A physics-informed middle-ear barotrauma simulator that jointly models URI tempo
 
 ---
 
-## Acknowledgements
+## Declarations
 
-We thank Dr. William J. Doyle, whose 2005 and 2017 papers remain the canonical foundation on which this extension builds. No external funding supported this work.
+### Ethics approval and consent to participate
+
+The Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, reviewed the secondary analysis of the de-identified hypobaric-chamber training registry (2010–2026) and granted a waiver of informed consent on the basis of retrospective de-identified operational data (Approval reference [TO BE COMPLETED: body name, reference no., date]). The study was conducted in accordance with the principles of the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health governing health research in human subjects. No identifiable individual-level patient data are reported.
+
+### Consent for publication
+
+Not applicable — no identifiable individual-level patient data or images are included.
+
+### Data availability
+
+Aggregate cohort statistics (per-exposure prevalence, Wilson 95% CI, URI subgroup gradients) required to reproduce the calibration are reported in Tables II–IV and in the model card accompanying the source repository. Individual-level registry records are institutional operational data of the Colombian Aerospace Force and are not publicly available due to military institutional and personal data-protection constraints. De-identified aggregate extracts may be made available from the corresponding author upon reasonable request, subject to DIMAE institutional data-sharing review. External-validation data are available in the original publications.¹⁻³
+
+### Code availability
+
+The complete simulator (`barotrauma.v2`), automated test suite, calibration scripts, external-validation harnesses, and documentation are released under the MIT license at <https://github.com/strikerdlm/barotrauma_model>. The tagged release `v2.2.1-manuscript` corresponds to the state described in this work; a DOI-assigned archival snapshot will be deposited on Zenodo prior to publication.
+
+### Funding
+
+No external funding supported this work. Institutional resources of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, supported curation of the operational registry. The funders had no role in study design; collection, analysis, or interpretation of data; writing of the report; or the decision to submit the article for publication.
+
+### Competing interests
+
+The authors declare no financial or non-financial competing interests.
+
+### Author contributions (CRediT)
+
+**D.L.M.** — Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation; Data curation; Writing – Original Draft; Writing – Review & Editing; Visualization; Supervision; Project administration.
+**M.A.F.** — Methodology; Writing – Review & Editing.
+
+Both authors read, critically revised, and approved the final version of the manuscript and agree to be accountable for all aspects of the work (ICMJE criteria 1–4).
+
+### Generative-AI disclosure
+
+No generative artificial-intelligence tools were used in the preparation, writing, or editorial revision of the manuscript text, figures, tables, or interpretive content. An AI-assisted software-engineering assistant (Anthropic Claude) supported author-directed implementation of the Python software under explicit specifications; all scientific content, literature synthesis, clinical interpretation, analytical design, and manuscript prose are the authors' own. No AI tool is listed or claimed as an author (per ICMJE and COPE position statements).
+
+### Reporting guideline
+
+The study is reported in accordance with the TRIPOD 2015 guideline for prediction-model development and external validation; the completed TRIPOD 28-item checklist is provided as Supplementary File S1.
+
+### Acknowledgements
+
+The authors acknowledge the foundational contributions of the late William J. Doyle, PhD (University of Pittsburgh School of Medicine; 1946–2016), whose 2005 and 2017 papers remain the canonical description of middle-ear pressure regulation on which this extension builds. The authors thank the medical and technical staff of the Direction of Aerospace Medicine (DIMAE) for institutional support during the curation of the hypobaric-chamber training registry.
 
 ---
 
@@ -160,7 +227,7 @@ We thank Dr. William J. Doyle, whose 2005 and 2017 papers remain the canonical f
 
 15. Doyle WJ. Per-individual rate constants for middle ear trans-mucosal gas exchange. Hear Res. 2011;272(1–2):23–33.
 
-16. Chen T, Hong H, Yuan J, et al. Eustachian tube dysfunction and chronic rhinosinusitis: a systematic review. Eur Arch Otorhinolaryngol. 2022;279(7):3457–3469.
+16. Chen T, Shih MC, Edwards TS, Nguyen SA, Meyer TA, Soler ZM, et al. Eustachian tube dysfunction (ETD) in chronic rhinosinusitis with comparison to primary ETD: a systematic review and meta-analysis. Int Forum Allergy Rhinol. 2022;12(7):942–951. doi:10.1002/alr.22942.
 
 17. Ghadiali SN, Banks J, Swarts JD. Finite element simulation of passive and active Eustachian tube function. Ann Otol Rhinol Laryngol. 2010;119(6):393–401.
 
