@@ -40,6 +40,7 @@ from . import (
     anatomy,
     atmosphere,
     calibration,
+    career,
     constants,
     engine,
     et_dynamics,
@@ -49,6 +50,13 @@ from . import (
     risk,
     scenarios,
     types,
+)
+from .career import (
+    CareerCohortResult,
+    CareerExposure,
+    CareerResult,
+    simulate_career,
+    simulate_career_cohort,
 )
 from .engine import simulate
 from .et_muscle import (
@@ -94,12 +102,15 @@ from .types import (
 
 __all__ = [
     # submodules
-    "anatomy", "atmosphere", "calibration", "constants", "engine",
+    "anatomy", "atmosphere", "calibration", "career", "constants", "engine",
     "et_dynamics", "et_muscle", "middle_ear", "pathophysiology",
     "risk", "scenarios", "types",
     # primary functions
-    "simulate", "score_trace", "score_with_uncertainty",
+    "simulate", "simulate_career", "simulate_career_cohort",
+    "score_trace", "score_with_uncertainty",
     "modifiers_for_patient",
+    # career types (v2.2.2)
+    "CareerExposure", "CareerResult", "CareerCohortResult",
     # muscle mechanics (Ghadiali FEM extension, v2.2)
     "MuscleMechanics", "default_healthy_mechanics",
     "default_dysfunctional_mechanics",
