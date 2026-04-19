@@ -4,7 +4,7 @@
 
 **Article type:** Research Article
 
-**Word count:** body ≈ 3,400 · abstract 248 · references 12 · tables 4 · figures 2 (placeholders)
+**Word count:** body ≈ 3,400 · abstract 248 · references 12 · tables 4 · figures 2
 
 ---
 
@@ -257,9 +257,15 @@ We thank the DIMAE medical team, including the Correa Guarín and Jaimes team wh
 
 ## Figure captions
 
-**Figure 1** (placeholder). Per-exposure barotrauma incidence time-series 2010–2026, with Wilson 95% CIs. Panel A: 2010–2020 per-year incidence where denominators are recoverable from the 2022 DIMAE draft. Panel B: 2025–2026 quarterly director-logged incidence against pooled 2010–2020 reference line.
+**Figure 1.** FAC clinical ear-barotrauma incidence across the 2010–2026 pooled window.
+*Panel A:* per-year case counts of FAC-only clinical barotrauma in the 2010–2020 structured registry (n = 161 over 6,565 exposures). Per-year denominators are not broken out in the Correa/Jaimes 2022 internal draft, so the panel reports numerators only; per-year incidence rates are not computed. The 2020 drop (n = 1) reflects partial-year chamber closure during the COVID-19 pandemic.
+*Panel B:* per-quarter per-exposure barotrauma rates from the 2025–2026 medical-director log (director-reported student-exposures as the denominator), with Wilson 95% CIs and the `n_events / n_exposures` fraction annotated above each point. The horizontal dashed line is the pooled 2010–2026 reference (2.38%, Wilson 95% CI 2.06–2.75% shown as a shaded band). Every included quarter's Wilson CI contains the pooled reference; 2025Q4 at 2.64% (6/227) is the highest point estimate but still well inside the reference CI. The 2026Q2 partial quarter (0/8, single run through the April data cutoff) is excluded from the plot as under-powered; footnoted below the panel.
 
-**Figure 2** (placeholder). Preflight denial-rate discriminatory power, Forest plot of per-flag denial rates with Wilson 95% CIs, ordered by point estimate. Vertical reference line at the overall 2.29% denial rate.
+![Figure 1 — incidence time-series](figures/fac_cohort/figure1_incidence_timeseries.png)
+
+**Figure 2.** Preflight denial-rate discrimination by screening flag, forest plot. Per-flag denial rate `denied / flag+ evaluated` with Wilson 95% CIs, ordered ascending by point estimate so the high-discrimination tier is at the top. Color coding: high discrimination (≥25%, dark red), moderate (10–25%, orange), low (0–10%, olive), null (0 denials at positive flag, gray). Right-margin annotations report `n_denied / n_flag_positive`. The vertical dashed line marks the overall 2.29% denial rate (Wilson 95% CI 1.53–3.41%, shown as a narrow band). The top four flags — malaise_fever_fatigue, anemia_bleeding, recent_respiratory, ear_URI_history — drive essentially all denial decisions; the bottom four — diving_altitude_48h, GI_symptoms, claustrophobia, seizures_epilepsy — record zero denials at positive flag and serve surveillance rather than gating.
+
+![Figure 2 — denial-rate forest plot](figures/fac_cohort/figure2_denial_forest.png)
 
 ---
 
