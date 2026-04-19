@@ -1,9 +1,9 @@
 {
   "meta": {
     "target_per_exposure": 0.02,
-    "achieved_per_exposure": 0.018768862364452868,
+    "achieved_per_exposure": 0.01877289271379286,
     "iterations": 5,
-    "career_projection_3_exposures": 0.055256388220786046,
+    "career_projection_3_exposures": 0.055268029609873315,
     "fac_career_anchor": 0.058
   },
   "hazard": {
@@ -13,22 +13,22 @@
   },
   "cohort_summary": {
     "n_cohort": 400,
-    "per_exposure_achieved": 0.018768862364452868,
+    "per_exposure_achieved": 0.01877289271379286,
     "per_exposure_target": 0.02,
-    "career_3_exposures_projected": 0.055256388220786046,
+    "career_3_exposures_projected": 0.055268029609873315,
     "uri_subgroup_means": {
-      "none": 0.003002591029597963,
-      "day_1_3": 0.08232051129667427,
-      "day_15_21": 0.009106024110339077,
-      "day_4_7": 0.2238989563658243,
-      "day_22_28": 0.004118793895394619,
-      "day_8_14": 0.03258383506091355
+      "none": 0.0029791233684000767,
+      "day_1_3": 0.08230619609824255,
+      "day_15_21": 0.009254852331300707,
+      "day_4_7": 0.22382253689729256,
+      "day_22_28": 0.004382457983875766,
+      "day_8_14": 0.03306048176032741
     },
     "severity_subgroup_means": {
-      "normal": 0.016875037581613104,
-      "mild": 0.029300092475219437,
-      "moderate": 0.018620026054649238,
-      "severe": 0.25760081786760725
+      "normal": 0.01687014326204758,
+      "mild": 0.029476424055789735,
+      "moderate": 0.019013750703820272,
+      "severe": 0.25597918041829715
     }
   }
 }
