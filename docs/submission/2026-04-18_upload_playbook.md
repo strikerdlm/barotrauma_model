@@ -1,7 +1,8 @@
 # AMHP Editorial Manager — Upload Playbook
 
 **Manuscript:** Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training
-**Corresponding author:** Diego L. Malpica, MD · dlmalpica@yahoo.com · ORCID 0000-0002-2257-4940
+**Corresponding author:** Diego L. Malpica, MD · diego.malpica@fac.mil.co · ORCID 0000-0002-2257-4940
+**Co-author:** Marian A. Farfán, MD (Subdirectorate of Aerospace Sciences, DIMAE, Colombian Aerospace Force)
 **Portal:** https://www.editorialmanager.com/AMHP/
 **Journal email:** AMHPJournal@asma.org
 
@@ -102,15 +103,23 @@ Confirm none appears verbatim in the title.
 
 ## Step 5 — Authors
 
-Sole author:
+**Author 1 (Corresponding, PI):**
 
 - **Full name:** Diego L. Malpica, MD
-- **Affiliation 1:** Dirección de Medicina Aeroespacial (DIMAE), Fuerza Aeroespacial Colombiana, Bogotá, Colombia
-- **Affiliation 2:** Independent researcher, Aerospace Medicine
-- **Email:** dlmalpica@yahoo.com
+- **Affiliation:** Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (Fuerza Aeroespacial Colombiana, FAC), Bogotá, Colombia
+- **Email:** diego.malpica@fac.mil.co
 - **ORCID:** 0000-0002-2257-4940
 - **Corresponding author:** ✓
-- **ICMJE contribution statement:** "Conceived the study; designed the physics-informed extensions and pathophysiology state machines; implemented the software, calibration, external validation, sensitivity analysis, and ABC-SMC sampler; performed all statistical analyses; wrote the manuscript; approved the final version."
+- **CRediT contribution:** "Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation; Data curation; Writing – Original Draft; Writing – Review & Editing; Visualization; Supervision; Project administration."
+
+**Author 2:**
+
+- **Full name:** Marian A. Farfán, MD
+- **Affiliation:** Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, Bogotá, Colombia
+- **Email:** [TO BE COMPLETED — institutional @fac.mil.co]
+- **ORCID:** [TO BE COMPLETED]
+- **Corresponding author:** ✗
+- **CRediT contribution:** "Conceptualization; Methodology; Validation; Writing – Review & Editing."
 
 ---
 
