@@ -71,6 +71,7 @@ export interface PatientStateV2 {
   sensory_neuropathy: boolean;
   impaired_volitional_equalization: boolean;
   glp1_exposure: boolean;
+  bdet_treated: boolean;
 }
 
 /**
@@ -94,6 +95,7 @@ export type PatientStateInput = {
   sensory_neuropathy?: boolean;
   impaired_volitional_equalization?: boolean;
   glp1_exposure?: boolean;
+  bdet_treated?: boolean;
 };
 
 // --------------------------------------------------- chamber profile
