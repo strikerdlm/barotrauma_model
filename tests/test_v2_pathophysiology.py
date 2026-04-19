@@ -123,3 +123,84 @@ def test_pet_s1_is_rupture_protective_but_s2_flips_to_high_risk():
     # Dominant risk factor reflects the real driver (URI or PET-S2)
     assert ("URI" in s2.risk.dominant_risk_factor
             or "Patulous" in s2.risk.dominant_risk_factor)
+
+
+# ------------------------------------- v2.3.0 categorical covariates ---
+def test_sensory_neuropathy_raises_per_descent_rr():
+    """Voigt 2025 sensory-neuropathy flag multiplies per-descent RR by the
+    configured SENSORY_NEUROPATHY_RR constant (1.8) and leaves other
+    modifier fields untouched."""
+    base_rr = modifiers_for_patient(PatientState()).per_descent_rr
+    m = modifiers_for_patient(PatientState(sensory_neuropathy=True))
+    assert m.per_descent_rr == pytest.approx(base_rr * 1.8)
+    # Note text should surface the covariate
+    assert any("Sensory neuropathy" in n for n in m.notes)
+
+
+def test_impaired_volitional_equalization_raises_per_descent_rr():
+    """Lee 2025 altered-mental-status flag multiplies per-descent RR by
+    IMPAIRED_VOLITIONAL_EQUALIZATION_RR (3.0)."""
+    base_rr = modifiers_for_patient(PatientState()).per_descent_rr
+    m = modifiers_for_patient(
+        PatientState(impaired_volitional_equalization=True)
+    )
+    assert m.per_descent_rr == pytest.approx(base_rr * 3.0)
+    assert any("Impaired volitional" in n for n in m.notes)
+
+
+def test_glp1_exposure_raises_per_descent_rr():
+    """Sudhoff 2025 GLP-1 flag multiplies per-descent RR by
+    GLP1_EXPOSURE_RR (1.4)."""
+    base_rr = modifiers_for_patient(PatientState()).per_descent_rr
+    m = modifiers_for_patient(PatientState(glp1_exposure=True))
+    assert m.per_descent_rr == pytest.approx(base_rr * 1.4)
+    assert any("GLP-1" in n for n in m.notes)
+
+
+def test_v23_covariates_compose_multiplicatively():
+    """All three v2.3.0 covariates active together multiply per-descent RR
+    by 1.8 × 3.0 × 1.4 = 7.56."""
+    m = modifiers_for_patient(
+        PatientState(
+            sensory_neuropathy=True,
+            impaired_volitional_equalization=True,
+            glp1_exposure=True,
+        )
+    )
+    base_rr = modifiers_for_patient(PatientState()).per_descent_rr
+    assert m.per_descent_rr == pytest.approx(base_rr * 1.8 * 3.0 * 1.4)
+    # All three notes should be present
+    notes_joined = " ".join(m.notes)
+    assert "Sensory neuropathy" in notes_joined
+    assert "Impaired volitional" in notes_joined
+    assert "GLP-1" in notes_joined
+
+
+def test_v23_covariates_default_false_is_noop():
+    """Defaults (all False) match the v2.2.1 baseline modifiers exactly —
+    no silent behavior change for existing callers."""
+    m_default = modifiers_for_patient(PatientState())
+    m_explicit_false = modifiers_for_patient(
+        PatientState(
+            sensory_neuropathy=False,
+            impaired_volitional_equalization=False,
+            glp1_exposure=False,
+        )
+    )
+    assert m_default.per_descent_rr == pytest.approx(m_explicit_false.per_descent_rr)
+    assert m_default.notes == m_explicit_false.notes
+
+
+def test_v23_covariates_raise_simulated_risk():
+    """End-to-end: at least one active v2.3.0 covariate raises
+    p_barotitis relative to an otherwise-identical baseline on the FAC
+    profile."""
+    baseline = simulate(
+        PatientState(uri="day_4_7"), FAC_BOGOTA_DEFAULT, rng_seed=42
+    )
+    with_flags = simulate(
+        PatientState(uri="day_4_7", impaired_volitional_equalization=True),
+        FAC_BOGOTA_DEFAULT,
+        rng_seed=42,
+    )
+    assert with_flags.risk.p_barotitis > baseline.risk.p_barotitis
