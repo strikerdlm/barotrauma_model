@@ -67,6 +67,10 @@ export interface PatientStateV2 {
   enable_valsalva: boolean;
   valsalva_interval_s: number;
   habitual_sniffer: boolean;
+  // v2.3.0 categorical covariates
+  sensory_neuropathy: boolean;
+  impaired_volitional_equalization: boolean;
+  glp1_exposure: boolean;
 }
 
 /**
@@ -86,6 +90,10 @@ export type PatientStateInput = {
   enable_valsalva?: boolean;
   valsalva_interval_s?: number;
   habitual_sniffer?: boolean;
+  // v2.3.0 categorical covariates
+  sensory_neuropathy?: boolean;
+  impaired_volitional_equalization?: boolean;
+  glp1_exposure?: boolean;
 };
 
 // --------------------------------------------------- chamber profile
