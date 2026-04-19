@@ -152,6 +152,31 @@ export function PatientBuilder({ patient, onChange }: PatientBuilderProps) {
             />
           </div>
 
+          <div className="space-y-2">
+            <span className="flex items-center gap-2 text-sm font-medium text-gray-300">
+              <Activity size={14} className="text-amber-400" />
+              v2.3.0 covariates
+            </span>
+            <ToggleRow
+              label="Sensory neuropathy"
+              description="Voigt 2025 HBOT meta-analysis (n = 18,284). Risk factor for MEB; RR ×1.8."
+              checked={patient.sensory_neuropathy}
+              onChange={(v) => set('sensory_neuropathy', v)}
+            />
+            <ToggleRow
+              label="Impaired volitional equalization"
+              description="Lee 2025: altered mental status (sedated HBOT, intoxicated evac, post-op). OR 2.50–3.16; RR ×3.0."
+              checked={patient.impaired_volitional_equalization}
+              onChange={(v) => set('impaired_volitional_equalization', v)}
+            />
+            <ToggleRow
+              label="GLP-1 exposure"
+              description="Sudhoff 2025: semaglutide/tirzepatide → OFP atrophy → PET. Low-confidence precautionary RR ×1.4."
+              checked={patient.glp1_exposure}
+              onChange={(v) => set('glp1_exposure', v)}
+            />
+          </div>
+
           <div className="flex items-center gap-2 text-xs text-gray-500">
             <Droplets size={12} />
             Allergic rhinitis + URI day 4–7 is the classic pre-flight
