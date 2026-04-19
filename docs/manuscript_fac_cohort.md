@@ -4,7 +4,7 @@
 
 **Article type:** Research Article
 
-**Word count:** body ≈ 3,400 · abstract 248 · references 12 · tables 4 · figures 2
+**Word count:** body ≈ 3,500 · abstract 248 · references 21 · tables 4 · figures 2
 
 ---
 
@@ -26,7 +26,7 @@
 
 Middle-ear barotrauma — the inability of the Eustachian tube (ET) to equalize middle-ear (ME) pressure against changing ambient pressure — is the most frequently reported medical complication of hypobaric-chamber training and simulated altitude exposures.¹⁻³ In operational military aviation, chamber barotrauma serves three functions: (i) as a direct medical outcome to be minimized, (ii) as a surrogate screening end-point for Eustachian-tube disease that disqualifies aviator applicants, and (iii) as the primary calibration anchor for physics-informed middle-ear models.⁴⁻⁶
 
-International incidence estimates span a wide range. Italian Air Force cohorts report 1.5% (Morgagni 2010, n = 1,241)¹ to 2.3–2.4% per-exposure (Morgagni 2012, n = 314; Landolfi 2009, n = 335).²·³ North American surveys of commercial pilots report 30–85% lifetime prevalence, dominated by in-flight pressurization changes rather than chamber training.⁴ Every one of these cohorts is trained at or near sea-level baseline altitude. No published series documents middle-ear barotrauma incidence in a hypobaric-chamber program conducted from a high-altitude baseline, despite Latin American, Andean, and Himalayan military aviation medicine programs routinely operating in this regime.
+International incidence estimates span a wide range. Italian Air Force cohorts report 1.5% (Morgagni 2010, n = 1,241)¹ to 2.3–2.4% per-exposure (Morgagni 2012, n = 314; Landolfi 2009, n = 335).²·³ North American surveys of commercial pilots report 30–85% lifetime prevalence, dominated by in-flight pressurization changes rather than chamber training.⁴ The Israeli Air Force's recent 2015–2019 altitude-chamber cohort of 1,627 trainees reports 5.59% overall adverse-event rate, with middle-ear and sinus barotrauma accounting for 69% of events¹³ — directly comparable in methodology and ascent/descent protocol to the FAC profile. Every one of these cohorts is trained at or near sea-level baseline altitude. No published series documents middle-ear barotrauma incidence in a hypobaric-chamber program conducted from a high-altitude baseline, despite Latin American, Andean, and Himalayan military aviation medicine programs routinely operating in this regime.
 
 The Colombian Aerospace Force (Fuerza Aérea Colombiana, FAC) conducts chamber training at the DIMAE facility in Bogotá (2,640 m, 8,530 ft), the highest institutional baseline of any major national aerospace-medicine program. This is a unique epidemiological situation: aircrew arrive at the chamber already at an altitude that elsewhere would be the chamber's first hold point, and the descent phase terminates at 2,640 m rather than sea level. Whether this halves the descent-side pressure excursion (because the terminal altitude is higher) or raises the URI-driven ET-dysfunction baseline (because resident aircrew carry sub-clinical rhinosinusitis at a higher rate at altitude) has not been previously quantified.
 
@@ -60,7 +60,7 @@ Clinical barotrauma (primary numerator) is defined as a middle-ear pressure-equa
 
 ### 2.5 Statistical analysis
 
-Wilson 95% confidence intervals⁷ were computed for every proportion: per-exposure barotrauma incidence, preflight denial rate, screening-flag prevalence, medical-emergency-per-run rate, and blood-pressure category prevalences. The Wilson interval was preferred over the normal-approximation Wald interval because several proportions fall in the low-prevalence regime (<5%) where the Wald interval is known to undercover. Career-exposure projections were computed as 1 − (1 − p)ⁿ with n = 3 (the number of chamber exposures scheduled across a standard FAC pilot career: initial + two recurrents), under the independence assumption discussed in §5. Pooled 2010–2026 estimates were computed by summing numerators and denominators across the two windows and reporting a single Wilson interval over the pooled proportion; no Bayesian shrinkage or meta-analytic combination was performed.
+Wilson 95% confidence intervals⁷ were computed for every proportion: per-exposure barotrauma incidence, preflight denial rate, screening-flag prevalence, medical-emergency-per-run rate, and blood-pressure category prevalences. The Wilson interval was preferred over the normal-approximation Wald interval because several proportions fall in the low-prevalence regime (<5%) where the Wald interval is known to undercover; the Wilson interval and the closely related Agresti–Coull interval¹⁴ are both standard recommendations for such regimes.¹⁵ Career-exposure projections were computed as 1 − (1 − p)ⁿ with n = 3 (the number of chamber exposures scheduled across a standard FAC pilot career: initial + two recurrents), under the independence assumption discussed in §5. Pooled 2010–2026 estimates were computed by summing numerators and denominators across the two windows and reporting a single Wilson interval over the pooled proportion; no Bayesian shrinkage or meta-analytic combination was performed.
 
 Narrative classification of the 19 director-logged medical events used a regex scan over a curated list of Spanish ENT terms (otalgia, barotrauma, plenitud, timpánica, aerocolia, hipoxia, paradójica, ansiedad) with manual review of ambiguous assignments. Fitness-decision normalization collapsed the 4 observed strings ("SI" / "APTO" / "Apto" / "SI\\nSI\\nSI\\nSI\\nSI") to "apt" and the 23 denial variants to "denied"; remaining edge cases ("PENDIENTE" / "R" / "S" / missing) were excluded from the denial-rate denominator. Vital-sign plausibility filters (PAS 70–220 mmHg; PAD 40–140 mmHg; FC 30–180 bpm; SpO₂ 70–100%) removed 8 of 1,046 rows with data-entry errors (e.g., PAS = 1,240 mmHg). Age text entries ("MIGUEL ANGEL" in the EDAD column, 9 rows) were coerced to NA via numeric parsing.
 
@@ -86,13 +86,13 @@ The pooled case series comprises 269 events from which 226 (84%) were FAC aircre
 
 Preflight screening flag prevalences (Table II) stratify high-discrimination from low-discrimination flags. The highest prevalence flags are chronic_disease_or_hosp (4.97%, 52/1,046), ear_URI_history (3.44%, 36/1,046), recent_respiratory (3.25%, 34/1,046), and cardiac_hypertension (2.96%, 31/1,046). Denial rate stratified by flag is reported in Table III. The denial rate overall is 23/1,004 = 2.29% (Wilson 95% CI 1.53–3.41%), with per-flag discriminatory power ranging from 100% (malaise_fever_fatigue, 3/3; anemia_bleeding, 1/1) through 29.0% (recent_respiratory, 9/31) and 15.2% (ear_URI_history, 5/33) down to 0% (claustrophobia, 0/5; GI_symptoms, 0/11; diving_altitude_48h, 0/9; seizures_epilepsy, 0/2). High-discrimination flags (respiratory, ear/URI, fever/malaise, dental, cardiac) concentrate the clinical denial decisions; low-discrimination flags are retained for population surveillance without operational gating utility.
 
-URI composite preflight prevalence (pooling ear_URI_history ∪ recent_respiratory ∪ malaise_fever_fatigue) is 62/1,046 = 5.93% (Wilson 95% CI 4.65–7.53%). This is the operational baseline against which controlled-rhinovirus-challenge literature⁸⁻¹⁰ and URI-state modifier tables in physics-informed MEB simulators⁵ should be validated.
+URI composite preflight prevalence (pooling ear_URI_history ∪ recent_respiratory ∪ malaise_fever_fatigue) is 62/1,046 = 5.93% (Wilson 95% CI 4.65–7.53%). This is the operational baseline against which controlled-rhinovirus-challenge literature⁸⁻¹⁰ and URI-state modifier tables in physics-informed MEB simulators⁵ should be validated. Note that the preflight form does not deploy a validated Eustachian-tube dysfunction instrument such as the seven-item ETDQ-7²⁰·²¹ and therefore under-detects low-symptom ET dysfunction relative to a population prevalence that may be substantially higher if measured with ETDQ-7; a prospective ETDQ-7 add-on to the preflight form is a natural next step.
 
 ### 3.4 Vital signs at 2,640 m baseline
 
 After plausibility filtering, vital-sign distributions at Bogotá baseline (Table IV, n = 1,004–1,007) are: PAS 126.7 ± 13.6 mmHg (median 125, IQR 117–135); PAD 79.9 ± 8.3 mmHg (median 80, IQR 74–85); FC 75.1 ± 12.6 bpm (median 74, IQR 66.5–84); SpO₂ 94.8 ± 2.3% (median 95, IQR 94–96). Blood-pressure categorization under ACC/AHA 2017 thresholds⁽¹¹⁾ shows 260 (25%) normal, 144 (14%) elevated, **379 (36%) stage-1 hypertension**, 207 (20%) stage-2 hypertension, 4 (0.4%) hypertensive crisis, and 8 (0.8%) hypotension. Over half (56%) of preflight readings meet stage-1-or-worse criteria. This finding, publishable on its own under a preflight-screening lens, cannot be interpreted as clinical hypertension prevalence in the cohort without paired office-vs-ambulatory validation; the single preflight reading plausibly reflects a combination of genuine HTN, acute sympathetic response to the chamber environment, and measurement artifact.
 
-SpO₂ at 2,640 m distributes as follows: expected-for-Bogotá (93–96%) 711 (68%), high-normal (≥97%) 177 (17%; possible supplemental O₂ or measurement artifact on a contact pulse oximeter), borderline (90–92%) 111 (11%), and clinically hypoxic (<90%) 5 (0.5%). The 94.8% mean is consistent with Beall-era reference values for acclimatized Andean residents.⁽¹²⁾
+SpO₂ at 2,640 m distributes as follows: expected-for-Bogotá (93–96%) 711 (68%), high-normal (≥97%) 177 (17%; possible supplemental O₂ or measurement artifact on a contact pulse oximeter), borderline (90–92%) 111 (11%), and clinically hypoxic (<90%) 5 (0.5%). The 94.8% mean is consistent with Beall-era reference values for acclimatized Andean residents¹² and with acute-exposure SpO₂ responses in Chilean military aircrew hypoxia-awareness training at comparable altitudes.¹⁶ A recent Bogotá-based comparison of the National Early Warning Score's oxygen-saturation coefficient against an altitude-adjusted variant in the 2,640 m emergency-department population further supports the appropriateness of Bogotá-specific SpO₂ reference ranges for clinical and operational scoring.¹⁷
 
 Denied-versus-cleared comparison: vital-sign distributions are essentially superimposed; denial is driven by the 14 yes/no flags and free-text findings, not by vital-sign thresholds. Mean FC is modestly higher in the denied group (80.5 vs 74.9 bpm), consistent with symptomatic respiratory and cardiac subgroups being over-represented in the denied population.
 
@@ -116,7 +116,7 @@ Clinical ear barotrauma incidence in the FAC DIMAE chamber is **2.38% per-exposu
 
 ### 4.2 Comparison with international cohorts
 
-The pooled FAC 2010–2026 per-exposure incidence is comparable to published Italian Air Force cohorts: Morgagni 2010 reported 1.5% overall (n = 1,241, with 1.1% in the pre-screened subset and 2.7% in unscreened controls),¹ Morgagni 2012 reported 2.3% at 25,000 ft (n = 314),² and Landolfi 2009 reported 2.4% TEED-graded barotitis (n = 335).³ Our pooled 2.38% sits comfortably within this envelope despite the 2,640 m FAC baseline altitude versus the sea-level Italian AF baseline. Two mechanistic interpretations are compatible with this observation.
+The pooled FAC 2010–2026 per-exposure incidence is comparable to published Italian Air Force cohorts: Morgagni 2010 reported 1.5% overall (n = 1,241, with 1.1% in the pre-screened subset and 2.7% in unscreened controls),¹ Morgagni 2012 reported 2.3% at 25,000 ft (n = 314),² and Landolfi 2009 reported 2.4% TEED-graded barotitis (n = 335).³ The Israeli Air Force's 2015–2019 cohort¹³ reports 5.59% overall altitude-chamber adverse-event rate, of which 69% were middle-ear or sinus barotrauma (implied barotrauma per-exposure ≈ 3.9%); the higher rate is consistent with the IAF profile's faster 3,000 ft·min⁻¹ ascent versus the FAC 1,650 ft·min⁻¹ ascent. A recent 75-pilot Vietnamese hypobaric-chamber study at 5,000 m reported transient systolic BP increases of 10.4 mmHg and SpO₂ drops to 77.7% during acute exposure,¹⁸ with rapid post-exposure recovery — cardiovascular and oxygenation dynamics comparable to what would be expected under the FAC 25,000 ft profile. Our pooled 2.38% sits comfortably within the Italian AF envelope despite the 2,640 m FAC baseline altitude versus the sea-level Italian AF baseline. Two mechanistic interpretations are compatible with this observation.
 
 First, the chamber-descent-side pressure excursion — which is the principal driver of middle-ear barotrauma — depends on the descent rate and the pressure differential traversed, not on the absolute baseline altitude. A descent from 25,000 ft to 2,640 m traverses a smaller absolute pressure differential than a sea-level descent, but the fractional gradient-clearing task facing the Eustachian tube is similar. The residual chamber-stress dose appears to dominate baseline-altitude effects.
 
@@ -132,7 +132,7 @@ The 56% stage-1-or-higher hypertension prevalence on the single preflight measur
 
 **FAC / non-FAC split.** The case-level data show 226/257 (88%) of 2010–2020 cases are FAC. If the 6,565 denominator has the same 88% FAC share, the FAC-only per-exposure rate is 161/5,777 = 2.79% rather than the 2.45% reported against the all-comers denominator. If FAC share of exposures is smaller (e.g., 70%), the true FAC-only rate is higher.
 
-**TEED grading completeness.** Only 8.6% (16 of 186) of 2010–2020 clinical barotrauma cases carry an explicit Teed grade; only 3 of 12 (25%) 2025–2026 director-logged cases do. Per-grade stratification is therefore not possible in this registry, and we do not report a TEED-distribution finding. A structured Teed-grade field on future director forms would close this gap prospectively.
+**TEED grading completeness.** Only 8.6% (16 of 186) of 2010–2020 clinical barotrauma cases carry an explicit Teed grade; only 3 of 12 (25%) 2025–2026 director-logged cases do. Per-grade stratification is therefore not possible in this registry, and we do not report a TEED-distribution finding. The Teed classification itself, dating to 1944 and originally designed for submarine escape-training ear injuries, has been critiqued for inconsistency across modern hyperbaric and chamber settings; the O'Neill Grading System¹⁹ proposes a simpler clinical-action-oriented alternative for hyperbaric teams. A structured Teed- or O'Neill-style grade field on future DIMAE director forms would close this gap prospectively.
 
 **Date completeness.** 45% of 2010–2020 case dates are year-only (`00/00/YYYY`); month or quarter-level trend analysis is valid only on the 115-case subset with full dates. Year-level trends are valid for all 257 2010–2020 cases, but per-year denominators are not available in the 2022 draft, so per-year incidence cannot be reported.
 
@@ -185,6 +185,24 @@ We thank the DIMAE medical team, including the Correa Guarín and Jaimes team wh
 11. Whelton PK, Carey RM, Aronow WS, et al. 2017 ACC/AHA/AAPA/ABC/ACPM/AGS/APhA/ASH/ASPC/NMA/PCNA guideline for the prevention, detection, evaluation, and management of high blood pressure in adults. Hypertension. 2018;71(6):e13–e115.
 
 12. Beall CM. Andean, Tibetan, and Ethiopian patterns of adaptation to high-altitude hypoxia. Integr Comp Biol. 2006;46(1):18–24.
+
+13. Nakdimon I, Ben-Ari O. Mitigating risks of altitude chamber training. Aerosp Med Hum Perform. 2022;93(11):811–815.
+
+14. Agresti A, Coull BA. Approximate is better than "exact" for interval estimation of binomial proportions. Am Stat. 1998;52(2):119–126.
+
+15. Brown LD, Cai TT, DasGupta A. Interval estimation for a binomial proportion. Stat Sci. 2001;16(2):101–133.
+
+16. Alvear-Catalán M, Montiglio C, Aravena-Nazif D, Viscor G, Araneda OF. Oxygen-saturation curve analysis in 2,298 hypoxia-awareness training tests of military aircrew members in a hypobaric chamber. Sensors (Basel). 2024;24(13):4168.
+
+17. Devia Jaramillo G, Erazo Guerrero L. Adjusting EWS scores for altitude above sea level: is it necessary to predict sepsis mortality in the emergency room? Int J Emerg Med. 2025;18(1):24.
+
+18. Thanh XN, Hong PN, Ngoc TT, et al. Heart rate, blood pressure, and SpO₂ responses to simulated 5000 m hypobaric exposure in healthy male Vietnamese pilots. Physiol Rep. 2026;14(1):e70733.
+
+19. O'Neill OJ, Weitzner ED. The O'Neill grading system for evaluation of the tympanic membrane: a practical approach for clinical hyperbaric patients. Undersea Hyperb Med. 2015;42(3):265–271.
+
+20. McCoul ED, Anand VK, Christos PJ. Validating the clinical assessment of Eustachian tube dysfunction: the Eustachian Tube Dysfunction Questionnaire (ETDQ-7). Laryngoscope. 2012;122(5):1137–1141.
+
+21. Holm NH, Ovesen T. The usefulness of ETDQ-7 score in assessing ETD. Clin Otolaryngol. 2025;50(4):624–631.
 
 ---
 
