@@ -111,6 +111,114 @@ def transmucosal_exchange_step(
     return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
 
 
+# ------------------------ Doyle 2017 multi-pathway gas exchange (v2.2) -
+# Rate constants for the TM and round-window pathways as fractions of the
+# trans-mucosal constants. Yuksel 2009 (PMID 18728916) demonstrates TM
+# permeability at physiologic gradients is substantial for CO2 and O2
+# but orders of magnitude smaller than trans-mucosal for perfusion-limited
+# exchange. Doyle 2017 (PMID 28917121) uses them in the species-resolved
+# sum over pathways.
+#
+# These constants are modest because the TM and RW surface areas are
+# small relative to the mucosa. Main relevance: multi-hour exposures,
+# multi-exposure training days.
+
+TM_FRACTION_O2: float = 0.04             # ~4% of mucosa rate
+TM_FRACTION_CO2: float = 0.04
+TM_FRACTION_N2: float = 0.01
+TM_FRACTION_H2O: float = 0.02
+
+RW_FRACTION_O2: float = 0.01             # round window ~1%
+RW_FRACTION_CO2: float = 0.01
+RW_FRACTION_N2: float = 0.005
+RW_FRACTION_H2O: float = 0.005
+
+
+def transmembrane_tm_exchange_step(
+    gas: GasComposition,
+    dt_s: float,
+) -> GasComposition:
+    """
+    Trans-TM Fick diffusion pathway (Doyle 2017 / Yuksel 2009). Uses the
+    same venous-blood partial pressures as the trans-mucosal pathway
+    (TM is in contact with the cabin gas, not blood directly, but for a
+    lumped-parameter model we treat it as an additive diffusion channel
+    toward the ambient / blood mean. This is a second-order effect over
+    typical chamber exposures).
+    """
+    dt_min = dt_s / 60.0
+    k_o2 = C.TRANSMEM_K_O2_PER_MIN * TM_FRACTION_O2
+    k_co2 = C.TRANSMEM_K_CO2_PER_MIN * TM_FRACTION_CO2
+    k_n2 = C.TRANSMEM_K_N2_PER_MIN * TM_FRACTION_N2
+    k_h2o = C.TRANSMEM_K_H2O_PER_MIN * TM_FRACTION_H2O
+    p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
+    p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
+    return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
+
+
+def transmembrane_rw_exchange_step(
+    gas: GasComposition,
+    dt_s: float,
+) -> GasComposition:
+    """Trans-round-window Fick diffusion. Smallest of the three pathways."""
+    dt_min = dt_s / 60.0
+    k_o2 = C.TRANSMEM_K_O2_PER_MIN * RW_FRACTION_O2
+    k_co2 = C.TRANSMEM_K_CO2_PER_MIN * RW_FRACTION_CO2
+    k_n2 = C.TRANSMEM_K_N2_PER_MIN * RW_FRACTION_N2
+    k_h2o = C.TRANSMEM_K_H2O_PER_MIN * RW_FRACTION_H2O
+    p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
+    p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
+    return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
+
+
+def full_gas_exchange_step(
+    gas: GasComposition,
+    dt_s: float,
+    *,
+    include_tm: bool = True,
+    include_rw: bool = True,
+) -> GasComposition:
+    """
+    Doyle 2017 species-resolved multi-pathway step: trans-mucosal
+    (always) + optional trans-TM + optional trans-RW. All three pathways
+    act on the same ME gas compartment and are summed additively because
+    they are independent linear first-order processes.
+
+    Default (both optional pathways on) reproduces the Doyle 2017
+    structure; passing both False falls back to the v2.1 trans-mucosal
+    behavior bit-for-bit.
+    """
+    # Sum effective rate constants before updating — more numerically
+    # stable than applying three sequential transforms for small dt_s.
+    dt_min = dt_s / 60.0
+
+    k_o2 = C.TRANSMEM_K_O2_PER_MIN
+    k_co2 = C.TRANSMEM_K_CO2_PER_MIN
+    k_n2 = C.TRANSMEM_K_N2_PER_MIN
+    k_h2o = C.TRANSMEM_K_H2O_PER_MIN
+
+    if include_tm:
+        k_o2 += C.TRANSMEM_K_O2_PER_MIN * TM_FRACTION_O2
+        k_co2 += C.TRANSMEM_K_CO2_PER_MIN * TM_FRACTION_CO2
+        k_n2 += C.TRANSMEM_K_N2_PER_MIN * TM_FRACTION_N2
+        k_h2o += C.TRANSMEM_K_H2O_PER_MIN * TM_FRACTION_H2O
+    if include_rw:
+        k_o2 += C.TRANSMEM_K_O2_PER_MIN * RW_FRACTION_O2
+        k_co2 += C.TRANSMEM_K_CO2_PER_MIN * RW_FRACTION_CO2
+        k_n2 += C.TRANSMEM_K_N2_PER_MIN * RW_FRACTION_N2
+        k_h2o += C.TRANSMEM_K_H2O_PER_MIN * RW_FRACTION_H2O
+
+    p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
+    p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
+    return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
+
+
 # -------------------------------------- aggregate ME state helper -------
 @dataclass
 class MeState:
