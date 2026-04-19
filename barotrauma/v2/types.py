@@ -163,6 +163,14 @@ class PatientState:
     via Ostmann fat-pad atrophy during 8.2-18.7% weight loss. Low
     confidence (case series). Applied as a narrow precautionary modifier."""
 
+    bdet_treated: bool = False
+    """Swords 2025 Cochrane (PMID 40008607) + Khan 2026 (PMID 41776716):
+    prior balloon dilation of the Eustachian tube. When True, partially
+    restores ET function via ra_mult 0.70, opening-shift −5 mmHg,
+    eq_rate_mult 1.20, and per-descent RR 0.65. Contraindicated in PET;
+    the pathophysiology layer surfaces a clinical-decision-support note
+    when bdet_treated is set alongside a non-normal PET state."""
+
     def validate(self) -> None:
         self.anatomy.validate()
         self.et.validate()
