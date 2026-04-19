@@ -1,0 +1,7 @@
+strategy,numerator,denominator,p_per_exposure,p_per_exposure_pct,wilson95_lo_pct,wilson95_hi_pct,implied_career_3_exposures_pct,implied_career_2_exposures_pct,notes
+any_ENT_event_all_comers,257,6565,0.0391,3.91,3.47,4.41,11.29,7.68,"All 257 events / all 6,565 exposures — matches 2020 draft paper's headline number. Includes clinical barotrauma, sub-clinical ear blocking, and O₂-induced aerotitis."
+clinical_barotrauma_all_comers,186,6565,0.0283,2.83,2.46,3.26,8.26,5.59,Only 'BAROTRAUMA' lesion entries; excludes ear-blocking and O₂ aerotitis.
+barotrauma_or_O2_aerotitis_all_comers,208,6565,0.0317,3.17,2.77,3.62,9.21,6.24,Clinical barotrauma + O₂-induced aerotitis; excludes sub-clinical ear blocking.
+FAC_only_any_ENT_event,226,6565,0.0344,3.44,3.03,3.91,9.98,6.77,"All events, FAC numerator only. Denominator 6,565 is all-comers, so this underestimates the FAC-only rate if non-FAC exposures are substantial."
+FAC_only_clinical_barotrauma,161,6565,0.0245,2.45,2.11,2.86,7.18,4.84,FAC clinical barotrauma; same denominator caveat. **HEADLINE CANDIDATE for AMHP calibration.**
+student_only_clinical_barotrauma,164,6565,0.025,2.5,2.15,2.9,7.31,4.93,Student role only. Matches the population the AMHP chamber-training model targets; same denominator caveat.
