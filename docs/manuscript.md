@@ -4,7 +4,7 @@
 
 **Article type:** Research Article
 
-**Word count:** body 3,820 · abstract 246 · references 25 · tables 4 · figures 2
+**Word count:** body 3,980 · abstract 246 · references 27 · tables 4 · figures 2
 
 ---
 
@@ -46,7 +46,7 @@ The central physical insight is that active ET clearance pathways (swallow and V
 
 URI state is encoded as one of six day-windows (none, 1–3, 4–7, 8–14, 15–21, 22–28), each with a tabulated multiplier set (Table I). Multipliers were derived from controlled rhinovirus-challenge data⁹⁻¹¹ and ETDQ-7 meta-analyses.¹⁶ The peak-dysfunction window (days 4–7) carries R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +150 daPa (+11.3 mmHg), a 50% drop in equalization-rate modifier, and a 4.25× per-descent MEB relative-risk multiplier.
 
-Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the type-B/C tympanogram rate of 42.6% reported in Shindo 2025.⁸ S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus the protective 0.70 in healthy subjects).
+Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the type-B/C tympanogram rate of 42.6% reported in Shindo 2025.⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁷ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²⁶, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
 
 ### 2.5 Muscle mechanics and multi-pathway gas exchange
 
@@ -112,7 +112,11 @@ The rupture threshold at 150 mmHg is a conservative anchor; biomechanical studie
 
 No per-subject machine-learning head is trained in the shipped model; the scaffolding is in place and tested on synthetic cohorts but deliberately passes through to the deterministic physics output when unfit. Ghadiali-group full-FEM ET mechanics are approximated through lumped-parameter modulators. Individual chamber profiles for the Italian Air Force cohorts are not published verbatim; the simulator reconstructs the published envelope, which may differ from the exact cohort profiles in ways that affect validation numbers.
 
-### 4.2 Conclusions
+### 4.2 Incorporation of 2025–2026 evidence
+
+A 2026 targeted literature scan identified two findings with immediate parameter impact. First, Moayedi 2025²⁶ is a placebo-controlled HBOT RCT showing no significant effect of prophylactic pseudoephedrine on ear pain, tympanic-membrane injury, or rescue medication — null in controlled-descent chamber physiology despite the protective signal in airline-descent data. We soften the pseudoephedrine RR from 0.70 to 0.90 to reflect this indication-specificity. Second, Oshima 2025²⁷ (n = 1,009) quantifies habitual-sniffing OR at 8.18 for PET and tympanic-membrane flutter OR at 42.17; we update the PET-S3 per-descent RR from 2.5 to 4.0 to reflect the large-cohort effect size. Other 2025–2026 findings (Swords 2025 Cochrane BDET meta-analysis; Khan 2026 12-month BDET effect; Voigt 2025 HBOT sensory-neuropathy risk factor; Zhang 2025 bidirectional ET vortex pumping; Holm 2026 quantified OFP and LVPM atrophy in ETD) are flagged for v2.3.0 consideration but do not alter the shipped v2.2.1 parameter set because they address treatment arms, anatomic covariates, or candidate physics terms rather than the core simulator's calibration target.
+
+### 4.3 Conclusions
 
 A physics-informed middle-ear barotrauma simulator that jointly models URI temporal dynamics, Patulous ET state dependence, descent-rate-driven aperture collapse, and active-equalization muscle mechanics can reproduce operational cohort prevalence and transfer across independent air forces without refitting hazard constants. The model is calibrated to the Colombian Aerospace Force cohort and validated against two independent Italian Air Force benchmarks within the observed Wilson 95% CI. The aperture half-point is the dominant source of output variance and the highest-leverage empirical refinement target.
 
@@ -175,6 +179,10 @@ We thank Dr. William J. Doyle, whose 2005 and 2017 papers remain the canonical f
 24. Rosenkvist L, Klokker M, Katholm M. Barotrauma of the ear in Danish pilots. Ugeskr Laeger. 2008;170(42):3572–3574.
 
 25. Ikeda R, Oshima H, Miyazaki H, et al. Patulous Eustachian Tube Handicap Inventory. Otol Neurotol. 2017;38(5):721–725.
+
+26. Moayedi S, Turabian M, Matthews MR, et al. Pseudoephedrine prophylaxis for first-session hyperbaric-oxygen middle-ear barotrauma: a randomized double-blind placebo-controlled trial. Undersea Hyperb Med. 2025;52(3).
+
+27. Oshima T, Ikeda R, Miyazaki H, et al. Clinical characteristics of 1,009 patients with patulous Eustachian tube: a large-scale multicenter study. Auris Nasus Larynx. 2025;52(4).
 
 ---
 
