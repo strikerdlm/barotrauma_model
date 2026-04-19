@@ -180,21 +180,37 @@ def active_swallow_equalization(
     dt_s: float,
     is_descent: bool,
     rate_mmHg_s: float = 0.0,
+    muscle_factor: float = 1.0,
 ) -> float:
     """
     Gas transfer during a single swallow-induced active opening.
 
     Uses the Fractional Gradient Equalized approach (Mandel 2016) scaled by
-    severity and URI modifiers, and further modulated by the NP-side
-    aperture factor (``aperture_factor``) so that descent-rate-dependent
-    lumen collapse progressively defeats each swallow's ability to equalize.
+    severity and URI modifiers, further modulated by the NP-side aperture
+    factor (``aperture_factor``) so that descent-rate-dependent lumen
+    collapse progressively defeats each swallow's ability to equalize, and
+    — since v2.2 — by an optional muscle-mechanics factor reflecting
+    TVP/LVP timing, fatigue, and mucosal adhesion (Ghadiali-group FEM).
 
-    Returns the NEW ΔP (mmHg) after the event.
+    Parameters
+    ----------
+    muscle_factor : float
+        Multiplier from ``et_muscle.fge_modulation``. 1.0 = baseline
+        v2.1 behavior; <1.0 = adhesion-penalized; >1.0 = priming-boosted.
+        Bypass with default 1.0 to preserve v2.1 parity.
+
+    Returns
+    -------
+    float
+        New ΔP (mmHg) after the swallow event.
     """
     fge = et.fge_controls * modifiers.eq_rate_mult
     fge = max(0.0, min(1.0, fge))
     # Aperture-limited effective clearance (Hagen-Poiseuille-informed)
     fge *= aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
+    # Ghadiali FEM muscle modulation (v2.2)
+    fge *= max(0.0, min(2.0, muscle_factor))
+    fge = min(1.0, fge)
     new_delta = delta_p_mmHg * (1.0 - fge)
     return new_delta
 
