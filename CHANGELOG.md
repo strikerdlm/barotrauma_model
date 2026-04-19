@@ -8,7 +8,7 @@ semantic versioning.
 
 ### Added
 
-- **v2.3.0 categorical covariates** — three new boolean fields on
+- **v2.3.0 categorical covariates** — four new boolean fields on
   `PatientState` for evidence from the 2025–2026 literature scan
   (`docs/research_notes/06_2025_2026_updates.md`):
   - `sensory_neuropathy` (Voigt 2025 PMID 41429031) — RR × 1.8
@@ -17,10 +17,16 @@ semantic versioning.
     aeromedical evacuation, and post-op altered sensorium
   - `glp1_exposure` (Sudhoff 2025 PMID 40721956) — RR × 1.4;
     semaglutide/tirzepatide-induced PET via OFP atrophy
-  Surfaced via Pydantic schema, TypeScript types, and the dashboard
-  PatientBuilder "v2.3.0 covariates" toggle block. Defaults False so
-  v2.2.1 callers see no behavior change. 6 new tests in
-  `tests/test_v2_pathophysiology.py`; full v2 suite now 113 passing.
+  - `bdet_treated` (Swords 2025 Cochrane PMID 40008607 + Khan 2026
+    PMID 41776716) — prior balloon dilation of ET. RA ×0.70,
+    opening-shift −5 mmHg, eq-rate ×1.20, per-descent RR ×0.65.
+    Contraindicated in PET; pathophysiology layer surfaces a
+    "CLINICAL INCONSISTENCY" note when bdet_treated is set alongside
+    a non-normal PET state.
+  All four surfaced via Pydantic schema, TypeScript types, and the
+  dashboard PatientBuilder "v2.3.0 covariates" toggle block. Defaults
+  False so v2.2.1 callers see no behavior change. 11 new tests in
+  `tests/test_v2_pathophysiology.py`; full v2 suite now 118 passing.
 - `barotrauma/v2/career.py` — multi-exposure career-simulation API.
   Exposes `simulate_career` (single subject, sequence of exposures) and
   `simulate_career_cohort` (population) with a correct intra-subject
