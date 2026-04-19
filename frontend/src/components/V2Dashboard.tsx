@@ -16,6 +16,7 @@ import { PatientBuilder } from './v2/PatientBuilder';
 import { ProbabilityTrio } from './v2/ProbabilityTrio';
 import { ProfilePicker } from './v2/ProfilePicker';
 import { SimulateControls } from './v2/SimulateControls';
+import { TmDisplacementChart } from './v2/TmDisplacementChart';
 import { TrajectoryChart } from './v2/TrajectoryChart';
 import { useSimulation } from '../lib/useSimulation';
 
@@ -134,6 +135,8 @@ export function V2Dashboard({ onShowLegacy }: V2DashboardProps) {
 
         <TrajectoryChart trace={result?.trace ?? null} loading={running} />
 
+        <TmDisplacementChart trace={result?.trace ?? null} loading={running} />
+
         <footer className="pt-4 pb-8 text-center text-xs text-gray-500">
           <p className="inline-flex items-center gap-1">
             <Gauge size={12} />
@@ -141,9 +144,10 @@ export function V2Dashboard({ onShowLegacy }: V2DashboardProps) {
             · API: <code className="font-mono">FastAPI /api/simulate</code>
           </p>
           <p className="mt-1">
-            Calibrated to the Colombian Aerospace Force 10-year cohort;
-            externally validated against three Italian Air Force cohorts
-            (Morgagni 2010/2012, Landolfi 2009).
+            Calibrated to the pooled Colombian Aerospace Force 2010–2026
+            cohort (173/7,271 = 2.38% per-exposure); externally validated
+            against three Italian Air Force cohorts (Morgagni 2010/2012,
+            Landolfi 2009).
           </p>
         </footer>
       </main>
