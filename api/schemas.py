@@ -81,6 +81,7 @@ class PatientStateRequest(BaseModel):
     sensory_neuropathy: bool = False
     impaired_volitional_equalization: bool = False
     glp1_exposure: bool = False
+    bdet_treated: bool = False
 
 
 class ChamberSegmentRequest(BaseModel):
@@ -229,6 +230,7 @@ def to_patient_state(req: PatientStateRequest) -> PatientState:
         sensory_neuropathy=req.sensory_neuropathy,
         impaired_volitional_equalization=req.impaired_volitional_equalization,
         glp1_exposure=req.glp1_exposure,
+        bdet_treated=req.bdet_treated,
     )
 
 
