@@ -159,6 +159,19 @@ challenge any of them without challenging the underlying data:
 | Post-MEB history RR 1.5 | Yes | Boel 2017, Rosenkvist 2008 commercial-pilot repeat-barotrauma trends | Modeler pick; no hypobaric-specific effect size retrieved |
 | Swallow-interval jitter ±20% | — | Physiological variation assumption | Modeler pick; jitter prevents grid artifacts |
 | Valsalva push amplitude 50 mmHg | — | Typical physiology | Modeler pick within plausible range |
+| `sensory_neuropathy` RR 1.8 (v2.3.0) | Yes | Voigt 2025 PMID 41429031: flagged as risk factor in pooled HBOT MA (n=18,284) without published OR | Modeler pick anchored to the "moderate risk factor" range in the same MA; tier MEDIUM; applied only when flag True (default False) |
+| `impaired_volitional_equalization` RR 3.0 (v2.3.0) | Yes | Lee 2025 PMID 40364015 / 40288902: altered mental status OR 2.50–3.16 across two HBOT cohorts (n ≈ 300 each) | Midpoint of the two reported ORs; tier MEDIUM; translation from "AMS" to "impaired volitional equalization" is a modeler-named re-framing |
+| `glp1_exposure` RR 1.4 (v2.3.0) | Yes | Sudhoff 2025 PMID 40721956: case series n=7 of semaglutide/tirzepatide-induced PET | Narrow precautionary value given LOW evidence tier; UI description explicitly labels it "low-confidence precautionary RR" |
+| `bdet_treated` RA ×0.70, RR ×0.65 (v2.3.0) | Yes | Swords 2025 PMID 40008607 Cochrane MA (ETDQ-7 MD −1.66) + Khan 2026 PMID 41776716 (1-year MD −2.03) | Translation from ETDQ-7 symptom-score change to mechanical RA/FGE/RR multipliers is modeler-invented; tier HIGH but translation MEDIUM. Numerical modifier applies even in PET (with a "CLINICAL INCONSISTENCY" CDS note) because BDET is contraindicated in PET |
+
+Four new rows (v2.3.0) — each pairs the applied engine multiplier with
+the confidence tier of the underlying evidence AND the confidence of
+the translation from reported endpoint to engine parameter. The
+translation confidence can be lower than the evidence tier (e.g., BDET
+HIGH evidence → MEDIUM translation) because the paper reports
+symptomatic / tympanometric outcomes that map to mechanical engine
+quantities via modeler assumption. See `docs/research_notes/07_v23_scope_rationale.md`
+§2.2 for the translation-honesty discipline.
 
 Parameters sourced directly from retrieved literature (NOT modeler priors)
 include: URI temporal modifier multipliers (research brief 02 Table),
