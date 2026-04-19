@@ -144,10 +144,19 @@ CHRONIC_RHINITIS_MODIFIERS: dict[str, dict[str, float]] = {
     "chronic_rhinosinusitis": dict(ra_mult=1.5, po_shift_mmHg=50.0*MMHG_PER_DAPA, pet_offset_mmHg=3.0, meb_rr=2.0),
 }
 
-# Medication effects (RR modifier on per-descent MEB probability)
+# Medication effects (RR modifier on per-descent MEB probability).
+#
+# v2.2.1 update — Moayedi 2025 (PMID 40819351) RCT of pseudoephedrine
+# prophylaxis in HBOT found no significant effect on ear pain, TM injury,
+# or rescue medication vs placebo. Previous baseline value of 0.70 was
+# extrapolated from AlGhamdi 2026 (airline descent) and Mirza 2005; the
+# Moayedi null applies directly to controlled-descent chamber physiology.
+# We soften the value toward 0.90, splitting the difference between the
+# airline-descent signal and the HBOT null — with the caveat in the model
+# card that the true effect size is indication-specific.
 MEDICATION_RR: dict[str, float] = {
     "none":                   1.00,
-    "pseudoephedrine_oral":   0.70,   # Mirza 2005 pooled (adults only; weak evidence)
+    "pseudoephedrine_oral":   0.90,   # v2.2.1: softened per Moayedi 2025 PMID 40819351
     "oxymetazoline_topical":  0.95,   # Null per Mirza 2005 / Joshi 2020
     "intranasal_steroid":     0.65,   # For chronic AR/CRS baseline, not acute URI
     "antihistamine_spray":    0.70,   # Daum 2024 β=-8.70 on ETDQ-7
