@@ -77,6 +77,10 @@ class PatientStateRequest(BaseModel):
     enable_valsalva: bool = True
     valsalva_interval_s: float = 60.0
     habitual_sniffer: bool = False
+    # v2.3.0 categorical covariates
+    sensory_neuropathy: bool = False
+    impaired_volitional_equalization: bool = False
+    glp1_exposure: bool = False
 
 
 class ChamberSegmentRequest(BaseModel):
@@ -222,6 +226,9 @@ def to_patient_state(req: PatientStateRequest) -> PatientState:
         enable_valsalva=req.enable_valsalva,
         valsalva_interval_s=req.valsalva_interval_s,
         habitual_sniffer=req.habitual_sniffer,
+        sensory_neuropathy=req.sensory_neuropathy,
+        impaired_volitional_equalization=req.impaired_volitional_equalization,
+        glp1_exposure=req.glp1_exposure,
     )
 
 
