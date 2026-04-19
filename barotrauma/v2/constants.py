@@ -165,6 +165,33 @@ MEDICATION_RR: dict[str, float] = {
 # Pathological rule: decongestants are contraindicated in PET (paradoxical worsening)
 # Applied as a penalty in pathophysiology.apply_medication().
 
+# ------------------------------------- v2.3.0 covariate RRs (additive) -
+# New patient-state categorical covariates introduced in v2.3.0 from the
+# 2025-2026 literature scan (docs/research_notes/06_2025_2026_updates.md).
+# Each multiplies the composite per-descent RR. Applied only when the
+# patient flag is True; default False → RR 1.0, no change.
+#
+# Voigt 2025 (PMID 41429031) — HBOT otologic adverse-event meta-analysis,
+# n = 18,284, 54 studies. Sensory neuropathy flagged as a risk factor for
+# MEB without a pooled OR. We pick RR 1.8 as a moderate modifier
+# (consistent with the typical "moderate risk factor" range in the same
+# meta-analysis for age and female sex); model-card modeler-prior.
+SENSORY_NEUROPATHY_RR: float = 1.8
+
+# Lee 2025 (PMID 40364015, PMID 40288902) — two monoplace-HBOT cohorts
+# (n ≈ 300 each). Altered mental status OR 2.50 (1.13-5.51) and
+# 3.16 (1.05-9.52) independently across both. Applies whenever volitional
+# equalization is impaired (sedated HBOT, intoxicated or unconscious
+# aeromedical evacuation, post-op altered sensorium).
+IMPAIRED_VOLITIONAL_EQUALIZATION_RR: float = 3.0
+
+# Sudhoff 2025 (PMID 40721956) — case series (n = 7) of
+# semaglutide/tirzepatide-induced PET via Ostmann fat-pad atrophy during
+# 8.2-18.7% weight loss. Low-confidence parameter; applied as a
+# precautionary modifier with a narrow RR 1.4. Mechanistically coherent
+# with Holm 2026 OFP atrophy finding (roadmap item 6).
+GLP1_EXPOSURE_RR: float = 1.4
+
 # ----------------------------------------------- Hazard model thresholds -
 # Hybrid Kanick-Doyle + Thalmann LEM hazard (see research brief 05).
 BAROTITIS_THRESHOLD_MMHG: float = 250.0 * MMHG_PER_MMH2O      # ≈18.4  (Teed I)
