@@ -275,13 +275,22 @@ See [`CHANGELOG.md`](../CHANGELOG.md).
 
 ## 10. Citation
 
-Malpica, D.L. (2026). *barotrauma_model v2: Physics-informed middle-ear
-barotrauma risk prediction for hypobaric-chamber training, anchored to the
-Colombian Aerospace Force cohort.* Version 2.0.0.
+Malpica DL, Farfán MA (2026). *barotrauma_model v2: Physics-informed
+middle-ear barotrauma risk prediction for hypobaric-chamber training,
+anchored to the Colombian Aerospace Force cohort.* Version 2.2.1.
+Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine
+(DIMAE), Colombian Aerospace Force.
 https://github.com/strikerdlm/barotrauma_model
 
 ## 11. Contact / maintainer
 
-Dr. Diego L. Malpica, MD — Aerospace Medicine, Colombia
+**Dr. Diego L. Malpica, MD** (Principal Investigator, Corresponding)
+Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine
+(DIMAE), Colombian Aerospace Force, Bogotá, Colombia.
+- Email: diego.malpica@fac.mil.co
 - ORCID: [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
 - GitHub: [@strikerdlm](https://github.com/strikerdlm)
+
+**Dr. Marian A. Farfán, MD** (Co-author)
+Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine
+(DIMAE), Colombian Aerospace Force, Bogotá, Colombia.
