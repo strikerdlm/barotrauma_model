@@ -4,6 +4,49 @@ All notable changes to `barotrauma_model`. Follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); project uses
 semantic versioning.
 
+## [2.2.1] — 2026-04-18
+
+### Added
+
+- `docs/research_notes/06_2025_2026_updates.md` — structured 2025-2026
+  literature scan brief. Ten actionable findings ranked by priority;
+  two applied in this patch, eight flagged for v2.3.0 roadmap.
+- `docs/manuscript.md` rewritten for AMHP Feb-2026 compliance (80-char
+  title, unstructured 246-word abstract, 5 keywords, Roman-numeral
+  tables after References, ≤3 citations per callout, NLM reference
+  format with all-author lists).
+- `docs/manuscript_author_page.md` — depersonalized Title Page upload
+  for Editorial Manager.
+- `docs/cover_letter.md` — AMHP cover letter covering all 11 §3–§12
+  required elements (originality, AI disclosure, statistical expertise,
+  5 suggested reviewers, etc.).
+- `docs/figures/figure1_descent_rate_sensitivity.tiff` and
+  `figure2_sobol_indices.tiff` — AMHP-ready 600-dpi TIFF figures with
+  companion PNG previews.
+
+### Changed
+
+- `constants.MEDICATION_RR["pseudoephedrine_oral"]`: 0.70 → 0.90 per
+  Moayedi 2025 (PMID 40819351) placebo-controlled HBOT RCT showing null
+  preventive effect. The airline-descent 0.70 signal was an over-reach;
+  the chamber/HBOT-indication-specific value is closer to null.
+- `pathophysiology._pet_modifiers("s3")`: per_descent_rr 2.5 → 4.0 per
+  Oshima 2025 (PMID 41014990; n = 1,009 PET patients) habitual-sniffing
+  OR of 8.18, convolved with already-modeled ΔP physiology so as not to
+  double-count.
+- Recalibrated hazard constants: r_barotitis = 4.43 × 10⁻⁸ (unchanged
+  since the Oshima update affects only the minority PET-S3 subgroup).
+  FAC anchor reproduced at 1.89% per-exposure / 5.73% career.
+
+### Notes
+
+- v2.3.0 roadmap items flagged by the 2025-2026 scan: Zhang 2025
+  bidirectional ET vortex pumping physics; Holm 2026 OFP/LVPM atrophy
+  anatomic susceptibility; Voigt 2025 sensory-neuropathy risk factor;
+  Lee 2025 altered-mental-status risk factor; Sudhoff 2025 GLP-1
+  agonist-induced PET; Swords 2025 / Khan 2026 Bayesian prior on BDET
+  treatment effect.
+
 ## [2.2.0] — 2026-04-18
 
 ### Added
