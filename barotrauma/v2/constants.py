@@ -192,6 +192,27 @@ IMPAIRED_VOLITIONAL_EQUALIZATION_RR: float = 3.0
 # with Holm 2026 OFP atrophy finding (roadmap item 6).
 GLP1_EXPOSURE_RR: float = 1.4
 
+# ----------------------------------- v2.3.0 BDET post-treatment arm ---
+# Swords 2025 Cochrane (PMID 40008607) — 9 RCTs, n = 684, ≤3 mo ETDQ-7
+# MD -1.66 (95% CI -2.16 to -1.16); tympanometry-normalization RR 2.51
+# (1.82-3.48). Sham-controlled ETDQ-7 MD at ≤3 mo -0.54 (-2.55, 1.47)
+# — NS. Khan 2026 (PMID 41776716) — 23 studies, pooled n = 309,
+# 1-year ETDQ-7 MD -2.03 (-2.59 to -1.47).
+#
+# We translate "ETDQ-7 improves by ~2 points out of a symptomatic
+# baseline ~25" + "tympanometry ~2.5x more likely to normalize" into
+# direct ET-function modifiers applied whenever patient.bdet_treated
+# is True.
+BDET_RA_MULT: float = 0.70          # 30% reduction in active resistance
+BDET_OPENING_SHIFT_MMHG: float = -5.0  # mildly lowered passive opening threshold
+BDET_EQ_RATE_MULT: float = 1.20     # 20% improvement in equalization efficiency
+BDET_PER_DESCENT_RR: float = 0.65   # 35% reduction in per-descent MEB RR
+# Clinical safety rule: BDET is contraindicated in PET. When
+# patient.bdet_treated is True AND patient.pet is not 'normal', the
+# composite modifier logs a warning note; the numerical effect is still
+# applied (the model does not assume the clinician will ignore
+# evidence-based contraindications).
+
 # ----------------------------------------------- Hazard model thresholds -
 # Hybrid Kanick-Doyle + Thalmann LEM hazard (see research brief 05).
 BAROTITIS_THRESHOLD_MMHG: float = 250.0 * MMHG_PER_MMH2O      # ≈18.4  (Teed I)
