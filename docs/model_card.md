@@ -129,7 +129,11 @@ on import).
 - **Time-varying R_A (Ghadiali FEM) is not implemented.** v2 uses a
   constant R_A per severity class with a Valsalva multiplier.
 - **Chronological exposure carry-over is not modeled.** Two exposures the
-  same day reset the ME gas composition to ambient each time.
+  same day reset the ME gas composition to ambient each time. The
+  v2.2.2 `career.simulate_career` / `simulate_career_cohort` API
+  composes multiple `simulate()` calls but does not pass ME gas state
+  or mucosal-fatigue state between exposures; each exposure is a fresh
+  draw conditioned on the subject's fixed parameters.
 - **Population priors are FAC-demographic.** Transfer to pediatric,
   geriatric, or diving populations requires re-calibration.
 - **Calibration is against a self-consistent synthetic cohort**, not an
