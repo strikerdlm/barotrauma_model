@@ -4,6 +4,47 @@ All notable changes to `barotrauma_model`. Follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); project uses
 semantic versioning.
 
+## [2.2.0] — 2026-04-18
+
+### Added
+
+- **`barotrauma/v2/et_muscle.py`** — Ghadiali FEM-inspired time-varying
+  active resistance. Lumped-parameter approximation of Ghadiali 2010
+  (PMID 20413236), Sheer 2012 (PMID 21996354) and Malik & Ghadiali 2019
+  (PMID 29395489) FEM/multi-scale findings: per-swallow FGE is modulated
+  by fatigue/priming, mucosal-adhesion buildup during prolonged closure
+  at high |ΔP|, and TVP/LVP timing variability. `MuscleMechanics` /
+  `MuscleState` dataclasses plus `default_healthy_mechanics()` and
+  `default_dysfunctional_mechanics()` factory helpers.
+- **Doyle 2017 multi-pathway gas exchange** in `middle_ear.py`. Adds
+  `transmembrane_tm_exchange_step()` (trans-TM Fick diffusion, ~4% of
+  mucosa rate per Yuksel 2009 PMID 18728916), `transmembrane_rw_exchange_step()`
+  (trans-round-window, ~1%), and `full_gas_exchange_step()` that sums
+  all three pathways in one numerically stable call.
+- **`barotrauma/v2/ml_hybrid.py`** — `PhysicsMLPredictor` hybrid
+  physics-ML head with residual correction + isotonic calibration +
+  bootstrap CI. `extract_features()` bundles 11 physics outputs with
+  one-hot clinical encodings. Falls through to physics when unfit so
+  no untrained ML output is ever emitted.
+
+### Changed
+
+- `simulate()` gains two optional keyword arguments:
+  `muscle_mechanics: MuscleMechanics | None` and
+  `gas_exchange_full: bool`. Both default to v2.1-equivalent behavior.
+- `active_swallow_equalization()` accepts a new `muscle_factor` keyword;
+  default 1.0 preserves parity.
+- `barotrauma.v2.__init__` re-exports the new symbols.
+
+### Tests
+
+- 16 new tests across `test_v2_muscle.py`, `test_v2_doyle2017.py`, and
+  `test_v2_ml_hybrid.py`. Full fast-suite total now 89 (109 with the
+  legacy / calibration / scenarios suites).
+- Every v2.2 extension is backward-compatible: the v2.1 calibration and
+  the Kanick-Doyle Fig 3 pinned fixture still pass bit-for-bit when the
+  extensions are disabled (their default).
+
 ## [2.1.0] — 2026-04-18
 
 ### Added
