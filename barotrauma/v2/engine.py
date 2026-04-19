@@ -44,11 +44,19 @@ from .et_dynamics import (
     swallow_interval_s,
     valsalva_pressurization_mmHg,
 )
+from .et_muscle import (
+    MuscleMechanics,
+    MuscleState,
+    fge_modulation,
+    record_swallow,
+    update_state as update_muscle_state,
+)
 from .middle_ear import (
     GasComposition,
     MeState,
     boyle_update_me_pressure_mmHg,
     effective_me_volume_ml,
+    full_gas_exchange_step,
     initial_me_gas,
     tm_displacement_ml,
     transmucosal_exchange_step,
@@ -74,6 +82,8 @@ def simulate(
     *,
     dt_s: float = C.DEFAULT_DT_S,
     rng_seed: int | None = None,
+    muscle_mechanics: MuscleMechanics | None = None,
+    gas_exchange_full: bool = False,
 ) -> SimulationResult:
     """
     Run a single-exposure chamber simulation.
@@ -88,6 +98,14 @@ def simulate(
         Integrator step (seconds). Default 0.1.
     rng_seed : int, optional
         Seed for stochastic swallow-interval jitter. None = deterministic.
+    muscle_mechanics : MuscleMechanics, optional
+        If provided and ``enabled=True``, applies Ghadiali-FEM-inspired
+        time-varying active-resistance modulation on each swallow (v2.2).
+        Default None → v2.1-equivalent constant-R_A behavior.
+    gas_exchange_full : bool, optional
+        If True, use the Doyle 2017 multi-pathway gas exchange
+        (trans-mucosal + trans-TM + trans-RW). Default False → v2.1
+        trans-mucosal only. Enabling matters for multi-hour exposures.
 
     Returns
     -------
@@ -134,6 +152,10 @@ def simulate(
     # randomize first swallow phase to avoid grid artifacts
     step.last_swallow_time_s = -rng.uniform(0.0, swallow_interval_s(et_eff, False))
 
+    # Ghadiali FEM muscle-mechanics state (only used when mechanics.enabled)
+    mechanics = muscle_mechanics or MuscleMechanics(enabled=False)
+    muscle = MuscleState()
+
     # --- integration loop -------------------------------------------------
     for i in range(1, n):
         t = float(t_s[i])
@@ -146,8 +168,12 @@ def simulate(
         # pressure is rising fast (viscoelastic mucosal response).
         rate_mmHg_s = float(p_ambient[i] - p_ambient[i - 1]) / max(dt, 1e-9)
 
-        # --- 1) transmucosal drift (slow, small effect per step) ----------
-        me.gas = transmucosal_exchange_step(me.gas, dt)
+        # --- 1) trans-mucosal + optional trans-TM / trans-RW drift -------
+        if gas_exchange_full:
+            me.gas = full_gas_exchange_step(me.gas, dt,
+                                             include_tm=True, include_rw=True)
+        else:
+            me.gas = transmucosal_exchange_step(me.gas, dt)
 
         # --- 2) Patulous S1 hard-zero override ----------------------------
         if modifiers.is_patulous_patent and not modifiers.patulous_unstable:
@@ -185,15 +211,21 @@ def simulate(
                 dp = passive_equilibration_mmHg(dp, et_eff)
                 et_open[i] = True
 
+            # Update muscle-mechanics adhesion state every step
+            update_muscle_state(muscle, t, dp, mechanics)
+
             # Swallow (active opening) — scheduled by frequency
             sint = swallow_interval_s(et_eff, descending)
             if (t - step.last_swallow_time_s) >= sint:
                 jitter = rng.uniform(-0.2, 0.2) * sint
                 step.last_swallow_time_s = t + jitter
+                muscle_fac = fge_modulation(muscle, t, mechanics, rng=rng)
                 dp = active_swallow_equalization(
                     dp, et_eff, modifiers, dt, descending,
                     rate_mmHg_s=rate_mmHg_s,
+                    muscle_factor=muscle_fac,
                 )
+                record_swallow(muscle, t)
                 et_open[i] = True
                 swallow_events.append(t)
 
