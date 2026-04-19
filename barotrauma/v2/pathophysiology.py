@@ -65,6 +65,7 @@ def modifiers_for_patient(patient: PatientState) -> Modifiers:
     m = _apply_medication(m, patient.medication, pet=patient.pet)
     m = _compose(m, _previous_meb_modifier(patient.previous_meb))
     m = _compose(m, _v23_covariate_modifiers(patient))
+    m = _compose(m, _bdet_modifier(patient.bdet_treated, pet=patient.pet))
     return m
 
 
@@ -216,6 +217,45 @@ def _v23_covariate_modifiers(patient: PatientState) -> Modifiers:
     if not notes:
         return Modifiers()
     return Modifiers(per_descent_rr=rr, notes=tuple(notes))
+
+
+# --------------------------------------- v2.3.0 BDET post-treatment --
+def _bdet_modifier(bdet_treated: bool, *, pet: PetState) -> Modifiers:
+    """Partial ET-function restoration for patients with prior balloon
+    dilation of the Eustachian tube.
+
+    Evidence: Swords 2025 Cochrane (PMID 40008607) + Khan 2026
+    (PMID 41776716). See constants.BDET_* for parameter derivation.
+
+    Safety: BDET is contraindicated in patulous ET because further
+    patency exacerbates autophony and paradoxical closure under
+    inflammation. When bdet_treated is set alongside a non-normal PET
+    state, we apply the numerical modifier (the model does not
+    second-guess a clinician who entered it) but surface a CDS note
+    flagging the clinical inconsistency.
+    """
+    if not bdet_treated:
+        return Modifiers()
+
+    notes: list[str] = [
+        f"BDET-treated (Swords 2025, Khan 2026): RA×{C.BDET_RA_MULT:.2f}, "
+        f"RR×{C.BDET_PER_DESCENT_RR:.2f}",
+    ]
+    if pet != "normal":
+        notes.append(
+            f"⚠ CLINICAL INCONSISTENCY: bdet_treated + PET-{pet} — "
+            "BDET is contraindicated in patulous ET. Simulation proceeds "
+            "with BDET modifiers applied; verify patient history before "
+            "acting on output."
+        )
+
+    return Modifiers(
+        ra_mult=C.BDET_RA_MULT,
+        passive_opening_shift_mmHg=C.BDET_OPENING_SHIFT_MMHG,
+        eq_rate_mult=C.BDET_EQ_RATE_MULT,
+        per_descent_rr=C.BDET_PER_DESCENT_RR,
+        notes=tuple(notes),
+    )
 
 
 # -------------------------------------------------------- history ----
