@@ -175,6 +175,12 @@ export function PatientBuilder({ patient, onChange }: PatientBuilderProps) {
               checked={patient.glp1_exposure}
               onChange={(v) => set('glp1_exposure', v)}
             />
+            <ToggleRow
+              label="BDET-treated"
+              description="Prior balloon dilation of ET (Swords 2025, Khan 2026). RA ×0.70, RR ×0.65. Contraindicated in PET — dashboard will flag."
+              checked={patient.bdet_treated}
+              onChange={(v) => set('bdet_treated', v)}
+            />
           </div>
 
           <div className="flex items-center gap-2 text-xs text-gray-500">
