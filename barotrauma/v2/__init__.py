@@ -43,6 +43,7 @@ from . import (
     constants,
     engine,
     et_dynamics,
+    et_muscle,
     middle_ear,
     pathophysiology,
     risk,
@@ -50,6 +51,17 @@ from . import (
     types,
 )
 from .engine import simulate
+from .et_muscle import (
+    MuscleMechanics,
+    default_dysfunctional_mechanics,
+    default_healthy_mechanics,
+)
+from .ml_hybrid import (
+    HybridEvaluation,
+    HybridPrediction,
+    PhysicsMLPredictor,
+    extract_features,
+)
 from .pathophysiology import Modifiers, modifiers_for_patient
 from .risk import score_trace, score_with_uncertainty
 from .scenarios import (
@@ -83,11 +95,17 @@ from .types import (
 __all__ = [
     # submodules
     "anatomy", "atmosphere", "calibration", "constants", "engine",
-    "et_dynamics", "middle_ear", "pathophysiology", "risk", "scenarios",
-    "types",
+    "et_dynamics", "et_muscle", "middle_ear", "pathophysiology",
+    "risk", "scenarios", "types",
     # primary functions
     "simulate", "score_trace", "score_with_uncertainty",
     "modifiers_for_patient",
+    # muscle mechanics (Ghadiali FEM extension, v2.2)
+    "MuscleMechanics", "default_healthy_mechanics",
+    "default_dysfunctional_mechanics",
+    # hybrid physics-ML head (v2.2)
+    "PhysicsMLPredictor", "HybridPrediction", "HybridEvaluation",
+    "extract_features",
     # scenarios
     "PRESETS", "get_profile",
     "USAFSAM_TYPE_I", "USAFSAM_TYPE_II_RD",
