@@ -16,6 +16,7 @@ import { PatientBuilder } from './v2/PatientBuilder';
 import { ProbabilityTrio } from './v2/ProbabilityTrio';
 import { ProfilePicker } from './v2/ProfilePicker';
 import { SimulateControls } from './v2/SimulateControls';
+import { TrajectoryChart } from './v2/TrajectoryChart';
 import { useSimulation } from '../lib/useSimulation';
 
 interface V2DashboardProps {
@@ -130,6 +131,8 @@ export function V2Dashboard({ onShowLegacy }: V2DashboardProps) {
             />
           </div>
         </div>
+
+        <TrajectoryChart trace={result?.trace ?? null} loading={running} />
 
         <footer className="pt-4 pb-8 text-center text-xs text-gray-500">
           <p className="inline-flex items-center gap-1">
