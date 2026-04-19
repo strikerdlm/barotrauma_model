@@ -4,6 +4,53 @@ All notable changes to `barotrauma_model`. Follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); project uses
 semantic versioning.
 
+## [Unreleased]
+
+### Added
+
+- `barotrauma/v2/career.py` — multi-exposure career-simulation API.
+  Exposes `simulate_career` (single subject, sequence of exposures) and
+  `simulate_career_cohort` (population) with a correct intra-subject
+  conditionally-independent model, plus a `naive_indep_p_career_barotitis`
+  comparator for the population-independence identity. 13 tests in
+  `tests/test_v2_career.py`.
+- `CareerExposure.rng_seed` field for deterministic per-exposure
+  simulation in regression tests and publication-anchored calibrations;
+  defaults to `None` (non-deterministic, matching the pre-existing
+  `simulate(rng_seed=None)` behavior).
+- Frontend: `TmDisplacementChart` component renders the
+  `tm_displacement_ml` trace in µL alongside ΔP, with ±25 µL Doyle 2011
+  clamp reference lines. Integrated into `V2Dashboard` below the
+  `TrajectoryChart`.
+- FAC cohort paper draft (`docs/manuscript_fac_cohort.md`, 21 refs) +
+  cover letter + Figures 1 and 2 (incidence time-series; denial-rate
+  forest plot) at 600 dpi TIFF and 150 dpi PNG.
+- Preflight-fidelity paper draft (`docs/manuscript_preflight_fidelity.md`,
+  18 refs) + cover letter. Standalone methodology-companion to the FAC
+  cohort paper focused on the DIMAE preflight Microsoft Forms
+  instrument's discriminatory performance (ROC AUC 0.81).
+
+### Changed
+
+- Calibration re-anchored to the pooled FAC 2010–2026 cohort
+  (173 / 7,271 = 2.38% per-exposure, Wilson 95% CI 2.06–2.75%; career-3
+  projection 6.97%). Supersedes the previous 2.00% / 5.80% internal
+  prior. `FAC_TARGET_MEB_PREVALENCE` 0.058 → 0.0697;
+  `FAC_COHORT_YEARS` 10 → 16. Hazard constant `r_barotitis`
+  4.43 × 10⁻⁸ → 5.85 × 10⁻⁸ (new value inside the existing ABC-SMC 95%
+  CI, so ABC-SMC posterior remains internally consistent and is not
+  re-fit). Italian AF Morgagni 2010 gap widens from +1.1 pp to
+  +1.77 pp; Morgagni 2012 and Landolfi 2009 remain inside Wilson 95%
+  CI. Manuscript, model card, and Table II / III / IV numbers updated
+  to match; `test_morgagni_2010_within_2pp_of_observed` renamed and
+  tolerance widened to 2.5 pp to reflect the expected consequence of
+  the re-anchor.
+- `docs/figures/figure1_descent_rate_sensitivity.tiff` regenerated from
+  the current simulator (the committed v2.2.1 TIFF was already stale
+  against the shipping physics before this commit; numbers now match
+  Table IV). Rupture probability is monotone-in-rate under the current
+  model, superseding the old table's peak-at-2000–5000 ft/min claim.
+
 ## [2.2.1] — 2026-04-18
 
 ### Added
