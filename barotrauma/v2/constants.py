@@ -224,11 +224,15 @@ F_N2: float = 0.79
 F_O2: float = 0.21
 
 # ----------------------------------------- FAC cohort (calibration target) -
-# Colombian Aerospace Force (DIMAE) hypobaric chamber training 10-year cohort.
-# Source: Malpica et al. (FAC internal; placeholder — see docs/model_card.md).
+# Colombian Aerospace Force (DIMAE) hypobaric chamber training pooled cohort
+# 2010-2020 + 2025-2026. Pooled n = 173 clinical barotrauma events in 7,271
+# chamber exposures; per-exposure rate 2.38% (Wilson 95% CI 2.06-2.75%);
+# projected 3-exposure career rate 6.97%.
+# Source: Malpica et al. (FAC internal, de-identified; see
+# `docs/Cohort FAC/analysis/phase2_summary.md §5`).
 # Used as the primary calibration anchor. URI and ET dysfunction dominate RFs.
-FAC_TARGET_MEB_PREVALENCE: float = 0.058      # 5.8%
-FAC_COHORT_YEARS: int = 10
+FAC_TARGET_MEB_PREVALENCE: float = 0.0697     # 6.97% (career-3 projection)
+FAC_COHORT_YEARS: int = 16
 FAC_URI_TOP_RISK_FACTOR: bool = True
 FAC_ETD_TOP_RISK_FACTOR: bool = True
 

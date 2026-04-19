@@ -50,15 +50,20 @@ plus `swallow_events_s` and `valsalva_events_s` timestamp arrays.
 
 ## 4. Data and calibration
 
-**Primary anchor:** Colombian Aerospace Force (FAC) 10-year hypobaric-
-chamber training registry, 5.8% career MEB prevalence, URI and ET
+**Primary anchor:** Colombian Aerospace Force (FAC) pooled 2010–2026
+hypobaric-chamber training registry. n = 173 clinical barotrauma events
+in 7,271 chamber exposures; per-exposure rate 2.38% (Wilson 95% CI
+2.06–2.75%); projected 3-exposure career rate 6.97%. URI and ET
 dysfunction reported as dominant risk factors (DIMAE, unpublished —
-**currently an internal prior**, awaiting peer-reviewed publication).
+**currently an internal prior**, awaiting peer-reviewed publication; see
+`docs/Cohort FAC/analysis/phase2_summary.md §5`).
 
-**Per-exposure target:** 2.0%, fitted against Italian Air Force per-
-exposure rates (1.5–2.5%; Morgagni 2010 PMID 20824995; Morgagni 2012
-PMID 22764614; Landolfi 2009 PMID 20027855). Career projection at 3
-exposures reproduces the 5.8% FAC anchor (1 − 0.98³ ≈ 5.9%).
+**Per-exposure target:** 2.38%, anchored to the pooled FAC 2010–2026
+cohort. Bisection-achieved per-exposure 2.47% and career-3 projection
+7.23% on an FAC_BOGOTA_DEFAULT synthetic cohort (n = 400). For
+cross-reference, Italian Air Force per-exposure rates 1.5–2.5%
+(Morgagni 2010 PMID 20824995; Morgagni 2012 PMID 22764614; Landolfi
+2009 PMID 20027855) remain the external-validation benchmarks.
 
 **Calibration method:** log-space bisection on `HAZARD_BAROTITIS_R`
 against the cohort mean `p_barotitis` over 300–400 synthetic subjects
@@ -93,8 +98,10 @@ on import).
 
 ## 6. Limitations
 
-- **FAC anchor is unpublished** — treat 5.8% as internal prior until
-  formally published. See `HOW_TO_CONTINUE.md` §1.
+- **FAC anchor is unpublished** — treat the pooled 2010–2026 rate
+  (2.38% per-exposure / 6.97% career-3) as an internal prior until the
+  FAC cohort paper is formally published. See `HOW_TO_CONTINUE.md` §1
+  and `docs/Cohort FAC/analysis/phase2_summary.md`.
 - **Rupture threshold at 150 mmHg is conservative.** Biomechanical
   studies report higher TM rupture pressures (~600–750 mmHg). The
   `p_rupture` output should be interpreted as "high risk of perforation"
@@ -188,7 +195,8 @@ External validation anchors (not yet automated):
 
 - Italian AF per-exposure barotitis rate 1.5–2.5% (Morgagni 2010/2012,
   Landolfi 2009).
-- FAC career rate 5.8% projected from 3 per-exposure samples (~5.9%).
+- Pooled FAC 2010–2026 career rate 6.97% projected from 3 per-exposure
+  samples against an achieved 2.47% per-exposure (~7.23%).
 - Kanick-Doyle 2005 Fig 3 qualitative trace matching (pending visual
   regression test).
 

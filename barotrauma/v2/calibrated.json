@@ -1,34 +1,34 @@
 {
   "meta": {
-    "target_per_exposure": 0.02,
-    "achieved_per_exposure": 0.01877289271379286,
-    "iterations": 5,
-    "career_projection_3_exposures": 0.055268029609873315,
-    "fac_career_anchor": 0.058
+    "target_per_exposure": 0.0238,
+    "achieved_per_exposure": 0.02471323487442823,
+    "iterations": 6,
+    "career_projection_3_exposures": 0.07232256614878418,
+    "fac_career_anchor": 0.0697
   },
   "hazard": {
-    "barotitis_r": 4.431195784562876e-08,
-    "baromyringitis_r": 1.3293587353688627e-09,
-    "rupture_r": 4.4311957845628755e-11
+    "barotitis_r": 5.845441860310862e-08,
+    "baromyringitis_r": 1.7536325580932582e-09,
+    "rupture_r": 5.845441860310861e-11
   },
   "cohort_summary": {
     "n_cohort": 400,
-    "per_exposure_achieved": 0.01877289271379286,
-    "per_exposure_target": 0.02,
-    "career_3_exposures_projected": 0.055268029609873315,
+    "per_exposure_achieved": 0.02471323487442823,
+    "per_exposure_target": 0.0238,
+    "career_3_exposures_projected": 0.07232256614878418,
     "uri_subgroup_means": {
-      "none": 0.0029791233684000767,
-      "day_1_3": 0.08230619609824255,
-      "day_15_21": 0.009254852331300707,
-      "day_4_7": 0.22382253689729256,
-      "day_22_28": 0.004382457983875766,
-      "day_8_14": 0.03306048176032741
+      "none": 0.004063233458823687,
+      "day_1_3": 0.10793762660527718,
+      "day_15_21": 0.012705105735194478,
+      "day_4_7": 0.293130366807115,
+      "day_22_28": 0.006071002117397389,
+      "day_8_14": 0.044255009255511894
     },
     "severity_subgroup_means": {
-      "normal": 0.01687014326204758,
-      "mild": 0.029476424055789735,
-      "moderate": 0.019013750703820272,
-      "severe": 0.25597918041829715
+      "normal": 0.022147655424241602,
+      "mild": 0.03873936353042774,
+      "moderate": 0.03087973035783954,
+      "severe": 0.3347486685622154
     }
   }
 }
