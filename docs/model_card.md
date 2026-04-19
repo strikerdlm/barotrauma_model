@@ -141,6 +141,58 @@ on import).
   is stated in prose but not yet enforced by an automated external-
   validation test. This is the single biggest item for v2.1.
 
+## 6.0.1 Considered but not implemented (v2.3.0 scope)
+
+Two 2025–2026 items from `docs/research_notes/06_2025_2026_updates.md`
+were audited and deliberately NOT encoded as engine parameters in
+v2.3.0. Each deferral is reviewable; each has an explicit unlock
+condition. See `docs/research_notes/07_v23_scope_rationale.md` §4 for
+the full analysis.
+
+**Zhang 2025 — ET bidirectional pumping and tympanic-orifice vortex
+(PMID 41092566).** In-vitro PIV on PET-derived tube anatomy showing
+bidirectional suction and vortex formation at the tympanic orifice
+during opening under negative middle-ear pressure.
+
+- *Why deferred*: (a) PIV gives velocity fields, not clearance-volume
+  changes — there is no quantitative translation from "vortex
+  exists" to "per-swallow FGE is modulated by X"; (b) the tube models
+  are PET-specific — the vortex may not occur in healthy anatomy;
+  (c) direction (does the vortex increase or decrease clearance?)
+  and magnitude are not recoverable from the reported data; (d)
+  adding it as a Sobol sensitivity axis with a modeler-chosen range
+  manufactures variance rather than measures it.
+- *Unlock criteria*: paired PIV + clinical-endpoint study
+  (tympanometry or ETDQ-7 change) in non-PET anatomy; OR a CFD study
+  coupling PIV-observed velocity fields to a volumetric clearance
+  calculation; OR DIMAE-internal paired forced-response-test data
+  pre-/post-simulated descent.
+
+**Holm 2026 — Ostmann fat-pad and LVPM muscle atrophy in ETD
+(PMID 41466069).** 3T MRI + CBCT on 28 ETD vs. 10 control ears
+showing longer ET and smaller OFP / LVPM volumes in ETD.
+
+- *Why deferred*: (a) n = 38 total is grossly underpowered for a
+  continuous dose-response curve; (b) reference ranges for OFP
+  thickness and LVPM volume in healthy populations are not published
+  at a standardized measurement protocol; (c) causal direction
+  (atrophy → ETD vs. chronic ETD → disuse atrophy) is undetermined;
+  (d) almost no operational user would have imaging-derived values,
+  so the API surface is net-negative at current cohort size; (e)
+  plugging in a non-standard measurement against a 2-point linear
+  extrapolation would display a severity score with unwarranted
+  precision.
+- *Unlock criteria*: independent cohort n ≥ 100 with standardized
+  imaging protocol confirming the OFP/LVPM ↔ ETD relationship; OR a
+  healthy-population reference-range paper (n ≥ 200, multi-site)
+  with explicit measurement-protocol specification.
+
+Both items are cited in the v2.2.1 manuscript discussion as motivating
+future work; neither changes engine behavior in v2.3.0. This section
+exists so a manuscript reviewer familiar with Zhang 2025 or Holm 2026
+can see that the exclusion is deliberate, documented, and reversible
+under stated conditions.
+
 ## 6.1 Explicit modeler priors (vs. retrieved data)
 
 These values come from modeler judgment informed by the literature
