@@ -53,6 +53,7 @@ export const DEFAULT_PATIENT: PatientStateV2 = {
   sensory_neuropathy: false,
   impaired_volitional_equalization: false,
   glp1_exposure: false,
+  bdet_treated: false,
 };
 
 export const DEFAULT_OPTIONS: SimulateOptions = {
