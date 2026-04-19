@@ -49,6 +49,10 @@ export const DEFAULT_PATIENT: PatientStateV2 = {
   enable_valsalva: true,
   valsalva_interval_s: 60.0,
   habitual_sniffer: false,
+  // v2.3.0 covariates (defaults preserve v2.2.1 behavior)
+  sensory_neuropathy: false,
+  impaired_volitional_equalization: false,
+  glp1_exposure: false,
 };
 
 export const DEFAULT_OPTIONS: SimulateOptions = {
