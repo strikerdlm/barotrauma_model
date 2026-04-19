@@ -27,6 +27,26 @@ Items 2, 3, 4, 5 from the v2.0 roadmap are now **delivered in v2.1**:
       `tests/fixtures/kanick_doyle_2005_fig3.json` and
       `tests/test_v2_kanick_doyle_fig3.py`.
 
+Items 7, 8 **delivered in v2.2**:
+
+- [x] (7a) Ghadiali FEM time-varying R_A extension — see
+      `barotrauma/v2/et_muscle.py` and `tests/test_v2_muscle.py`.
+      Lumped-parameter approximation (fatigue/priming, mucosal
+      adhesion, TVP/LVP timing) rather than full FEM, but captures
+      the clinically meaningful effects; default disabled to preserve
+      v2.1 calibration.
+- [x] (7b) Doyle 2017 multi-pathway gas exchange — see
+      `barotrauma/v2/middle_ear.py` (`full_gas_exchange_step`,
+      `transmembrane_tm_exchange_step`, `transmembrane_rw_exchange_step`)
+      and `tests/test_v2_doyle2017.py`. Trans-TM + trans-RW pathways
+      added; default disabled.
+- [x] (8) Hybrid physics-ML head scaffolding — see
+      `barotrauma/v2/ml_hybrid.py` (`PhysicsMLPredictor`,
+      `extract_features`) and `tests/test_v2_ml_hybrid.py`. Trains a
+      calibrated residual correction on labeled outcomes; falls through
+      to physics when unfit. Awaits a real labeled cohort to actually
+      become useful.
+
 Remaining open items below.
 
 ### 1. Publish the FAC 5.8% cohort
