@@ -35,7 +35,7 @@ ORCID: https://orcid.org/0000-0002-2257-4940
 
 from __future__ import annotations
 
-__version__ = "2.2.0"
+__version__ = "2.2.1"
 __author__ = "Dr. Diego L. Malpica"
 __email__ = "dlmalpica@yahoo.com"
 

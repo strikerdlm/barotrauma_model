@@ -16,7 +16,7 @@ with open('requirements.txt', 'r', encoding='utf-8') as f:
 
 setup(
     name="barotrauma-model",
-    version="2.2.0",
+    version="2.2.1",
     author="Dr. Diego L Malpica (Aerospace Medicine) ORCID: https://orcid.org/0000-0002-2257-4940",
     author_email="dlmalpica@yahoo.com",
     description="Physics-informed middle-ear barotrauma risk model for hypobaric-chamber training (FAC-anchored)",
