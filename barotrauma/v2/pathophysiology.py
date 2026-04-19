@@ -127,11 +127,18 @@ def _pet_modifiers(pet: PetState, *, uri: UriState, habitual_sniffer: bool) -> M
     if pet == "s3":
         # Habitual sniffer. Shindo 2025: type B/C tympanograms in 42.6%.
         # Baseline ME pressure sits at ≈ -15 mmHg from active closure.
+        #
+        # v2.2.1 update: Oshima 2025 (PMID 41014990), n=1009 PET patients,
+        # reports habitual-sniffing OR 8.18 for PET vs baseline. We raise
+        # per_descent_rr from the prior 2.5 to 4.0, reflecting the full
+        # OR convolved with already-applied ET-function physics in the
+        # deterministic simulator (raising from 2.5 directly to 8.18 would
+        # double-count the physiological ΔP bias already modeled).
         return Modifiers(
             habitual_sniffer_bias=True,
             pet_tissue_offset_mmHg=0.0,      # tissue pressure near normal when not sniffing
-            per_descent_rr=2.5,
-            notes=("PET-S3 (habitual sniffer): sustained −ME pressure, descent-vulnerable",),
+            per_descent_rr=4.0,
+            notes=("PET-S3 (habitual sniffer): sustained −ME pressure, descent-vulnerable (Oshima 2025)",),
         )
 
     if pet == "s4":
