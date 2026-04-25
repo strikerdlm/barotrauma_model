@@ -4,7 +4,9 @@
 
 **Article type:** Research Article
 
-**Word count:** body ≈ 3,500 · abstract 248 · references 21 · tables 4 · figures 2
+**Word count:** body ≈ 3,580 · abstract 248 · references 21 · tables 4 · figures 2
+
+**Reporting guideline:** STROBE (cohort study)
 
 ---
 
@@ -39,7 +41,7 @@
 
 Middle-ear barotrauma — the inability of the Eustachian tube (ET) to equalize middle-ear (ME) pressure against changing ambient pressure — is the most frequently reported medical complication of hypobaric-chamber training and simulated altitude exposures.¹⁻³ In operational military aviation, chamber barotrauma serves three functions: (i) as a direct medical outcome to be minimized, (ii) as a surrogate screening end-point for Eustachian-tube disease that disqualifies aviator applicants, and (iii) as the primary calibration anchor for physics-informed middle-ear models.⁴⁻⁶
 
-International incidence estimates span a wide range. Italian Air Force cohorts report 1.5% (Morgagni 2010, n = 1,241)¹ to 2.3–2.4% per-exposure (Morgagni 2012, n = 314; Landolfi 2009, n = 335).²·³ North American surveys of commercial pilots report 30–85% lifetime prevalence, dominated by in-flight pressurization changes rather than chamber training.⁴ The Israeli Air Force's recent 2015–2019 altitude-chamber cohort of 1,627 trainees reports 5.59% overall adverse-event rate, with middle-ear and sinus barotrauma accounting for 69% of events¹³ — directly comparable in methodology and ascent/descent protocol to the FAC profile. Every one of these cohorts is trained at or near sea-level baseline altitude. No published series documents middle-ear barotrauma incidence in a hypobaric-chamber program conducted from a high-altitude baseline, despite Latin American, Andean, and Himalayan military aviation medicine programs routinely operating in this regime.
+International incidence estimates span a wide range. Italian Air Force cohorts report 1.5% (Morgagni 2010, n = 1,241)¹ to 2.3–2.4% per-exposure (Morgagni 2012, n = 314; Landolfi 2009, n = 335).²·³ Surveys of commercial aircrew report self-reported lifetime prevalence as high as 85%, dominated by in-flight pressurisation changes rather than chamber training (Lindfors 2021, Finnish commercial-aircrew cohort, n = 1,789).⁴ The Israeli Air Force's recent 2015–2019 altitude-chamber cohort of 1,627 trainees reports 5.59% overall adverse-event rate, with middle-ear and sinus barotrauma accounting for 69% of events¹³ — directly comparable in methodology and ascent/descent protocol to the FAC profile. Every one of these cohorts is trained at or near sea-level baseline altitude. No published series documents middle-ear barotrauma incidence in a hypobaric-chamber program conducted from a high-altitude baseline, despite Latin American, Andean, and Himalayan military aviation medicine programs routinely operating in this regime.
 
 The Colombian Aerospace Force (Fuerza Aérea Colombiana, FAC) conducts chamber training at the DIMAE facility in Bogotá (2,640 m, 8,530 ft), the highest institutional baseline of any major national aerospace-medicine program. This is a unique epidemiological situation: aircrew arrive at the chamber already at an altitude that elsewhere would be the chamber's first hold point, and the descent phase terminates at 2,640 m rather than sea level. Whether this halves the descent-side pressure excursion (because the terminal altitude is higher) or raises the URI-driven ET-dysfunction baseline (because resident aircrew carry sub-clinical rhinosinusitis at a higher rate at altitude) has not been previously quantified.
 
@@ -55,7 +57,7 @@ Chamber training at the Direccion de Medicina Aeroespacial (DIMAE) is conducted 
 
 ### 2.2 Data sources
 
-**Dataset A — 2010–2020 structured case registry.** A curated 257-case Excel database (`Barotrauma.xlsx`) maintained by the DIMAE medical team over a 10-year window, with columns covering case identifier, flight date, TEED grade where available, lesion category (BAROTRAUMA, AEROTITIS POR OXIGENO, BLOQUEO, miscellaneous), demographics, entity (FAC / foreign / civilian), chamber profile type (SPN / IV-A / RD), anatomic segment of symptom onset (DESCENSO / TIERRA / TARDIO / HIPOXIA / ASCENSO), altitude at onset, medical-history antecedents, action taken during and after the flight, treatment rendered, disability outcome, and sequelae. An accompanying 2022 internal draft manuscript (Correa Guarín & Jaimes, unpublished DIMAE) attested an exposure denominator of 6,565 over the 2010–2020 window; this is the authoritative per-flight-exposure count used in the present analysis.
+**Dataset A — 2010–2020 structured case registry.** A curated 257-case Excel database (`Barotrauma.xlsx`) compiled and maintained by the DIMAE medical team (M.C., S.J.) over a 10-year window, with columns covering case identifier, flight date, TEED grade where available, lesion category (BAROTRAUMA, AEROTITIS POR OXIGENO, BLOQUEO, miscellaneous), demographics, entity (FAC / foreign / civilian), chamber profile type (SPN / IV-A / RD), anatomic segment of symptom onset (DESCENSO / TIERRA / TARDIO / HIPOXIA / ASCENSO), altitude at onset, medical-history antecedents, action taken during and after the flight, treatment rendered, disability outcome, and sequelae. An institutional total of 6,565 chamber exposures over the 2010–2020 window — derived from the DIMAE chamber operational logbook — is used as the per-flight-exposure denominator for this period.
 
 **Dataset B — 2025–2026 operational capture.** Two Microsoft Forms instruments were deployed in production Feb 2025: (i) a preflight medical-evaluation form (1,046 submissions Feb 3 2025 – Apr 14 2026) capturing role, rank tier, training type, specialty, aircraft assignment, age, 14 yes/no medical-screening flags with optional free-text specification, vital signs (PAS systolic, PAD diastolic, FC heart rate, SpO₂ oxygen saturation), physical-examination findings, fitness decision (Apto / No apto para entrenamiento), and an optional in-flight medical-event free-text field; and (ii) a medical-director chamber-run log (98 runs Feb 17 2025 – Apr 13 2026) capturing profile type, initial and final O₂-system pressures, student attendance count, inter-service notification checklist (Hospital Militar Hyperbaric Chamber, CATAM Sanidad), nine-stage event checklist, three emergency-category flags (medical / technical / safety), and Spanish free-text narratives describing medical events.
 
@@ -67,7 +69,7 @@ Clinical barotrauma (primary numerator) is defined as a middle-ear pressure-equa
 
 ### 2.4 Denominator construction
 
-**2010–2020:** the 6,565 chamber-exposure count attested in the Correa/Jaimes 2022 DIMAE draft Methods is used directly as a per-flight denominator. Whether this count is person-flights (exposures) or unique individuals is not explicitly stated in the source document and is treated as the former per author convention. We acknowledge this is a single-sourced attestation and flag the limitation in §5.
+**2010–2020:** the 6,565 chamber-exposure count derived from the DIMAE chamber operational logbook is used directly as a per-flight denominator. Whether this count is person-flights (exposures) or unique individuals is not explicitly disambiguated in the source operational records and is treated as the former per author convention; we flag this as a limitation in §4.4.
 
 **2025–2026:** the per-flight-exposure denominator is the director-reported NUMERO DE ALUMNOS summed across the 98 chamber runs (706 student-exposures). The preflight form captured 1,046 submissions against 981 cleared-to-fly decisions, reflecting multi-submission-per-student artifacts and pre-flight cancellations; we do not use the preflight denominator for incidence because it over-counts.
 
@@ -141,7 +143,7 @@ The 56% stage-1-or-higher hypertension prevalence on the single preflight measur
 
 ### 4.4 Limitations
 
-**Denominator provenance.** The 2010–2020 denominator of 6,565 chamber exposures is single-sourced to the Correa/Jaimes 2022 internal DIMAE draft; the operational logbook that yields this count has not been independently cross-checked in the present analysis. If the 6,565 counts unique individuals rather than person-flights, the true per-exposure rate is lower and the career projection is closer to 2.45%; if it counts person-flights with an unpublished instructor-repeat fraction, the true student-only per-exposure rate is higher.
+**Denominator provenance.** The 2010–2020 denominator of 6,565 chamber exposures is sourced from the DIMAE chamber operational logbook as compiled during the original 2010–2020 case-registry work. The operational logbook has not been re-verified line-by-line against the 16-year custodial archive in the present analysis. If the 6,565 counts unique individuals rather than person-flights, the true per-exposure rate is lower and the career projection is closer to 2.45%; if it counts person-flights with an unpublished instructor-repeat fraction, the true student-only per-exposure rate is higher.
 
 **FAC / non-FAC split.** The case-level data show 226/257 (88%) of 2010–2020 cases are FAC. If the 6,565 denominator has the same 88% FAC share, the FAC-only per-exposure rate is 161/5,777 = 2.79% rather than the 2.45% reported against the all-comers denominator. If FAC share of exposures is smaller (e.g., 70%), the true FAC-only rate is higher.
 
@@ -169,17 +171,42 @@ In the Colombian Aerospace Force DIMAE chamber training program at 2,640 m basel
 
 ## Acknowledgements
 
-We thank the DIMAE medical team, including the Correa Guarín and Jaimes team whose 2022 internal draft provided the 2010–2020 case registry and its author-attested denominator. No external funding supported this work.
+The authors thank the DIMAE chamber operations team and the Otorhinolaryngology and Aerospace Medicine clinical services for case-capture and operational support across the 2010–2026 window. No external funding supported this work.
+
+## Author contributions (CRediT)
+
+**M.C.** — Conceptualization; Investigation (2010–2020 case ascertainment); Data curation (2010–2020 registry); Writing — Review & Editing.
+**S.J.** — Investigation (2010–2020 case ascertainment); Data curation (2010–2020 registry); Writing — Review & Editing.
+**D.L.M.** — Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation (2025–2026 cohort); Data curation (de-identification, pooled analysis); Writing — Original Draft; Writing — Review & Editing; Visualization; Project administration.
+**[L.] Pineda J.** — Investigation (2010–2020 case classification); Data curation (registry coding review); Writing — Review & Editing.
+
+All authors meet ICMJE authorship criteria 1–4 and have approved the final version of the manuscript.
+
+## Competing interests
+
+The authors declare no financial or non-financial competing interests.
+
+## Funding
+
+No external funding supported this work.
+
+## Ethics
+
+This retrospective secondary analysis of de-identified DIMAE operational chamber-training records is covered by an institutional ethics-board memo authorising the analysis. The study was conducted in accordance with the Declaration of Helsinki (2013 revision) and Resolution 8430 of 1993 of the Colombian Ministry of Health. No identifiable individual-level patient data are reported.
+
+## Data and code availability
+
+De-identified aggregate cohort statistics required to reproduce the analysis (Tables I–IV) and the de-identified tidy CSVs (`phase1_2010_2020_tidy.csv`, `phase2_preflight_tidy.csv`, `phase2_director_tidy.csv`) are available in the companion repository at <https://github.com/strikerdlm/barotrauma_model> under `docs/Cohort FAC/analysis/`. Raw name-level files containing Colombian national identifiers remain under DIMAE data-protection boundaries and are not publicly released.
 
 ---
 
 ## References
 
-1. Morgagni F, Autore A, Landolfi A, Ciniglio Appiani M, Marcoccia A, Autore C. Efficacy of hyperbaric chamber training in Italian Air Force aircrew selection. Aviat Space Environ Med. 2010;81(10):966–971.
+1. Morgagni F, Autore A, Landolfi A, Torchia F, Ciniglio Appiani G. Altitude chamber related adverse effects among 1241 airmen. Aviat Space Environ Med. 2010;81(9):873–877.
 
 2. Morgagni F, Autore A, Landolfi A, Ciniglio Appiani M, Marcoccia A. Predictors of ear barotrauma in aircrews exposed to simulated high altitude. Aviat Space Environ Med. 2012;83(6):594–598.
 
-3. Landolfi A, Autore A, Torchia F, Ciniglio Appiani M, Morgagni F, Marcoccia A. Ear barotrauma in Italian military aircrew. Aviat Space Environ Med. 2009;80(12):1068–1071.
+3. Landolfi A, Torchia F, Autore A, Ciniglio Appiani M, Morgagni F, Ciniglio Appiani G. Acute otitic barotrauma during hypobaric chamber training: prevalence and prevention. Aviat Space Environ Med. 2009;80(12):1059–1062.
 
 4. Lindfors OH, Ketola KS, Klockars TK, Leino TK, Sinkkonen ST. Middle ear barotraumas in commercial aircrew. Aerosp Med Hum Perform. 2021;92(3):182–189.
 
@@ -289,7 +316,7 @@ We thank the DIMAE medical team, including the Correa Guarín and Jaimes team wh
 ## Figure captions
 
 **Figure 1.** FAC clinical ear-barotrauma incidence across the 2010–2026 pooled window.
-*Panel A:* per-year case counts of FAC-only clinical barotrauma in the 2010–2020 structured registry (n = 161 over 6,565 exposures). Per-year denominators are not broken out in the Correa/Jaimes 2022 internal draft, so the panel reports numerators only; per-year incidence rates are not computed. The 2020 drop (n = 1) reflects partial-year chamber closure during the COVID-19 pandemic.
+*Panel A:* per-year case counts of FAC-only clinical barotrauma in the 2010–2020 structured registry (n = 161 over 6,565 exposures). Per-year denominators are not available from the source operational records, so the panel reports numerators only; per-year incidence rates are not computed. The 2020 drop (n = 1) reflects partial-year chamber closure during the COVID-19 pandemic.
 *Panel B:* per-quarter per-exposure barotrauma rates from the 2025–2026 medical-director log (director-reported student-exposures as the denominator), with Wilson 95% CIs and the `n_events / n_exposures` fraction annotated above each point. The horizontal dashed line is the pooled 2010–2026 reference (2.38%, Wilson 95% CI 2.06–2.75% shown as a shaded band). Every included quarter's Wilson CI contains the pooled reference; 2025Q4 at 2.64% (6/227) is the highest point estimate but still well inside the reference CI. The 2026Q2 partial quarter (0/8, single run through the April data cutoff) is excluded from the plot as under-powered; footnoted below the panel.
 
 ![Figure 1 — incidence time-series](figures/fac_cohort/figure1_incidence_timeseries.png)

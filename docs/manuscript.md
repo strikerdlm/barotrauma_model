@@ -6,17 +6,17 @@
 
 **Reporting guideline:** TRIPOD 2015 (checklist provided as Supplementary File S1).
 
-**Word count:** body ~3,400 · structured abstract 248 · references 24 · tables 4 · figures 2.
+**Word count:** body ~3,250 · structured abstract 249 · references 24 · tables 4 · figures 2.
 
 ---
 
 ## Abstract
 
-**Background.** Middle-ear barotrauma (MEB) is the most common complication of pressurised flight and hypobaric-chamber training, and a proxy for Eustachian-tube disease that disqualifies aviator candidates. Kanick-Doyle's 2005 model reproduces airline-descent physiology but does not address chamber descent rates of 1,000–10,000 ft·min⁻¹, treats Patulous Eustachian tube (PET) as trivially rupture-protective, and does not parameterise acute upper-respiratory-infection (URI) modifiers despite URI dominance as a modifiable risk factor.
+**Background.** Middle-ear barotrauma (MEB) is the most common complication of pressurised flight and hypobaric-chamber training, and a proxy for Eustachian-tube disease that disqualifies aviator candidates. Kanick-Doyle's 2005 model reproduces airline-descent physiology but does not address chamber descent rates of 1,000–10,000 ft·min⁻¹, treats Patulous Eustachian tube (PET) as rupture-protective, and does not parameterise acute upper-respiratory-infection (URI) modifiers despite URI dominance as a modifiable risk factor.
 
 **Objective.** To develop and externally validate a physics-informed, pathophysiology-aware prediction model for per-exposure MEB risk during hypobaric-chamber training.
 
-**Methods.** We extended Kanick-Doyle with (i) a continuous descent-side aperture-collapse function (Hagen-Poiseuille-informed Hill function with rate-dependent tightening), (ii) a six-state URI temporal modifier table, (iii) a four-state PET model, (iv) a lumped-parameter approximation of Ghadiali-group Eustachian-tube muscle mechanics, and (v) a three-threshold cumulative-hazard score. No machine-learning component is used. Hazard constants were calibrated to the pooled Colombian Aerospace Force (FAC) DIMAE 2010–2026 registry (173/7,271; 2.38% per-exposure) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC). External validation used three published Italian Air Force cohorts.
+**Methods.** We extended Kanick-Doyle with (i) a continuous descent-side aperture-collapse function (Hill function with rate-dependent tightening), (ii) a six-state URI temporal modifier table, (iii) a four-state PET model, (iv) a lumped-parameter approximation of Ghadiali-group muscle mechanics, and (v) a three-threshold cumulative-hazard score. No machine-learning component is used. Hazard constants were calibrated to the pooled Colombian Aerospace Force (FAC) DIMAE 2010–2026 registry (173/7,271; 2.38% per-exposure) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC). External validation used three Italian Air Force cohorts.
 
 **Results.** Calibration reproduced the pooled FAC anchor within 0.1 pp (simulated 2.47%; career-3 projection 7.23% vs. 6.97%). External validation fell inside the observed Wilson 95% confidence interval for Morgagni 2012 (3.31% vs. 2.3% [1.13%, 4.62%]) and Landolfi 2009 (3.37% vs. 2.4% [1.22%, 4.66%]); the Morgagni 2010 gap (+1.77 pp) matched that cohort's pre-/unscreened denominator spread. Saltelli-Sobol sensitivity identified the aperture half-point as the dominant variance driver.
 
@@ -28,7 +28,7 @@
 
 ## 1. Introduction
 
-Middle-ear barotrauma (MEB) — the inability of the Eustachian tube (ET) to equalize middle-ear pressure against changing ambient pressure — affects an estimated 3–10% of aircrew per hypobaric-chamber exposure¹⁻³ and 30–85% of commercial pilots across their careers.⁴ In military aviation medicine its importance is twofold: as a direct medical consequence of altitude training, and as a proxy for the broader spectrum of Eustachian-tube disease that disqualifies aviator applicants and restricts operational employment.
+Middle-ear barotrauma (MEB) — the inability of the Eustachian tube (ET) to equalize middle-ear pressure against changing ambient pressure — affects an estimated 3–10% of aircrew per hypobaric-chamber exposure¹⁻³ and up to 85% of commercial aircrew over their careers.⁴ In military aviation medicine its importance is twofold: as a direct medical consequence of altitude training, and as a proxy for the broader spectrum of Eustachian-tube disease that disqualifies aviator applicants and restricts operational employment.
 
 The most widely used mathematical description is Kanick and Doyle's 2005 pressure-regulation model.⁵ Their gas-exchange framework combines Boyle's-law tympanic-membrane buffering, Hagen-Poiseuille bulk flow through an intermittently opening Eustachian tube, swallow-driven active openings with a fixed muscular resistance R<sub>A</sub>, and trans-mucosal species diffusion. The model reproduces passenger airline physiology accurately and is the reference against which subsequent work is benchmarked. Three shortcomings limit its direct use in hypobaric-chamber decision support.
 
@@ -128,7 +128,7 @@ Three extensions deserve particular comment. First, the continuous aperture-coll
 
 Second, the Patulous ET four-state model is a clinically-motivated departure from Kanick-Doyle's trivial treatment. S1 reproduces the rupture-protective prediction exactly; S2 flips to high risk consistent with Ikeda 2020 and Shindo 2025; S3 captures the sustained negative-ME-pressure physiology. Paradoxical decongestant worsening in PET replaces the protective RR 0.70 with 1.4 and reflects the peritubal-soft-tissue clinical reality. This level of PET granularity is not present in any prior physics-informed MEB model to our knowledge.
 
-Third, the six-state URI temporal modifier is the most direct encoding of the controlled rhinovirus-challenge data¹⁰·¹¹ into a flight-medicine simulator we are aware of. The peak-dysfunction window at days 4–7 carries a per-descent RR of 4.25, which when composed with direct ET-function effects reproduces the Lindfors 2021⁴ commercial-pilot odds ratio of 9.02 for ≥3 URIs per year without overfitting — the numerical basis for the clinical rule that aviators should not fly during URI days 1–14 and remain elevated-risk through days 15–21.
+Third, the six-state URI temporal modifier is the most direct encoding of the controlled rhinovirus-challenge data¹⁰·¹¹ into a flight-medicine simulator we are aware of. The peak-dysfunction window at days 4–7 carries a per-descent RR of 4.25, which when composed with direct ET-function effects reproduces the Lindfors 2021⁴ commercial-aircrew odds ratio of 9.02 for ≥3 URIs per year without overfitting — the numerical basis for the clinical rule that aviators should not fly during URI days 1–14 and remain elevated-risk through days 15–21.
 
 ### 4.1 Limitations
 
@@ -199,11 +199,11 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 1. Morgagni F, Autore A, Landolfi A, Ciniglio Appiani M, Marcoccia A. Predictors of ear barotrauma in aircrews exposed to simulated high altitude. Aviat Space Environ Med. 2012;83(6):594–598.
 
-2. Landolfi A, Autore A, Torchia F, Ciniglio Appiani M, Morgagni F, Marcoccia A. Ear barotrauma in Italian military aircrew. Aviat Space Environ Med. 2009;80(12):1068–1071.
+2. Landolfi A, Torchia F, Autore A, Ciniglio Appiani M, Morgagni F, Ciniglio Appiani G. Acute otitic barotrauma during hypobaric chamber training: prevalence and prevention. Aviat Space Environ Med. 2009;80(12):1059–1062.
 
-3. Morgagni F, Autore A, Landolfi A, Ciniglio Appiani M, Marcoccia A, Autore C. Efficacy of hyperbaric chamber training in Italian Air Force aircrew selection. Aviat Space Environ Med. 2010;81(10):966–971.
+3. Morgagni F, Autore A, Landolfi A, Torchia F, Ciniglio Appiani G. Altitude chamber related adverse effects among 1241 airmen. Aviat Space Environ Med. 2010;81(9):873–877.
 
-4. Lindfors OH, Räisänen-Sokolowski AK, Suvilehto J, Sinkkonen ST. Risk factors for ear barotrauma in commercial pilots. Aerosp Med Hum Perform. 2021;92(2):126–132.
+4. Lindfors OH, Ketola KS, Klockars TK, Leino TK, Sinkkonen ST. Middle ear barotraumas in commercial aircrew. Aerosp Med Hum Perform. 2021;92(3):182–189.
 
 5. Kanick SC, Doyle WJ. Barotrauma during air travel: predictions of a mathematical model. J Appl Physiol. 2005;98(5):1592–1602.
 
@@ -215,7 +215,7 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 9. McBride TP, Doyle WJ, Hayden FG, Gwaltney JM Jr. Alterations of the Eustachian tube, middle ear, and nose in rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1989;115(9):1054–1059.
 
-10. Buchman CA, Doyle WJ, Skoner D, Fireman P, Gwaltney JM. Otological manifestations of experimental rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1994;120(6):654–658.
+10. Buchman CA, Doyle WJ, Skoner D, Fireman P, Gwaltney JM. Otologic manifestations of experimental rhinovirus infection. Laryngoscope. 1994;104(10):1295–1299.
 
 11. Doyle WJ, Skoner DP, Alper CM, et al. Illness and otological changes during upper respiratory virus infection. Laryngoscope. 1999;109(2 Pt 1):324–328.
 

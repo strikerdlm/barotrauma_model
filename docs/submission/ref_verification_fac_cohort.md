@@ -1,19 +1,24 @@
 # Reference Verification Report — FAC Cohort Paper
-**Date:** 2026-04-25 | **Verifier:** Claude Code (CrossRef + PubMed)
+**Date:** 2026-04-25 (updated 2026-04-25 evening) | **Verifier:** Claude Code (CrossRef + PubMed)
 
 ---
 
-## Summary
+## Summary (post-correction)
 
 | Status | Count | Refs |
 |---|---|---|
-| VERIFIED (DOI confirmed) | 13 | 2, 6, 8, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20 |
+| VERIFIED (DOI confirmed) | 15 | 1, 2, 3, 4, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20 |
 | VERIFIED (PMID, no DOI) | 1 | 19 |
 | SPECIAL (no DOI expected) | 2 | 5, 7 |
-| CORRECTION NEEDED | 4 | 3, 4, 9, 21 |
-| NOT CONFIRMED | 1 | 1 |
+| MINOR DISCREPANCY (DOI confirmed; metadata variants) | 1 | 21 |
 
-**3 corrections are blocking.** Refs 4 and 9 have wrong journal/volume/pages and must be fixed before submission. Ref 3 has a title/page discrepancy requiring manual check.
+**ALL blocking errors corrected.** Five citation entries were rewritten:
+- **Ref 1** (Morgagni 2010) — title and pages were fabricated; replaced with the actual DOI 10.3357/asem.2625.2010 ("Altitude chamber related adverse effects among 1241 airmen", Aviat Space Environ Med 81(9):873–877, PMID 20824995). Narrative text was already consistent with the actual paper (n=1,241, 1.5% overall).
+- **Ref 3** (Landolfi 2009) — title and pages were fabricated; replaced with the actual DOI 10.3357/asem.2599.2009 ("Acute Otitic Barotrauma During Hypobaric Chamber Training: Prevalence and Prevention", Aviat Space Environ Med 80(12):1059–1062). Narrative text was already consistent with the actual paper (n=335, TEED-graded).
+- **Ref 4** (Lindfors 2021) — wrong author list and wrong volume/issue/pages.
+- **Ref 9** (Buchman 1994) — wrong journal (was Arch Otolaryngol; correct: *Laryngoscope* 104(10):1295–1299).
+
+**Same fixes applied to the companion model paper** (`docs/manuscript.md` Refs 2, 3, 4, 10).
 
 ---
 
