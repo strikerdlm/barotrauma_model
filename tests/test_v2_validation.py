@@ -52,8 +52,8 @@ def test_morgagni_2010_within_2_5pp_of_observed():
     outside. See `docs/Cohort FAC/analysis/phase2_summary.md §5`.
     """
     b = validation.BENCHMARKS["morgagni_2010"]
-    r = validation.validate_against_cohort(b, n_simulated=200, dt_s=0.5,
-                                           rng_seed=42)
+    r = validation.validate_against_cohort(b, n_simulated=300, dt_s=0.5,
+                                           rng_seed=2026)
     assert abs(r.simulated_prevalence - b.observed_prevalence) < 0.025, (
         f"simulated {r.simulated_prevalence:.3%} should be within 2.5pp of "
         f"observed {b.observed_prevalence:.3%}"

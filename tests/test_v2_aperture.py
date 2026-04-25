@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 from barotrauma.v2 import PatientState, simulate
-from barotrauma.v2.et_dynamics import aperture_factor
+from barotrauma.v2.et_dynamics import active_swallow_equalization, aperture_factor
 from barotrauma.v2.pathophysiology import Modifiers
 from barotrauma.v2.types import ChamberProfile, ChamberSegment, EtFunction
 
@@ -65,6 +65,28 @@ def test_aperture_inflammation_tightening():
     healthy = aperture_factor(-120.0, 0.0, et, Modifiers())
     uri = aperture_factor(-120.0, 0.0, et, Modifiers(ra_mult=4.0))
     assert uri < healthy
+
+
+def test_active_resistance_reduces_swallow_clearance():
+    """Higher Kanick-Doyle R_A should reduce the delivered active-opening bolus."""
+    m = Modifiers()
+    baseline = active_swallow_equalization(
+        -80.0,
+        EtFunction(active_resistance_mmHg_ml_min=2.0),
+        m,
+        dt_s=0.1,
+        is_descent=True,
+        rate_mmHg_s=0.0,
+    )
+    high_resistance = active_swallow_equalization(
+        -80.0,
+        EtFunction(active_resistance_mmHg_ml_min=200.0),
+        m,
+        dt_s=0.1,
+        is_descent=True,
+        rate_mmHg_s=0.0,
+    )
+    assert abs(high_resistance) > abs(baseline)
 
 
 # ----------------------- end-to-end asymmetry behaviour -----------------------

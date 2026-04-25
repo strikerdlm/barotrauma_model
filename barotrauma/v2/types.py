@@ -115,6 +115,10 @@ class EtFunction:
             raise ValueError("passive_opening_mmHg_me must be positive")
         if self.active_resistance_mmHg_ml_min <= 0:
             raise ValueError("active_resistance_mmHg_ml_min must be positive")
+        if self.active_open_duration_s <= 0:
+            raise ValueError("active_open_duration_s must be positive")
+        if self.swallow_freq_per_hr_cruise < 0 or self.swallow_freq_per_hr_descent < 0:
+            raise ValueError("swallow frequencies must be non-negative")
         if not 0 <= self.fge_controls <= 1:
             raise ValueError("fge_controls must be in [0,1]")
 
@@ -238,6 +242,12 @@ class SimulationTrace:
     def dt(self) -> float:
         return float(self.t_s[1] - self.t_s[0]) if len(self.t_s) > 1 else 0.0
 
+    def step_durations_s(self) -> NDArray[np.float64]:
+        """Per-sample integration weights; first sample has zero elapsed time."""
+        if len(self.t_s) == 0:
+            return np.asarray([], dtype=np.float64)
+        return np.diff(self.t_s, prepend=self.t_s[0]).astype(np.float64)
+
     def max_abs_delta_p(self) -> float:
         return float(np.max(np.abs(self.delta_p_mmHg)))
 
@@ -245,16 +255,16 @@ class SimulationTrace:
         """Seconds spent with |ΔP| > threshold."""
         if len(self.t_s) < 2:
             return 0.0
-        dt = self.dt()
-        return float(np.sum(np.abs(self.delta_p_mmHg) > threshold_mmHg) * dt)
+        weights = self.step_durations_s()
+        return float(np.sum((np.abs(self.delta_p_mmHg) > threshold_mmHg) * weights))
 
     def auc_abs_delta_p(self, threshold_mmHg: float = 0.0) -> float:
         """∫ max(0, |ΔP| - threshold) dt — dose-response exposure integral."""
         if len(self.t_s) < 2:
             return 0.0
-        dt = self.dt()
+        weights = self.step_durations_s()
         excess = np.clip(np.abs(self.delta_p_mmHg) - threshold_mmHg, 0.0, None)
-        return float(np.sum(excess) * dt)
+        return float(np.sum(excess * weights))
 
 
 @dataclass(frozen=True)

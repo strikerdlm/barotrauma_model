@@ -59,8 +59,8 @@ dysfunction reported as dominant risk factors (DIMAE, unpublished —
 `docs/Cohort FAC/analysis/phase2_summary.md §5`).
 
 **Per-exposure target:** 2.38%, anchored to the pooled FAC 2010–2026
-cohort. Bisection-achieved per-exposure 2.47% and career-3 projection
-7.23% on an FAC_BOGOTA_DEFAULT synthetic cohort (n = 400). For
+cohort. Bisection-achieved per-exposure 2.29% and career-3 projection
+6.72% on an FAC_BOGOTA_DEFAULT synthetic cohort (n = 400). For
 cross-reference, Italian Air Force per-exposure rates 1.5–2.5%
 (Morgagni 2010 PMID 20824995; Morgagni 2012 PMID 22764614; Landolfi
 2009 PMID 20027855) remain the external-validation benchmarks.
@@ -68,8 +68,10 @@ cross-reference, Italian Air Force per-exposure rates 1.5–2.5%
 **Calibration method:** log-space bisection on `HAZARD_BAROTITIS_R`
 against the cohort mean `p_barotitis` over 300–400 synthetic subjects
 drawn from FAC-like priors (see `barotrauma/v2/calibration.py`,
-`CohortPriors`). Baromyringitis and rupture rate constants are rescaled
-proportionally until per-grade cohort data enable independent fitting.
+`CohortPriors`). Simulation seeds are fixed per synthetic subject during
+calibration to remove swallow-jitter noise from the fitted hazard constant.
+Baromyringitis and rupture rate constants are rescaled proportionally until
+per-grade cohort data enable independent fitting.
 
 **Calibration persistence:** `barotrauma/v2/calibrated.json` (auto-loaded
 on import).
@@ -126,8 +128,10 @@ on import).
   it from the v2 surface to avoid implying trained ML capability.
 - **Valsalva is idealized** as a 2-s bolus with a multiplicative FGE
   boost. Real Valsalva efficacy varies widely with technique and anatomy.
-- **Time-varying R_A (Ghadiali FEM) is not implemented.** v2 uses a
-  constant R_A per severity class with a Valsalva multiplier.
+- **Full time-varying R_A (Ghadiali FEM) is not implemented.** v2 now uses
+  static Kanick-Doyle active resistance and active-open duration to scale
+  per-swallow clearance, plus an optional lumped muscle-mechanics extension;
+  it does not run a full 2-D FEM per integration step.
 - **Chronological exposure carry-over is not modeled.** Two exposures the
   same day reset the ME gas composition to ambient each time. The
   v2.2.2 `career.simulate_career` / `simulate_career_cohort` API
@@ -137,9 +141,10 @@ on import).
 - **Population priors are FAC-demographic.** Transfer to pediatric,
   geriatric, or diving populations requires re-calibration.
 - **Calibration is against a self-consistent synthetic cohort**, not an
-  external held-out dataset. The Italian AF 1.5–2.5% per-exposure anchor
-  is stated in prose but not yet enforced by an automated external-
-  validation test. This is the single biggest item for v2.1.
+  external held-out subject-level dataset. The Italian AF 1.5–2.5%
+  per-exposure anchors are enforced by automated transfer-validation tests,
+  but they are study-level prevalence checks rather than individual-level
+  discrimination or calibration tests.
 
 ## 6.0.1 Considered but not implemented (v2.3.0 scope)
 
@@ -255,19 +260,23 @@ Automated tests (`tests/test_v2_*.py`, 44 cases):
 - FAC baseline simulates to `low`/`moderate` risk category.
 - Patulous-S1 reproduces Kanick-Doyle zero-ΔP prediction exactly.
 - URI/PET/rhinitis modifier composition: peak URI > baseline, AR+URI >
-  URI alone, paradoxical decongestant in PET > protective in healthy.
+  URI alone, paradoxical decongestant in PET > protective in healthy, and
+  PET-S1 with active URI flips to paradoxical-closure behavior.
 - Severe ETD simulates to higher risk than mild and normal.
+- Active resistance and active-open duration affect swallow clearance.
+- Doyle 2017 multi-pathway gas exchange feeds back into the pressure trace.
 - Calibration converges within ±0.5% of the target per-exposure
   prevalence and preserves URI dominance (day_4_7 > 2× none).
 
-External validation anchors (not yet automated):
+External validation anchors (automated):
 
 - Italian AF per-exposure barotitis rate 1.5–2.5% (Morgagni 2010/2012,
-  Landolfi 2009).
+  Landolfi 2009): Morgagni 2012 and Landolfi 2009 remain inside Wilson
+  95% CIs; Morgagni 2010 remains outside its tight Wilson CI but within the
+  pre-specified mixed-denominator tolerance.
 - Pooled FAC 2010–2026 career rate 6.97% projected from 3 per-exposure
-  samples against an achieved 2.47% per-exposure (~7.23%).
-- Kanick-Doyle 2005 Fig 3 qualitative trace matching (pending visual
-  regression test).
+  samples against an achieved 2.29% per-exposure (~6.72%).
+- Kanick-Doyle 2005 Fig 3 sampled trajectory regression.
 
 ## 9. Version history
 

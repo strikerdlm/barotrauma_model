@@ -130,6 +130,7 @@ def _prebake_cohort(
     cohort: list[PatientState],
     profile: ChamberProfile,
     dt_s: float,
+    rng_seed: int,
 ) -> _PrebakedCohort:
     """Run every cohort member once, store traces + modifiers."""
     from .pathophysiology import modifiers_for_patient
@@ -138,8 +139,8 @@ def _prebake_cohort(
     modifiers_list = []
     uris: list[str] = []
     severities: list[str] = []
-    for p in cohort:
-        r = simulate(p, profile, dt_s=dt_s)
+    for i, p in enumerate(cohort):
+        r = simulate(p, profile, dt_s=dt_s, rng_seed=rng_seed + i)
         traces.append(r.trace)
         modifiers_list.append(modifiers_for_patient(p))
         uris.append(p.uri)
@@ -272,7 +273,7 @@ def run_abc_smc(
     """
     rng = np.random.default_rng(rng_seed)
     cohort = sample_cohort(cohort_size, rng=rng)
-    prebaked = _prebake_cohort(cohort, profile, dt_s)    # expensive, ONCE
+    prebaked = _prebake_cohort(cohort, profile, dt_s, rng_seed + 10_000)    # expensive, ONCE
 
     # --- generation 0: sample from prior -----------------------------
     theta = prior.sample(rng, n=n_particles)          # linear

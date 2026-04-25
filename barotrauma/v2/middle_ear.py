@@ -79,6 +79,25 @@ class GasComposition:
         return self.p_o2 + self.p_co2 + self.p_n2 + self.p_h2o
 
 
+def rescale_gas_to_total(gas: GasComposition, p_total_mmHg: float) -> GasComposition:
+    """
+    Rescale partial pressures to a new total pressure while preserving gas
+    fractions. Mechanical effects (Boyle compression, ET bolus flow) change the
+    compartment's total pressure immediately; species diffusion then relaxes
+    the partial pressures on slower time constants.
+    """
+    total = gas.total_mmHg()
+    if total <= 0:
+        return initial_me_gas(p_total_mmHg)
+    scale = p_total_mmHg / total
+    return GasComposition(
+        p_o2=gas.p_o2 * scale,
+        p_co2=gas.p_co2 * scale,
+        p_n2=gas.p_n2 * scale,
+        p_h2o=gas.p_h2o * scale,
+    )
+
+
 def initial_me_gas(p_total_mmHg: float) -> GasComposition:
     """
     Steady-state ME gas composition assumed equal to venous-blood composition
@@ -106,7 +125,7 @@ def transmucosal_exchange_step(
     dt_min = dt_s / 60.0
     p_o2 = gas.p_o2 - C.TRANSMEM_K_O2_PER_MIN * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
     p_co2 = gas.p_co2 - C.TRANSMEM_K_CO2_PER_MIN * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
-    p_n2 = gas.p_n2 - C.TRANSMEM_K_N2_PER_MIN * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min  # small drift
+    p_n2 = gas.p_n2 - C.TRANSMEM_K_N2_PER_MIN * (gas.p_n2 - C.P_VB_N2_MMHG) * dt_min  # small drift
     p_h2o = gas.p_h2o - C.TRANSMEM_K_H2O_PER_MIN * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
     return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
 
@@ -153,7 +172,7 @@ def transmembrane_tm_exchange_step(
     k_h2o = C.TRANSMEM_K_H2O_PER_MIN * TM_FRACTION_H2O
     p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
     p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
-    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_N2_MMHG) * dt_min
     p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
     return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
 
@@ -170,7 +189,7 @@ def transmembrane_rw_exchange_step(
     k_h2o = C.TRANSMEM_K_H2O_PER_MIN * RW_FRACTION_H2O
     p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
     p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
-    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_N2_MMHG) * dt_min
     p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
     return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
 
@@ -214,7 +233,7 @@ def full_gas_exchange_step(
 
     p_o2 = gas.p_o2 - k_o2 * (gas.p_o2 - C.P_VB_O2_MMHG) * dt_min
     p_co2 = gas.p_co2 - k_co2 * (gas.p_co2 - C.P_VB_CO2_MMHG) * dt_min
-    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_O2_MMHG) * dt_min
+    p_n2 = gas.p_n2 - k_n2 * (gas.p_n2 - C.P_VB_N2_MMHG) * dt_min
     p_h2o = gas.p_h2o - k_h2o * (gas.p_h2o - C.P_VB_H2O_MMHG) * dt_min
     return GasComposition(p_o2=p_o2, p_co2=p_co2, p_n2=p_n2, p_h2o=p_h2o)
 

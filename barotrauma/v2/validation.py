@@ -141,8 +141,15 @@ def validate_against_cohort(
     rng = np.random.default_rng(rng_seed)
     cohort = sample_cohort(n_simulated, rng=rng, priors=benchmark.priors)
     probs = np.fromiter(
-        (simulate(p, benchmark.profile, dt_s=dt_s).risk.p_barotitis
-         for p in cohort),
+        (
+            simulate(
+                p,
+                benchmark.profile,
+                dt_s=dt_s,
+                rng_seed=rng_seed + i,
+            ).risk.p_barotitis
+            for i, p in enumerate(cohort)
+        ),
         dtype=np.float64,
     )
     simulated_prev = float(np.mean(probs))

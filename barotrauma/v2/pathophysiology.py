@@ -104,15 +104,6 @@ def _pet_modifiers(pet: PetState, *, uri: UriState, habitual_sniffer: bool) -> M
     if pet == "normal":
         return Modifiers()
 
-    if pet == "s1":
-        # Baseline patent, upright, dry. Kanick-Doyle prediction holds:
-        # tube continuously open → ΔP ≈ 0. Protective for rupture.
-        return Modifiers(
-            is_patulous_patent=True,
-            per_descent_rr=0.4,    # structurally lower MEB in healthy S1
-            notes=("PET-S1 (baseline patent): rupture-protective per Kanick-Doyle",),
-        )
-
     if pet == "s2" or (pet == "s1" and uri != "none"):
         # PET + URI / rhinitis / recumbency = paradoxical closure on abnormal substrate.
         # This is the safety-critical state: not protected, and ET may lock at
@@ -124,6 +115,15 @@ def _pet_modifiers(pet: PetState, *, uri: UriState, habitual_sniffer: bool) -> M
             passive_opening_shift_mmHg=60.0 * C.MMHG_PER_DAPA,
             per_descent_rr=4.0,
             notes=("PET-S2 (PET + inflammation): paradoxical closure, HIGH RISK",),
+        )
+
+    if pet == "s1":
+        # Baseline patent, upright, dry. Kanick-Doyle prediction holds:
+        # tube continuously open → ΔP ≈ 0. Protective for rupture.
+        return Modifiers(
+            is_patulous_patent=True,
+            per_descent_rr=0.4,    # structurally lower MEB in healthy S1
+            notes=("PET-S1 (baseline patent): rupture-protective per Kanick-Doyle",),
         )
 
     if pet == "s3":

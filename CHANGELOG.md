@@ -26,7 +26,7 @@ semantic versioning.
   All four surfaced via Pydantic schema, TypeScript types, and the
   dashboard PatientBuilder "v2.3.0 covariates" toggle block. Defaults
   False so v2.2.1 callers see no behavior change. 11 new tests in
-  `tests/test_v2_pathophysiology.py`; full v2 suite now 118 passing.
+  `tests/test_v2_pathophysiology.py`; full v2 suite now 122 passing.
 - `barotrauma/v2/career.py` — multi-exposure career-simulation API.
   Exposes `simulate_career` (single subject, sequence of exposures) and
   `simulate_career_cohort` (population) with a correct intra-subject
@@ -51,15 +51,36 @@ semantic versioning.
 
 ### Changed
 
+- Active swallow/Toynbee equalization now uses Kanick-Doyle active
+  resistance (`R_A`) and active-open duration (`T_A`) as a relative
+  conductance multiplier. This makes ETD/BDET mechanical modifiers affect
+  actual pressure clearance instead of only downstream risk labels.
+- Doyle 2017 gas-exchange steps now feed their total pressure change back
+  into `p_me_mmHg`, and mechanical pressure changes rescale the species
+  partial pressures for the next diffusion step. Nitrogen diffusion now
+  targets a dedicated venous/tissue N2 partial pressure instead of the O2
+  target.
+- Hazard and AUC integrations now use per-sample time weights from the
+  trace, preserving accuracy for profiles whose segment durations are not
+  exact multiples of the requested `dt_s`.
+- Calibration and external-validation cohort simulations now assign fixed
+  per-subject RNG seeds, removing swallow-jitter noise from fitted hazard
+  constants and prevalence regression tests.
+- Recalibrated persisted hazard constants after the active-clearance and
+  gas-exchange fixes: `r_barotitis` 5.85 × 10⁻⁸ → 5.09 × 10⁻⁸;
+  achieved FAC-like per-exposure prevalence 2.29% and career-3 projection
+  6.72%. Morgagni 2012 and Landolfi 2009 remain inside Wilson 95% CI;
+  Morgagni 2010 remains outside its tight CI but inside the mixed-denominator
+  tolerance.
 - Calibration re-anchored to the pooled FAC 2010–2026 cohort
   (173 / 7,271 = 2.38% per-exposure, Wilson 95% CI 2.06–2.75%; career-3
   projection 6.97%). Supersedes the previous 2.00% / 5.80% internal
   prior. `FAC_TARGET_MEB_PREVALENCE` 0.058 → 0.0697;
   `FAC_COHORT_YEARS` 10 → 16. Hazard constant `r_barotitis`
-  4.43 × 10⁻⁸ → 5.85 × 10⁻⁸ (new value inside the existing ABC-SMC 95%
+  4.43 × 10⁻⁸ → 5.09 × 10⁻⁸ (new value inside the existing ABC-SMC 95%
   CI, so ABC-SMC posterior remains internally consistent and is not
   re-fit). Italian AF Morgagni 2010 gap widens from +1.1 pp to
-  +1.77 pp; Morgagni 2012 and Landolfi 2009 remain inside Wilson 95%
+  +2.28 pp; Morgagni 2012 and Landolfi 2009 remain inside Wilson 95%
   CI. Manuscript, model card, and Table II / III / IV numbers updated
   to match; `test_morgagni_2010_within_2pp_of_observed` renamed and
   tolerance widened to 2.5 pp to reflect the expected consequence of
@@ -69,6 +90,13 @@ semantic versioning.
   against the shipping physics before this commit; numbers now match
   Table IV). Rupture probability is monotone-in-rate under the current
   model, superseding the old table's peak-at-2000–5000 ft/min claim.
+
+### Fixed
+
+- PET-S1 with an active URI now flips into the paradoxical-closure pathway
+  before the protective patent-tube override is applied. Previously
+  `PatientState(pet="s1", uri="day_4_7")` reported acute URI but hard-zeroed
+  the pressure gradient and risk.
 
 ## [2.2.1] — 2026-04-18
 

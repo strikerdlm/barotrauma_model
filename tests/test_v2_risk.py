@@ -40,6 +40,14 @@ def test_cumulative_hazard_integration_units():
     assert h == pytest.approx(excess * n * dt_s, rel=0.01)
 
 
+def test_cumulative_hazard_accepts_variable_step_weights():
+    dp = np.array([0.0, 30.0, 30.0], dtype=np.float64)
+    weights = np.array([0.0, 1.0, 3.0], dtype=np.float64)
+    excess = 30.0 - 18.4
+    h = cumulative_hazard(dp, weights, 18.4, 1.0, 1.0)
+    assert h == pytest.approx(excess * 4.0, rel=0.01)
+
+
 def test_subthreshold_gives_zero_hazard():
     dp = np.array([10.0, 12.0, 15.0], dtype=np.float64)
     h = cumulative_hazard(dp, 0.1, 18.4, 1.0, 1.0)

@@ -43,14 +43,19 @@ from .types import PatientState, RiskResult, SimulationTrace
 # ----------------------------------------------- dose integration -----
 def cumulative_hazard(
     delta_p_mmHg: NDArray[np.float64],
-    dt_s: float,
+    dt_s: float | NDArray[np.float64],
     threshold_mmHg: float,
     rate: float,
     power: float,
 ) -> float:
     """∫ r·max(0, |ΔP| − Θ)^n dt, returned in absolute hazard units."""
     excess = np.clip(np.abs(delta_p_mmHg) - threshold_mmHg, 0.0, None)
-    return float(rate * np.sum(excess ** power) * dt_s)
+    weights = np.asarray(dt_s, dtype=np.float64)
+    if weights.ndim == 0:
+        return float(rate * np.sum(excess ** power) * float(weights))
+    if weights.shape != excess.shape:
+        raise ValueError("dt_s array must have the same shape as delta_p_mmHg")
+    return float(rate * np.sum((excess ** power) * weights))
 
 
 def probability_from_hazard(cum_hazard: float) -> float:
@@ -70,7 +75,7 @@ def score_trace(
     Returns the ``RiskResult`` with per-stratum probabilities, the max |ΔP|,
     AUC exposures, and a plain-language dominant risk factor.
     """
-    dt_s = trace.dt()
+    dt_s = trace.step_durations_s()
     max_abs_dp = trace.max_abs_delta_p()
 
     # Baseline hazards from the physics-only ΔP trajectory

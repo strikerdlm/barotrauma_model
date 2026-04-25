@@ -266,6 +266,7 @@ TRANSMEM_CO2_O2_RATIO: float = 8.1              # Doyle 2011
 P_VB_O2_MMHG: float = 45.0
 P_VB_CO2_MMHG: float = 46.0
 P_VB_H2O_MMHG: float = 47.0
+P_VB_N2_MMHG: float = P0_MMHG - P_VB_O2_MMHG - P_VB_CO2_MMHG - P_VB_H2O_MMHG
 
 # Cabin/NP partial-pressure fractions (assumed constant)
 F_N2: float = 0.79

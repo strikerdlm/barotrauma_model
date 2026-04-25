@@ -75,6 +75,13 @@ def test_patulous_s2_flags_paradoxical_instability():
     assert m.is_patulous_patent is False
 
 
+def test_patulous_s1_with_uri_flips_to_paradoxical_instability():
+    """A patent PET with active URI should not keep the protective S1 override."""
+    m = modifiers_for_patient(PatientState(pet="s1", uri="day_4_7"))
+    assert m.patulous_unstable is True
+    assert m.is_patulous_patent is False
+
+
 def test_patulous_s4_sets_post_plug_flag():
     m = modifiers_for_patient(PatientState(pet="s4"))
     assert m.post_plug_stenotic is True
@@ -112,6 +119,7 @@ def test_pet_s1_is_rupture_protective_but_s2_flips_to_high_risk():
     """
     s1 = simulate(PatientState(pet="s1"), FAC_BOGOTA_DEFAULT)
     s2 = simulate(PatientState(pet="s2", uri="day_4_7"), FAC_BOGOTA_DEFAULT)
+    s1_uri = simulate(PatientState(pet="s1", uri="day_4_7"), FAC_BOGOTA_DEFAULT)
 
     # Kanick-Doyle protective prediction for S1
     assert s1.risk.p_barotitis < 0.02
@@ -120,6 +128,8 @@ def test_pet_s1_is_rupture_protective_but_s2_flips_to_high_risk():
     # Paradoxical flip in S2 — high risk despite the PET label
     assert s2.risk.p_barotitis > 0.20
     assert s2.risk.max_abs_delta_p_mmHg > 50.0
+    assert s1_uri.risk.p_barotitis > 0.20
+    assert s1_uri.risk.max_abs_delta_p_mmHg > 50.0
     # Dominant risk factor reflects the real driver (URI or PET-S2)
     assert ("URI" in s2.risk.dominant_risk_factor
             or "Patulous" in s2.risk.dominant_risk_factor)

@@ -141,12 +141,16 @@ def cohort_mean_p_barotitis(
     cohort: list[PatientState],
     profile: ChamberProfile,
     dt_s: float = 0.2,
+    rng_seed: int = 2026,
 ) -> float:
     """Mean predicted per-exposure p_barotitis across the cohort."""
     from .engine import simulate
 
     probs = np.fromiter(
-        (simulate(p, profile, dt_s=dt_s).risk.p_barotitis for p in cohort),
+        (
+            simulate(p, profile, dt_s=dt_s, rng_seed=rng_seed + i).risk.p_barotitis
+            for i, p in enumerate(cohort)
+        ),
         dtype=np.float64,
     )
     return float(np.mean(probs))
@@ -207,7 +211,9 @@ def calibrate_hazard_constants(
         C.HAZARD_BAROMYRINGITIS_R = float(mid * r_bmrg_ratio)
         C.HAZARD_RUPTURE_R = float(mid * r_rupt_ratio)
 
-        achieved = cohort_mean_p_barotitis(cohort, profile, dt_s=dt_s)
+        achieved = cohort_mean_p_barotitis(
+            cohort, profile, dt_s=dt_s, rng_seed=rng_seed + 10_000
+        )
         if abs(achieved - target_per_exposure_prevalence) < tol:
             break
         if achieved < target_per_exposure_prevalence:
@@ -225,8 +231,8 @@ def calibrate_hazard_constants(
     from .engine import simulate
     uri_probs: dict[str, list[float]] = {}
     severity_probs: dict[str, list[float]] = {}
-    for p in cohort:
-        pb = simulate(p, profile, dt_s=dt_s).risk.p_barotitis
+    for i, p in enumerate(cohort):
+        pb = simulate(p, profile, dt_s=dt_s, rng_seed=rng_seed + 20_000 + i).risk.p_barotitis
         uri_probs.setdefault(p.uri, []).append(pb)
         severity_probs.setdefault(p.et.severity, []).append(pb)
 

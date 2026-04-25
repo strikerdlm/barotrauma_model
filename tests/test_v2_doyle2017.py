@@ -17,6 +17,7 @@ from barotrauma.v2.middle_ear import (
     transmembrane_tm_exchange_step,
     transmucosal_exchange_step,
 )
+from barotrauma.v2.types import ChamberProfile, ChamberSegment
 
 
 def test_full_gas_exchange_backward_compat_with_both_disabled():
@@ -70,3 +71,27 @@ def test_simulate_with_gas_exchange_full_returns_finite():
                   rng_seed=42)
     assert np.isfinite(r.risk.p_barotitis)
     assert 0.0 <= r.risk.p_barotitis <= 1.0
+
+
+def test_full_gas_exchange_couples_back_to_pressure_trace():
+    """The Doyle 2017 option should affect ME pressure, not only hidden gas state."""
+    long_altitude_hold = ChamberProfile(
+        name="long hypobaric hold",
+        start_altitude_ft=25000.0,
+        segments=(ChamberSegment(duration_s=3600.0, end_altitude_ft=25000.0),),
+    )
+    simple = simulate(
+        PatientState(),
+        long_altitude_hold,
+        dt_s=1.0,
+        rng_seed=42,
+        gas_exchange_full=False,
+    )
+    full = simulate(
+        PatientState(),
+        long_altitude_hold,
+        dt_s=1.0,
+        rng_seed=42,
+        gas_exchange_full=True,
+    )
+    assert np.max(np.abs(simple.trace.p_me_mmHg - full.trace.p_me_mmHg)) > 1e-4

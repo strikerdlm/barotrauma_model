@@ -204,8 +204,15 @@ def active_swallow_equalization(
     float
         New ΔP (mmHg) after the swallow event.
     """
-    fge = et.fge_controls * modifiers.eq_rate_mult
+    fge = et.fge_controls
     fge = max(0.0, min(1.0, fge))
+    # Convert the Kanick-Doyle active-resistance/open-duration parameters into
+    # a relative conductance multiplier. Baseline EtFunction values preserve the
+    # published FGE; higher R_A or shorter openings reduce the delivered bolus.
+    baseline_conductance = C.ET_ACTIVE_OPEN_DURATION_S / C.ET_ACTIVE_RESISTANCE_MMHG_ML_MIN
+    conductance = et.active_open_duration_s / et.active_resistance_mmHg_ml_min
+    flow_factor = conductance / max(baseline_conductance, 1e-12)
+    fge *= max(0.0, min(4.0, flow_factor))
     # Aperture-limited effective clearance (Hagen-Poiseuille-informed)
     fge *= aperture_factor(delta_p_mmHg, rate_mmHg_s, et, modifiers)
     # Ghadiali FEM muscle modulation (v2.2)
