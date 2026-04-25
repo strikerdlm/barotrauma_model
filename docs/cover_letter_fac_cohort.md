@@ -58,7 +58,7 @@ No generative AI writing tools were used in the scientific content or clinical i
 
 ### Figures
 
-The submission includes 2 figures: Figure 1 (A) per-year FAC case counts 2010–2020 and (B) per-quarter 2025–2026 director-logged incidence with Wilson 95% CIs against the pooled 2010–2026 reference; Figure 2, a forest plot of per-flag preflight denial-rate discrimination with Wilson 95% CIs. Both figures are intended for **B&W print** (no color charges requested). Figure files will be uploaded separately as TIFF at ≥ 600 dpi (combination halftone) per AMHP requirements.
+The submission includes 4 figures (matching AMHP's ≤ 4 figure limit): Figure 1, (A) per-year FAC case counts 2010–2020 and (B) per-quarter 2025–2026 director-logged incidence with Wilson 95% CIs against the pooled 2010–2026 reference band; Figure 2, a forest plot of per-flag preflight denial-rate discrimination with Wilson 95% CIs; Figure 3, an international cohort comparison of per-exposure clinical barotrauma incidence with Wilson 95% CIs (FAC pooled 2010–2026 highlighted against published Italian and Israeli Air Force cohorts); Figure 4, two-panel display of (A) preflight blood-pressure category distribution under ACC/AHA 2017 thresholds, showing 56% of readings at stage-1 hypertension or above, and (B) SpO₂ distribution at 2,640 m baseline with Bogotá-specific reference bands. All four figures use the colorblind-safe Wong palette and are greyscale-legible; **B&W print is requested** (no color charges). Figure files will be uploaded separately as TIFF at ≥ 600 dpi (combination halftone) per AMHP requirements.
 
 ### Ethics, regulatory classification, and data
 
