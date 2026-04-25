@@ -1,0 +1,32 @@
+{
+  "paper": "fac_cohort",
+  "title": "Incidence and Preflight Screening Characteristics of Clinical Ear Barotrauma During Hypobaric Chamber Training in the Colombian Aerospace Force, 2010–2026: A Pooled Cohort Study",
+  "target_journal": "Aerospace Medicine and Human Performance (AMHP)",
+  "citation_style": "Vancouver",
+  "reporting_guideline": "STROBE",
+  "authors": "Diego L. Malpica, MD (sole author)",
+  "orcid": "0000-0002-2257-4940",
+  "primary_manuscript": "docs/manuscript_fac_cohort.md",
+  "cover_letter": "docs/cover_letter_fac_cohort.md",
+  "current_phase": 5,
+  "phase_label": "Manuscript draft complete — verification and submission package",
+  "phase_history": {
+    "0": {"label": "Scoping and project init", "status": "complete", "completed": "2026-04-25"},
+    "1": {"label": "Literature intelligence", "status": "complete", "completed": "prior"},
+    "2": {"label": "Data audit and cleaning", "status": "complete", "completed": "prior"},
+    "3": {"label": "Statistical analysis", "status": "complete", "completed": "prior"},
+    "4": {"label": "Figures and tables", "status": "complete", "completed": "prior", "note": "2 figures exist in docs/figures/fac_cohort/"},
+    "5": {"label": "Manuscript drafting", "status": "complete", "completed": "prior"},
+    "6": {"label": "Verification and submission package", "status": "in_progress", "started": "2026-04-25"}
+  },
+  "phase6_checklist": {
+    "doi_verify_all_refs": false,
+    "strobe_checklist": false,
+    "suggested_reviewers": false,
+    "highlights_bullet_list": false,
+    "final_manuscript_assembly": false,
+    "cover_letter_review": true
+  },
+  "notes": "Manuscript, figures, tables, and cover letter all exist. Phase 6 work: DOI-verify 21 refs, STROBE checklist, reviewers list, final assembly. Figures: docs/figures/fac_cohort/figure1_incidence_timeseries.{png,tiff} and figure2_denial_forest.{png,tiff}. The existing docs/submission/ files are for Paper C (model paper, Malpica & Farfán) — not this paper.",
+  "last_updated": "2026-04-25"
+}

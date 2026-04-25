@@ -168,7 +168,7 @@ We thank the DIMAE medical team, including the Correa Guarín and Jaimes team wh
 
 3. Landolfi A, Autore A, Torchia F, Ciniglio Appiani M, Morgagni F, Marcoccia A. Ear barotrauma in Italian military aircrew. Aviat Space Environ Med. 2009;80(12):1068–1071.
 
-4. Lindfors OH, Räisänen-Sokolowski AK, Suvilehto J, Sinkkonen ST. Risk factors for ear barotrauma in commercial pilots. Aerosp Med Hum Perform. 2021;92(2):126–132.
+4. Lindfors OH, Ketola KS, Klockars TK, Leino TK, Sinkkonen ST. Middle ear barotraumas in commercial aircrew. Aerosp Med Hum Perform. 2021;92(3):182–189.
 
 5. Malpica DL. Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training. Aerosp Med Hum Perform. 2026 (in review).
 
@@ -178,7 +178,7 @@ We thank the DIMAE medical team, including the Correa Guarín and Jaimes team wh
 
 8. McBride TP, Doyle WJ, Hayden FG, Gwaltney JM Jr. Alterations of the Eustachian tube, middle ear, and nose in rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1989;115(9):1054–1059.
 
-9. Buchman CA, Doyle WJ, Skoner D, Fireman P, Gwaltney JM. Otological manifestations of experimental rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1994;120(6):654–658.
+9. Buchman CA, Doyle WJ, Skoner D, Fireman P, Gwaltney JM. Otologic manifestations of experimental rhinovirus infection. Laryngoscope. 1994;104(10):1295–1299.
 
 10. Doyle WJ, Skoner DP, Alper CM, et al. Illness and otological changes during upper respiratory virus infection. Laryngoscope. 1999;109(2 Pt 1):324–328.
 
