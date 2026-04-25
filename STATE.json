@@ -21,13 +21,23 @@
     "6": {"label": "Verification and submission package", "status": "in_progress", "started": "2026-04-25"}
   },
   "phase6_checklist": {
-    "doi_verify_all_refs": false,
-    "strobe_checklist": false,
-    "suggested_reviewers": false,
+    "doi_verify_all_refs": true,
+    "strobe_checklist": true,
+    "suggested_reviewers": true,
     "highlights_bullet_list": false,
     "final_manuscript_assembly": false,
     "cover_letter_review": true
   },
-  "notes": "Manuscript, figures, tables, and cover letter all exist. Phase 6 work: DOI-verify 21 refs, STROBE checklist, reviewers list, final assembly. Figures: docs/figures/fac_cohort/figure1_incidence_timeseries.{png,tiff} and figure2_denial_forest.{png,tiff}. The existing docs/submission/ files are for Paper C (model paper, Malpica & Farfán) — not this paper.",
+  "blockers_for_diego": [
+    "Pineda full given name (currently '[Given name] Pineda J.' in author block — email lpinedaj@unal.edu.co)",
+    "ORCID for Correa, Jaimes, Pineda (Malpica's ORCID 0000-0002-2257-4940 is on file)",
+    "Verify the two narrative softenings in Paper C (42.6% type-B/C tympanogram and FGE = 0.32) against actual source PDFs if available",
+    "DIMAE institutional ethics-board memo reference number (Both papers note '[TO BE COMPLETED]')"
+  ],
+  "companion_paper_status": {
+    "model_paper": "docs/manuscript.md — 9 fabricated/incorrect references corrected; 11 verified; abstract trimmed to 249 words; ready for submission pending Diego's blocker review",
+    "doi_audit_report": "docs/submission/ref_verification_model_paper.md"
+  },
+  "notes": "Both papers underwent comprehensive Q1 optimization on 2026-04-25. Major finding: 9 of 24 refs in model paper and 4 of 21 refs in cohort paper had fabricated titles, wrong journals, or wrong author lists; all corrected to verified DOI-resolvable sources. Manuscripts, cover letters, and submission packages are coherent for the two-paper plan. Figures: docs/figures/fac_cohort/figure1_incidence_timeseries.{png,tiff} and figure2_denial_forest.{png,tiff} (cohort paper); docs/figures/figure1_descent_rate_sensitivity.tiff and figure2_sobol_indices.tiff (model paper).",
   "last_updated": "2026-04-25"
 }

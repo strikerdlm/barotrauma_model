@@ -52,7 +52,7 @@ The simulator is implemented in pure Python (NumPy and SciPy) as the `barotrauma
 
 ### 2.3 Physics core
 
-The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of 0.32 (Mandel 2016¹⁴); Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
+The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of approximately 0.3 (range derived from adult Eustachian-tube-function testing data¹⁴); Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
 
 ### 2.4 Descent-side aperture-collapse model
 
@@ -62,7 +62,7 @@ The central physical insight is that active ET clearance pathways (swallow and V
 
 URI state is encoded as one of six day-windows (none, 1–3, 4–7, 8–14, 15–21, 22–28), each with a tabulated multiplier set (Table I). Multipliers were derived from controlled rhinovirus-challenge data⁹⁻¹¹ and ETDQ-7 meta-analyses.¹⁶ The peak-dysfunction window (days 4–7) carries R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +150 daPa (+11.3 mmHg), a 50% drop in equalization-rate modifier, and a 4.25× per-descent MEB relative-risk multiplier.
 
-Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the type-B/C tympanogram rate of 42.6% reported in Shindo 2025.⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁴ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²³, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
+Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the negative-middle-ear-pressure pathophysiology repeatedly observed in PET patients with habitual sniffing (Ikeda 2011).⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁴ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²³, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
 
 ### 2.6 Muscle mechanics and multi-pathway gas exchange
 
@@ -110,7 +110,7 @@ Italian Air Force transfer tests (Table III) passed for Morgagni 2012 (simulated
 
 For a healthy baseline patient on a 25,000-ft descent, max |ΔP| grows monotonically with descent rate up to saturation at ~400 mmHg (Table IV; Figure 1). Barotitis probability increases from 0.0% at 300 ft·min⁻¹ (commercial cabin) to 9.9% at 10,000 ft·min⁻¹ (worst-case chamber stress test). Rupture probability rises monotonically with descent rate, reaching 1.57% at 10,000 ft·min⁻¹ after clearing the 150 mmHg threshold at ~5,000 ft·min⁻¹. The dose-time integral of |ΔP| does not saturate as sharply as the peak, so barotitis probability retains its gradient across the full 500–10,000 ft·min⁻¹ range even where max |ΔP| plateaus.
 
-The Patulous-S1 override reproduces Kanick-Doyle's rupture-protective prediction exactly (max |ΔP| = 0 on a rapid 10,000 ft·min⁻¹ descent, p<sub>barotitis</sub> = 0.0%). PET-S2 pathology (paradoxical closure on an abnormal cartilaginous substrate, no concurrent URI) on the same profile gives max |ΔP| = 423 mmHg and p<sub>barotitis</sub> = 44%; adding peak URI (day 4–7) saturates the hazard integral (p<sub>barotitis</sub> ≈ 100%), the clinically dangerous state flagged by Ikeda 2020⁷ but absent from Kanick-Doyle's framework.
+The Patulous-S1 override reproduces Kanick-Doyle's rupture-protective prediction exactly (max |ΔP| = 0 on a rapid 10,000 ft·min⁻¹ descent, p<sub>barotitis</sub> = 0.0%). PET-S2 pathology (paradoxical closure on an abnormal cartilaginous substrate, no concurrent URI) on the same profile gives max |ΔP| = 423 mmHg and p<sub>barotitis</sub> = 44%; adding peak URI (day 4–7) saturates the hazard integral (p<sub>barotitis</sub> ≈ 100%), a clinically dangerous state recognised in the PET-management literature⁶⁻⁸ but absent from Kanick-Doyle's framework.
 
 ### 3.4 Global sensitivity and pinned-baseline stability
 
@@ -126,7 +126,7 @@ We have extended the canonical Kanick-Doyle 2005 middle-ear-barotrauma model wit
 
 Three extensions deserve particular comment. First, the continuous aperture-collapse model was the single most load-bearing addition for chamber-rate physiology. Kanick-Doyle's binary lock treatment could not simultaneously reproduce a healthy-ear 20-mmHg gradient at 300 ft·min⁻¹ airline descent and a 400-mmHg gradient at 10,000 ft·min⁻¹ chamber stress — the single R<sub>A</sub> and lock threshold drifted one direction or the other. The Hill-function aperture with a protective free zone below 40 mmHg resolves this by leaving slow descents in the easy regime while progressively collapsing faster ones. Rate-dependent tightening captures the Wang 2019 rabbit histopathology gradient²² where pressure-change rate, not absolute altitude, predicted grade.
 
-Second, the Patulous ET four-state model is a clinically-motivated departure from Kanick-Doyle's trivial treatment. S1 reproduces the rupture-protective prediction exactly; S2 flips to high risk consistent with Ikeda 2020 and Shindo 2025; S3 captures the sustained negative-ME-pressure physiology. Paradoxical decongestant worsening in PET replaces the protective RR 0.70 with 1.4 and reflects the peritubal-soft-tissue clinical reality. This level of PET granularity is not present in any prior physics-informed MEB model to our knowledge.
+Second, the Patulous ET four-state model is a clinically-motivated departure from Kanick-Doyle's trivial treatment. S1 reproduces the rupture-protective prediction exactly; S2 flips to high risk consistent with the PET-with-inflammation pathophysiology described in the Japan Otological Society criteria (Kobayashi 2018); S3 captures the sustained negative-ME-pressure physiology. Paradoxical decongestant worsening in PET replaces the protective RR 0.70 with 1.4 and reflects the peritubal-soft-tissue clinical reality. This level of PET granularity is not present in any prior physics-informed MEB model to our knowledge.
 
 Third, the six-state URI temporal modifier is the most direct encoding of the controlled rhinovirus-challenge data¹⁰·¹¹ into a flight-medicine simulator we are aware of. The peak-dysfunction window at days 4–7 carries a per-descent RR of 4.25, which when composed with direct ET-function effects reproduces the Lindfors 2021⁴ commercial-aircrew odds ratio of 9.02 for ≥3 URIs per year without overfitting — the numerical basis for the clinical rule that aviators should not fly during URI days 1–14 and remain elevated-risk through days 15–21.
 
@@ -207,11 +207,11 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 5. Kanick SC, Doyle WJ. Barotrauma during air travel: predictions of a mathematical model. J Appl Physiol. 2005;98(5):1592–1602.
 
-6. Ikeda R, Oshima T, Oshima H, Miyazaki H, Kikuchi T, Kawase T. Clinical diagnostic criteria for patulous Eustachian tube: a proposal by the Japan Otological Society. Auris Nasus Larynx. 2024;51(2):415–421.
+6. Kobayashi T, Morita M, Yoshioka S, Mizuta K, Ohta S, Kikuchi T, Hayashi T, Kaneko A, Yamaguchi N, Hashimoto S, Kojima H, Murakami S, Takahashi H. Diagnostic criteria for patulous Eustachian tube: a proposal by the Japan Otological Society. Auris Nasus Larynx. 2018;45(1):1–5.
 
-7. Ikeda R, Kikuchi T, Oshima H, Miyazaki H, Hidaka H, Kawase T. Long-term results of the Kobayashi plug for patulous Eustachian tube. Laryngoscope. 2020;130(6):1518–1523.
+7. Kikuchi T, Ikeda R, Oshima H, Takata I, Kawase T, Oshima T, Katori Y, Kobayashi T. Effectiveness of Kobayashi plug for 252 ears with chronic patulous Eustachian tube. Acta Otolaryngol. 2017;137(3):253–258.
 
-8. Shindo T, Ikeda R, Oshima H, Miyazaki H, Katori Y. Middle-ear pressure in habitual sniffers. Auris Nasus Larynx. 2025;52(2):245–252.
+8. Ikeda R, Oshima T, Oshima H, Miyazaki M, Kikuchi T, Kawase T, Kobayashi T. Management of patulous Eustachian tube with habitual sniffing. Otol Neurotol. 2011;32(5):790–793.
 
 9. McBride TP, Doyle WJ, Hayden FG, Gwaltney JM Jr. Alterations of the Eustachian tube, middle ear, and nose in rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1989;115(9):1054–1059.
 
@@ -219,17 +219,17 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 11. Doyle WJ, Skoner DP, Alper CM, et al. Illness and otological changes during upper respiratory virus infection. Laryngoscope. 1999;109(2 Pt 1):324–328.
 
-12. Boel NM, Klokker M. Upper respiratory tract infections and aeromedical decisions. Aerosp Med Hum Perform. 2017;88(2):136–141.
+12. Boel NM, Klokker M. Upper respiratory infections and barotrauma among commercial pilots. Aerosp Med Hum Perform. 2017;88(1):17–22.
 
 13. Alper CM, Kitsko DJ, Swarts JD, Martin B, Yuksel S, Doyle WJ. Role of the mastoid in middle ear pressure regulation. Laryngoscope. 2011;121(2):404–408.
 
-14. Mandel EM, Doyle WJ, Swarts JD, Weissbrod PA. Fractional gradient equalized per swallow in children and adults. Laryngoscope. 2016;126(6):1433–1440.
+14. Doyle WJ, Swarts JD, Banks J, Casselbrant ML, Mandel EM, Alper CM. Sensitivity and specificity of Eustachian tube function tests in adults. JAMA Otolaryngol Head Neck Surg. 2013;139(7):719–727.
 
-15. Doyle WJ. Per-individual rate constants for middle ear trans-mucosal gas exchange. Hear Res. 2011;272(1–2):23–33.
+15. Doyle WJ, Swarts JD, Banks J, Yuksel S, Alper CM. Transmucosal O2 and CO2 exchange rates for the human middle ear. Auris Nasus Larynx. 2011;38(6):684–691.
 
 16. Chen T, Shih MC, Edwards TS, Nguyen SA, Meyer TA, Soler ZM, et al. Eustachian tube dysfunction (ETD) in chronic rhinosinusitis with comparison to primary ETD: a systematic review and meta-analysis. Int Forum Allergy Rhinol. 2022;12(7):942–951. doi:10.1002/alr.22942.
 
-17. Ghadiali SN, Banks J, Swarts JD. Finite element simulation of passive and active Eustachian tube function. Ann Otol Rhinol Laryngol. 2010;119(6):393–401.
+17. Ghadiali SN, Banks J, Swarts JD. Finite element analysis of active Eustachian tube function. J Appl Physiol. 2004;97(2):648–654.
 
 18. Doyle WJ. A formal description of middle ear pressure-regulation. Hear Res. 2017;354:73–85.
 
@@ -237,9 +237,9 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 20. Saltelli A, Annoni P, Azzini I, Campolongo F, Ratto M, Tarantola S. Variance based sensitivity analysis of model output: design and estimator for the total sensitivity index. Comput Phys Commun. 2010;181(2):259–270.
 
-21. Alper CM, Teixeira MS, Richert BC, Swarts JD. Change in Eustachian tube function with balloon dilation in adults with ventilation tubes. Otol Neurotol. 2020;41(4):511–518.
+21. Alper CM, Teixeira MS, Rath TJ, Hall-Burton D, Swarts JD. Change in Eustachian tube function with balloon dilation in adults with ventilation tubes. Otol Neurotol. 2020;41(4):482–488.
 
-22. Wang X, Bi Z, Sha Y. Rate-dependent middle-ear barotrauma: a dynamic rabbit model. Aerosp Med Hum Perform. 2019;90(8):697–703.
+22. Wang B, Xu X, Lin J, Jin Z. Dynamic rabbit model of ear barotrauma. Aerosp Med Hum Perform. 2019;90(8):696–702.
 
 23. Moayedi S, Gizaw A, Sweet S, Sethuraman K, Witting M. Pseudoephedrine prophylaxis does not prevent middle ear barotrauma in hyperbaric oxygen therapy. Undersea Hyperb Med. 2025;52(2):101–107.
 
