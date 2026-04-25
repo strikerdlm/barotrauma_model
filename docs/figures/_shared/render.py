@@ -40,8 +40,9 @@ def _build_html(panels: list[dict], total_w_log: int, total_h_log: int,
         )
         init_blocks.append(
             f"const opt{i} = {opt_str};\n"
-            f"const ch{i} = echarts.init(document.getElementById('c{i}'), null, {{ renderer: 'svg' }});\n"
+            f"const ch{i} = echarts.init(document.getElementById('c{i}'), null, {{ renderer: 'svg', width: {w}, height: {h} }});\n"
             f"ch{i}.setOption(opt{i});\n"
+            f"ch{i}.resize({{width: {w}, height: {h}}});\n"
         )
         svg_collect.append(f"ch{i}.renderToSVGString()")
 
@@ -116,16 +117,7 @@ def render_panels(panels_mm: list[dict], *, out_dir: Path, slug: str,
     svg_path = out_dir / f"{slug}.svg"
     html_path.write_text(html, encoding="utf-8")
 
-    subprocess.run([
-        "google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu",
-        f"--window-size={total_w_log},{total_h_log}",
-        "--force-device-scale-factor=2",
-        f"--screenshot={png_path}",
-        "--virtual-time-budget=4000",
-        "--hide-scrollbars",
-        f"file://{html_path.resolve()}",
-    ], check=True, capture_output=True, timeout=45)
-
+    # Step 1: extract SVG via Chrome's dump-dom (gives us a clean vector master)
     eval_html = out_dir / f"{slug}.eval.html"
     body = html.replace(
         'document.title = "READY";',
@@ -146,6 +138,27 @@ def render_panels(panels_mm: list[dict], *, out_dir: Path, slug: str,
         svg = m.group(1).replace("&lt;", "<").replace("&gt;", ">").replace("&amp;", "&").replace("&quot;", '"')
         svg_path.write_text(svg, encoding="utf-8")
     eval_html.unlink(missing_ok=True)
+
+    # Step 2: convert SVG to high-DPI PNG via cairosvg (bypasses Chrome's screenshot quirks)
+    if svg_path.exists():
+        import cairosvg
+        cairosvg.svg2png(
+            url=str(svg_path),
+            write_to=str(png_path),
+            output_width=total_w_log * 2,
+            output_height=total_h_log * 2,
+        )
+    else:
+        # Fallback to Chrome screenshot
+        subprocess.run([
+            "google-chrome", "--headless=new", "--no-sandbox", "--disable-gpu",
+            f"--window-size={total_w_log},{total_h_log}",
+            "--force-device-scale-factor=2",
+            f"--screenshot={png_path}",
+            "--virtual-time-budget=4000",
+            "--hide-scrollbars",
+            f"file://{html_path.resolve()}",
+        ], check=True, capture_output=True, timeout=45)
 
     return {"html": html_path, "png": png_path, "svg": svg_path,
             "size_px": (total_w_log * 2, total_h_log * 2),
