@@ -36,7 +36,7 @@ It returns:
 ## Scientific anchor
 
 - **Physics core**: Kanick & Doyle 2005 ([PMID 15608090](https://pubmed.ncbi.nlm.nih.gov/15608090/)) + Doyle 2017 ([PMID 28917121](https://pubmed.ncbi.nlm.nih.gov/28917121/)) species-resolved gas exchange coupled back into ME pressure + Alper 2020 ([PMID 32176133](https://pubmed.ncbi.nlm.nih.gov/32176133/)) parameter distributions.
-- **Aperture-collapse model**: continuous Hill-function aperture factor α(ΔP, dΔP/dt) ∈ [0,1] applied multiplicatively to active ET clearance; captures Hagen-Poiseuille r⁴ lumen compression under NP tissue pressure, rate-dependent viscoelastic lag, and inflammation tightening. Sobol sensitivity analysis identifies the aperture half-point (ΔP½ = 110 mmHg) as the dominant variance driver.
+- **Aperture-collapse model**: continuous Hill-function aperture factor α(ΔP, dΔP/dt) ∈ [0,1] applied multiplicatively to active ET clearance; captures Hagen-Poiseuille r⁴ lumen compression under NP tissue pressure, rate-dependent viscoelastic lag, and inflammation tightening. Production-grade Saltelli-Sobol sensitivity analysis (N = 128 base samples, 768 model evaluations, scrambled-Sobol QMC, seed 2026) identifies the aperture half-point (ΔP½ = 110 mmHg) as the dominant variance driver in per-exposure p_barotitis (S_T = 0.99, S_i = 0.97) — approximately fifty-fold above the next-largest indices (descent-phase swallow frequency S_T = 0.020, aperture free-zone S_T = 0.019, mastoid volume S_T = 0.005).
 - **Active ET clearance**: swallow/Toynbee equalization scales with Kanick-Doyle active resistance (R_A) and active-open duration (T_A), so ETD and BDET modifiers affect actual clearance mechanics rather than only labels or posterior RR.
 - **URI pathophysiology**: 6-state temporal modifier table (days 1–3, 4–7, 8–14, 15–21, 22–28) derived from Buchman 1994, McBride 1989, Doyle 1999, Chen 2022 (ETDQ-7 meta-analysis).
 - **Patulous ET**: 4-state model (S1 baseline patent → S2 inflammation-induced paradoxical closure → S3 habitual sniffer → S4 post-plug) per Ikeda 2020/2024, Shindo 2025, Oshima 2025.
@@ -70,7 +70,7 @@ Three manuscripts are in active development from this codebase:
 - **File:** [`docs/manuscript.md`](docs/manuscript.md)
 - **Article type:** Original Research — computational prediction model development + external validation
 - **Reporting:** TRIPOD 2015 ([checklist S1](docs/submission/supplementary_S1_tripod_checklist.md))
-- **Word count:** ~3,400 body · 248-word abstract · 24 refs · 4 tables · 2 figures
+- **Word count:** ~3,400 body · 248-word abstract · 24 refs · 4 tables · 4 figures (max permitted)
 - **Submission target:** *Aerospace Medicine and Human Performance* (AMHP) — primary track
   - Status: 5 FAIL items pending from 2026-04-18 compliance audit ([`docs/submission/2026-04-18_amhp_compliance_audit.md`](docs/submission/2026-04-18_amhp_compliance_audit.md))
   - Portal: <https://www.editorialmanager.com/AMHP/>
@@ -83,20 +83,35 @@ Three manuscripts are in active development from this codebase:
 
 ### Paper 2 — FAC cohort epidemiology
 
-**Title:** *Ten-Year Epidemiology of Middle-Ear Barotrauma in Colombian Aerospace Force Hypobaric-Chamber Training (DIMAE Registry 2010–2026)*
+**Title:** *Sixteen-Year Incidence of Ear Barotrauma in a Hypobaric-Chamber Training Program at 2,640 m Baseline Altitude: Colombian Aerospace Force 2010–2026 Cohort*
 
 - **File:** [`docs/manuscript_fac_cohort.md`](docs/manuscript_fac_cohort.md)
-- Incidence time-series + denial-rate forest plot (Figures 1 and 2, 600 dpi TIFF)
+- **Reporting:** STROBE 2007 ([checklist](docs/submission/strobe_checklist_fac_cohort.md))
+- **Word count:** abstract + 16-year pooled incidence body · 22 refs · 4 tables · 4 figures (max permitted)
+- **Figures (TIFF, 600 dpi):** [`docs/figures/paper_b/`](docs/figures/paper_b/)
+  - Fig 1 — incidence time-series (per-year 2010–2020 + per-quarter 2025–2026 with Wilson CIs)
+  - Fig 2 — preflight denial-rate forest plot (13 screening flags, ranked by discrimination)
+  - Fig 3 — international cohort comparison (FAC vs Italian/Israeli AF, 7 cohorts)
+  - Fig 4 — vital signs distribution at 2,640 m baseline (BP categories + SpO₂ histogram)
+- **Cover letter:** [`docs/cover_letter_fac_cohort.md`](docs/cover_letter_fac_cohort.md)
 - Reports the 7,271-exposure DIMAE registry underlying the model's calibration anchor
-- Standalone epidemiological companion to Paper 1
+- Headline finding: pooled 2.38% per-exposure incidence sits within the published Italian AF envelope despite the 2,640 m baseline altitude
 
 ### Paper 3 — Preflight screening instrument
 
-**Title:** Preflight fidelity and discriminatory performance of the DIMAE Microsoft Forms screening instrument
+**Title:** *Preflight Fidelity and Discriminatory Performance of the DIMAE Microsoft Forms Screening Instrument*
 
 - **File:** [`docs/manuscript_preflight_fidelity.md`](docs/manuscript_preflight_fidelity.md)
-- ROC AUC 0.81 for the DIMAE preflight questionnaire in predicting MEB during training
-- Methodological companion establishing the screening instrument's validity
+- **Reporting:** TRIPOD 2015 for the prediction-model component
+- **Word count:** ~3,500 body · 4 tables · 2 figures
+- **Figures (TIFF, 600 dpi):** [`docs/figures/paper_b/`](docs/figures/paper_b/)
+  - Fig 1 — denial-rate forest plot (shared with Paper 2 Fig 2)
+  - Fig 2 — preflight ROC curve (multivariable battery, AUC corrected = 0.813)
+- **Analysis:** [`analysis/scripts/preflight_roc.py`](analysis/scripts/preflight_roc.py) — penalised L2-ridge logistic regression with Harrell–Steyerberg bootstrap optimism correction (1,000 reps, seed 2026); raw curve and per-flag diagnostic-test metrics persisted at [`analysis/results/preflight_roc_logreg.json`](analysis/results/preflight_roc_logreg.json)
+- **Headline metrics** (corrected, expected out-of-sample): AUC 0.813 (95% CI 0.717–0.859); at Youden threshold sensitivity 63.6%, specificity 91.9%, PPV 15.2%, NPV 99.1%, LR+ 6.5, LR− 0.39, DOR 17
+- **Per-flag univariable** (no fitted coefficients, no optimism penalty): recent_respiratory LR+ 17.4 [9.05–33.63] is the strongest individual discriminator; anaemia/bleeding and malaise/fever/fatigue are pathognomonic (specificity 100%, LR+ ∞)
+- **Cover letter:** [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
+- **Submission target:** *BMJ Open* — pending submission playbook
 
 ---
 
@@ -212,9 +227,9 @@ Results are written to `barotrauma/v2/calibrated.json` and auto-loaded on next i
 
 | Cohort | Observed | Simulated | Status |
 |--------|----------|-----------|--------|
-| Morgagni 2012 (25k ft) | 2.3% [1.13–4.62%] | 3.78% | Inside Wilson 95% CI |
-| Landolfi 2009 | 2.4% [1.22–4.66%] | 3.78% | Inside Wilson 95% CI |
-| Morgagni 2010 (mixed) | 1.5% [0.96–2.34%] | 3.78% (+2.28 pp) | Outside Wilson CI; within mixed-denominator tolerance |
+| Morgagni 2012 (25k ft) | 2.3% [1.13–4.62%] | 3.31% | Inside Wilson 95% CI |
+| Landolfi 2009 | 2.4% [1.22–4.66%] | 3.37% | Inside Wilson 95% CI |
+| Morgagni 2010 (mixed) | 1.5% [0.96–2.34%] | 3.27% (+0.91 pp) | Outside Wilson CI; within mixed-denominator tolerance |
 
 ---
 
@@ -282,11 +297,24 @@ barotrauma_model/
 │   ├── manuscript_preflight_fidelity.md  # Paper 3 — preflight screening instrument
 │   ├── manuscript_author_page.md # Depersonalized title page for Editorial Manager
 │   ├── model_card.md             # Inputs / outputs / assumptions / limitations
-│   ├── cover_letter.md           # AMHP cover letter
+│   ├── cover_letter.md           # AMHP cover letter (Paper 1)
+│   ├── cover_letter_fac_cohort.md         # Paper 2 cover letter
+│   ├── cover_letter_preflight_fidelity.md # Paper 3 cover letter
 │   ├── 2026-04-19_journal-scout_meb-model.md  # Journal scout report (all candidates)
 │   ├── figures/
-│   │   ├── figure1_descent_rate_sensitivity.tiff  # 600 dpi AMHP-ready
-│   │   └── figure2_sobol_indices.tiff             # 600 dpi AMHP-ready
+│   │   ├── _shared/                  # ECharts theme + SVG→PNG→TIFF render pipeline
+│   │   ├── paper_b/                  # 5 figures for Papers 2 & 3 (FAC cohort + preflight)
+│   │   │   ├── fig_01_incidence_timeseries.{py,svg,png,tiff}
+│   │   │   ├── fig_02_denial_forest.{py,svg,png,tiff}
+│   │   │   ├── fig_03_international_comparison.{py,svg,png,tiff}
+│   │   │   ├── fig_04_vitals_distribution.{py,svg,png,tiff}
+│   │   │   └── fig_05_preflight_roc.{py,svg,png,tiff}
+│   │   └── paper_c/                  # 4 figures for Paper 1 (physics-informed model)
+│   │       ├── fig_01_descent_rate_sensitivity.{py,svg,png,tiff}
+│   │       ├── fig_02_sobol_sensitivity.{py,svg,png,tiff}
+│   │       ├── fig_03_external_validation.{py,svg,png,tiff}
+│   │       ├── fig_04_uri_pet_interaction.{py,svg,png,tiff}
+│   │       └── data/uri_pet_grid.json
 │   ├── research_notes/           # 7 structured literature briefs
 │   └── submission/               # AMHP compliance audit, upload playbook, TRIPOD S1
 ├── api/                          # FastAPI sidecar (Python) — JSON prediction endpoint
@@ -294,7 +322,11 @@ barotrauma_model/
 ├── models/
 │   ├── Literature/               # Structured literature PDFs / note files
 │   └── middle_ear_model-matlab/  # Original MATLAB reference implementation
-├── analysis/                     # Standalone analysis scripts and figures
+├── analysis/
+│   ├── scripts/                  # Reproducible analysis scripts (TRIPOD-grade)
+│   │   └── preflight_roc.py      # Paper 3 — penalised logreg + bootstrap optimism correction
+│   └── results/                  # JSON outputs that drive figure scripts (single source of truth)
+│       └── preflight_roc_logreg.json
 ├── app/                          # Streamlit dashboard (legacy prototype)
 ├── CHANGELOG.md                  # Full semantic-version history
 ├── HOW_TO_CONTINUE.md            # Prioritized next iterations
