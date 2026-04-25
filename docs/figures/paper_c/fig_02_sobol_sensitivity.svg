@@ -1,0 +1,56 @@
+<svg width="1417" height="945" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1417 945">
+<rect width="1417" height="945" x="0" y="0" fill="#ffffff"></rect>
+<path d="M173.5 50L173.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M448.5 50L448.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M723.5 50L723.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M997.5 50L997.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1272.5 50L1272.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1327.5 50L1327.5 846" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M173.5 846L173.5 50" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<path d="M-91.1 -12l91.1 0l0 24l-91.1 0Z" transform="translate(165.5342 746.5)" fill="transparent" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="translate(165.5342 746.5)" fill="#000">Aperture free zone</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(165.5342 746.5)" fill="#000">(20–60 mmHg)</text>
+<path d="M-77 -12l77 0l0 24l-77 0Z" transform="translate(165.5342 547.5)" fill="transparent" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="translate(165.5342 547.5)" fill="#000">Mastoid volume</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(165.5342 547.5)" fill="#000">(3–13 mL)</text>
+<path d="M-135.5 -12l135.5 0l0 24l-135.5 0Z" transform="translate(165.5342 348.5)" fill="transparent" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="translate(165.5342 348.5)" fill="#000">Swallow frequency, descent</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(165.5342 348.5)" fill="#000">(30–120 per hr)</text>
+<path d="M-90.5 -12l90.5 0l0 24l-90.5 0Z" transform="translate(165.5342 149.5)" fill="transparent" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="translate(165.5342 149.5)" fill="#000">Aperture half-point</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(165.5342 149.5)" fill="#000">(70–180 mmHg)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(173.5342 854)" fill="#000">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(448.1689 854)" fill="#000">0.5</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(722.8036 854)" fill="#000">1</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(997.4383 854)" fill="#000">1.5</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1272.0731 854)" fill="#000">2</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1327 854)" fill="#000">2.1</text>
+<path d="M173.8 692.1l43.3 0l0 108.9l-43.3 0Z" fill="#0072B2" stroke="#000" stroke-width="0.6" class="zr0-cls-1"></path>
+<path d="M173.8 493.1l87.3 0l0 108.8l-87.3 0Z" fill="#0072B2" stroke="#000" stroke-width="0.6" class="zr0-cls-1"></path>
+<path d="M173.8 294.1l98.3 0l0 108.9l-98.3 0Z" fill="#0072B2" stroke="#000" stroke-width="0.6" class="zr0-cls-1"></path>
+<path d="M173.8 95.1l1010.1 0l0 108.9l-1010.1 0Z" fill="#D55E00" stroke="#000" stroke-width="0.6" class="zr0-cls-2"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" transform="translate(223.4757 746.5)" fill="#000">0.08</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" transform="translate(267.4173 547.5)" fill="#000">0.16</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" transform="translate(278.4027 348.5)" fill="#000">0.18</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" transform="translate(1190.1899 149.5)" fill="#000">1.84</text>
+<path d="M-150.1 -5l300.1 0l0 23l-300.1 0Z" transform="translate(708.5 15)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6.5" transform="translate(708.5 15)" fill="#464646">Total-order Sobol sensitivity index (Saltelli, N = 32)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font: 12px Arial,sans-serif" xml:space="preserve" y="6" transform="translate(708.5 895)" fill="#000">Total-order Sobol index  S_T</text>
+<text dominant-baseline="central" text-anchor="middle" style="font: 9px Arial,sans-serif" xml:space="preserve" y="4.5" transform="translate(708.5 924)" fill="#444">Per-exposure p_barotitis at moderate-risk reference patient · N=32 Saltelli base · 192 evaluations · production runs use N≥128</text>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+pointer-events:none;
+}
+.zr0-cls-1:hover {
+cursor:pointer;
+fill:rgba(0,125,195,1);
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:rgba(234,103,0,1);
+}
+
+]]>
+
+</style>
+</svg>
