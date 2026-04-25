@@ -228,3 +228,6 @@ docs/Cohort FAC/**/*.pdf
 docs/Cohort FAC/**/*.csv
 !docs/Cohort FAC/analysis/
 !docs/Cohort FAC/analysis/**
+
+# User-supplied reference materials (local-only, not for version control)
+Old_docx/
