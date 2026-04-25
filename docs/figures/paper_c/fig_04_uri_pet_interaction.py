@@ -171,6 +171,7 @@ result = render(
     slug="fig_04_uri_pet_interaction",
     width_mm=160,
     height_mm=95,
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 print(f"Grid (PET × URI):")

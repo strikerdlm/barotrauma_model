@@ -21,10 +21,12 @@ Work from `docs/submission/` so every file has a canonical name and nothing gets
 | 3 | `author_title_page.docx` | from `docs/manuscript_author_page.md` via pandoc → Word | Title Page |
 | 4 | `fig_01_descent_rate_sensitivity.tiff` | `docs/figures/paper_c/` (ECharts → SVG → 600 dpi LZW TIFF, Wong colorblind palette is greyscale-legible) | Figure |
 | 5 | `fig_02_sobol_sensitivity.tiff` | `docs/figures/paper_c/` (ECharts → SVG → 600 dpi LZW TIFF, Wong colorblind palette is greyscale-legible) | Figure |
-| 6 | `forms/author_checklist_signed.pdf` | Editorial Manager form, wet signature | Author Checklist |
-| 7 | `forms/copyright_release_signed.pdf` | Editorial Manager form, wet signature | Copyright Release Form |
-| 8 | `forms/coi_signed.pdf` | Editorial Manager form, wet signature (one author = one section) | Conflict of Interest |
-| 9 | `dimae_ethics_memo.pdf` | DIMAE IRB/ethics office | Supplementary Material |
+| 6 | `fig_03_external_validation.tiff` | `docs/figures/paper_c/` (TRIPOD external-validation forest plot — observed vs simulated for FAC anchor + 3 Italian AF cohorts) | Figure |
+| 7 | `fig_04_uri_pet_interaction.tiff` | `docs/figures/paper_c/` (5 PET × 6 URI heatmap; visualises the headline pathophysiology innovation) | Figure |
+| 8 | `forms/author_checklist_signed.pdf` | Editorial Manager form, wet signature | Author Checklist |
+| 9 | `forms/copyright_release_signed.pdf` | Editorial Manager form, wet signature | Copyright Release Form |
+| 10 | `forms/coi_signed.pdf` | Editorial Manager form, wet signature (one author = one section) | Conflict of Interest |
+| 11 | `dimae_ethics_memo.pdf` | DIMAE IRB/ethics office | Supplementary Material |
 
 **Skip:** Color Surcharge form (B&W print requested).
 
@@ -130,10 +132,12 @@ Confirm none appears verbatim in the title.
 3. **Title Page** → `author_title_page.docx` (full author info)
 4. **Figure** → `fig_01_descent_rate_sensitivity.tiff`
 5. **Figure** → `fig_02_sobol_sensitivity.tiff`
-6. **Author Checklist** → `forms/author_checklist_signed.pdf`
-7. **Copyright Release Form** → `forms/copyright_release_signed.pdf`
-8. **Conflict of Interest** → `forms/coi_signed.pdf`
-9. **Supplementary Material** → `dimae_ethics_memo.pdf`
+6. **Figure** → `fig_03_external_validation.tiff`
+7. **Figure** → `fig_04_uri_pet_interaction.tiff`
+8. **Author Checklist** → `forms/author_checklist_signed.pdf`
+9. **Copyright Release Form** → `forms/copyright_release_signed.pdf`
+10. **Conflict of Interest** → `forms/coi_signed.pdf`
+11. **Supplementary Material** → `dimae_ethics_memo.pdf`
 
 Do NOT upload the Agreement-to-Pay-Extra-Charges form (B&W print).
 

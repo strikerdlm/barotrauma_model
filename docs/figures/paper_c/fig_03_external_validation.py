@@ -199,6 +199,7 @@ result = render(
         "RENDERWHISKER": WHISKER_JS,
         "RENDERANNOT": ANNOT_RIGHT_JS,
     },
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 for r in ROWS:

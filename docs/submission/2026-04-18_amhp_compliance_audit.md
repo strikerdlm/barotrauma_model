@@ -3,7 +3,13 @@
 **Manuscript:** `docs/manuscript.md` — "Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training"
 **Cover letter:** `docs/cover_letter.md`
 **Author page:** `docs/manuscript_author_page.md`
-**Figures:** `docs/figures/paper_c/fig_01_descent_rate_sensitivity.tiff`, `docs/figures/paper_c/fig_02_sobol_sensitivity.tiff` (Q1-grade ECharts pipeline, source scripts colocated, vector SVG masters preserved, 600 dpi LZW TIFF for AMHP halftone requirement)
+**Figures (4, AMHP limit ≤4):**
+- `docs/figures/paper_c/fig_01_descent_rate_sensitivity.tiff` — descent-rate sensitivity, healthy patient (Table IV companion)
+- `docs/figures/paper_c/fig_02_sobol_sensitivity.tiff` — Saltelli-Sobol total-order indices (N = 128, 768 evaluations)
+- `docs/figures/paper_c/fig_03_external_validation.tiff` — observed vs simulated forest plot for the calibration anchor + 3 Italian AF cohorts (TRIPOD validation visual)
+- `docs/figures/paper_c/fig_04_uri_pet_interaction.tiff` — 5 PET × 6 URI interaction heatmap (FAC profile, default healthy patient)
+
+All figures: Q1-grade ECharts pipeline, source scripts colocated, vector SVG masters preserved, 600 dpi LZW TIFF for AMHP halftone requirement, Wong colorblind-safe palette (greyscale-legible).
 
 **Article type:** Research Article (limits: 6,000 body words; 250 abstract words; ≤4 tables; ≤4 figures; ~25 refs)
 **Journal:** *Aerospace Medicine and Human Performance* — Feb 2026 Instructions for Authors
