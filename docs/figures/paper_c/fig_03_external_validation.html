@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/><title>chart</title>
+<style>
+  html,body{margin:0;padding:0;background:#fff}
+  #wrap{width:2008px;height:886px;position:relative;}
+</style>
+<script src="file:///root/.openclaw/workspace/barotrauma_model/docs/figures/_shared/echarts.min.js"></script>
+</head><body>
+<div id="wrap">
+<div id="c0" style="width:2008px;height:886px;display:block;"></div>
+
+</div>
+<script>
+const opt0 = {"backgroundColor": "#ffffff", "textStyle": {"fontFamily": "Arial, Helvetica, 'Liberation Sans', sans-serif", "color": "#000000"}, "animation": false, "title": {"text": "External validation: observed vs simulated per-exposure barotitis (%)", "left": "center", "top": 8, "textStyle": {"fontFamily": "Arial, Helvetica, 'Liberation Sans', sans-serif", "fontSize": 13, "fontWeight": "normal"}}, "graphic": [{"type": "text", "left": "center", "bottom": 14, "z": 100, "style": {"text": "Observed (filled circles) with Wilson 95% CI · simulated point (diamonds: green = within CI, orange = outside)", "font": "9px Arial,sans-serif", "fill": "#000", "textAlign": "center"}}], "legend": {"data": ["Observed (anchor)", "Observed (external)", "Simulated (within CI)", "Simulated (outside CI)"], "left": "center", "top": 32, "textStyle": {"fontFamily": "Arial, Helvetica, 'Liberation Sans', sans-serif", "fontSize": 10, "color": "#000"}, "itemWidth": 14, "itemHeight": 10, "selectedMode": false}, "grid": {"left": 200, "right": 280, "top": 70, "bottom": 60, "containLabel": true}, "xAxis": {"type": "value", "min": 0, "max": 6.0, "name": "", "axisLine": {"lineStyle": {"color": "#000", "width": 1}}, "axisTick": {"lineStyle": {"color": "#000", "width": 1}, "length": 4}, "axisLabel": {"fontFamily": "Arial, Helvetica, 'Liberation Sans', sans-serif", "fontSize": 11, "color": "#000", "formatter": "{value}%"}, "splitLine": {"lineStyle": {"color": "#E5E5E5", "width": 0.5, "type": "dashed"}}}, "yAxis": {"type": "category", "data": ["Landolfi 2009, TEED-graded  (Italian AF)", "Morgagni 2012, 25,000 ft  (Italian AF)", "Morgagni 2010  (Italian AF)", "FAC pooled 2010–2026  (anchor)"], "axisLine": {"lineStyle": {"color": "#000", "width": 1}}, "axisTick": {"show": false}, "axisLabel": {"fontFamily": "Arial, Helvetica, 'Liberation Sans', sans-serif", "fontSize": 11, "color": "#000", "interval": 0}, "splitLine": {"show": false}}, "series": [{"name": "CI", "type": "custom", "renderItem": function(params, api){
+  var y = api.coord([0, api.value(0)])[1];
+  var xLo = api.coord([api.value(1), api.value(0)])[0];
+  var xHi = api.coord([api.value(2), api.value(0)])[0];
+  var capH = 6;
+  return { type: 'group', children: [
+    { type: 'line', shape: { x1: xLo, y1: y, x2: xHi, y2: y },
+      style: { stroke: '#000', lineWidth: 1.0 } },
+    { type: 'line', shape: { x1: xLo, y1: y - capH, x2: xLo, y2: y + capH },
+      style: { stroke: '#000', lineWidth: 1.0 } },
+    { type: 'line', shape: { x1: xHi, y1: y - capH, x2: xHi, y2: y + capH },
+      style: { stroke: '#000', lineWidth: 1.0 } }
+  ] };
+}, "data": [[0, 1.22, 4.62], [1, 1.09, 4.51], [2, 0.97, 2.36], [3, 2.06, 2.75]], "z": 6, "silent": true}, {"name": "Observed (anchor)", "type": "scatter", "data": [null, null, null, {"value": [2.38, 3], "itemStyle": {"color": "#D55E00", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 14}], "symbol": "circle", "z": 10, "encode": {"x": 0, "y": 1}, "itemStyle": {"color": "#D55E00", "borderColor": "#000", "borderWidth": 0.7}}, {"name": "Observed (external)", "type": "scatter", "data": [{"value": [2.39, 0], "itemStyle": {"color": "#0072B2", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 12}, {"value": [2.23, 1], "itemStyle": {"color": "#0072B2", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 12}, {"value": [1.51, 2], "itemStyle": {"color": "#0072B2", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 12}, null], "symbol": "circle", "z": 10, "encode": {"x": 0, "y": 1}, "itemStyle": {"color": "#0072B2", "borderColor": "#000", "borderWidth": 0.7}}, {"name": "Simulated (within CI)", "type": "scatter", "data": [{"value": [3.37, 0], "itemStyle": {"color": "#009E73", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 13}, {"value": [3.31, 1], "itemStyle": {"color": "#009E73", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 13}, null, {"value": [2.47, 3], "itemStyle": {"color": "#009E73", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 13}], "symbol": "diamond", "z": 11, "encode": {"x": 0, "y": 1}, "itemStyle": {"color": "#009E73", "borderColor": "#000", "borderWidth": 0.7}}, {"name": "Simulated (outside CI)", "type": "scatter", "data": [null, null, {"value": [3.27, 2], "itemStyle": {"color": "#E69F00", "borderColor": "#000", "borderWidth": 0.7}, "symbolSize": 13}, null], "symbol": "diamond", "z": 11, "encode": {"x": 0, "y": 1}, "itemStyle": {"color": "#E69F00", "borderColor": "#000", "borderWidth": 0.7}}, {"name": "annot_right", "type": "custom", "renderItem": function(params, api){
+  var x = api.coord([api.value(0), api.value(1)])[0];
+  var y = api.coord([api.value(0), api.value(1)])[1];
+  return { type: 'text', style: {
+    text: api.value(2),
+    x: x + 10, y: y,
+    fontSize: 10, fontFamily: 'Arial,sans-serif',
+    fill: '#000', textAlign: 'left', textVerticalAlign: 'middle'
+  }};
+}, "data": [[6.0, 0, "k=8/335  ·  sim 3.37%  (within CI)"], [6.0, 1, "k=7/314  ·  sim 3.31%  (within CI)"], [6.0, 2, "k=19/1,254  ·  sim 3.27%  (+0.91 pp outside)"], [6.0, 3, "k=173/7,271  ·  sim 2.47%  (within CI)"]], "z": 12, "silent": true}]};
+const ch0 = echarts.init(document.getElementById('c0'), null, { renderer: 'svg', width: 2008, height: 886 });
+ch0.setOption(opt0);
+ch0.resize({width: 2008, height: 886});
+
+window.__svg = [ch0.renderToSVGString()].join('\n');
+document.title = "READY";
+</script>
+</body></html>
