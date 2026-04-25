@@ -2,7 +2,7 @@
 
 **Authors:** Diego L. Malpica, MD¹
 
-**Affiliations:** ¹ Dirección de Medicina Aeroespacial (DIMAE), Fuerza Aérea Colombiana, Bogotá, Colombia
+**Affiliations:** ¹ Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia
 
 **Corresponding author:** Diego L. Malpica, MD; dlmalpica@yahoo.com
 
