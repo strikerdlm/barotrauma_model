@@ -52,7 +52,7 @@ The simulator is implemented in pure Python (NumPy and SciPy) as the `barotrauma
 
 ### 2.3 Physics core
 
-The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of approximately 0.3 (range derived from adult Eustachian-tube-function testing data¹⁴); Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
+The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of 0.32 (Mandel 2016 ears with no OM history, 95% CI 0.21–0.43; the previously reported adult-no-OM value is 0.26, 95% CI 0.18–0.34);¹⁴ Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
 
 ### 2.4 Descent-side aperture-collapse model
 
@@ -62,7 +62,7 @@ The central physical insight is that active ET clearance pathways (swallow and V
 
 URI state is encoded as one of six day-windows (none, 1–3, 4–7, 8–14, 15–21, 22–28), each with a tabulated multiplier set (Table I). Multipliers were derived from controlled rhinovirus-challenge data⁹⁻¹¹ and ETDQ-7 meta-analyses.¹⁶ The peak-dysfunction window (days 4–7) carries R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +150 daPa (+11.3 mmHg), a 50% drop in equalization-rate modifier, and a 4.25× per-descent MEB relative-risk multiplier.
 
-Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the negative-middle-ear-pressure pathophysiology repeatedly observed in PET patients with habitual sniffing (Ikeda 2011).⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁴ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²³, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
+Patulous ET (PET) is encoded as one of four states.⁶⁻⁸ S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on ΔP. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via R<sub>A</sub> × 3.5, P<sub>O</sub>' shift +60 daPa, and a 4.0× per-descent RR. S3 (habitual sniffer) biases resting ΔP toward −15 mmHg, reflecting the type-B/C tympanogram rate of 42.6% reported in habitually-sniffing PET patients (Shindo 2025).⁸ Per-descent RR was raised from 2.5 to 4.0 to reflect the Oshima 2025²⁴ large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled ΔP physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects — softened from the prior 0.70 per Moayedi 2025²³, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
 
 ### 2.6 Muscle mechanics and multi-pathway gas exchange
 
@@ -211,7 +211,7 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 7. Kikuchi T, Ikeda R, Oshima H, Takata I, Kawase T, Oshima T, Katori Y, Kobayashi T. Effectiveness of Kobayashi plug for 252 ears with chronic patulous Eustachian tube. Acta Otolaryngol. 2017;137(3):253–258.
 
-8. Ikeda R, Oshima T, Oshima H, Miyazaki M, Kikuchi T, Kawase T, Kobayashi T. Management of patulous Eustachian tube with habitual sniffing. Otol Neurotol. 2011;32(5):790–793.
+8. Shindo H, Yoshida M, Hirai R, Oshima T. Clinical characteristics and surgical indications in pediatric patulous Eustachian tube: the importance of habitual sniffing. Auris Nasus Larynx. 2025;52(5):545–549.
 
 9. McBride TP, Doyle WJ, Hayden FG, Gwaltney JM Jr. Alterations of the Eustachian tube, middle ear, and nose in rhinovirus infection. Arch Otolaryngol Head Neck Surg. 1989;115(9):1054–1059.
 
@@ -223,7 +223,7 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 13. Alper CM, Kitsko DJ, Swarts JD, Martin B, Yuksel S, Doyle WJ. Role of the mastoid in middle ear pressure regulation. Laryngoscope. 2011;121(2):404–408.
 
-14. Doyle WJ, Swarts JD, Banks J, Casselbrant ML, Mandel EM, Alper CM. Sensitivity and specificity of Eustachian tube function tests in adults. JAMA Otolaryngol Head Neck Surg. 2013;139(7):719–727.
+14. Mandel EM, Casselbrant ML, Richert BC, Teixeira MS, Swarts JD, Doyle WJ. Eustachian tube function in 6-year-old children with and without a history of middle ear disease. Otolaryngol Head Neck Surg. 2016;154(3):502–507.
 
 15. Doyle WJ, Swarts JD, Banks J, Yuksel S, Alper CM. Transmucosal O2 and CO2 exchange rates for the human middle ear. Auris Nasus Larynx. 2011;38(6):684–691.
 
