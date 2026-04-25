@@ -2,23 +2,23 @@
 Paper C — Figure 2. Saltelli-Sobol total-order sensitivity index over four
 model parameters evaluated at a moderate-risk reference patient.
 
-Source: manuscript.md L117 (§3.4) and L310 (Figure 2 caption). The aperture
-half-point dominates (S_T ≈ 1.84), an order of magnitude above descent-phase
-swallow frequency (0.18), mastoid volume (0.16), and aperture free-zone
-threshold (0.08). N = 32 Saltelli base samples → 192 model evaluations;
-production runs should use N ≥ 128.
-
-NOTE: The vendored `barotrauma/v2/sobol_indices.json` carries different total-
-order values (1.10 / 0.14 / 0.22 / 0.09) from a separate development run.
-This figure intentionally tracks the manuscript prose so the figure matches
-what the reader sees in §3.4. The JSON-vs-prose discrepancy is flagged for
-v2.3.0 reconciliation; a production rerun at N ≥ 128 will replace both.
+Source: barotrauma/v2/sobol_indices.json (canonical), produced by
+``python -m barotrauma.v2.sensitivity --n 128 --seed 2026 --save`` —
+N = 128 Saltelli base samples × (2 + k=4) = 768 model evaluations,
+scrambled-Sobol QMC sequence. The aperture half-point dominates
+(S_T = 0.99), approximately fifty-fold above the next-largest indices
+(swallow frequency 0.020, aperture free-zone 0.019, mastoid volume 0.005).
+The three secondary parameters are within Monte-Carlo noise of each other
+across a five-seed sweep at N = 128 (range 0.016–0.033 for swallow and
+free-zone). First-order index sum ≈ 0.93; total-order sum ≈ 1.04
+(no small-N artifact at the production sample size).
 
 Visualizes the paper's headline empirical-refinement claim: any future
 calibration effort should target the aperture half-point first.
 """
 from __future__ import annotations
 
+import json
 from pathlib import Path
 import sys
 
@@ -31,15 +31,23 @@ from amhp_theme import (
 from render import render
 
 # ---------------------------------------------------------------------------
-# Data — manuscript.md L117 (§3.4 Sobol-sampled sensitivity)
+# Data — load from canonical sobol_indices.json (N = 128, seed 2026)
 # ---------------------------------------------------------------------------
-PARAMS = [
-    # (display label, S_T, parameter range, is_dominant)
-    ("Aperture half-point\n(70–180 mmHg)",            1.84, True),
-    ("Swallow frequency, descent\n(30–120 per hr)",   0.18, False),
-    ("Mastoid volume\n(3–13 mL)",                     0.16, False),
-    ("Aperture free zone\n(20–60 mmHg)",              0.08, False),
+SOBOL_JSON = ROOT.parent / "barotrauma" / "v2" / "sobol_indices.json"
+_sj = json.loads(SOBOL_JSON.read_text())
+_st_by_name = dict(zip(_sj["parameters"], _sj["total_order"]))
+N_SAMPLES = _sj["n_samples"]
+N_EVALS = _sj["n_evaluations"]
+
+# (display label, source-name, parameter range, is_dominant)
+_PARAM_META = [
+    ("APERTURE_HALF_MMHG",      "Aperture half-point\n(70–180 mmHg)",         "(70–180 mmHg)", True),
+    ("SF_DESCENT_PER_HR",       "Swallow frequency, descent\n(30–120 per hr)", "(30–120 per hr)", False),
+    ("APERTURE_FREE_ZONE_MMHG", "Aperture free zone\n(20–60 mmHg)",           "(20–60 mmHg)", False),
+    ("MASTOID_VOLUME_ML",       "Mastoid volume\n(3–13 mL)",                  "(3–13 mL)", False),
 ]
+PARAMS = [(label, round(_st_by_name[src], 3), is_dom)
+          for src, label, _r, is_dom in _PARAM_META]
 
 # Sort descending and reverse for ECharts (top of chart = first item)
 PARAMS_SORTED = sorted(PARAMS, key=lambda r: r[1], reverse=True)
@@ -63,14 +71,15 @@ for i, r in enumerate(PARAMS_REV):
                   "distance": 6},
     })
 
-X_MAX = 2.1
+# X-axis to 1.1 leaves room for the right-side value labels above the dominant bar (~1.0)
+X_MAX = 1.15
 
 opt = {
     "backgroundColor": "#ffffff",
     "textStyle": {"fontFamily": FONT_FAMILY, "color": "#000000"},
     "animation": False,
     "title": {
-        "text": "Total-order Sobol sensitivity index (Saltelli, N = 32)",
+        "text": f"Total-order Sobol sensitivity index (Saltelli, N = {N_SAMPLES})",
         "left": "center", "top": 10,
         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_TITLE, "fontWeight": "normal"},
     },
@@ -86,7 +95,7 @@ opt = {
         # Footnote on the small-N artifact
         {"type": "text", "left": "center", "bottom": 12, "z": 100,
          "style": {
-             "text": "Per-exposure p_barotitis at moderate-risk reference patient · N=32 Saltelli base · 192 evaluations · production runs use N≥128",
+             "text": f"Per-exposure p_barotitis at moderate-risk reference patient · N={N_SAMPLES} Saltelli base · {N_EVALS} evaluations · scrambled-Sobol QMC, seed 2026",
              "font": f"9px Arial,sans-serif",
              "fill": "#444",
              "textAlign": "center",
