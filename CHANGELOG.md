@@ -8,6 +8,77 @@ semantic versioning.
 
 ### Added
 
+- **Q1-grade publication figure pipeline** (`docs/figures/_shared/`):
+  ECharts → headless-Chrome SVG dump → cairosvg high-DPI PNG → Pillow
+  600-dpi LZW TIFF. Wong 2011 colorblind-safe palette, Arial throughout,
+  vector SVG masters preserved for editorial markup. Single canonical
+  render entry point (`render.py`, opt-in `emit_tiff=True`); reusable
+  Wilson 95% CI helper (`amhp_theme.wilson`). Vendored `echarts.min.js`
+  for offline rendering reproducibility.
+- **9 publication-grade figures** built and committed alongside their
+  source scripts (PNG / SVG / HTML / TIFF for each):
+  - `docs/figures/paper_b/` — Papers 2 & 3 (FAC cohort + preflight):
+    `fig_01_incidence_timeseries`, `fig_02_denial_forest`,
+    `fig_03_international_comparison`, `fig_04_vitals_distribution`,
+    `fig_05_preflight_roc`.
+  - `docs/figures/paper_c/` — Paper 1 (physics-informed model):
+    `fig_01_descent_rate_sensitivity`, `fig_02_sobol_sensitivity`
+    (data-driven from `barotrauma/v2/sobol_indices.json`),
+    `fig_03_external_validation`, `fig_04_uri_pet_interaction` (5×6 grid
+    computed by `barotrauma.v2.simulate`, raw values cached at
+    `docs/figures/paper_c/data/uri_pet_grid.json`).
+- **TRIPOD-grade preflight prediction-model analysis**
+  (`analysis/scripts/preflight_roc.py` →
+  `analysis/results/preflight_roc_logreg.json`): penalised L2-ridge
+  logistic regression (`LogisticRegressionCV`, 5-fold CV on negative
+  log-likelihood; selected inverse-strength C = 3.16) on the 14 preflight
+  flags against the apt/denied outcome (n = 1,004 evaluable, 23 denials,
+  EPV = 1.6). Internal validation by Harrell–Steyerberg bootstrap
+  optimism correction (1,000 resamples, seed 2026), evaluating the
+  operating-point characteristics at the original-fit Youden threshold
+  held fixed across resamples. Headline result: AUC apparent 0.858,
+  AUC corrected 0.813 (95% CI 0.717–0.859); at Youden threshold sens
+  63.6%, spec 91.9%, PPV 15.2%, NPV 99.1%, LR+ 6.5, LR− 0.39, DOR 17.
+  Per-flag univariable diagnostic-test metrics (sens/spec/PPV/NPV/LR+/
+  LR− with Wilson and Katz log 95% CIs) tabulated in Paper 3 Table 4
+  for all 14 flags.
+- **Production-grade Sobol sensitivity analysis** at N = 128 base
+  samples (768 model evaluations, scrambled-Sobol QMC, seed 2026), with
+  five-seed convergence sweep (range 0.984–1.026 for the dominant
+  aperture half-point S_T). Replaces the previously vendored N = 32
+  development run. Figure 2 in Paper 1 now loads directly from the
+  canonical `sobol_indices.json` with no hardcoded values.
+- **Paper 1 (physics-informed model) Figures 3 and 4 promoted to the
+  main manuscript** (had only Figs 1+2 captioned previously): external
+  validation forest plot (TRIPOD requirement) and URI × PET interaction
+  heatmap (5 PET states × 6 URI temporal states). Inline references in
+  §3.2 (External validation) and §3.3 (Pathophysiology interactions).
+- **Paper 2 (FAC cohort) Figures 3 and 4 promoted to the main
+  manuscript**: international cohort comparison forest plot (positions
+  the FAC pooled 2.38% within the published Italian Air Force envelope)
+  and vital-signs distribution at 2,640 m baseline (BP categories +
+  SpO₂ histogram with Bogotá-specific reference bands).
+- **Paper 3 (preflight fidelity) Figure 2 newly built** to replace a
+  cover-letter overclaim (the prior cover letter referenced "AUC = 0.81"
+  with no underlying analysis on disk). Figure 2 is the bootstrap-
+  corrected ROC; Table 4 (per-flag diagnostic-test metrics) added with
+  apparent + corrected multivariable rows.
+- Methodology references added to Paper 3:
+  - Riley RD et al. *Stat Med* 2019;38(7):1276-1296. doi:10.1002/sim.7992
+  - van Smeden M et al. *Stat Methods Med Res* 2019;28(8):2455-2474.
+    doi:10.1177/0962280218784726
+  - Steyerberg EW et al. *J Clin Epidemiol* 2001;54(8):774-781.
+    doi:10.1016/S0895-4356(01)00341-9
+  - Collins GS et al. *Ann Intern Med* 2015;162(1):55-63.
+    doi:10.7326/M14-0697 (TRIPOD)
+  All four DOI-verified via Crossref before adding.
+- Submission infrastructure update: `docs/submission/2026-04-18_upload_playbook.md`
+  and `2026-04-18_amhp_compliance_audit.md` now point at the four new
+  Paper 1 TIFFs in `docs/figures/paper_c/`; legacy hand-rendered
+  binaries in `docs/figures/figure*.tiff` retired (no committed source
+  script, drifted from current Sobol values).
+- `Old_docx/` user-supplied reference materials (V3 article draft,
+  highlights, raw spreadsheets) added to `.gitignore` (local-only).
 - **v2.3.0 categorical covariates** — four new boolean fields on
   `PatientState` for evidence from the 2025–2026 literature scan
   (`docs/research_notes/06_2025_2026_updates.md`):
@@ -51,6 +122,47 @@ semantic versioning.
 
 ### Changed
 
+- **Paper 1 §3.4 Sobol prose rewritten for production-grade values.**
+  Old: N = 32 / 192 evaluations, S_T = 1.84 (aperture half), 0.18
+  (swallow), 0.16 (mastoid), 0.08 (free-zone) — values inflated by
+  small-sample noise (the manuscript footnote itself flagged this and
+  recommended N ≥ 128). New: N = 128 / 768 evaluations, S_T = 0.99
+  (aperture half, with S_i = 0.97), 0.020 (swallow), 0.019 (free-zone),
+  0.005 (mastoid). The dominance ratio strengthened from "an order of
+  magnitude" to "approximately fifty-fold". The previously-required
+  small-N artefact footnote (first-order index sum > 1) was deleted —
+  no artefact at production sample size (first-order sum 0.93,
+  total-order sum 1.04). Reordering of secondary parameters reflects
+  the new ranking; the three secondary terms are within Monte-Carlo
+  noise of each other.
+- **Paper 3 (preflight) Methods §2.7 rewritten to admit a multivariable
+  model with proper internal validation.** The earlier text said "no
+  multivariable logistic regression model was fitted" with EPV-of-10
+  rationale; this contradicted the cover letter's AUC = 0.81 claim and
+  blocked any honest multivariable reporting. Reconciled by introducing
+  Path C: penalised L2-ridge regression (Riley 2019, van Smeden 2019)
+  + Harrell–Steyerberg bootstrap optimism correction (Steyerberg 2001)
+  + TRIPOD 2015 reporting (Collins 2015). The methodology is the
+  principled response to low EPV; refusing the analysis was overly
+  conservative and inconsistent with the cover-letter claim.
+- **Paper 3 cover letter** now reports the corrected AUC 0.813
+  (95% CI 0.717–0.859) and operating-point characteristics from the
+  real bootstrap-corrected analysis, replacing the prior unverifiable
+  "AUC = 0.81" stated without source.
+- **Paper 2 (FAC cohort) figure paths repointed** from
+  `figures/fac_cohort/figure*.png` (a directory that never existed) to
+  `figures/paper_b/fig_*.png` (the new ECharts pipeline output). Cover
+  letter claim updated from "2 figures" to "4 figures" with the
+  accompanying figure descriptions.
+- **`barotrauma/v2/sobol_indices.json` regenerated** at production N=128
+  / seed 2026, replacing the previously vendored N=32 development run.
+  Five-seed convergence sweep (seeds 2024–2028) bound the dominant
+  aperture-half S_T to [0.984, 1.026], confirming Monte-Carlo
+  convergence at the production sample size.
+- **Render pipeline gains opt-in `emit_tiff=True`** option
+  (`docs/figures/_shared/render.py`) — Pillow conversion stamps 600 dpi
+  metadata for AMHP halftone TIFF requirement. Default off; opted in by
+  the 9 submission-bound figures.
 - Active swallow/Toynbee equalization now uses Kanick-Doyle active
   resistance (`R_A`) and active-open duration (`T_A`) as a relative
   conductance multiplier. This makes ETD/BDET mechanical modifiers affect
@@ -97,6 +209,29 @@ semantic versioning.
   before the protective patent-tube override is applied. Previously
   `PatientState(pet="s1", uri="day_4_7")` reported acute URI but hard-zeroed
   the pressure gradient and risk.
+- **Cover-letter/Methods contradiction in Paper 3 resolved.** Previous
+  state: `manuscript_preflight_fidelity.md` Methods §2.7 said "no
+  multivariable model fitted, EPV=1.6"; cover letter promised "AUC =
+  0.81" with no source analysis. Now: penalised L2-ridge regression with
+  bootstrap optimism correction, both apparent and corrected metrics
+  reported in the manuscript and cover letter, full TRIPOD-aligned
+  Methods description.
+- **Paper-1 Sobol values reconciled across JSON, manuscript prose, and
+  Figure 2.** The three previously drifted independently
+  (JSON: 1.10/0.14/0.22/0.09 from a stale dev run; manuscript prose:
+  1.84/0.18/0.16/0.08 from an earlier run; figure: hardcoded matching
+  prose). Now all three load from the canonical
+  `barotrauma/v2/sobol_indices.json` (N=128, seed 2026), with no
+  hardcoded values anywhere in the figure script.
+- **Legacy hand-rendered figure binaries retired.**
+  `docs/figures/figure1_descent_rate_sensitivity.{png,tiff}` and
+  `figure2_sobol_indices.{png,tiff}` had no committed source script,
+  could not be reproduced, and pre-dated the Sobol N=128 reconciliation
+  (still showed S_T = 1.84). Replaced by `docs/figures/paper_c/fig_*`
+  with committed source scripts and TIFF outputs at the same 600 dpi.
+- **Paper 1 Figure 2 axis labels** — replaced U+207B (superscript
+  minus) with `/` so `ft·min⁻¹` no longer renders as `ft·min□¹` (the
+  glyph is missing from Arial / Liberation Sans).
 
 ## [2.2.1] — 2026-04-18
 
