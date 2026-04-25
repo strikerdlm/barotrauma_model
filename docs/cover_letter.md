@@ -39,9 +39,9 @@ Both authors meet all four ICMJE authorship criteria. Each author has read and a
 - **D.L.M.** — Conceptualization; Methodology; Software; Validation; Formal analysis; Investigation; Data curation; Writing – Original Draft; Writing – Review & Editing; Visualization; Supervision; Project administration.
 - **M.A.F.** — Methodology; Writing – Review & Editing.
 
-### Ethics
+### Ethics and regulatory classification
 
-The study underwent secondary-analysis ethics review by the Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force. A waiver of informed consent was granted for retrospective analysis of de-identified operational registry data (reference [TO BE COMPLETED]). The study was conducted in accordance with the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health.
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*"Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), this retrospective secondary analysis of de-identified Colombian Aerospace Force operational records is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). **Publication of this work was authorized by the Colombian Aerospace Force.**
 
 ### Statistical expertise
 
@@ -65,7 +65,7 @@ No external funding supported this work. Institutional resources of the Directio
 
 ### Data and code availability
 
-Aggregate cohort statistics required to reproduce the calibration are reported in the manuscript and in the accompanying model card. Individual-level registry records are institutional operational data and are not publicly available due to military institutional and personal data-protection constraints; de-identified aggregate extracts may be made available from the corresponding author upon reasonable request. The complete simulator is released open-source (MIT license) at <https://github.com/strikerdlm/barotrauma_model>; the tagged release `v2.2.1-manuscript` corresponds to the state described in this manuscript. A DOI-assigned archival snapshot will be deposited on Zenodo prior to publication.
+Aggregate cohort statistics required to reproduce the calibration are reported in the manuscript and in the accompanying model card. Individual-level registry records are institutional operational data of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. The complete simulator is released open-source (MIT license) at <https://github.com/strikerdlm/barotrauma_model>; the tagged release `v2.2.1-manuscript` corresponds to the state described in this manuscript. A DOI-assigned archival snapshot will be deposited on Zenodo prior to publication.
 
 ### Suggested reviewers
 

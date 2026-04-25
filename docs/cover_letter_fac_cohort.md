@@ -60,9 +60,9 @@ No generative AI writing tools were used in the scientific content or clinical i
 
 The submission includes 2 figures: Figure 1 (A) per-year FAC case counts 2010–2020 and (B) per-quarter 2025–2026 director-logged incidence with Wilson 95% CIs against the pooled 2010–2026 reference; Figure 2, a forest plot of per-flag preflight denial-rate discrimination with Wilson 95% CIs. Both figures are intended for **B&W print** (no color charges requested). Figure files will be uploaded separately as TIFF at ≥ 600 dpi (combination halftone) per AMHP requirements.
 
-### Ethics and data
+### Ethics, regulatory classification, and data
 
-The DIMAE de-identified-registry secondary analysis is covered by the institutional ethics-board memo that will be uploaded as supplementary material. Raw case-level data with Colombian national identifiers (Cédula), names, and institutional emails remain under DIMAE data-protection boundaries and are not shared; de-identified aggregate CSVs and analysis scripts are publicly available in the companion repository (https://github.com/strikerdlm/barotrauma_model, under `docs/Cohort FAC/analysis/`).
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*"Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), this retrospective secondary analysis of de-identified DIMAE operational records is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). **Publication of this work was authorized by the Colombian Aerospace Force.** Raw case-level data with Colombian national identifiers (Cédula), names, and institutional emails remain under the data-protection boundary of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. De-identified aggregate CSVs and analysis scripts are publicly available in the companion repository (<https://github.com/strikerdlm/barotrauma_model>, under `docs/Cohort FAC/analysis/`).
 
 ### Conflicts of interest
 

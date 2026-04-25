@@ -12,14 +12,12 @@
 
 ## Authors
 
-**Maria Correa, MD**¹ · **Sonia Jaimes, MD**¹ · **Diego L. Malpica, MD**¹ · **[Given name] Pineda J.**²
+**Maria Correa, MD**¹ · **Sonia Jaimes, MD**¹ · **Diego L. Malpica, MD**¹ (ORCID 0000-0002-2257-4940) · **L. Pineda J.**²
 
 ¹ Directorate of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia
 ² Resident, Aerospace Medicine, Faculty of Medicine, National University of Colombia, Bogotá, Colombia
 
-**Corresponding author:** Diego L. Malpica, MD — Directorate of Aerospace Medicine, Colombian Air Force, Military Air Transport Command (CATAM), Bogotá, Colombia 110911. Email: diego.malpica@fac.mil.co. ORCID: 0000-0002-2257-4940.
-
-> **NOTE FOR SUBMISSION:** Pineda's full given name needs confirmation before submission. Email: lpinedaj@unal.edu.co. ORCID required for all co-authors (Correa: maria.correa@fac.mil.co; Jaimes: sonia.jaimes@fac.mil.co).
+**Corresponding author:** Diego L. Malpica, MD — Directorate of Aerospace Medicine, Colombian Air Force, Military Air Transport Command (CATAM), Bogotá, Colombia 110911. Email: diego.malpica@fac.mil.co.
 
 ---
 
@@ -79,9 +77,11 @@ Wilson 95% confidence intervals⁷ were computed for every proportion: per-expos
 
 Narrative classification of the 19 director-logged medical events used a regex scan over a curated list of Spanish ENT terms (otalgia, barotrauma, plenitud, timpánica, aerocolia, hipoxia, paradójica, ansiedad) with manual review of ambiguous assignments. Fitness-decision normalization collapsed the 4 observed strings ("SI" / "APTO" / "Apto" / "SI\\nSI\\nSI\\nSI\\nSI") to "apt" and the 23 denial variants to "denied"; remaining edge cases ("PENDIENTE" / "R" / "S" / missing) were excluded from the denial-rate denominator. Vital-sign plausibility filters (PAS 70–220 mmHg; PAD 40–140 mmHg; FC 30–180 bpm; SpO₂ 70–100%) removed 8 of 1,046 rows with data-entry errors (e.g., PAS = 1,240 mmHg). Age text entries ("MIGUEL ANGEL" in the EDAD column, 9 rows) were coerced to NA via numeric parsing.
 
-### 2.6 Ethics and data availability
+### 2.6 Regulatory classification, ethics, and data availability
 
-The analysis is covered by a DIMAE ethics-board memo authorizing secondary analysis of the de-identified chamber-training registry. De-identified tidy CSVs (`phase1_2010_2020_tidy.csv`, `phase2_preflight_tidy.csv`, `phase2_director_tidy.csv`) and summary tables are available in the companion repository at https://github.com/strikerdlm/barotrauma_model under `docs/Cohort FAC/analysis/`. Raw name-level files remain under the DIMAE data-protection boundary and are not publicly released.
+This study is a retrospective secondary analysis of de-identified operational records of the Direction of Aerospace Medicine (Dirección de Medicina Aeroespacial, DIMAE), Colombian Aerospace Force. Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*Ministerio de Salud, "Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), research that employs retrospective documentary methods reviewing de-identified records — without intervention or modification of biological, physiological, psychological, or social variables of subjects — is classified as ***investigación sin riesgo*** (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The present study meets these criteria: data are retrospective, de-identified prior to analysis, and no intervention was performed. The study was conducted in accordance with the principles of the Declaration of Helsinki (2013 revision). **Publication of this work was authorized by the Colombian Aerospace Force.**
+
+De-identified aggregate cohort statistics required to reproduce the analysis are reported in Tables I–IV. De-identified tidy CSVs (`phase1_2010_2020_tidy.csv`, `phase2_preflight_tidy.csv`, `phase2_director_tidy.csv`) and summary tables are available in the companion repository at <https://github.com/strikerdlm/barotrauma_model> under `docs/Cohort FAC/analysis/`. Raw name-level files remain under the data-protection boundary of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority.
 
 ---
 
@@ -192,11 +192,11 @@ No external funding supported this work.
 
 ## Ethics
 
-This retrospective secondary analysis of de-identified DIMAE operational chamber-training records is covered by an institutional ethics-board memo authorising the analysis. The study was conducted in accordance with the Declaration of Helsinki (2013 revision) and Resolution 8430 of 1993 of the Colombian Ministry of Health. No identifiable individual-level patient data are reported.
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health, Article 11(a), this retrospective secondary analysis of de-identified DIMAE operational chamber-training records is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). No identifiable individual-level patient data are reported. **Publication of this work was authorized by the Colombian Aerospace Force.**
 
 ## Data and code availability
 
-De-identified aggregate cohort statistics required to reproduce the analysis (Tables I–IV) and the de-identified tidy CSVs (`phase1_2010_2020_tidy.csv`, `phase2_preflight_tidy.csv`, `phase2_director_tidy.csv`) are available in the companion repository at <https://github.com/strikerdlm/barotrauma_model> under `docs/Cohort FAC/analysis/`. Raw name-level files containing Colombian national identifiers remain under DIMAE data-protection boundaries and are not publicly released.
+De-identified aggregate cohort statistics required to reproduce the analysis (Tables I–IV) and the de-identified tidy CSVs (`phase1_2010_2020_tidy.csv`, `phase2_preflight_tidy.csv`, `phase2_director_tidy.csv`) are available in the companion repository at <https://github.com/strikerdlm/barotrauma_model> under `docs/Cohort FAC/analysis/`. Raw name-level files containing Colombian national identifiers remain under the data-protection boundary of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority.
 
 ---
 

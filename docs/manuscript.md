@@ -44,7 +44,7 @@ We present a physics-informed, pathophysiology-aware extension that addresses th
 
 This is a computational prediction-model study comprising model development followed by external validation on three independent, previously published cohorts. Reporting follows the TRIPOD 2015 guideline (Transparent Reporting of a multivariable prediction model for Individual Prognosis Or Diagnosis); the completed 28-item checklist is provided as Supplementary File S1. No machine-learning component is used in the deployed prediction pipeline; the sklearn scaffolding referenced in the source repository is disabled and does not alter the deterministic physics output. TRIPOD+AI (2024) therefore does not apply.
 
-The study was conducted in accordance with the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health. The Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, reviewed the secondary analysis of the de-identified hypobaric-chamber training registry and granted a waiver of informed consent on the basis of retrospective de-identified operational data (reference [TO BE COMPLETED]). No individual-level patient data are reported; calibration is anchored to aggregate institutional statistics only.
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*Ministerio de Salud, "Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), research that uses retrospective documentary methods and de-identified records — without intervention or modification of biological, physiological, psychological, or social variables of subjects — is classified as ***investigación sin riesgo*** (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The present study meets these criteria: data are retrospective, de-identified prior to analysis, and no intervention was performed. The study was conducted in accordance with the principles of the Declaration of Helsinki (2013 revision). Calibration is anchored to aggregate institutional statistics only. **Publication of this work was authorized by the Colombian Aerospace Force.**
 
 ### 2.2 Model architecture
 
@@ -152,7 +152,7 @@ A physics-informed middle-ear barotrauma simulator that jointly models URI tempo
 
 ### Ethics approval and consent to participate
 
-The Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, reviewed the secondary analysis of the de-identified hypobaric-chamber training registry (2010–2026) and granted a waiver of informed consent on the basis of retrospective de-identified operational data (Approval reference [TO BE COMPLETED: body name, reference no., date]). The study was conducted in accordance with the principles of the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health governing health research in human subjects. No identifiable individual-level patient data are reported.
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*"Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), this retrospective secondary analysis of de-identified Colombian Aerospace Force operational chamber-training records (2010–2026) is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). No identifiable individual-level patient data are reported. **Publication of this work was authorized by the Colombian Aerospace Force.**
 
 ### Consent for publication
 
@@ -160,7 +160,7 @@ Not applicable — no identifiable individual-level patient data or images are i
 
 ### Data availability
 
-Aggregate cohort statistics (per-exposure prevalence, Wilson 95% CI, URI subgroup gradients) required to reproduce the calibration are reported in Tables II–IV and in the model card accompanying the source repository. Individual-level registry records are institutional operational data of the Colombian Aerospace Force and are not publicly available due to military institutional and personal data-protection constraints. De-identified aggregate extracts may be made available from the corresponding author upon reasonable request, subject to DIMAE institutional data-sharing review. External-validation data are available in the original publications.¹⁻³
+Aggregate cohort statistics (per-exposure prevalence, Wilson 95% CI, URI subgroup gradients) required to reproduce the calibration are reported in Tables II–IV and in the model card accompanying the source repository. Individual-level registry records are institutional operational data of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. External-validation data are available in the original publications.¹⁻³
 
 ### Code availability
 

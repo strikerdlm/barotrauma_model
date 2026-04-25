@@ -23,7 +23,6 @@ PHYSICS-INFORMED MEB MODEL
 <sup>\*</sup> Corresponding author.
 
 ORCID (D.L.M.): [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
-ORCID (M.A.F.): [to be provided]
 
 ## Corresponding author
 
@@ -61,7 +60,7 @@ The authors declare no financial or non-financial conflicts of interest, includi
 
 ## Ethics approval and consent to participate
 
-The Institutional Ethics Committee of the Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, reviewed the secondary analysis of the de-identified hypobaric-chamber training registry (2010–2026) and granted a waiver of informed consent on the basis of retrospective de-identified operational data (Approval reference [TO BE COMPLETED: body name, reference no., date]). The study was conducted in accordance with the principles of the Declaration of Helsinki (2013 revision) and with Resolution 8430 of 1993 of the Colombian Ministry of Health governing health research in human subjects. No individual-level patient data are reported.
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*"Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), this retrospective secondary analysis of de-identified Colombian Aerospace Force operational chamber-training records (2010–2026) is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). No identifiable individual-level patient data are reported. **Publication of this work was authorized by the Colombian Aerospace Force.**
 
 ## Consent for publication
 
@@ -73,7 +72,7 @@ No generative artificial-intelligence tools were used in the preparation, writin
 
 ## Data availability statement
 
-The calibration anchor is the Colombian Aerospace Force DIMAE hypobaric-chamber training registry (2010–2026; n = 7,271 exposures, n = 173 clinical barotrauma events). Aggregate cohort statistics (per-exposure prevalence, Wilson 95% CI, URI subgroup gradients) required to reproduce the calibration are reported in the manuscript and in the model card. Individual-level registry records are institutional operational data and are not publicly available due to military institutional and personal data-protection constraints. De-identified aggregate extracts may be made available from the corresponding author (diego.malpica@fac.mil.co) upon reasonable request, subject to DIMAE institutional data-sharing review. External-validation data are drawn from three previously published Italian Air Force cohorts (Morgagni 2010, Morgagni 2012, Landolfi 2009) and are available in those publications.
+The calibration anchor is the Colombian Aerospace Force DIMAE hypobaric-chamber training registry (2010–2026; n = 7,271 exposures, n = 173 clinical barotrauma events). Aggregate cohort statistics (per-exposure prevalence, Wilson 95% CI, URI subgroup gradients) required to reproduce the calibration are reported in the manuscript and in the model card. Individual-level registry records are institutional operational data of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. External-validation data are drawn from three previously published Italian Air Force cohorts (Morgagni 2010, Morgagni 2012, Landolfi 2009) and are available in those publications.
 
 ## Code availability statement
 
@@ -85,4 +84,4 @@ The study is reported in accordance with the TRIPOD 2015 guideline (Transparent 
 
 ## Institutional release
 
-This work was conducted under the auspices of the Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force. Institutional release authorization for external publication [TO BE COMPLETED: release memo reference and date, issued by DIMAE / FAC chain of command per military institutional research-publication policy].
+This work was conducted under the auspices of the Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force. **Publication of this work was authorized by the Colombian Aerospace Force.**

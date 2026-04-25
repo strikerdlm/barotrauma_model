@@ -29,10 +29,14 @@
     "cover_letter_review": true
   },
   "blockers_for_diego": [
-    "Pineda full given name (currently '[Given name] Pineda J.' in author block — email lpinedaj@unal.edu.co)",
-    "ORCID for Correa, Jaimes, Pineda (Malpica's ORCID 0000-0002-2257-4940 is on file)",
-    "Verify the two narrative softenings in Paper C (42.6% type-B/C tympanogram and FGE = 0.32) against actual source PDFs if available",
-    "DIMAE institutional ethics-board memo reference number (Both papers note '[TO BE COMPLETED]')"
+    "Verify the two narrative softenings in Paper C (42.6% type-B/C tympanogram and FGE = 0.32) against actual source PDFs if available; otherwise the softened wording stands"
+  ],
+  "resolved_2026_04_25_evening": [
+    "Pineda's name: kept as 'L. Pineda J.' per V3 author block (per Diego's instruction to use what's on hand)",
+    "ORCIDs: only Malpica's (0000-0002-2257-4940) is listed; co-author placeholders removed per Diego's instruction",
+    "Ethics framing: replaced IEC-review/waiver language with Colombian Resolution 8430/1993 Article 11(a) classification as 'investigación sin riesgo'; no IEC submission required",
+    "Institutional authorization: 'Publication of this work was authorized by the Colombian Aerospace Force' added to all manuscript and submission files",
+    "Data sharing: standardized to 'further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority'"
   ],
   "companion_paper_status": {
     "model_paper": "docs/manuscript.md — 9 fabricated/incorrect references corrected; 11 verified; abstract trimmed to 249 words; ready for submission pending Diego's blocker review",
