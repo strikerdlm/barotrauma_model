@@ -132,6 +132,7 @@ result = render(
     slug="fig_02_sobol_sensitivity",
     width_mm=120,
     height_mm=80,
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 for label, st, _ in PARAMS_SORTED:

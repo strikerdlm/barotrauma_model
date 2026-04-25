@@ -211,6 +211,7 @@ result = render(
     slug="fig_01_descent_rate_sensitivity",
     width_mm=120,
     height_mm=140,
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 for r, dp, b, ru in DESCENT:
