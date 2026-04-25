@@ -126,7 +126,7 @@ opt = {
     "xAxis": [
         # Panel A x — log scale
         {"type": "log", "min": 200, "max": 12000, "gridIndex": 0,
-         "name": "Descent rate (ft·min⁻¹)", "nameLocation": "middle", "nameGap": 30,
+         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 30,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"lineStyle": {"color": "#000", "width": 1}, "length": 4},
@@ -135,7 +135,7 @@ opt = {
          "splitLine": {"lineStyle": {"color": "#E5E5E5", "width": 0.5, "type": "dashed"}}},
         # Panel B x — log scale
         {"type": "log", "min": 200, "max": 12000, "gridIndex": 1,
-         "name": "Descent rate (ft·min⁻¹)", "nameLocation": "middle", "nameGap": 30,
+         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 30,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"lineStyle": {"color": "#000", "width": 1}, "length": 4},

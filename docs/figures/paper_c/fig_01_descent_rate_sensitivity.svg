@@ -26,9 +26,9 @@
 <path d="M90.5 1511L90.5 870" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
 <text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="matrix(0,-1,1,0,52.0161,1190.5)" fill="#000">Probability (%)</text>
 <path d="M86.4 719.5L1387 719.5" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
-<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(736.6765 749)" fill="#000">Descent rate (ft·min⁻¹)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(736.6765 749)" fill="#000">Descent rate (ft/min)</text>
 <path d="M90 1511.5L1387 1511.5" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
-<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(738.5081 1541)" fill="#000">Descent rate (ft·min⁻¹)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(738.5081 1541)" fill="#000">Descent rate (ft/min)</text>
 <path d="M86.4 719.5L81.4 719.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
 <path d="M86.4 567.5L81.4 567.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
 <path d="M86.4 416.5L81.4 416.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
