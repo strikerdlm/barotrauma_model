@@ -202,6 +202,7 @@ result = render(
     width_mm=89,
     height_mm=130,
     render_item_replacements={"RENDERWHISKER": WHISKER_JS, "RENDERLABELS": LABELS_JS},
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 print(f"Total cases 2010-2020: {total_2010_2020}; Per-year: {dict(zip(years, counts))}")

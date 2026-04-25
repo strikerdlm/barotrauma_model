@@ -183,6 +183,7 @@ result = render(
     width_mm=160,
     height_mm=95,
     render_item_replacements={"RENDERWHISKER": WHISKER_JS, "RENDERANNOT": ANNOT_JS},
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 for r in rows:

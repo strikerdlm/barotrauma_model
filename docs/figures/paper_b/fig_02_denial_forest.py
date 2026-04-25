@@ -198,6 +198,7 @@ result = render(
     width_mm=120,
     height_mm=120,
     render_item_replacements={"RENDERWHISKER": WHISKER_JS, "RENDERANNOT": ANNOT_JS},
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 for f in flags:

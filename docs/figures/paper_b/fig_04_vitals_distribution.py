@@ -209,6 +209,7 @@ result = render(
     slug="fig_04_vitals_distribution",
     width_mm=160,
     height_mm=70,
+    emit_tiff=True,
 )
 print("Rendered:", result["png"])
 print(f"BP n: {total_bp}; SpO2 n: {len(spo2_vals)}")
