@@ -8,6 +8,19 @@
 
 ---
 
+## Authors
+
+**Maria Correa, MD**¹ · **Sonia Jaimes, MD**¹ · **Diego L. Malpica, MD**¹ · **[Given name] Pineda J.**²
+
+¹ Directorate of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia
+² Resident, Aerospace Medicine, Faculty of Medicine, National University of Colombia, Bogotá, Colombia
+
+**Corresponding author:** Diego L. Malpica, MD — Directorate of Aerospace Medicine, Colombian Air Force, Military Air Transport Command (CATAM), Bogotá, Colombia 110911. Email: diego.malpica@fac.mil.co. ORCID: 0000-0002-2257-4940.
+
+> **NOTE FOR SUBMISSION:** Pineda's full given name needs confirmation before submission. Email: lpinedaj@unal.edu.co. ORCID required for all co-authors (Correa: maria.correa@fac.mil.co; Jaimes: sonia.jaimes@fac.mil.co).
+
+---
+
 ## Abstract
 
 **Background.** Middle-ear barotrauma is the dominant medical complication of hypobaric-chamber training and a surrogate end-point for Eustachian-tube disease. Colombian Aerospace Force (FAC) training at the DIMAE chamber is conducted from a 2,640 m (8,530 ft) resting altitude — a regime under-represented in the international chamber-barotrauma literature.

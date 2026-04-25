@@ -5,9 +5,11 @@
 Aerospace Medical Association
 AMHPJournal@asma.org
 
-**From:** Diego L. Malpica, MD
-Dirección de Medicina Aeroespacial (DIMAE), Fuerza Aeroespacial Colombiana
-Bogotá, Colombia
+**Authors:** Maria Correa, MD¹ · Sonia Jaimes, MD¹ · Diego L. Malpica, MD¹ · [Given name] Pineda J.²
+¹ Dirección de Medicina Aeroespacial (DIMAE), Fuerza Aeroespacial Colombiana, Bogotá, Colombia
+² Residencia de Medicina Aeroespacial, Universidad Nacional de Colombia, Bogotá, Colombia
+
+**Corresponding author:** Diego L. Malpica, MD — DIMAE, FAC, CATAM, Bogotá 110911
 Email: dlmalpica@yahoo.com · ORCID: [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
 
 **Date:** 2026-04-19
@@ -20,7 +22,7 @@ Email: dlmalpica@yahoo.com · ORCID: [0000-0002-2257-4940](https://orcid.org/000
 
 Dear Dr. Newman,
 
-I am submitting the enclosed Research Article, "Sixteen-year incidence of ear barotrauma in a hypobaric-chamber training program at 2,640 m baseline altitude: Colombian Aerospace Force 2010–2026 cohort," for consideration at *Aerospace Medicine and Human Performance*.
+We are submitting the enclosed Research Article, "Sixteen-year incidence of ear barotrauma in a hypobaric-chamber training program at 2,640 m baseline altitude: Colombian Aerospace Force 2010–2026 cohort," for consideration at *Aerospace Medicine and Human Performance*.
 
 ### Principal novelty and relevance to AMHP
 
@@ -34,11 +36,17 @@ A physics-informed middle-ear-barotrauma model calibrated against this FAC cohor
 
 ### Originality and prior publication
 
-This manuscript has not been submitted or published elsewhere, in whole or in part. It supersedes an unfinished 2022 internal DIMAE draft (Correa Guarín & Jaimes) that reported the 2010–2020 subset only; that draft was never submitted to a peer-reviewed journal and is not considered prior publication. The 2025–2026 dataset is analyzed here for the first time. No part of the work has been posted to any preprint server.
+This manuscript has not been submitted or published elsewhere, in whole or in part. The 2010–2020 case registry was originally compiled by co-authors Correa and Jaimes in a 2022 internal DIMAE document that was never submitted to a peer-reviewed journal and is not considered prior publication. The present manuscript substantially extends that registry (adding the 2025–2026 Phase 2 operational dataset, de-identified case-level analysis, preflight screening and vital-signs characterization, and the pooled 16-year statistical analysis) and is offered as the first peer-reviewed publication of this cohort. The 2025–2026 dataset is analyzed here for the first time. No part of the work has been posted to any preprint server.
 
 ### Author approval and authorship
 
-I am the sole author and have read and approved the final manuscript. Per ICMJE authorship criteria: I obtained access to the DIMAE registry, designed the analysis, de-identified and curated the datasets, performed the analyses, and wrote the manuscript.
+All authors have read and approved the final manuscript. Per ICMJE authorship criteria:
+
+- **Correa** and **Jaimes**: compiled the 2010–2020 DIMAE case registry; contributed to study conception and critical revision.
+- **Malpica**: designed the study extension (2025–2026 Phase 2), de-identified and curated all datasets, performed all statistical analyses, drafted and revised the manuscript; guarantor of the work.
+- **Pineda J.**: contributed to data extraction and classification of the 2010–2020 registry; critical revision.
+
+All authors meet all four ICMJE criteria. No ghost or guest authorship.
 
 ### Statistical expertise
 
@@ -84,7 +92,7 @@ No external funding supported this work. Analysis was performed on personally-ow
 4. **Olli H. Lindfors, MD, PhD** (or **Saku T. Sinkkonen, MD, PhD**)
    Department of Otorhinolaryngology, University of Helsinki and
    Helsinki University Hospital, Helsinki, Finland
-   Rationale: First (Lindfors) and senior (Sinkkonen) authors of Lindfors 2021 (*Aerosp Med Hum Perform* 92:126–132; PMID 33468294), the commercial-pilot ear-barotrauma risk-factor cohort that is the closest methodological peer to the preflight-screening-discrimination analysis in §3.3 of the present paper. No coauthorship with the author.
+   Rationale: First (Lindfors) and senior (Sinkkonen) authors of Lindfors et al. 2021 (*Aerosp Med Hum Perform* 92(3):182–189; doi:10.3357/amhp.5738.2021), the commercial-aircrew middle-ear-barotrauma cohort that is the closest methodological peer to the preflight-screening-discrimination analysis in §3.3 of the present paper. No coauthorship with any author.
 
 5. **David J. Rollins, MD, MPH** — USAFSAM, Wright-Patterson AFB, OH, USA (or an equivalent senior USAF aerospace-medicine epidemiologist identified by the editor) — Rationale: institutional chamber-training program with a comparable Type I / IV-A profile structure; independent of both FAC and Italian AF programs. Email verification will be coordinated through the Editorial Manager portal.
 
@@ -96,11 +104,11 @@ None.
 
 ---
 
-I look forward to the editorial office's consideration. The manuscript, figures, required forms, and author page are submitted through Editorial Manager as separate files per AMHP formatting requirements.
+We look forward to the editorial office's consideration. The manuscript, figures, required forms, and author page are submitted through Editorial Manager as separate files per AMHP formatting requirements.
 
 Sincerely,
 
-**Diego L. Malpica, MD**
+**Diego L. Malpica, MD** *(on behalf of all authors)*
 Dirección de Medicina Aeroespacial
 Fuerza Aeroespacial Colombiana
 Bogotá, Colombia
