@@ -3,7 +3,7 @@
 **Manuscript:** `docs/manuscript.md` — "Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training"
 **Cover letter:** `docs/cover_letter.md`
 **Author page:** `docs/manuscript_author_page.md`
-**Figures:** `docs/figures/figure1_descent_rate_sensitivity.tiff`, `docs/figures/figure2_sobol_indices.tiff`
+**Figures:** `docs/figures/paper_c/fig_01_descent_rate_sensitivity.tiff`, `docs/figures/paper_c/fig_02_sobol_sensitivity.tiff` (Q1-grade ECharts pipeline, source scripts colocated, vector SVG masters preserved, 600 dpi LZW TIFF for AMHP halftone requirement)
 
 **Article type:** Research Article (limits: 6,000 body words; 250 abstract words; ≤4 tables; ≤4 figures; ~25 refs)
 **Journal:** *Aerospace Medicine and Human Performance* — Feb 2026 Instructions for Authors

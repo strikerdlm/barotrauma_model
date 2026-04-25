@@ -19,8 +19,8 @@ Work from `docs/submission/` so every file has a canonical name and nothing gets
 | 1 | `cover_letter.pdf` | from `docs/cover_letter.md` via pandoc → PDF | Cover Letter |
 | 2 | `manuscript.docx` | from `docs/manuscript.md` via pandoc → Word | Manuscript |
 | 3 | `author_title_page.docx` | from `docs/manuscript_author_page.md` via pandoc → Word | Title Page |
-| 4 | `figure1_descent_rate_sensitivity.tiff` | `docs/figures/`, re-rendered grayscale | Figure |
-| 5 | `figure2_sobol_indices.tiff` | `docs/figures/`, re-rendered grayscale | Figure |
+| 4 | `fig_01_descent_rate_sensitivity.tiff` | `docs/figures/paper_c/` (ECharts → SVG → 600 dpi LZW TIFF, Wong colorblind palette is greyscale-legible) | Figure |
+| 5 | `fig_02_sobol_sensitivity.tiff` | `docs/figures/paper_c/` (ECharts → SVG → 600 dpi LZW TIFF, Wong colorblind palette is greyscale-legible) | Figure |
 | 6 | `forms/author_checklist_signed.pdf` | Editorial Manager form, wet signature | Author Checklist |
 | 7 | `forms/copyright_release_signed.pdf` | Editorial Manager form, wet signature | Copyright Release Form |
 | 8 | `forms/coi_signed.pdf` | Editorial Manager form, wet signature (one author = one section) | Conflict of Interest |
@@ -128,8 +128,8 @@ Confirm none appears verbatim in the title.
 1. **Cover Letter** → `cover_letter.pdf`
 2. **Manuscript** → `manuscript.docx` (depersonalized; includes abstract, body, references, tables, figure captions)
 3. **Title Page** → `author_title_page.docx` (full author info)
-4. **Figure** → `figure1_descent_rate_sensitivity.tiff`
-5. **Figure** → `figure2_sobol_indices.tiff`
+4. **Figure** → `fig_01_descent_rate_sensitivity.tiff`
+5. **Figure** → `fig_02_sobol_sensitivity.tiff`
 6. **Author Checklist** → `forms/author_checklist_signed.pdf`
 7. **Copyright Release Form** → `forms/copyright_release_signed.pdf`
 8. **Conflict of Interest** → `forms/coi_signed.pdf`
