@@ -1,0 +1,64 @@
+{
+  "profile": "FAC_BOGOTA_DEFAULT",
+  "profile_name": "FAC Bogot\u00e1 default (DIMAE chamber, 8,530 ft start)",
+  "patient": "default healthy baseline",
+  "metric": "p_barotitis (%)",
+  "uri_states": [
+    "none",
+    "day_1_3",
+    "day_4_7",
+    "day_8_14",
+    "day_15_21",
+    "day_22_28"
+  ],
+  "pet_states": [
+    "normal",
+    "s1",
+    "s2",
+    "s3",
+    "s4"
+  ],
+  "grid_pct": {
+    "normal": {
+      "none": 0.32,
+      "day_1_3": 7.47,
+      "day_4_7": 21.55,
+      "day_8_14": 2.86,
+      "day_15_21": 0.73,
+      "day_22_28": 0.43
+    },
+    "s1": {
+      "none": 0.0,
+      "day_1_3": 46.81,
+      "day_4_7": 100.0,
+      "day_8_14": 33.0,
+      "day_15_21": 14.34,
+      "day_22_28": 10.24
+    },
+    "s2": {
+      "none": 7.2,
+      "day_1_3": 46.58,
+      "day_4_7": 100.0,
+      "day_8_14": 33.4,
+      "day_15_21": 14.09,
+      "day_22_28": 10.36
+    },
+    "s3": {
+      "none": 0.0,
+      "day_1_3": 0.0,
+      "day_4_7": 0.0,
+      "day_8_14": 0.0,
+      "day_15_21": 0.0,
+      "day_22_28": 0.0
+    },
+    "s4": {
+      "none": 65.74,
+      "day_1_3": 100.0,
+      "day_4_7": 100.0,
+      "day_8_14": 100.0,
+      "day_15_21": 86.16,
+      "day_22_28": 72.87
+    }
+  },
+  "note": "PET=normal column reproduces the URI temporal modifier; PET=S1+URI elevates dramatically because URI converts patent-protective to paradoxically-closed; PET=S3 (habitual sniffer) shows uniformly low risk in this profile because the negative resting-pressure bias offsets the descent-side dP integral."
+}
