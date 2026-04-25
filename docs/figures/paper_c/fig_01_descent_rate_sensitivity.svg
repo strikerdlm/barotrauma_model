@@ -1,0 +1,211 @@
+<svg width="1417" height="1654" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1417 1654">
+<rect width="1417" height="1654" x="0" y="0" fill="#ffffff"></rect>
+<path d="M86.4 719.5L1387 719.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.4 567.5L1387 567.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.4 416.5L1387 416.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.4 265.5L1387 265.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.4 113.5L1387 113.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.4 38.5L1387 38.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 1511.5L1387 1511.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 1404.5L1387 1404.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 1297.5L1387 1297.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 1190.5L1387 1190.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 1083.5L1387 1083.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 977.5L1387 977.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90 870.5L1387 870.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.5 38L86.5 719" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M597.5 38L597.5 719" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1329.5 38L1329.5 719" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1387.5 38L1387.5 719" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M90.5 870L90.5 1511" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M600.5 870L600.5 1511" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1329.5 870L1329.5 1511" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1387.5 870L1387.5 1511" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M86.5 719L86.5 38" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="matrix(0,-1,1,0,44.353,378.5)" fill="#000">Peak |ΔP| (mmHg)</text>
+<path d="M90.5 1511L90.5 870" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="matrix(0,-1,1,0,52.0161,1190.5)" fill="#000">Probability (%)</text>
+<path d="M86.4 719.5L1387 719.5" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(736.6765 749)" fill="#000">Descent rate (ft·min⁻¹)</text>
+<path d="M90 1511.5L1387 1511.5" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(738.5081 1541)" fill="#000">Descent rate (ft·min⁻¹)</text>
+<path d="M86.4 719.5L81.4 719.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.4 567.5L81.4 567.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.4 416.5L81.4 416.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.4 265.5L81.4 265.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.4 113.5L81.4 113.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.4 38.5L81.4 38.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 1511.5L85 1511.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 1404.5L85 1404.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 1297.5L85 1297.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 1190.5L85 1190.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 1083.5L85 1083.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 977.5L85 977.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90 870.5L85 870.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M86.5 719L86.5 723" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M597.5 719L597.5 723" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M1329.5 719L1329.5 723" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M1387.5 719L1387.5 723" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M90.5 1511L90.5 1515" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M600.5 1511L600.5 1515" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M1329.5 1511L1329.5 1515" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M1387.5 1511L1387.5 1515" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 719)" fill="#000">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 567.6667)" fill="#000">100</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 416.3333)" fill="#000">200</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 265)" fill="#000">300</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 113.6667)" fill="#000">400</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(78.353 38)" fill="#000">450</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 1511)" fill="#000">0%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 1404.1667)" fill="#000">2%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 1297.3333)" fill="#000">4%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 1190.5)" fill="#000">6%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 1083.6667)" fill="#000">8%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 976.8333)" fill="#000">10%</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(82.0161 870)" fill="#000">12%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(86.353 727)" fill="#000">200</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(597.6218 727)" fill="#000">1,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1329.0821 727)" fill="#000">10,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1387 727)" fill="#000">12,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(90.0161 1519)" fill="#000">200</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(599.845 1519)" fill="#000">1,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1329.2452 1519)" fill="#000">10,000</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1387 1519)" fill="#000">12,000</text>
+<g clip-path="url(#zr0-c0)">
+<path d="M86.4 691.2L1387 691.2" fill="transparent" stroke="#F0E442" stroke-width="1.4" stroke-dasharray="5.6,2.8" stroke-linejoin="bevel" class="zr0-cls-0"></path>
+</g>
+<g clip-path="url(#zr0-c1)">
+<path d="M86.4 574.3L1387 574.3" fill="transparent" stroke="#E69F00" stroke-width="1.4" stroke-dasharray="5.6,2.8" stroke-linejoin="bevel" class="zr0-cls-0"></path>
+</g>
+<g clip-path="url(#zr0-c2)">
+<path d="M86.4 492L1387 492" fill="transparent" stroke="#D55E00" stroke-width="1.4" stroke-dasharray="5.6,2.8" stroke-linejoin="bevel" class="zr0-cls-0"></path>
+</g>
+<path d="M-8 -4l132.3 0l0 55l-132.3 0Z" transform="translate(98 74)" fill="rgb(255,255,255)" fill-opacity="0.85" stroke="#bbb" stroke-width="0.5" class="zr0-cls-0"></path>
+<path d="M-8 -4l74.1 0l0 38l-74.1 0Z" transform="translate(1300.877 884)" fill="rgb(255,255,255)" fill-opacity="0.85" stroke="#bbb" stroke-width="0.5" class="zr0-cls-0"></path>
+<path d="M0 0l22 0l0 2l-22 0Z" transform="translate(98 77.5)" fill="#5470c6" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" x="27" y="1" transform="translate(98 77.5)" fill="#000">Barotitis Θ=18.4</text>
+<path d="M0 -3.5l91.8 0l0 9l-91.8 0Z" transform="translate(98 77.5)" fill="transparent" class="zr0-cls-0"></path>
+<path d="M0 0l22 0l0 2l-22 0Z" transform="translate(98 96.5)" fill="#91cc75" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" x="27" y="1" transform="translate(98 96.5)" fill="#000">Baromyringitis Θ=95.6</text>
+<path d="M0 -3.5l116.3 0l0 9l-116.3 0Z" transform="translate(98 96.5)" fill="transparent" class="zr0-cls-0"></path>
+<path d="M0 0l22 0l0 2l-22 0Z" transform="translate(98 115.5)" fill="#fac858" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" x="27" y="1" transform="translate(98 115.5)" fill="#000">Rupture Θ=150</text>
+<path d="M0 -3.5l88.8 0l0 9l-88.8 0Z" transform="translate(98 115.5)" fill="transparent" class="zr0-cls-0"></path>
+<path d="M0 4L16 4" transform="translate(1301.877 885)" fill="#000" stroke="#D55E00" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" class="zr0-cls-0"></path>
+<path d="M11.2 4A3.2 3.2 0 1 1 11.2 3.7A3.2 3.2 0 0 1 11.2 4" transform="translate(1301.877 885)" fill="#D55E00" stroke="#000" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" x="21" y="4" transform="translate(1301.877 885)" fill="#000">Barotitis</text>
+<path d="M-1 -1l58.1 0l0 10l-58.1 0Z" transform="translate(1301.877 885)" fill="transparent" class="zr0-cls-1"></path>
+<path d="M0 4L16 4" transform="translate(1301.877 905)" fill="#000" stroke="#E69F00" stroke-width="2" stroke-dasharray="8,4" stroke-linecap="butt" stroke-miterlimit="10" class="zr0-cls-0"></path>
+<path d="M8 0.8L11.2 4L8 7.2L4.8 4Z" transform="translate(1301.877 905)" fill="#E69F00" stroke="#000" stroke-width="2" stroke-linecap="butt" stroke-miterlimit="10" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:10px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" x="21" y="4" transform="translate(1301.877 905)" fill="#000">Rupture</text>
+<path d="M-1 -1l57.6 0l0 10l-57.6 0Z" transform="translate(1301.877 905)" fill="transparent" class="zr0-cls-1"></path>
+<path d="M-5 -5l21.6 0l0 26l-21.6 0Z" transform="translate(13 11)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<path d="M-181.8 -5l363.6 0l0 23l-363.6 0Z" transform="translate(708.5 13)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<path d="M-5 -5l21.6 0l0 26l-21.6 0Z" transform="translate(13 841)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<path d="M-169.7 -5l339.5 0l0 23l-339.5 0Z" transform="translate(708.5 843)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="start" style="font-size:16px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" y="8" transform="translate(13 11)" fill="#464646">A</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6.5" transform="translate(708.5 13)" fill="#464646">Peak |ΔP| vs descent rate (25,000-ft descent, healthy patient)</text>
+<text dominant-baseline="central" text-anchor="start" style="font-size:16px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;font-weight:bold;" y="8" transform="translate(13 841)" fill="#464646">B</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6.5" transform="translate(708.5 843)" fill="#464646">Per-exposure clinical-outcome probability vs descent rate</text>
+<g clip-path="url(#zr0-c3)">
+<path d="M218.5 1511L380.3 1511L599.8 1511L819.4 1511L947.9 1511L1109.7 1501.9L1238.1 1457.6L1329.2 1427.1" fill="transparent" stroke="#E69F00" stroke-width="1.6" stroke-dasharray="6.4,3.2" stroke-linejoin="bevel" class="zr0-cls-3"></path>
+</g>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,218.4571,1511)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,380.2737,1511)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,599.845,1511)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,819.4163,1511)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,947.8573,1511)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,1109.6738,1501.9192)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,1238.1149,1457.5834)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(5,0,0,5,1329.2452,1427.1359)" fill="#E69F00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-4"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="4.5" transform="translate(1109.6738 1512.2692)" fill="#000">0.17%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="4.5" transform="translate(1238.1149 1467.9334)" fill="#000">1.00%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="4.5" transform="translate(1329.2452 1437.4859)" fill="#000">1.57%</text>
+<g clip-path="url(#zr0-c4)">
+<path d="M215.2 703.9L377.4 694.8L597.6 664.5L817.8 629.7L946.6 569.2L1108.9 304.3L1237.7 169.7L1329.1 106.1" fill="transparent" stroke="#0072B2" stroke-width="2" stroke-linejoin="bevel" class="zr0-cls-3"></path>
+</g>
+<g clip-path="url(#zr0-c5)">
+<path d="M218.5 1511L380.3 1511L599.8 1508.9L819.4 1483.8L947.9 1430.3L1109.7 1126.9L1238.1 992.3L1329.2 982.2" fill="transparent" stroke="#D55E00" stroke-width="2" stroke-linejoin="bevel" class="zr0-cls-3"></path>
+</g>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,215.1568,703.8666)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,377.4303,694.7867)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,597.6218,664.52)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,817.8133,629.7133)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,946.6171,569.18)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1108.8906,304.3467)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1237.6943,169.66)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1329.082,106.1)" fill="#0072B2" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-5"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,218.4571,1511)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,380.2737,1511)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,599.845,1508.8633)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,819.4163,1483.7574)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,947.8573,1430.3408)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1109.6738,1126.9342)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1238.1149,992.3242)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<path d="M1 0A1 1 0 1 1 1 -0.1A1 1 0 0 1 1 0" transform="matrix(5,0,0,5,1329.2452,982.175)" fill="#D55E00" stroke="#000" stroke-width="0.13999999999999999" class="zr0-cls-6"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(215.1568 693.5166)" fill="#000">10</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(377.4303 684.4367)" fill="#000">16</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(597.6218 654.17)" fill="#000">36</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(817.8133 619.3633)" fill="#000">59</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(946.6171 558.83)" fill="#000">99</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1108.8906 293.9967)" fill="#000">274</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1237.6943 159.31)" fill="#000">363</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1329.082 95.75)" fill="#000">405</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(599.845 1498.5133)" fill="#000">0.04%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(819.4163 1473.4074)" fill="#000">0.51%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(947.8573 1419.9908)" fill="#000">1.51%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1109.6738 1116.5842)" fill="#000">7.19%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1238.1149 981.9742)" fill="#000">9.71%</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:9px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="-4.5" transform="translate(1329.2452 971.825)" fill="#000">9.90%</text>
+<defs >
+<clipPath id="zr0-c0">
+<path d="M85 37.3l1304 0l0 682.4l-1304 0Z" fill="#000" class="zr0-cls-0"></path>
+</clipPath>
+<clipPath id="zr0-c1">
+<path d="M85 37.3l1304 0l0 682.4l-1304 0Z" fill="#000" class="zr0-cls-0"></path>
+</clipPath>
+<clipPath id="zr0-c2">
+<path d="M85 37.3l1304 0l0 682.4l-1304 0Z" fill="#000" class="zr0-cls-0"></path>
+</clipPath>
+<clipPath id="zr0-c3">
+<path d="M89 869.2l1300 0l0 642.6l-1300 0Z" fill="#000" class="zr0-cls-2"></path>
+</clipPath>
+<clipPath id="zr0-c4">
+<path d="M85 37l1304 0l0 683l-1304 0Z" fill="#000" class="zr0-cls-2"></path>
+</clipPath>
+<clipPath id="zr0-c5">
+<path d="M89 869l1300 0l0 643l-1300 0Z" fill="#000" class="zr0-cls-2"></path>
+</clipPath>
+</defs>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+pointer-events:none;
+}
+.zr0-cls-1:hover {
+cursor:pointer;
+fill:rgba(0,0,0,0);
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:rgba(0,0,0,1);
+}
+.zr0-cls-3:hover {
+cursor:pointer;
+}
+.zr0-cls-4:hover {
+cursor:pointer;
+fill:rgba(253,174,0,1);
+}
+.zr0-cls-5:hover {
+cursor:pointer;
+fill:rgba(0,125,195,1);
+}
+.zr0-cls-6:hover {
+cursor:pointer;
+fill:rgba(234,103,0,1);
+}
+
+]]>
+
+</style>
+</svg>
