@@ -1,0 +1,94 @@
+<svg width="1051" height="1051" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" baseProfile="full" viewBox="0 0 1051 1051">
+<rect width="1051" height="1051" x="0" y="0" fill="#ffffff"></rect>
+<path d="M83.3 972.5L1021 972.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.3 785.5L1021 785.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.3 599.5L1021 599.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.3 413.5L1021 413.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.3 226.5L1021 226.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.3 40.5L1021 40.5" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.5 40L83.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M271.5 40L271.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M458.5 40L458.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M646.5 40L646.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M833.5 40L833.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M1021.5 40L1021.5 972" fill="transparent" stroke="#E5E5E5" stroke-width="0.5" stroke-dasharray="2,1" class="zr0-cls-0"></path>
+<path d="M83.5 972L83.5 40" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="-6" transform="matrix(0,-1,1,0,45.2915,506)" fill="#000">True positive rate (sensitivity)</text>
+<path d="M83.3 972.5L1021 972.5" fill="transparent" stroke="#000" stroke-linecap="round" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:12px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6" transform="translate(552.1458 1002)" fill="#000">False positive rate (1 − specificity)</text>
+<path d="M83.3 972.5L78.3 972.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.3 785.5L78.3 785.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.3 599.5L78.3 599.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.3 413.5L78.3 413.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.3 226.5L78.3 226.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.3 40.5L78.3 40.5" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M83.5 972L83.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M271.5 972L271.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M458.5 972L458.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M646.5 972L646.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M833.5 972L833.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<path d="M1021.5 972L1021.5 976" fill="transparent" stroke="#000" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 972)" fill="#000">0</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 785.6)" fill="#000">0.2</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 599.2)" fill="#000">0.4</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 412.8)" fill="#000">0.6</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 226.4)" fill="#000">0.8</text>
+<text dominant-baseline="central" text-anchor="end" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" transform="translate(75.2915 40)" fill="#000">1</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(83.2915 980)" fill="#000">0</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(270.8332 980)" fill="#000">0.2</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(458.3749 980)" fill="#000">0.4</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(645.9166 980)" fill="#000">0.6</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(833.4583 980)" fill="#000">0.8</text>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:11px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" y="5.5" transform="translate(1021 980)" fill="#000">1</text>
+<g clip-path="url(#zr0-c0)">
+<path d="M83.3 972L1021 40" fill="transparent" stroke="#808080" stroke-dasharray="4,2" stroke-linejoin="bevel" class="zr0-cls-0"></path>
+</g>
+<path d="M-210.9 -5l421.8 0l0 23l-421.8 0Z" transform="translate(525.5 13)" fill="rgb(0,0,0)" fill-opacity="0" stroke="#ccc" stroke-width="0" class="zr0-cls-0"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:13px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="6.5" transform="translate(525.5 13)" fill="#464646">Preflight 14-flag battery — ROC curve (multivariable logistic regression)</text>
+<g clip-path="url(#zr0-c1)">
+<path d="M83.3 972L83.3 931.5L83.3 891L85.2 891L85.2 850.4L86.2 850.4L87.1 809.9L88.1 809.9L90 769.4L90.9 769.4L90.9 728.9L92.9 688.3L107.2 526.3L109.1 485.7L111 485.7L112.9 485.7L122.5 445.2L144.5 404.7L157.8 364.2L157.8 323.7L159.8 323.7L159.8 283.1L174.1 242.6L188.4 242.6L189.4 242.6L204.7 242.6L206.6 242.6L218.1 242.6L1000 40L1001.9 40L1006.7 40L1014.3 40L1021 40L1021 972L1014.3 972L1006.7 972L1001.9 972L1000 972L218.1 972L206.6 972L204.7 972L189.4 972L188.4 972L174.1 972L159.8 972L157.8 972L144.5 972L122.5 972L112.9 972L111 972L109.1 972L107.2 972L92.9 972L90.9 972L90 972L88.1 972L87.1 972L86.2 972L85.2 972L83.3 972Z" fill="#56B4E9" fill-opacity="0.18" class="zr0-cls-2"></path>
+<path d="M83.3 972L83.3 931.5L83.3 891L85.2 891L85.2 850.4L86.2 850.4L87.1 809.9L88.1 809.9L90 769.4L90.9 769.4L90.9 728.9L92.9 688.3L107.2 526.3L109.1 485.7L111 485.7L112.9 485.7L122.5 445.2L144.5 404.7L157.8 364.2L157.8 323.7L159.8 323.7L159.8 283.1L174.1 242.6L188.4 242.6L189.4 242.6L204.7 242.6L206.6 242.6L218.1 242.6L1000 40L1001.9 40L1006.7 40L1014.3 40L1021 40" fill="transparent" stroke="#0072B2" stroke-width="2" stroke-linejoin="bevel" class="zr0-cls-3"></path>
+</g>
+<path d="M0 -1L1 0L0 1L-1 0Z" transform="matrix(8,0,0,8,174.0992,242.6087)" fill="#D55E00" fill-opacity="0.8" stroke="#000" stroke-width="0.0875" stroke-opacity="0.8" class="zr0-cls-4"></path>
+<text dominant-baseline="central" text-anchor="middle" style="font-size:10px;font-family:Arial, Helvetica, 'Liberation Sans', sans-serif;" xml:space="preserve" y="5" transform="translate(174.0992 258.9587)" fill="#000" fill-opacity="0.8">Youden optimum</text>
+<path d="M0 0l106.4067 0l0 42l-106.4067 0Z" transform="translate(95 60)" fill="transparent" class="zr0-cls-3"></path>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="7" transform="translate(95 60)" fill="#000">AUC = 0.855</text>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="21" transform="translate(95 60)" fill="#000">95% CI [0.755, 0.942]</text>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="35" transform="translate(95 60)" fill="#000">bootstrap n=1,000</text>
+<path d="M0 0l134.8252 0l0 42l-134.8252 0Z" transform="translate(95 130)" fill="transparent" class="zr0-cls-3"></path>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="7" transform="translate(95 130)" fill="#000">Youden J = 0.686</text>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="21" transform="translate(95 130)" fill="#000">at threshold 0.028</text>
+<text dominant-baseline="central" text-anchor="start" style="font: 11px Arial,sans-serif" xml:space="preserve" y="35" transform="translate(95 130)" fill="#000">(sens 78.3%, 1−spec 9.7%)</text>
+<text dominant-baseline="central" text-anchor="middle" style="font: 9px Arial,sans-serif" xml:space="preserve" y="4.5" transform="translate(525.5 1028)" fill="#000">n = 1,004 evaluable preflight submissions · 23 denials · target = denied vs apt</text>
+<defs >
+<clipPath id="zr0-c0">
+<path d="M82 39.5l940 0l0 933l-940 0Z" fill="#000" class="zr0-cls-0"></path>
+</clipPath>
+<clipPath id="zr0-c1">
+<path d="M82 39l941 0l0 934l-941 0Z" fill="#000" class="zr0-cls-1"></path>
+</clipPath>
+</defs>
+<style ><![CDATA[
+.zr0-cls-0:hover {
+pointer-events:none;
+}
+.zr0-cls-1:hover {
+cursor:pointer;
+fill:rgba(0,0,0,1);
+}
+.zr0-cls-2:hover {
+cursor:pointer;
+fill:rgba(94,198,255,1);
+}
+.zr0-cls-3:hover {
+cursor:pointer;
+}
+.zr0-cls-4:hover {
+cursor:pointer;
+fill:rgba(234,103,0,1);
+}
+
+]]>
+
+</style>
+</svg>

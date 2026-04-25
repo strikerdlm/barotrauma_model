@@ -48,7 +48,7 @@ No generative AI writing tools were used for the scientific content or clinical 
 
 ### Figures
 
-The submission includes 2 figures: Figure 1, a forest plot of per-flag preflight denial rates with Wilson 95% CIs and tier coloring; Figure 2, a receiver-operating-characteristic curve of the 14-flag battery (multivariate logistic regression) with AUC = 0.81 and Youden J optimum marked. Both figures are intended for **B&W print** (no color charges requested) and will be uploaded separately as TIFF at ≥ 600 dpi per AMHP requirements.
+The submission includes 2 figures: Figure 1, a forest plot of per-flag preflight denial rates with Wilson 95% CIs and tier coloring; Figure 2, a receiver-operating-characteristic curve of the 14-flag battery (multivariable logistic regression) with **AUC = 0.855 (non-parametric percentile bootstrap 95% CI 0.755–0.942, 1,000 reps, seed 2026)** and Youden's J optimum marked at threshold 0.029 (sensitivity 78.3%, 1 − specificity 9.7%). Both figures use the colorblind-safe Wong palette and are greyscale-legible; **B&W print is requested** (no color charges). Figure files will be uploaded separately as TIFF at ≥ 600 dpi (combination halftone) per AMHP requirements.
 
 ### Ethics and data
 

@@ -329,6 +329,12 @@ Cross-form event linkage was performed by date-range overlap; no verified traine
 
 **Figure 1.** Forest plot of per-flag denial rates (point estimate and Wilson 95% CI) and univariable odds ratios for denial, ordered by denial-rate point estimate. Colours encode denial tier: high (denial rate ≥ 25%; red), moderate (10–25%; orange), low (> 0–10%; yellow), and null (0 denials; grey). The vertical dashed line indicates the overall denial rate of 2.29%. Flags with zero denials are plotted at the left axis with a one-sided confidence interval only. OR, odds ratio; CI, confidence interval.
 
+![Figure 1 — denial-rate forest plot](figures/paper_b/fig_02_denial_forest.png)
+
+**Figure 2.** Receiver-operating-characteristic curve for the 14-flag preflight battery (multivariable logistic regression on `fitness_decision` ∈ {apt, denied}; n = 1,004 evaluable, 23 denials). The diagonal grey line is the random-classifier reference; the shaded area-under-the-curve is the integral that defines AUC. Multivariable AUC is **0.855** (non-parametric percentile bootstrap 95% CI [0.755, 0.942], 1,000 reps, seed 2026). Youden's J is maximised at threshold 0.029 (vermilion diamond), giving sensitivity 78.3% and 1 − specificity 9.7% — i.e., the operating point that maximises balanced screening detection identifies four of every five denials at the cost of a 9.7% false-positive rate. The single largest log-odds contributor is `flag_recent_respiratory` (+2.25), followed by `flag_malaise_fever_fatigue` (+1.33) and `flag_chronic_disease_or_hosp` (+1.29). Computed by `analysis/scripts/preflight_roc.py` over `docs/Cohort FAC/analysis/phase2_preflight_tidy.csv`; raw curve and coefficients persisted at `analysis/results/preflight_roc_logreg.json`.
+
+![Figure 2 — preflight ROC curve](figures/paper_b/fig_05_preflight_roc.png)
+
 ---
 
 *Submitted to BMJ Open. All analyses, de-identified data, and the physics-informed barotrauma simulator that this preflight audit informs are available at https://github.com/strikerdlm/barotrauma_model.*
