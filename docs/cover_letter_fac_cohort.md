@@ -5,12 +5,13 @@
 Aerospace Medical Association
 AMHPJournal@asma.org
 
-**Authors:** Maria Correa, MD¹ · Sonia Jaimes, MD¹ · Diego L. Malpica, MD¹ · [Given name] Pineda J.²
-¹ Dirección de Medicina Aeroespacial (DIMAE), Fuerza Aeroespacial Colombiana, Bogotá, Colombia
-² Residencia de Medicina Aeroespacial, Universidad Nacional de Colombia, Bogotá, Colombia
+**Authors:** Diego L. Malpica, MD¹\* · Laura Pineda, MD² · Maria Alejandra Correa, MD³ · Sonia Jaimes, MD³
+¹ Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia. *Aerospace Medicine Specialist.*
+² Aeromedical Certification Subdirectorate, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia. *Aerospace Medicine Specialist.*
+³ Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (FAC), Bogotá, Colombia. *M.A.C. — Otolaryngologist; S.J. — Aviation Physiology Instructor.*
 
-**Corresponding author:** Diego L. Malpica, MD — DIMAE, FAC, CATAM, Bogotá 110911
-Email: dlmalpica@yahoo.com · ORCID: [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
+\* **Corresponding author:** Diego L. Malpica, MD — Direction of Aerospace Medicine, Colombian Aerospace Force, Military Air Transport Command (CATAM), Bogotá 110911
+Email: diego.malpica@fac.mil.co · ORCID: [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
 
 **Date:** 2026-04-19
 
@@ -36,15 +37,15 @@ A physics-informed middle-ear-barotrauma model calibrated against this FAC cohor
 
 ### Originality and prior publication
 
-This manuscript has not been submitted or published elsewhere, in whole or in part. The 2010–2020 case registry was originally compiled by co-authors Correa and Jaimes in a 2022 internal DIMAE document that was never submitted to a peer-reviewed journal and is not considered prior publication. The present manuscript substantially extends that registry (adding the 2025–2026 Phase 2 operational dataset, de-identified case-level analysis, preflight screening and vital-signs characterization, and the pooled 16-year statistical analysis) and is offered as the first peer-reviewed publication of this cohort. The 2025–2026 dataset is analyzed here for the first time. No part of the work has been posted to any preprint server.
+This manuscript has not been submitted or published elsewhere, in whole or in part. The 2010–2020 case registry was originally compiled by co-authors Correa and Jaimes in a 2022 internal DIMAE document that was never submitted to a peer-reviewed journal and is not considered prior publication. The present manuscript substantially extends that registry (adding the 2025–2026 Phase 2 operational dataset, de-identified case-level analysis, preflight screening and vital-signs characterisation, and the pooled 16-year statistical analysis) and is offered as the first peer-reviewed publication of this cohort. The 2025–2026 dataset is analysed here for the first time. No part of the work has been posted to any preprint server.
 
 ### Author approval and authorship
 
 All authors have read and approved the final manuscript. Per ICMJE authorship criteria:
 
-- **Correa** and **Jaimes**: compiled the 2010–2020 DIMAE case registry; contributed to study conception and critical revision.
 - **Malpica**: designed the study extension (2025–2026 Phase 2), de-identified and curated all datasets, performed all statistical analyses, drafted and revised the manuscript; guarantor of the work.
-- **Pineda J.**: contributed to data extraction and classification of the 2010–2020 registry; critical revision.
+- **Pineda**: contributed to aeromedical-certification interpretation of preflight denial decisions, vital-signs analysis, and critical revision.
+- **Correa** and **Jaimes**: compiled the 2010–2020 DIMAE case registry; contributed otolaryngological case classification and aviation-physiology operational context, respectively; critical revision.
 
 All authors meet all four ICMJE criteria. No ghost or guest authorship.
 
@@ -62,7 +63,7 @@ The submission includes 4 figures (matching AMHP's ≤ 4 figure limit): Figure 1
 
 ### Ethics, regulatory classification, and data
 
-Under Colombian Resolution 8430 of 1993 of the Ministry of Health (*"Por la cual se establecen las normas científicas, técnicas y administrativas para la investigación en salud"*), Article 11(a), this retrospective secondary analysis of de-identified DIMAE operational records is classified as *investigación sin riesgo* (research without risk) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). **Publication of this work was authorized by the Colombian Aerospace Force.** Raw case-level data with Colombian national identifiers (Cédula), names, and institutional emails remain under the data-protection boundary of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. De-identified aggregate CSVs and analysis scripts are publicly available in the companion repository (<https://github.com/strikerdlm/barotrauma_model>, under `docs/Cohort FAC/analysis/`).
+Under Colombian Resolution 8430 of 1993 of the Ministry of Health (which establishes scientific, technical, and administrative norms for health research), Article 11(a), this retrospective secondary analysis of de-identified DIMAE operational records is classified as research without risk (*investigación sin riesgo*) and does not require institutional-ethics-committee submission or individual informed consent. The study was conducted in accordance with the Declaration of Helsinki (2013 revision). **Publication of this work was authorised by the Colombian Aerospace Force.** Raw case-level data with Colombian national identifiers, names, and institutional emails remain under the data-protection boundary of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorisation from the Colombian Aerospace Force institutional authority. The de-identified aggregate datasets and analysis scripts are publicly available in the companion repository (<https://github.com/strikerdlm/barotrauma_model>).
 
 ### Conflicts of interest
 
