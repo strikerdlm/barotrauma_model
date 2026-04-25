@@ -35,14 +35,16 @@ from render import render
 ROC = json.loads((ROOT.parent / "analysis" / "results" / "preflight_roc_logreg.json").read_text())
 fpr = ROC["fpr"]
 tpr = ROC["tpr"]
-auc = ROC["auc"]
-auc_lo = ROC["auc_ci_lo_95"]
-auc_hi = ROC["auc_ci_hi_95"]
-youden_fpr = ROC["youden_fpr"]
-youden_tpr = ROC["youden_tpr_sensitivity"]
+auc_apparent = ROC["auc_apparent"]
+auc_corrected = ROC["auc_corrected"]
+auc_lo = ROC["auc_ci_lo_95_corrected"]
+auc_hi = ROC["auc_ci_hi_95_corrected"]
+youden_fpr = ROC["youden_fpr_apparent"]
+youden_tpr = ROC["youden_tpr_sensitivity_apparent"]
 youden_thr = ROC["youden_threshold"]
 n_eval = ROC["n_eval"]
 n_denied = ROC["n_denied"]
+m_corrected = ROC["multivariable_at_youden_corrected"]
 
 # Build series points
 roc_points = [[f, t] for f, t in zip(fpr, tpr)]
@@ -60,16 +62,26 @@ opt = {
         # AUC annotation (top-left of plot area)
         {"type": "text", "left": 95, "top": 60, "z": 50,
          "style": {
-             "text": f"AUC = {auc:.3f}\n95% CI [{auc_lo:.3f}, {auc_hi:.3f}]\nbootstrap n=1,000",
+             "text": (
+                 f"AUC apparent  = {auc_apparent:.3f}\n"
+                 f"AUC corrected = {auc_corrected:.3f}\n"
+                 f"   95% CI [{auc_lo:.3f}, {auc_hi:.3f}]\n"
+                 f"   Harrell-Steyerberg bootstrap, n=1,000"
+             ),
              "font": "11px Arial,sans-serif",
              "fill": "#000",
              "lineHeight": 14,
              "textAlign": "left",
          }},
-        # Youden annotation
-        {"type": "text", "left": 95, "top": 130, "z": 50,
+        # Operating-point annotation (corrected)
+        {"type": "text", "left": 95, "top": 150, "z": 50,
          "style": {
-             "text": f"Youden J = {youden_tpr - youden_fpr:.3f}\nat threshold {youden_thr:.3f}\n(sens {youden_tpr*100:.1f}%, 1−spec {youden_fpr*100:.1f}%)",
+             "text": (
+                 f"At Youden threshold {youden_thr:.3f} (corrected):\n"
+                 f"   sens {m_corrected['sensitivity']*100:.1f}%, spec {m_corrected['specificity']*100:.1f}%\n"
+                 f"   PPV  {m_corrected['ppv']*100:.1f}%, NPV  {m_corrected['npv']*100:.1f}%\n"
+                 f"   LR+  {m_corrected['lr_pos']:.2f},  LR-  {m_corrected['lr_neg']:.2f}"
+             ),
              "font": "11px Arial,sans-serif",
              "fill": "#000",
              "lineHeight": 14,
@@ -78,7 +90,10 @@ opt = {
         # Footer note
         {"type": "text", "left": "center", "bottom": 14, "z": 100,
          "style": {
-             "text": f"n = {n_eval:,} evaluable preflight submissions · {n_denied} denials · target = denied vs apt",
+             "text": (
+                 f"n = {n_eval:,} evaluable preflight submissions · {n_denied} denials · "
+                 f"penalised L2-ridge logistic regression with bootstrap optimism correction (TRIPOD 2015)"
+             ),
              "font": "9px Arial,sans-serif",
              "fill": "#000",
              "textAlign": "center",
@@ -145,5 +160,9 @@ result = render(
     emit_tiff=True,
 )
 print(f"Rendered: {result['png']}")
-print(f"AUC = {auc:.4f} [{auc_lo:.4f}, {auc_hi:.4f}], "
-      f"Youden J = {youden_tpr - youden_fpr:.4f} at thr={youden_thr:.4f}")
+print(f"AUC apparent  = {auc_apparent:.4f}")
+print(f"AUC corrected = {auc_corrected:.4f}  [{auc_lo:.4f}, {auc_hi:.4f}]")
+print(f"Youden threshold = {youden_thr:.4f}")
+print(f"Corrected sens={m_corrected['sensitivity']*100:.1f}% spec={m_corrected['specificity']*100:.1f}% "
+      f"PPV={m_corrected['ppv']*100:.1f}% NPV={m_corrected['npv']*100:.1f}% "
+      f"LR+={m_corrected['lr_pos']:.2f} LR-={m_corrected['lr_neg']:.2f}")
