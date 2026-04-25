@@ -52,7 +52,7 @@ The simulator is implemented in pure Python (NumPy and SciPy) as the `barotrauma
 
 ### 2.3 Physics core
 
-The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of 0.32 (Mandel 2016 ears with no OM history, 95% CI 0.21–0.43; the previously reported adult-no-OM value is 0.26, 95% CI 0.18–0.34);¹⁴ Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
+The physics core retains the Kanick-Doyle 2005 structure: standard-atmosphere altitude-to-pressure map P(z) = P₀ exp(−z/H) with H = 29,921 ft; two-compartment middle-ear volume V<sub>ME</sub> = V<sub>tympanum</sub> + V<sub>mastoid</sub> with the mastoid drawn from a log-normal prior (median 7.0 mL, 95% interval 2.9–16.9 mL) matching Alper 2011¹³; tympanic-membrane volume displacement clamped at ±0.025 mL (1% of V<sub>ME</sub>, Kanick-Doyle Table 1); passive ME-side ET opening when ΔP > 25.7 mmHg venting to 7.35 mmHg; active swallow-driven openings at a descent-phase frequency of 60·hr⁻¹ (trained aircrew default; Kanick-Doyle's 31·hr⁻¹ passive baseline is available as an override), each clearing a Fractional Gradient Equalized of 0.32, set to the upper bound of the 95% CI 0.18–0.34 reported for adult ears with no significant otitis-media history (Doyle 2014 pressure-chamber test);¹⁴ Valsalva pulses every 60 s on descent with per-pulse clearance 0.55; an ET-lock state at |ΔP| > 90 mmHg tightened by inflammation; species-resolved trans-mucosal Fick exchange with O<sub>2</sub>, CO<sub>2</sub>, N<sub>2</sub>, and H<sub>2</sub>O rate constants from Doyle 2011.¹⁵
 
 ### 2.4 Descent-side aperture-collapse model
 
@@ -223,7 +223,7 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 13. Alper CM, Kitsko DJ, Swarts JD, Martin B, Yuksel S, Doyle WJ. Role of the mastoid in middle ear pressure regulation. Laryngoscope. 2011;121(2):404–408.
 
-14. Mandel EM, Casselbrant ML, Richert BC, Teixeira MS, Swarts JD, Doyle WJ. Eustachian tube function in 6-year-old children with and without a history of middle ear disease. Otolaryngol Head Neck Surg. 2016;154(3):502–507.
+14. Doyle WJ, Singla A, Banks J, El-Wagaa J, Swarts JD. Pressure chamber tests of Eustachian tube function document lower efficiency in adults with colds when compared to without colds. Acta Otolaryngol. 2014;134(7):691–697.
 
 15. Doyle WJ, Swarts JD, Banks J, Yuksel S, Alper CM. Transmucosal O2 and CO2 exchange rates for the human middle ear. Auris Nasus Larynx. 2011;38(6):684–691.
 
