@@ -80,22 +80,25 @@ document.title = "READY";
 def render(option: dict[str, Any], *, out_dir: Path, slug: str,
            width_mm: float, height_mm: float,
            render_item_replacements: dict[str, str] | None = None,
-           panel_titles: list[dict] | None = None) -> dict[str, Any]:
-    """Single-panel render."""
+           panel_titles: list[dict] | None = None,
+           emit_tiff: bool = False) -> dict[str, Any]:
+    """Single-panel render. emit_tiff=True also writes {slug}.tiff (LZW)."""
     return render_panels(
         [{"option": option, "w_mm": width_mm, "h_mm": height_mm}],
         out_dir=out_dir, slug=slug,
         total_w_mm=width_mm, total_h_mm=height_mm,
         render_item_replacements=render_item_replacements,
         panel_titles=panel_titles,
+        emit_tiff=emit_tiff,
     )
 
 
 def render_panels(panels_mm: list[dict], *, out_dir: Path, slug: str,
                   total_w_mm: float, total_h_mm: float,
                   render_item_replacements: dict[str, str] | None = None,
-                  panel_titles: list[dict] | None = None) -> dict[str, Any]:
-    """Render multiple stacked ECharts panels to a single PNG + SVG."""
+                  panel_titles: list[dict] | None = None,
+                  emit_tiff: bool = False) -> dict[str, Any]:
+    """Render multiple stacked ECharts panels to a single PNG + SVG (+ optional TIFF)."""
     out_dir.mkdir(parents=True, exist_ok=True)
     total_w_log = _mm_to_logical_px(total_w_mm)
     total_h_log = _mm_to_logical_px(total_h_mm)
@@ -160,6 +163,21 @@ def render_panels(panels_mm: list[dict], *, out_dir: Path, slug: str,
             f"file://{html_path.resolve()}",
         ], check=True, capture_output=True, timeout=45)
 
-    return {"html": html_path, "png": png_path, "svg": svg_path,
-            "size_px": (total_w_log * 2, total_h_log * 2),
-            "size_mm": (total_w_mm, total_h_mm)}
+    tiff_path: Path | None = None
+    if emit_tiff and png_path.exists():
+        # AMHP requires submission TIFFs at the figure's physical size and
+        # 600 dpi halftone resolution. The PNG above is rendered at logical
+        # 300 dpi × 2× device scale, which equals 600 dpi at the same physical
+        # size — convert directly to TIFF and stamp the dpi metadata.
+        from PIL import Image
+        tiff_path = out_dir / f"{slug}.tiff"
+        with Image.open(png_path) as im:
+            im.save(tiff_path, format="TIFF",
+                    compression="tiff_lzw", dpi=(600, 600))
+
+    out = {"html": html_path, "png": png_path, "svg": svg_path,
+           "size_px": (total_w_log * 2, total_h_log * 2),
+           "size_mm": (total_w_mm, total_h_mm)}
+    if tiff_path is not None:
+        out["tiff"] = tiff_path
+    return out
