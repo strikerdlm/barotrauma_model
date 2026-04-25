@@ -28,8 +28,10 @@
     "final_manuscript_assembly": false,
     "cover_letter_review": true
   },
-  "blockers_for_diego": [
-    "Verify the two narrative softenings in Paper C (42.6% type-B/C tympanogram and FGE = 0.32) against actual source PDFs if available; otherwise the softened wording stands"
+  "blockers_for_diego": [],
+  "resolved_2026_04_25_late_evening": [
+    "42.6% type-B/C tympanogram: verified in Shindo H et al. 2025 (Auris Nasus Larynx 52(5):545-549, doi:10.1016/j.anl.2025.07.003); precise number reinstated in Paper C §2.5 with Ref 8 now pointing to Shindo H 2025",
+    "FGE = 0.32: verified in Mandel EM et al. 2016 (Otolaryngol Head Neck Surg 154(3):502-507, doi:10.1177/0194599815620149); precise number reinstated in Paper C §2.3 with Ref 14 now pointing to Mandel 2016"
   ],
   "resolved_2026_04_25_evening": [
     "Pineda's name: kept as 'L. Pineda J.' per V3 author block (per Diego's instruction to use what's on hand)",
