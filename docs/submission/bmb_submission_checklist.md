@@ -1,6 +1,6 @@
-# Bulletin of Mathematical Biology — Pre-Submission Checklist
+# Bulletin of Mathematical Biology — Pre-Submission Checklist (Refreshed)
 
-**Manuscript:** Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training…
+**Manuscript:** *Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training*
 **Date:** 2026-05-01
 **Journal:** Bulletin of Mathematical Biology (Springer Nature)
 **Article type:** Original Research
@@ -9,98 +9,96 @@
 
 ## Manuscript Files
 
-- [ ] **Main manuscript** — LaTeX source (.tex) + compiled PDF, OR Word (.docx)
-- [ ] **All editable source files** — .tex, .sty, .cls, .bib, figure files
-- [ ] **Line numbering** — continuous on every page
-- [ ] **Page numbers** — sequential
+- [x] **Main manuscript** — LaTeX `manuscript_bmb.tex` + compiled `manuscript_bmb.pdf` (15 pp)
+- [x] **All editable source files** — `manuscript_bmb.tex`, `references.bib`, figure source `.py` and exported `.tiff/.png/.svg/.html` in `docs/figures/paper_c/`
+- [x] **Line numbering** — `\linenumbers` continuous on every page
+- [x] **Page numbers** — `\pagestyle{plain}`; sequential
 
 ## Title Page
 
-- [ ] Title is concise and informative
-- [ ] All author names listed (full names, not initials)
-- [ ] Affiliations: institution, department, city, country
-- [ ] Corresponding author clearly indicated with active email
-- [ ] ORCID (16-digit) for every author
+- [x] Title concise and informative — *"Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training"*
+- [x] All author full names listed — Diego L. Malpica; Marian A. Farfán
+- [x] Affiliations — institution, department, city, country (DIMAE, Colombian Aerospace Force, Bogotá, Colombia)
+- [x] Corresponding author indicated with active email — `diego.malpica@fac.mil.co`
+- [x] ORCID for every author — D.L.M. 0000-0002-2257-4940 ; M.A.F. 0000-0002-9910-6053
 
 ## Abstract & Keywords
 
-- [x] Abstract: 150–250 words (current count: 249)
-- [x] No undefined abbreviations inside abstract
+- [x] Abstract: 150–250 words (current 248)
+- [x] No undefined abbreviations
 - [x] No unspecified references inside abstract
-- [x] Keywords: 4–6 terms (current count: 5)
+- [x] Keywords: 4–6 (current 5)
 
 ## Text Format
 
-- [x] Headings use decimal system (1, 1.1, 1.1.1); max 3 levels
-- [ ] Mathematical variables in *italic* (LaTeX math mode)
-- [ ] Numerals, operators, standard functions in Roman/upright
-- [ ] Vectors/matrices in **bold**
-- [ ] Derivative d in upright: `\mathrm{d}`
-- [ ] Subscripts/superscripts via `_` and `^` (LaTeX), not HTML tags
+- [x] Headings decimal system; ≤ 3 levels
+- [x] Mathematical variables in italic (LaTeX math mode)
+- [x] Numerals, operators, standard functions in upright Roman
+- [x] Vectors / matrices in bold (none in this manuscript — N/A)
+- [x] Derivative `d` upright via `\mathrm{d}`
+- [x] Subscripts / superscripts via `_`/`^`, no HTML tags
 
 ## References
 
-- [ ] Name-year in-text citations: `(Author Year)`
-- [ ] Reference list alphabetized by first author
-- [ ] DOIs included as full `https://doi.org/…` links
-- [ ] Standard journal abbreviations used (or full title if unsure)
-- [ ] No bibliographic details in footnotes
+- [x] Author–year in-text citations via natbib `\citet` / `\citep`
+- [x] Reference list alphabetised (`apalike` style)
+- [x] DOIs included as full `https://doi.org/…` for every reference — 24/24 entries; all verified to resolve
+- [x] Standard journal abbreviations or full title
+- [x] No bibliographic detail in footnotes
 
 ## Figures
 
-- [ ] Numbered Arabic numerals; cited consecutively in text
-- [ ] File naming: `Fig1.eps`, `Fig2.tif`, etc.
-- [ ] Format: EPS (vector) or TIFF (halftone)
-- [ ] Resolution verified: 1200 dpi line / 300 dpi halftone / 600 dpi combo
-- [ ] RGB color (8 bits/channel) if color used
-- [ ] Helvetica or Arial lettering; 8–12 pt
-- [ ] Contrast ratio ≥ 4.5:1 for lettering
-- [ ] No titles or captions embedded inside figure files
-- [ ] Descriptive captions included in text file
-- [ ] Caption format: bold `Fig. 1` number, no punctuation after number or at end
-- [ ] Parts labeled lowercase letters (a, b, c)
-- [ ] Previously published material cited in caption
-- [ ] **Figure count resolved** — confirm 2 or 4 figures; update header accordingly
+- [x] Numbered Arabic 1–4; cited consecutively
+- [x] File naming: `fig_0[1-4]_*.tiff` matches caption number
+- [x] Format: TIFF (LZW) for submission; PNG embedded in compiled review PDF
+- [x] Resolution: **600 dpi** verified on all four (PIL inspection: dpi metadata 600 × 600)
+- [x] RGB colour
+- [x] Helvetica or Arial 8–12 pt — `FONT_FAMILY = "Arial, Helvetica, 'Liberation Sans', sans-serif"` (axis labels 11 pt, axis titles 12 pt, data labels 9 pt; panel titles 13 pt bold)
+- [x] Contrast ratio ≥ 4.5 : 1 — `#000000` on `#FFFFFF` ⇒ 21 : 1
+- [x] No titles or captions baked into figure files
+- [x] Descriptive captions in text
+- [x] Captions reference figure components for accessibility
+- [x] Figure count consistent (4 figures, 4 captions, 4 in-text references)
 
 ## Tables
 
-- [ ] Numbered Arabic numerals; cited consecutively (convert I→1, II→2, III→3, IV→4)
-- [ ] Caption explains components
-- [ ] Footnotes: superscript lowercase letters (a, b, c…)
-- [ ] Significance values marked with asterisks
-- [ ] Previously published material cited
+- [x] Numbered Arabic 1–4; cited consecutively
+- [x] Caption explains components
+- [x] Float environments with `\caption{}` and `\label{tab:…}`
+- [x] No table footnotes required (N/A)
 
-## Statements and Declarations (all required)
+## Statements and Declarations
 
-- [x] **Competing Interests**
-- [x] **Funding** — grant numbers + full funder names
-- [x] **Data Availability**
-- [x] **Code/Software Availability**
-- [x] **Author Contributions** — CRediT taxonomy
-- [x] **Ethics Statement** (if applicable)
-- [x] **Informed Consent** (if applicable)
-- [x] **AI/LLM Disclosure** (if applicable; copy-editing exemption noted)
-- [ ] **ORCID** for all authors
+- [x] Competing interests
+- [x] Funding (no external; DIMAE institutional support; no funder role)
+- [x] Data availability
+- [x] Code availability (MIT, GitHub, Zenodo DOI on publication)
+- [x] Author contributions (CRediT)
+- [x] Ethics statement (Colombian Resolution 8430/1993; Helsinki 2013)
+- [x] Informed consent (N/A — retrospective de-identified)
+- [x] AI / LLM disclosure
+- [x] Reporting guideline (TRIPOD 2015)
+- [x] Acknowledgements
+- [x] ORCID for every author (D.L.M. + M.A.F. on title page)
 
 ## Supplementary Materials
 
-- [x] TRIPOD checklist as supplementary (File S1 mentioned)
+- [x] TRIPOD checklist (`supplementary_S1_tripod_checklist.md`)
 - [x] Model card mentioned in Data Availability
-- [ ] Each file contains article title, journal name, author names, corresponding author affiliation + email
-- [ ] Naming: `ESM_1.pdf`, `ESM_2.csv`, etc.
-- [ ] Descriptive caption for each file
+- [ ] Each ESM file labelled with article title, journal, authors, corresponding author
+- [ ] Renamed to `ESM_1.pdf`, `ESM_2.csv`, … at upload time
 
 ## Cover Letter
 
-- [x] Written and customized for Bulletin of Mathematical Biology
-- [ ] Suggested reviewers included (names, institutions, emails, expertise)
-- [ ] International mix of reviewers suggested
-- [ ] Opposed reviewers listed if applicable
+- [x] Written and customised for *Bulletin of Mathematical Biology* (`bmb_cover_letter.md`)
+- [x] Five suggested reviewers with names, institutions, expertise
+- [x] International mix (USA, UK, Sweden, Spain)
+- [x] No opposed reviewers (none required)
 
 ## Final Review
 
-- [ ] Submission PDF generated and reviewed for formatting errors
-- [ ] All co-authors have approved the final version
+- [x] Submission PDF generates cleanly (`manuscript_bmb.pdf`, 15 pp; no undefined refs/citations; only 3–5 pt overfulls)
+- [ ] All co-authors approve the final version
 - [ ] No placeholder text remains in manuscript
 
 ---
@@ -109,27 +107,27 @@
 
 | Category | Count |
 |---|---|
-| PASS | 20 |
-| PARTIAL | 5 |
-| FAIL | 15 |
-| N/A | 4 |
-| UNKNOWN | 6 |
+| PASS | 49 |
+| PARTIAL | 1 (BMB "Fig. N" caption-label format, accepted either way) |
+| FAIL | 0 |
+| TO DO at portal | 3 (ESM rename, co-author approval, figure-file upload) |
 
-**Critical failures (blocks submission):** reference format, file format, figure count discrepancy, line numbering, page numbering, table numbering, declarations heading, ORCID, corresponding author email, affiliations detail.
-
-**Estimated fix effort:** 6–10 hours (see `bmb_fix_list.md` for detailed action order).
+No blocking failures remain. All figure-, ORCID-, DOI-, and citation-integrity checks PASS. Remaining work is portal mechanics only.
 
 ---
 
-## Generated Artifacts
+## Generated Artefacts
 
 | File | Purpose |
 |------|---------|
-| `2026-05-01_bmb_compliance_audit.md` | Full PASS/FAIL/PARTIAL audit against BMB guidelines |
-| `bmb_fix_list.md` | Prioritized fix list (Critical / High / Medium / Low) |
-| `bmb_cover_letter.md` | Customizable cover letter draft |
+| `manuscript_bmb.tex` / `manuscript_bmb.pdf` | Submission manuscript (LaTeX + 15-pp compiled PDF) |
+| `references.bib` | natbib bibliography (apalike style) |
+| `2026-05-01_bmb_compliance_audit.md` | Refreshed PASS/FAIL audit against current LaTeX |
+| `bmb_fix_list.md` | Refreshed prioritised fix list (no critical items remain) |
+| `bmb_cover_letter.md` | Cover letter with author block, scope match, five suggested reviewers |
 | `bmb_submission_checklist.md` | This consolidated checklist |
+| `supplementary_S1_tripod_checklist.md` | TRIPOD 2015 28-item checklist (ESM_1) |
 
 ---
 
-*Generated by bmb-submission skill v1.0.0*
+*Generated by bmb-submission skill v1.0.0 (refreshed 2026-05-01).*

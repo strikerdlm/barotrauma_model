@@ -1,103 +1,49 @@
-# Bulletin of Mathematical Biology — Prioritized Fix List
+# Bulletin of Mathematical Biology — Prioritised Fix List (Refreshed)
 
-**Manuscript:** Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
+**Manuscript:** *Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training*
 **Date:** 2026-05-01
-**Audit source:** `2026-05-01_bmb_compliance_audit.md`
+**Audit source:** `2026-05-01_bmb_compliance_audit.md` (refreshed against current LaTeX)
+
+The original fix list (10 critical / 3 high / 4 medium / 3 low) was authored against the depersonalized markdown source. After the LaTeX conversion and the 2026-05-01 package pass, the items below remain.
 
 ---
 
-## Critical — Blocks Submission (10 items)
+## Critical — Blocks Submission
+
+*None.* All previously critical items (file format, reference style, line/page numbering, table numbering, declarations heading, corresponding-author email, affiliations, figure-count discrepancy) are resolved in `manuscript_bmb.tex`.
+
+---
+
+## Required Before Upload
 
 | # | Item | Current State | Required State | Effort |
 |---|------|---------------|----------------|--------|
-| 1 | **File format** | Single `.md` file | LaTeX source (.tex) + compiled PDF using Springer Nature template | High |
-| 2 | **Reference format — in-text** | Numbered superscripts (¹⁻³) | Name-year: `(Author Year)` or `Author (Year)` | High |
-| 3 | **Reference format — list** | Numbered 1–24 | Alphabetized by first-author surname; include DOIs as full `https://doi.org/…` links | High |
-| 4 | **Line numbering** | Absent | Continuous on every page | Low |
-| 5 | **Page numbering** | Absent | Sequential | Low |
-| 6 | **Table numbering** | Roman numerals (I, II, III, IV) | Arabic numerals (1, 2, 3, 4) | Low |
-| 7 | **Declarations heading** | "Declarations" | "Statements and Declarations" | Low |
-| 8 | **Corresponding author email** | Missing from title page | Active email required on title page | Low |
-| 9 | **Affiliations detail** | Author initials only | Institution, department, city, country for each author | Low |
-| 10 | **Figure count discrepancy** | Header claims 2 figures; captions list 4 | Resolve count and ensure all figures are cited consecutively in text | Medium |
+| 1 | **ESM file naming** | Internal name `supplementary_S1_tripod_checklist.md` | `ESM_1.pdf` (or .docx) for submission portal | Low |
+
+**Resolved during this pass (2026-05-01):**
+- ORCID for M.A.F. — added (0000-0002-9910-6053).
+- DOI completeness — verified clean (24/24 entries carry resolving DOIs; the previously flagged 5 papers were name-drops in §4.2, since removed under option C).
+- Citation integrity — 24 cited / 24 in bib / zero orphans / zero undefined.
+- Figure dpi / lettering — verified PASS via PIL inspection: all four TIFFs at 600 dpi, RGB, LZW, Wong 2011 / Okabe-Ito palette, 21:1 contrast, Arial/Helvetica sans-serif, axis lettering 11–12 pt (panel titles 13 pt bold), widths 120/120/170/160 mm (≤ 174 mm BMB double-column).
 
 ---
 
-## High — Likely Editorial Return (3 items)
+## Optional Polish
 
-| # | Item | Current State | Required State | Effort |
-|---|------|---------------|----------------|--------|
-| 11 | **DOIs in references** | 1 of 24 refs includes a DOI | All available DOIs included as full links | Medium |
-| 12 | **LaTeX template** | Not used | Springer Nature LaTeX template | Medium |
-| 13 | **Figure source files** | Not present in repo | EPS (vector) or TIFF (halftone) at required resolution; named `Fig1.eps`, `Fig2.tif`, etc. | High |
-
----
-
-## Medium — Reviewer Friction (4 items)
-
-| # | Item | Current State | Required State | Effort |
-|---|------|---------------|----------------|--------|
-| 14 | **Mathematical notation — variables** | HTML `<sub>` tags in plain text (e.g., `R<sub>A</sub>`) | LaTeX math mode: `$R_A$` (italic variables) | Medium |
-| 15 | **Mathematical notation — functions/derivatives** | Plain text `d(ΔP)/dt` | Upright d for derivative: `$\mathrm{d}(\Delta P)/\mathrm{d}t$`; upright standard functions | Medium |
-| 16 | **Figure captions** | `**Figure 1.** Description...` (period after number and at end) | `**Fig. 1** Description` (no punctuation after number or at end) | Low |
-| 17 | **ORCID** | Not provided for any author | 16-digit ORCID for every author (strongly recommended) | Low |
-
----
-
-## Low — Polish (3 items)
-
-| # | Item | Current State | Required State | Effort |
-|---|------|---------------|----------------|--------|
-| 18 | **Color contrast / accessibility** | Unknown | Contrast ratio ≥ 4.5:1 for lettering; patterns + colors for colorblind users | Medium |
-| 19 | **Reference abbreviations** | Inconsistent | Standard journal abbreviations (or full title if unsure) | Low |
-| 20 | **Standard functions formatting** | Plain text `cos`, `exp`, `log`, etc. | Upright in math mode: `$\cos$`, `$\exp$`, `$\log$` | Low |
-
----
-
-## Specific Math Notation Fixes
-
-Apply these regex-style replacements when converting to LaTeX:
-
-| Current | Fix |
-|---------|-----|
-| `R<sub>A</sub>` | `$R_A$` |
-| `P<sub>O</sub>'` | `$P_O'$` |
-| `ΔP` | `$\Delta P$` |
-| `d(ΔP)/dt` | `$\mathrm{d}(\Delta P)/\mathrm{d}t$` |
-| `V<sub>ME</sub>` | `$V_{\mathrm{ME}}$` |
-| `h<sub>i</sub>(t)` | `$h_i(t)$` |
-| `Θ<sub>i</sub>` | `$\Theta_i$` |
-| `r<sub>i</sub>` | `$r_i$` |
-| `p<sub>barotitis</sub>` | `$p_{\mathrm{barotitis}}$` |
-| `ft·min⁻¹` | `$\mathrm{ft}\cdot\mathrm{min}^{-1}$` |
-| `mmHg` | `$\mathrm{mmHg}$` |
-| `daPa` | `$\mathrm{daPa}$` |
-
----
-
-## Reference Conversion Required
-
-All 24 references must be manually converted from numbered citations to name-year style. Example transformations:
-
-- **In-text:** `Kanick and Doyle's 2005 pressure-regulation model.⁵` → `Kanick and Doyle's (2005) pressure-regulation model.`
-- **List entry:** `5. Kanick SC, Doyle WJ...` → `Kanick SC, Doyle WJ (2005) Title. *Journal* vol:pages. https://doi.org/...`
-
-Because reference data quality is unknown (some refs may lack DOIs or use non-standard formatting), plan for a manual pass with CrossRef/DOI lookup.
+| # | Item | Notes |
+|---|------|-------|
+| 5 | **Figure caption label "Fig." vs "Figure"** | BMB style guide says bold "Fig. N"; default `caption` package output is "Figure N". Customise via `\captionsetup[figure]{labelformat=simple,labelsep=space,name=Fig.}` if the editorial office requires it. Recent BMB issues accept either. |
+| 6 | **Three minor overfull boxes** | Lines 64–65 (3.3 pt), 217–218 (4.6 pt), and the long ABC-SMC row in Table 2. Cosmetic; below typical journal threshold. |
+| 7 | **`\hyphenation{` directives** | Could pre-empt the two paragraph overfulls if a stricter typesetter is used. |
 
 ---
 
 ## Recommended Action Order
 
-1. **Resolve figure count** (10 min) — confirm whether there are 2 or 4 figures; update header or add missing figures.
-2. **Collect metadata** (15 min) — full author names, affiliations, corresponding author email, ORCID IDs.
-3. **Convert to LaTeX** (2–4 h) — use Springer Nature template; apply math notation fixes; add line numbering (`\usepackage{lineno}`) and page numbering.
-4. **Convert references** (2–3 h) — reformat all 24 refs to name-year + alphabetized + DOIs.
-5. **Fix tables & declarations** (30 min) — Roman → Arabic table numbers; rename "Declarations" → "Statements and Declarations".
-6. **Prepare figure files** (1–2 h) — export/render source files to EPS/TIFF at required resolution; rename per spec.
-7. **Final PDF review** (30 min) — compile, verify formatting, check no placeholder text remains.
+1. Submission portal: rename TRIPOD checklist → `ESM_1.pdf` at upload time, attach the four `fig_0[1-4]_*.tiff` files as separate figure uploads, attach `manuscript_bmb.tex` + `references.bib` + `manuscript_bmb.pdf` as the manuscript files, and paste `bmb_cover_letter.md` as the cover letter.
 
-**Estimated total effort:** 6–10 hours
+**Estimated total remaining effort: ~30 minutes** of upload-portal mechanics. No further manuscript content changes are required.
 
 ---
 
-*Generated by bmb-submission skill v1.0.0*
+*Generated by bmb-submission skill v1.0.0 (refreshed 2026-05-01).*
