@@ -1,4 +1,4 @@
-# Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
+# Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training
 
 **Diego L. Malpica, MD**<sup>1,2,*</sup>
 **Marian A. Farfán, MD**<sup>1</sup>

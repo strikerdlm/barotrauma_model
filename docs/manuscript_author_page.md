@@ -6,16 +6,16 @@
 
 ## Title
 
-Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
+Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training
 
 ## Running head
 
-PHYSICS-INFORMED MEB MODEL
+APERTURE-COLLAPSE MEB HAZARD MODEL
 
 ## Authors
 
 **Diego L. Malpica, MD**<sup>1,2,\*</sup> (Principal Investigator)
-**Marian A. Farfán, MD**<sup>1</sup>
+**Marian A. Farfán, MD**<sup>1</sup> (ORCID: [0000-0002-9910-6053](https://orcid.org/0000-0002-9910-6053))
 
 <sup>1</sup> Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force (Fuerza Aeroespacial Colombiana, FAC), Bogotá, Colombia.
 <sup>2</sup> Aerospace Medicine Research Program, DIMAE, Colombian Aerospace Force, Bogotá, Colombia.
@@ -23,6 +23,7 @@ PHYSICS-INFORMED MEB MODEL
 <sup>\*</sup> Corresponding author.
 
 ORCID (D.L.M.): [0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940)
+ORCID (M.A.F.): [0000-0002-9910-6053](https://orcid.org/0000-0002-9910-6053)
 
 ## Corresponding author
 

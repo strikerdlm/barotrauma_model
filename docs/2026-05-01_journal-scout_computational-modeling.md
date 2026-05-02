@@ -1,7 +1,7 @@
 # Journal Scout Report — Computational & Mathematical Biology Track
 **Generated:** 2026-05-01
 **Manuscript:** `docs/manuscript.md`
-**Title:** Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
+**Title:** Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training
 **Article type:** Original Research — computational prediction model development + external validation
 **Reporting guideline:** TRIPOD 2015
 **Word count:** ~3,250 body · 249-word abstract · 24 refs · 4 tables · 2 figures
