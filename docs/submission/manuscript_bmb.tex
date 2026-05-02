@@ -5,6 +5,8 @@
 \usepackage{amsmath,amssymb}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{ragged2e}
 \usepackage{natbib}
 \usepackage{url}
 \usepackage{hyperref}
@@ -23,11 +25,18 @@
 % upright derivative d
 \newcommand{\diff}{\mathrm{d}}
 
-\title{Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts}
+\title{Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training}
 
-\author{Diego L. Malpica$^{1,2,*}$ \and Marian A. Farf\'{a}n$^{1}$}
+\author{%
+  Diego L. Malpica\thanks{Corresponding author. Email: \href{mailto:diego.malpica@fac.mil.co}{diego.malpica@fac.mil.co}. ORCID: \href{https://orcid.org/0000-0002-2257-4940}{0000-0002-2257-4940}.}\,$^{1,2}$
+  \and Marian A. Farf\'{a}n\thanks{ORCID: \href{https://orcid.org/0000-0002-9910-6053}{0000-0002-9910-6053}.}\,$^{1}$%
+}
 
-\date{}
+\date{%
+\small
+$^{1}$Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force, Bogot\'{a}, Colombia.\\[2pt]
+$^{2}$Aerospace Medicine Research Program, DIMAE, Colombian Aerospace Force, Bogot\'{a}, Colombia.%
+}
 
 
 \begin{document}
@@ -39,11 +48,11 @@
 
 \textbf{Objective.} To develop and externally validate a physics-informed, pathophysiology-aware prediction model for per-exposure MEB risk during hypobaric-chamber training.
 
-\textbf{Methods.} We extended Kanick-Doyle with (i) a continuous descent-side aperture-collapse function (Hill function with rate-dependent tightening), (ii) a six-state URI temporal modifier table, (iii) a four-state PET model, (iv) a lumped-parameter approximation of Ghadiali-group muscle mechanics, and (v) a three-threshold cumulative-hazard score. No machine-learning component is used. Hazard constants were calibrated to the pooled Colombian Aerospace Force (FAC) DIMAE 2010--2026 registry (173/7,271; 2.38\% per-exposure) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC). External validation used three Italian Air Force cohorts.
+\textbf{Methods.} We extended Kanick-Doyle with (i) a continuous descent-side aperture-collapse function (Hill function with rate-dependent tightening), (ii) a six-state URI temporal modifier table, (iii) a four-state PET model, (iv) a lumped-parameter approximation of Ghadiali-group muscle mechanics, and (v) a three-threshold cumulative-hazard score. No machine-learning component is used. Hazard constants were calibrated to the pooled Colombian Aerospace Force (FAC) DIMAE 2010--2026 registry (173/7,271; 2.38\% per-exposure) via log-space bisection and Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC). External validation used three previously published military-aviation cohorts \citep{Morgagni2012,Landolfi2009,Morgagni2010} without parameter refitting.
 
-\textbf{Results.} Calibration reproduced the pooled FAC anchor within 0.1 pp (simulated 2.47\%; career-3 projection 7.23\% vs. 6.97\%). External validation fell inside the observed Wilson 95\% confidence interval for Morgagni 2012 (3.31\% vs. 2.3\% [1.13\%, 4.62\%]) and Landolfi 2009 (3.37\% vs. 2.4\% [1.22\%, 4.66\%]); the Morgagni 2010 gap (+1.77 pp) matched that cohort's pre-/unscreened denominator spread. Saltelli-Sobol sensitivity identified the aperture half-point as the dominant variance driver.
+\textbf{Results.} Calibration reproduced the pooled FAC anchor within 0.1 pp (simulated 2.47\%; career-3 projection 7.23\% vs. 6.97\%). External validation fell inside the observed Wilson 95\% confidence interval for two of three benchmarks (3.31\% vs. 2.3\% [1.13\%, 4.62\%]; 3.37\% vs. 2.4\% [1.22\%, 4.66\%]); the third cohort's gap (+1.77 pp) matched its own pre-/unscreened denominator spread. Saltelli-Sobol sensitivity identified the aperture half-point as the dominant variance driver.
 
-\textbf{Conclusion.} The model reproduces operational MEB prevalence and transfers across independent air forces without refitting. Open-source simulator: \url{https://github.com/strikerdlm/barotrauma_model}
+\textbf{Conclusion.} The model reproduces operational MEB prevalence and transfers across independent military-aviation cohorts without refitting. Open-source simulator: \url{https://github.com/strikerdlm/barotrauma_model}
 
 \textbf{Keywords:} Eustachian tube dysfunction; altitude training; upper respiratory infection; physics-informed modelling; external validation.
 \end{abstract}
@@ -56,7 +65,7 @@ The most widely used mathematical description is Kanick and Doyle's 2005 pressur
 
 First, chamber training descent rates of 1,000--10,000 ft$\cdot$min$^{-1}$ exceed cabin descent by a factor of 5--30. At these rates the developing intra-tubal pressure gradient progressively collapses the collapsible cartilaginous portion of the ET, a Hagen-Poiseuille r$^{4}$ effect that Kanick-Doyle's binary "open or locked" treatment approximates but does not resolve continuously. Second, Kanick-Doyle model obstructive dysfunction through $R_A$ and Patulous ET through a trivial "always open" case that predicts complete rupture protection. Clinical experience contradicts the latter when mucosal edema (such as concurrent URI) converts a patent tube into a paradoxically closed one \citep{Kobayashi2018,Kikuchi2017,Shindo2025}. Third, controlled rhinovirus-challenge data have documented substantial ET dysfunction persisting for 2--3 weeks post-onset \citep{McBride1989,Buchman1994,Doyle1999}, and survey data show URI to be the dominant modifiable risk factor for MEB in flying populations \citep{Lindfors2021,Boel2017}, yet the Kanick-Doyle parameters do not vary with URI state.
 
-We present a physics-informed, pathophysiology-aware extension that addresses these gaps, calibrated to the Colombian Aerospace Force (FAC) 10-year operational registry and externally validated on three independent Italian Air Force cohorts. The software is released open-source at \url{https://github.com/strikerdlm/barotrauma_model} under the MIT license.
+We present a physics-informed, pathophysiology-aware extension that addresses these gaps, calibrated to the Colombian Aerospace Force (FAC) 10-year operational registry and externally validated on three independent previously published military-aviation cohorts. The software is released open-source at \url{https://github.com/strikerdlm/barotrauma_model} under the MIT license.
 
 
 
@@ -82,7 +91,7 @@ The central physical insight is that active ET clearance pathways (swallow and V
 
 \subsection{2.5 Pathophysiology state machine}
 
-URI state is encoded as one of six day-windows (none, 1--3, 4--7, 8--14, 15--21, 22--28), each with a tabulated multiplier set (Table 1). Multipliers were derived from controlled rhinovirus-challenge data \citep{McBride1989,Buchman1994,Doyle1999} and ETDQ-7 meta-analyses \citep{Chen2022}. The peak-dysfunction window (days 4--7) carries $R_A$ $\times$ 3.5, $P_O'$ shift +150 daPa (+11.3 mmHg), a 50\% drop in equalization-rate modifier, and a 4.25$\times$ per-descent MEB relative-risk multiplier.
+URI state is encoded as one of six day-windows (none, 1--3, 4--7, 8--14, 15--21, 22--28), each with a tabulated multiplier set (Table~\ref{tab:uri_modifiers}). Multipliers were derived from controlled rhinovirus-challenge data \citep{McBride1989,Buchman1994,Doyle1999} and ETDQ-7 meta-analyses \citep{Chen2022}. The peak-dysfunction window (days 4--7) carries $R_A$ $\times$ 3.5, $P_O'$ shift +150 daPa (+11.3 mmHg), a 50\% drop in equalization-rate modifier, and a 4.25$\times$ per-descent MEB relative-risk multiplier.
 
 Patulous ET (PET) is encoded as one of four states \citep{Kobayashi2018,Kikuchi2017,Shindo2025}. S1 (baseline patent, upright, dry mucosa) reproduces Kanick-Doyle's rupture-protective prediction via a hard-zero override on $\Delta P$. S2 (PET with acute URI or mucosal inflammation) applies paradoxical closure on an abnormal cartilaginous substrate via $R_A$ $\times$ 3.5, $P_O'$ shift +60 daPa, and a 4.0$\times$ per-descent RR. S3 (habitual sniffer) biases resting $\Delta P$ toward -15 mmHg, reflecting the type-B/C tympanogram rate of 42.6\% reported in habitually-sniffing PET patients \citep{Shindo2025}. Per-descent RR was raised from 2.5 to 4.0 to reflect the \citet{Oshima2025} large-cohort (n = 1,009) sniffing OR of 8.18 convolved with the already-modeled $\Delta P$ physiology. S4 (post-Kobayashi-plug or cartilage augmentation) imposes stenotic-equivalent obstruction. Oral and topical decongestants carry a paradoxical-worsening RR of 1.4 in PET (versus 0.90 in healthy subjects --- softened from the prior 0.70 per \citet{Moayedi2025}, a placebo-controlled HBOT RCT showing null preventive effect of prophylactic pseudoephedrine).
 
@@ -106,7 +115,7 @@ Per-outcome probabilities are scored by a cumulative hazard applied to the $\Del
 
 \textbf{Calibration methods.} Calibration used two methods. Bisection performed log-space bisection on $r_{\mathrm{barotitis}}$ against the cohort mean per-exposure $p_{\mathrm{barotitis}}$. Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC) \citep{Toni2009} jointly inferred ($r_{\mathrm{barotitis}}$, $r_{\mathrm{baromyringitis}}$, $r_{\mathrm{rupture}}$) against three summary statistics (cohort prevalence; URI day 4--7 / none gradient; severe / normal severity gradient), using 100 particles, 4 generations, 150 synthetic-cohort subjects, and a tolerance schedule of 13.9 $\rightarrow$ 5.0.
 
-\textbf{External validation.} External validation used three published Italian Air Force cohorts \citep{Morgagni2012,Landolfi2009,Morgagni2010} without refitting: Morgagni 2010 (n = 1,241, 1.5\% overall barotitis), Morgagni 2012 (n = 314, 2.3\% acute barotitis at 25,000 ft), and Landolfi 2009 (n = 335, 2.4\% TEED-graded barotitis). Each carried a matched chamber profile (30-min preoxygenation, 25,000 ft hold, 3,000 ft$\cdot$min$^{-1}$ descent), a tightened cohort prior reflecting Italian Air Force tympanometry pre-screening, and a binomial Wilson 95\% CI around the observed proportion.
+\textbf{External validation.} External validation used three previously published independent military-aviation cohorts \citep{Morgagni2012,Landolfi2009,Morgagni2010} without refitting: Morgagni 2010 (n = 1,241, 1.5\% overall barotitis), Morgagni 2012 (n = 314, 2.3\% acute barotitis at 25,000 ft), and Landolfi 2009 (n = 335, 2.4\% TEED-graded barotitis). Each carried a matched chamber profile (30-min preoxygenation, 25,000 ft hold, 3,000 ft$\cdot$min$^{-1}$ descent), a tightened cohort prior reflecting tympanometry pre-screening reported in those cohorts, and a binomial Wilson 95\% CI around the observed proportion.
 
 \textbf{Model performance measures.} Model performance was assessed by (i) absolute agreement of simulated vs. observed per-exposure prevalence against the cohort's Wilson 95\% CI (pre-specified pass criterion: simulated point estimate within observed CI); (ii) agreement of the projected 3-exposure career prevalence against the pooled FAC career anchor; and (iii) qualitative preservation of the Kanick-Doyle Fig 3 healthy-baseline $\Delta P$ trace under a pinned regression fixture. Calibration-in-the-large and discrimination metrics routinely reported for person-level risk models (c-statistic, calibration slope) are not applicable to a cohort-level aggregate prediction and are not reported.
 
@@ -120,23 +129,23 @@ Saltelli-sampled Sobol first-order and total-order indices \citep{Saltelli2010} 
 
 \subsection{3.1 Calibration}
 
-The bisection calibrator converged in 6 iterations with an achieved per-exposure prevalence of 2.47\% (target 2.38\%) and a projected three-exposure career prevalence of 7.23\% against the pooled FAC 2010--2026 anchor of 6.97\% (Table 2). URI subgroup means separated cleanly: none 0.41\%, day 1--3 10.8\%, day 4--7 29.3\%, day 8--14 4.4\%, day 15--21 1.3\%. Severity subgroup means: normal 2.2\%, mild 3.9\%, moderate 3.1\%, severe 33.5\%.
+The bisection calibrator converged in 6 iterations with an achieved per-exposure prevalence of 2.47\% (target 2.38\%) and a projected three-exposure career prevalence of 7.23\% against the pooled FAC 2010--2026 anchor of 6.97\% (Table~\ref{tab:calibration}). URI subgroup means separated cleanly: none 0.41\%, day 1--3 10.8\%, day 4--7 29.3\%, day 8--14 4.4\%, day 15--21 1.3\%. Severity subgroup means: normal 2.2\%, mild 3.9\%, moderate 3.1\%, severe 33.5\%.
 
 ABC-SMC (100 particles, 4 generations, 150 cohort subjects, tolerance schedule 13.9 $\rightarrow$ 5.0; fit against the earlier 2.00\% target) returned a posterior mean $r_{\mathrm{barotitis}}$ = 5.07 $\times$ 10$^{-8}$ with a 95\% credible interval of [3.59 $\times$ 10$^{-8}$, 8.00 $\times$ 10$^{-8}$]. The bisection point estimate against the re-anchored 2.38\% target ($r_{\mathrm{barotitis}}$ = 5.85 $\times$ 10$^{-8}$) falls inside this CI, so the ABC-SMC posterior remains internally consistent with the pooled anchor and is not re-fit. The baromyringitis and rupture constants have wider posterior intervals because the chosen summary statistics do not tightly constrain them; a FAC per-TEED-grade breakdown is the clearest next step.
 
 \subsection{3.2 External validation}
 
-Italian Air Force transfer tests (Table 3; Figure 3) passed for Morgagni 2012 (simulated 3.31\% vs. observed 2.3\%, inside Wilson 95\% CI [1.13\%, 4.62\%]) and Landolfi 2009 (simulated 3.37\% vs. observed 2.4\%, inside CI [1.22\%, 4.66\%]). Morgagni 2010 fell 1.77 pp outside the narrowest observed CI (simulated 3.27\% vs. observed 1.5\%, CI [0.96\%, 2.34\%]); the discrepancy is larger than the +1.1 pp gap reported against the earlier single-cohort anchor, reflecting the 0.38 pp uplift in the pooled 2010--2026 FAC target relative to the Italian AF aggregate mean (~1.8\%), but remains comparable to that cohort's own pre-screened-to-unscreened spread (1.1\% to 2.7\%), consistent with the unpublished denominator mix rather than a physics error. URI-state gradient in the validation cohorts (day 4--7 > 3 $\times$ URI none) confirms acute URI as the dominant predicted risk driver.
+External transfer tests (Table~\ref{tab:validation}; Figure~\ref{fig:validation}) passed for Morgagni 2012 (simulated 3.31\% vs. observed 2.3\%, inside Wilson 95\% CI [1.13\%, 4.62\%]) and Landolfi 2009 (simulated 3.37\% vs. observed 2.4\%, inside CI [1.22\%, 4.66\%]). Morgagni 2010 fell 1.77 pp outside the narrowest observed CI (simulated 3.27\% vs. observed 1.5\%, CI [0.96\%, 2.34\%]); the discrepancy is larger than the +1.1 pp gap reported against the earlier single-cohort anchor, reflecting the 0.38 pp uplift in the pooled 2010--2026 FAC target relative to the Italian AF aggregate mean (~1.8\%), but remains comparable to that cohort's own pre-screened-to-unscreened spread (1.1\% to 2.7\%), consistent with the unpublished denominator mix rather than a physics error. URI-state gradient in the validation cohorts (day 4--7 > 3 $\times$ URI none) confirms acute URI as the dominant predicted risk driver.
 
 \subsection{3.3 Descent-rate sensitivity and pathophysiology interactions}
 
-For a healthy baseline patient on a 25,000-ft descent, max |$\Delta P$| grows monotonically with descent rate up to saturation at ~400 mmHg (Table 4; Figure 1). Barotitis probability increases from 0.0\% at 300 ft$\cdot$min$^{-1}$ (commercial cabin) to 9.9\% at 10,000 ft$\cdot$min$^{-1}$ (worst-case chamber stress test). Rupture probability rises monotonically with descent rate, reaching 1.57\% at 10,000 ft$\cdot$min$^{-1}$ after clearing the 150 mmHg threshold at ~5,000 ft$\cdot$min$^{-1}$. The dose-time integral of |$\Delta P$| does not saturate as sharply as the peak, so barotitis probability retains its gradient across the full 500--10,000 ft$\cdot$min$^{-1}$ range even where max |$\Delta P$| plateaus.
+For a healthy baseline patient on a 25,000-ft descent, max $|\Delta P|$ grows monotonically with descent rate up to saturation at $\sim$400 mmHg (Table~\ref{tab:descent_rate}; Figure~\ref{fig:descent_rate}). Barotitis probability increases from 0.0\% at 300 ft$\cdot$min$^{-1}$ (commercial cabin) to 9.9\% at 10,000 ft$\cdot$min$^{-1}$ (worst-case chamber stress test). Rupture probability rises monotonically with descent rate, reaching 1.57\% at 10,000 ft$\cdot$min$^{-1}$ after clearing the 150 mmHg threshold at ~5,000 ft$\cdot$min$^{-1}$. The dose-time integral of |$\Delta P$| does not saturate as sharply as the peak, so barotitis probability retains its gradient across the full 500--10,000 ft$\cdot$min$^{-1}$ range even where max |$\Delta P$| plateaus.
 
-The Patulous-S1 override reproduces Kanick-Doyle's rupture-protective prediction exactly (max |$\Delta P$| = 0 on a rapid 10,000 ft$\cdot$min$^{-1}$ descent, $p_{\mathrm{barotitis}}$ = 0.0\%). PET-S2 pathology (paradoxical closure on an abnormal cartilaginous substrate, no concurrent URI) on the same profile gives max |$\Delta P$| = 423 mmHg and $p_{\mathrm{barotitis}}$ = 44\%; adding peak URI (day 4--7) saturates the hazard integral ($p_{\mathrm{barotitis}}$ $\approx$ 100\%), a clinically dangerous state recognised in the PET-management literature \citep{Kobayashi2018,Kikuchi2017,Shindo2025} but absent from Kanick-Doyle's framework. Figure 4 shows the full URI $\times$ PET interaction matrix on the FAC chamber profile for a default healthy baseline patient, confirming that the peak-URI window (days 4--7) dominates each PET row and that S1 + URI elevates risk to the same level as S2 + URI --- that is, the rupture-protective Kanick-Doyle prediction for patent ET is reversed under acute upper-respiratory inflammation.
+The Patulous-S1 override reproduces Kanick-Doyle's rupture-protective prediction exactly (max |$\Delta P$| = 0 on a rapid 10,000 ft$\cdot$min$^{-1}$ descent, $p_{\mathrm{barotitis}}$ = 0.0\%). PET-S2 pathology (paradoxical closure on an abnormal cartilaginous substrate, no concurrent URI) on the same profile gives max |$\Delta P$| = 423 mmHg and $p_{\mathrm{barotitis}}$ = 44\%; adding peak URI (day 4--7) saturates the hazard integral ($p_{\mathrm{barotitis}}$ $\approx$ 100\%), a clinically dangerous state recognised in the PET-management literature \citep{Kobayashi2018,Kikuchi2017,Shindo2025} but absent from Kanick-Doyle's framework. Figure~\ref{fig:uri_pet} shows the full URI $\times$ PET interaction matrix on the FAC chamber profile for a default healthy baseline patient, confirming that the peak-URI window (days 4--7) dominates each PET row and that S1 + URI elevates risk to the same level as S2 + URI --- that is, the rupture-protective Kanick-Doyle prediction for patent ET is reversed under acute upper-respiratory inflammation.
 
 \subsection{3.4 Global sensitivity and pinned-baseline stability}
 
-Sobol analysis (N = 128 Saltelli base samples, 768 model evaluations, scrambled-Sobol QMC sequence, seed 2026) identified the aperture half-point as the dominant variance driver in per-exposure $p_{\mathrm{barotitis}}$ ($S_T$ = 0.99, $S_i$ = 0.97), approximately fifty-fold above descent-phase swallow frequency ($S_T$ = 0.020), aperture free-zone threshold ($S_T$ = 0.019), and mastoid volume ($S_T$ = 0.005); the three secondary parameters were within Monte-Carlo noise of each other across a five-seed sweep (range 0.016--0.033 for swallow and free-zone). First-order indices summed to $\approx$ 0.93 and total-order indices to $\approx$ 1.04, indicating that the per-exposure barotitis output is dominated by the main effect of the aperture half-point with negligible interaction structure. Figure 2 shows the ranking. The clinical implication is that the single highest-leverage target for future empirical parameter refinement is the aperture half-point, most plausibly constrained by paired forced-response-test data or by ET balloon-dilation pre- and post-measurements \citep{Alper2020}.
+Sobol analysis (N = 128 Saltelli base samples, 768 model evaluations, scrambled-Sobol QMC sequence, seed 2026) identified the aperture half-point as the dominant variance driver in per-exposure $p_{\mathrm{barotitis}}$ ($S_T$ = 0.99, $S_i$ = 0.97), approximately fifty-fold above descent-phase swallow frequency ($S_T$ = 0.020), aperture free-zone threshold ($S_T$ = 0.019), and mastoid volume ($S_T$ = 0.005); the three secondary parameters were within Monte-Carlo noise of each other across a five-seed sweep (range 0.016--0.033 for swallow and free-zone). First-order indices summed to $\approx$ 0.93 and total-order indices to $\approx$ 1.04, indicating that the per-exposure barotitis output is dominated by the main effect of the aperture half-point with negligible interaction structure. Figure~\ref{fig:sobol} shows the ranking. The clinical implication is that the single highest-leverage target for future empirical parameter refinement is the aperture half-point, most plausibly constrained by paired forced-response-test data or by ET balloon-dilation pre- and post-measurements \citep{Alper2020}.
 
 Across the v2.0 $\rightarrow$ v2.1 $\rightarrow$ v2.2 physics changes, the Kanick-Doyle Fig 3 / Groth 1986 healthy-baseline trajectory remained within $\pm$5\% of the pinned fixture at every one of 17 sample time points. Peak |$\Delta P$| is 17.9 mmHg, matching the order of magnitude in Kanick-Doyle Fig 3.
 
@@ -144,7 +153,7 @@ Across the v2.0 $\rightarrow$ v2.1 $\rightarrow$ v2.2 physics changes, the Kanic
 
 \section{Discussion}
 
-We have extended the canonical Kanick-Doyle 2005 middle-ear-barotrauma model with a set of additions motivated by operational hypobaric-chamber needs: a continuous descent-side aperture-collapse model, a six-state URI temporal modifier, a four-state Patulous ET model, Ghadiali-FEM-inspired muscle mechanics, and Doyle 2017 multi-pathway gas exchange. The resulting simulator reproduces the pooled Colombian Aerospace Force 2010--2026 anchor cohort within 0.1 percentage points per-exposure and 0.3 percentage points career-3, transfers to two of three independent Italian Air Force cohorts within the observed Wilson 95\% CI, and remains consistent with the Kanick-Doyle Fig 3 / Groth 1986 validation under a pinned regression test.
+We have extended the canonical Kanick-Doyle 2005 middle-ear-barotrauma model with a set of additions motivated by operational hypobaric-chamber needs: a continuous descent-side aperture-collapse model, a six-state URI temporal modifier, a four-state Patulous ET model, Ghadiali-FEM-inspired muscle mechanics, and Doyle 2017 multi-pathway gas exchange. The resulting simulator reproduces the pooled Colombian Aerospace Force 2010--2026 anchor cohort within 0.1 percentage points per-exposure and 0.3 percentage points career-3, transfers to two of three independent previously published cohorts within the observed Wilson 95\% CI, and remains consistent with the Kanick-Doyle Fig 3 / Groth 1986 validation under a pinned regression test.
 
 Three extensions deserve particular comment. First, the continuous aperture-collapse model was the single most load-bearing addition for chamber-rate physiology. Kanick-Doyle's binary lock treatment could not simultaneously reproduce a healthy-ear 20-mmHg gradient at 300 ft$\cdot$min$^{-1}$ airline descent and a 400-mmHg gradient at 10,000 ft$\cdot$min$^{-1}$ chamber stress --- the single $R_A$ and lock threshold drifted one direction or the other. The Hill-function aperture with a protective free zone below 40 mmHg resolves this by leaving slow descents in the easy regime while progressively collapsing faster ones. Rate-dependent tightening captures the Wang 2019 rabbit histopathology gradient \citep{Wang2019} where pressure-change rate, not absolute altitude, predicted grade.
 
@@ -154,19 +163,19 @@ Third, the six-state URI temporal modifier is the most direct encoding of the co
 
 \subsection{4.1 Limitations}
 
-The calibration anchor, the pooled Colombian Aerospace Force 2010--2026 registry (n = 173 clinical barotrauma events in 7,271 chamber exposures; Wilson 95\% CI 2.06--2.75\%), is currently internal DIMAE cohort data awaiting peer-reviewed publication. Users should treat the specific hazard-rate constants as informed priors rather than externally validated point estimates until the anchor paper is published. External validation on two of three Italian Air Force benchmarks mitigates but does not eliminate this dependency.
+The calibration anchor, the pooled Colombian Aerospace Force 2010--2026 registry (n = 173 clinical barotrauma events in 7,271 chamber exposures; Wilson 95\% CI 2.06--2.75\%), is currently internal DIMAE cohort data awaiting peer-reviewed publication. Users should treat the specific hazard-rate constants as informed priors rather than externally validated point estimates until the anchor paper is published. External validation on two of three independent previously published benchmarks mitigates but does not eliminate this dependency.
 
 The rupture threshold at 150 mmHg is a conservative anchor; biomechanical studies of isolated tympanic-membrane preparations report actual rupture pressures of 600--750 mmHg. The rupture output should be interpreted as "imminent perforation risk" and is most useful for ordinal ranking of profiles. Several parameters derive their magnitude from modeler judgment rather than retrieved data, including the decongestant-in-PET paradoxical RR of 1.4, the ET lock threshold of 90 mmHg, and the hazard exponents. These are listed explicitly in the model card so a reviewer can challenge any of them without challenging the underlying data.
 
-No per-subject machine-learning head is trained in the shipped model; the scaffolding is in place and tested on synthetic cohorts but deliberately passes through to the deterministic physics output when unfit. Ghadiali-group full-FEM ET mechanics are approximated through lumped-parameter modulators. Individual chamber profiles for the Italian Air Force cohorts are not published verbatim; the simulator reconstructs the published envelope, which may differ from the exact cohort profiles in ways that affect validation numbers.
+No per-subject machine-learning head is trained in the shipped model; the scaffolding is in place and tested on synthetic cohorts but deliberately passes through to the deterministic physics output when unfit. Ghadiali-group full-FEM ET mechanics are approximated through lumped-parameter modulators. Individual chamber profiles for the external-validation cohorts are not published verbatim; the simulator reconstructs the published envelope, which may differ from the exact cohort profiles in ways that affect validation numbers.
 
 \subsection{4.2 Incorporation of 2025--2026 evidence}
 
-A 2026 targeted literature scan identified two findings with immediate parameter impact. First, \citet{Moayedi2025} is a placebo-controlled HBOT RCT showing no significant effect of prophylactic pseudoephedrine on ear pain, tympanic-membrane injury, or rescue medication --- null in controlled-descent chamber physiology despite the protective signal in airline-descent data. We soften the pseudoephedrine RR from 0.70 to 0.90 to reflect this indication-specificity. Second, \citet{Oshima2025} (n = 1,009) quantifies habitual-sniffing OR at 8.18 for PET and tympanic-membrane flutter OR at 42.17; we update the PET-S3 per-descent RR from 2.5 to 4.0 to reflect the large-cohort effect size. Other 2025--2026 findings (Swords 2025 Cochrane BDET meta-analysis; Khan 2026 12-month BDET effect; Voigt 2025 HBOT sensory-neuropathy risk factor; Zhang 2025 bidirectional ET vortex pumping; Holm 2026 quantified OFP and LVPM atrophy in ETD) are flagged for v2.3.0 consideration but do not alter the shipped v2.2.1 parameter set because they address treatment arms, anatomic covariates, or candidate physics terms rather than the core simulator's calibration target.
+A 2026 targeted literature scan identified two findings with immediate parameter impact. First, \citet{Moayedi2025} is a placebo-controlled hyperbaric-oxygen-therapy RCT showing no significant effect of prophylactic pseudoephedrine on ear pain, tympanic-membrane injury, or rescue medication --- null in controlled-descent chamber physiology despite the protective signal in airline-descent data. We soften the pseudoephedrine RR from 0.70 to 0.90 to reflect this indication-specificity. Second, \citet{Oshima2025} ($n = 1{,}009$) quantifies habitual-sniffing OR at 8.18 for Patulous Eustachian tube and tympanic-membrane flutter OR at 42.17; we update the PET-S3 per-descent RR from 2.5 to 4.0 to reflect the large-cohort effect size.
 
 \subsection{4.3 Conclusions}
 
-A physics-informed middle-ear barotrauma simulator that jointly models URI temporal dynamics, Patulous ET state dependence, descent-rate-driven aperture collapse, and active-equalization muscle mechanics can reproduce operational cohort prevalence and transfer across independent air forces without refitting hazard constants. The model is calibrated to the Colombian Aerospace Force cohort and validated against two independent Italian Air Force benchmarks within the observed Wilson 95\% CI. The aperture half-point is the dominant source of output variance and the highest-leverage empirical refinement target.
+A physics-informed middle-ear barotrauma simulator that jointly models URI temporal dynamics, Patulous ET state dependence, descent-rate-driven aperture collapse, and active-equalization muscle mechanics can reproduce operational cohort prevalence and transfer across independent military-aviation cohorts without refitting hazard constants. The model is calibrated to the Colombian Aerospace Force cohort and validated against two of three independent previously published benchmarks within the observed Wilson 95\% CI. The aperture half-point is the dominant source of output variance and the highest-leverage empirical refinement target.
 
 
 
@@ -182,7 +191,7 @@ Not applicable --- no identifiable individual-level patient data or images are i
 
 \subsection{Data availability}
 
-Aggregate cohort statistics (per-exposure prevalence, Wilson 95\% CI, URI subgroup gradients) required to reproduce the calibration are reported in Tables II--IV and in the model card accompanying the source repository. Individual-level registry records are institutional operational data of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. External-validation data are available in the original publications \citep{Morgagni2012,Landolfi2009,Morgagni2010}.
+Aggregate cohort statistics (per-exposure prevalence, Wilson 95\% CI, URI subgroup gradients) required to reproduce the calibration are reported in Tables \ref{tab:calibration}--\ref{tab:descent_rate} and in the model card accompanying the source repository. Individual-level registry records are institutional operational data of the Colombian Aerospace Force; further data may be shared with qualified researchers upon written authorization from the Colombian Aerospace Force institutional authority. External-validation data are available in the original publications \citep{Morgagni2012,Landolfi2009,Morgagni2010}.
 
 \subsection{Code availability}
 
@@ -217,31 +226,33 @@ The authors acknowledge the foundational contributions of the late William J. Do
 
 
 
-\subsection{Table 1. URI temporal modifier table.}
-
 \begin{table}[htbp]
 \centering
-\begin{tabular}{llllll}
+\caption{URI temporal modifier table. Six day-windows from URI symptom onset, each with the multiplier set applied to Eustachian-tube resistance ($R_A$), passive opening pressure ($P_O'$), per-event equalisation-rate modifier, Valsalva clearance, and the per-descent middle-ear-barotrauma relative risk}
+\label{tab:uri_modifiers}
+\small
+\begin{tabularx}{\textwidth}{@{}lccccc@{}}
 \toprule
-URI state & $R_A$ $\times$ & $P_O'$ shift (daPa) & Equalization rate $\times$ & Valsalva $\times$ & Per-descent relative risk \\
+URI state & $R_A$ $\times$ & $P_O'$ shift (daPa) & Equalisation rate $\times$ & Valsalva $\times$ & Per-descent RR \\
 \midrule
-none & 1.0 & 0 & 1.00 & 1.00 & 1.00 \\
-day 1--3 & 2.0 & +80 & 0.60 & 0.70 & 2.50 \\
-day 4--7 & 3.5 & +150 & 0.40 & 0.50 & 4.25 \\
-day 8--14 & 1.8 & +60 & 0.75 & 0.80 & 2.00 \\
-day 15--21 & 1.3 & +20 & 0.90 & 0.90 & 1.30 \\
-day 22--28 & 1.1 & +5 & 0.95 & 0.95 & 1.10 \\
+none       & 1.0 & 0    & 1.00 & 1.00 & 1.00 \\
+day 1--3   & 2.0 & +80  & 0.60 & 0.70 & 2.50 \\
+day 4--7   & 3.5 & +150 & 0.40 & 0.50 & 4.25 \\
+day 8--14  & 1.8 & +60  & 0.75 & 0.80 & 2.00 \\
+day 15--21 & 1.3 & +20  & 0.90 & 0.90 & 1.30 \\
+day 22--28 & 1.1 & +5   & 0.95 & 0.95 & 1.10 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 
 
-\subsection{Table 2. Calibration summary.}
-
 \begin{table}[htbp]
 \centering
-\begin{tabular}{ll}
+\caption{Calibration summary against the pooled Colombian Aerospace Force 2010--2026 anchor cohort. Bisection point estimates and ABC-SMC credible intervals for the three hazard-rate constants}
+\label{tab:calibration}
+\small
+\begin{tabularx}{\textwidth}{@{}>{\RaggedRight\arraybackslash}X >{\RaggedRight\arraybackslash}l@{}}
 \toprule
 Metric & Value \\
 \midrule
@@ -249,50 +260,52 @@ Target per-exposure $p_{\mathrm{barotitis}}$ & 2.38\% \\
 Achieved per-exposure $p_{\mathrm{barotitis}}$ & 2.47\% \\
 Career projection (3 exposures) & 7.23\% \\
 Pooled FAC 2010--2026 career anchor & 6.97\% \\
-$r_{\mathrm{barotitis}}$ & 5.85 $\times$ 10$^{-8}$ \\
-$r_{\mathrm{baromyringitis}}$ & 1.75 $\times$ 10$^{-9}$ \\
-$r_{\mathrm{rupture}}$ & 5.85 $\times$ 10$^{-11}$ \\
+$r_{\mathrm{barotitis}}$ & $5.85 \times 10^{-8}$ \\
+$r_{\mathrm{baromyringitis}}$ & $1.75 \times 10^{-9}$ \\
+$r_{\mathrm{rupture}}$ & $5.85 \times 10^{-11}$ \\
 Bisection iterations & 6 \\
-ABC-SMC 95\% credible interval on $r_{\mathrm{barotitis}}$ (fit against 2.00\% target; re-anchored r = 5.85 $\times$ 10$^{-8}$ lies inside) & [3.59 $\times$ 10$^{-8}$, 8.00 $\times$ 10$^{-8}$] \\
+ABC-SMC 95\% credible interval on $r_{\mathrm{barotitis}}$ (fit against 2.00\% target; the re-anchored $r = 5.85 \times 10^{-8}$ lies inside) & $[3.59 \times 10^{-8},\, 8.00 \times 10^{-8}]$ \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{External validation against three previously published independent military-aviation cohorts without parameter refitting. Observed proportions are reported with binomial Wilson 95\% confidence intervals; the pre-specified pass criterion is that the simulated point estimate falls inside the observed CI}
+\label{tab:validation}
+\small
+\begin{tabular}{@{}lrlrl@{}}
+\toprule
+Cohort & $n$ & Observed (95\% CI) & Simulated & Inside CI \\
+\midrule
+Morgagni 2010              & 1{,}241 & 1.5\% [0.96\%, 2.34\%] & 3.27\% & no (+1.77 pp) \\
+Morgagni 2012, 25{,}000 ft & 314     & 2.3\% [1.13\%, 4.62\%] & 3.31\% & yes \\
+Landolfi 2009              & 335     & 2.4\% [1.22\%, 4.66\%] & 3.37\% & yes \\
 \bottomrule
 \end{tabular}
 \end{table}
 
 
 
-\subsection{Table 3. External validation against Italian Air Force cohorts.}
-
 \begin{table}[htbp]
 \centering
-\begin{tabular}{lllll}
+\caption{Descent-rate sensitivity for a healthy patient under the FAC cohort priors (25{,}000-ft hold, varying descent rate). Peak transmembrane pressure $|\Delta P|$, predicted per-exposure barotitis probability ($p_{\mathrm{barotitis}}$), and rupture probability ($p_{\mathrm{rupture}}$) as functions of descent rate}
+\label{tab:descent_rate}
+\small
+\begin{tabular}{@{}rrrrr@{}}
 \toprule
-Cohort & n & Observed (95\% CI) & Simulated & Inside CI \\
+Descent rate (ft$\cdot$min$^{-1}$) & Duration (s) & Max $|\Delta P|$ (mmHg) & $p_{\mathrm{barotitis}}$ & $p_{\mathrm{rupture}}$ \\
 \midrule
-Morgagni 2010 & 1,241 & 1.5\% [0.96\%, 2.34\%] & 3.27\% & no (+1.77 pp) \\
-Morgagni 2012, 25,000 ft & 314 & 2.3\% [1.13\%, 4.62\%] & 3.31\% & yes \\
-Landolfi 2009 & 335 & 2.4\% [1.22\%, 4.66\%] & 3.37\% & yes \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-
-\subsection{Table 4. Descent-rate sensitivity, healthy patient, FAC cohort priors.}
-
-\begin{table}[htbp]
-\centering
-\begin{tabular}{lllll}
-\toprule
-Descent rate (ft$\cdot$min$^{-1}$) & Duration (s) & Max |$\Delta P$| (mmHg) & $p_{\mathrm{barotitis}}$ & $p_{\mathrm{rupture}}$ \\
-\midrule
-300 & 5,000 & 10 & 0.00\% & 0.00\% \\
-500 & 3,000 & 16 & 0.00\% & 0.00\% \\
-1,000 & 1,500 & 36 & 0.04\% & 0.00\% \\
-2,000 & 750 & 59 & 0.51\% & 0.00\% \\
-3,000 & 500 & 99 & 1.51\% & 0.00\% \\
-5,000 & 300 & 274 & 7.19\% & 0.17\% \\
-7,500 & 200 & 363 & 9.71\% & 1.00\% \\
-10,000 & 150 & 405 & 9.90\% & 1.57\% \\
+300     & 5{,}000 &  10 & 0.00\% & 0.00\% \\
+500     & 3{,}000 &  16 & 0.00\% & 0.00\% \\
+1{,}000 & 1{,}500 &  36 & 0.04\% & 0.00\% \\
+2{,}000 &     750 &  59 & 0.51\% & 0.00\% \\
+3{,}000 &     500 &  99 & 1.51\% & 0.00\% \\
+5{,}000 &     300 & 274 & 7.19\% & 0.17\% \\
+7{,}500 &     200 & 363 & 9.71\% & 1.00\% \\
+10{,}000 &    150 & 405 & 9.90\% & 1.57\% \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -321,7 +334,7 @@ Descent rate (ft$\cdot$min$^{-1}$) & Duration (s) & Max |$\Delta P$| (mmHg) & $p
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.85\textwidth]{../figures/paper_c/fig_03_external_validation.png}
-\caption{External validation of the model against the calibration anchor (Colombian Aerospace Force pooled 2010--2026) and three independent published Italian Air Force cohorts. Observed per-exposure barotitis incidence (filled circles) is shown with Wilson 95\% confidence intervals (whiskers); simulated point estimates (diamonds) are colored green when within the observed CI and orange when outside. The model fell within the observed CI for the calibration cohort (sim 2.47\% vs obs 2.38\%, CI [2.06--2.75]) and for two of the three external cohorts (Morgagni 2012 and Landolfi 2009). The Morgagni 2010 simulated point (3.27\%) sits 0.91 percentage points above the upper CI bound of that cohort's observed estimate (1.51\%, CI [0.97--2.36]), within the cohort's own pre-screened-to-unscreened denominator spread (1.1\% to 2.7\%) reported in the source publication. Right margin shows event count over cohort denominator and the simulated point with within-CI status}
+\caption{External validation of the model against the calibration anchor (Colombian Aerospace Force pooled 2010--2026) and three independent previously published military-aviation cohorts (Morgagni 2010, Morgagni 2012, Landolfi 2009). Observed per-exposure barotitis incidence (filled circles) is shown with Wilson 95\% confidence intervals (whiskers); simulated point estimates (diamonds) are colored green when within the observed CI and orange when outside. The model fell within the observed CI for the calibration cohort (sim 2.47\% vs obs 2.38\%, CI [2.06--2.75]) and for two of the three external cohorts (Morgagni 2012 and Landolfi 2009). The Morgagni 2010 simulated point (3.27\%) sits 0.91 percentage points above the upper CI bound of that cohort's observed estimate (1.51\%, CI [0.97--2.36]), within the cohort's own pre-screened-to-unscreened denominator spread (1.1\% to 2.7\%) reported in the source publication. Right margin shows event count over cohort denominator and the simulated point with within-CI status}
 \label{fig:validation}
 \end{figure}
 
