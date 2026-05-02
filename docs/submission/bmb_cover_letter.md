@@ -1,69 +1,59 @@
-# Cover Letter — Bulletin of Mathematical Biology
+## Cover Letter — Bulletin of Mathematical Biology
 
-**Manuscript:** Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts
+**Manuscript:** Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training
 
 **Date:** 2026-05-01
 
 ---
 
-**[Corresponding Author Full Name]**
-**[Corresponding Author Affiliation — Institution, Department, City, Country]**
-**[Corresponding Author Email]**
+Diego L. Malpica, MD
+Subdirectorate of Aerospace Sciences
+Direction of Aerospace Medicine (DIMAE)
+Colombian Aerospace Force (Fuerza Aeroespacial Colombiana)
+Bogotá, Colombia
+diego.malpica@fac.mil.co — ORCID 0000-0002-2257-4940
 
 Editorial Office
-Bulletin of Mathematical Biology
+*Bulletin of Mathematical Biology*
 Springer Nature
 
 ---
 
 Dear Editor,
 
-We wish to submit our manuscript entitled **"Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts"** for consideration as an **Original Research Article** in the *Bulletin of Mathematical Biology*.
+We submit for your consideration as an **Original Research Article** the manuscript **"Beyond Binary Lock: A Continuous Aperture-Collapse Hazard Model of Middle-Ear Barotrauma in Hypobaric-Chamber Training."**
 
-**Scope match.** Our work sits at the interface of **computational physiology** and the **mathematical sciences**. Specifically, we develop a physics-informed ordinary-differential-equation (ODE) framework that extends classical pressure-regulation theory with continuous aperture-collapse mechanics, a six-state temporal modifier for upper-respiratory-infection risk, and a four-state Patulous-Eustachian-tube model. The simulator is calibrated via Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC) and validated externally on three independent air-force cohorts, with global sensitivity analysis (Saltelli-Sobol) identifying dominant variance drivers. We believe this aligns with the journal's aim to publish "new biological insights gained with tools from the mathematical sciences, or new mathematical tools with demonstrated applicability to biological investigations."
+**Scope match.** The work sits squarely at the *Bulletin*'s interface of mathematics and biology. We develop a physics-informed ordinary-differential-equation model of middle-ear pressure regulation in which the binary "open / locked" Eustachian-tube treatment of Kanick & Doyle (2005) is replaced with a continuous Hill-function aperture coupled to a discrete pathophysiology state machine (six-state upper-respiratory-infection temporal modifier; four-state Patulous Eustachian-tube model). Three hazard-rate constants are inferred via Approximate Bayesian Computation Sequential Monte Carlo (ABC-SMC), the model is externally validated on three independent previously published cohorts without parameter refitting, and global Saltelli–Sobol sensitivity analysis identifies the aperture half-pressure as the dominant variance driver. We believe this matches the journal's stated aim to publish "new biological insights gained with tools from the mathematical sciences, [and] new mathematical tools with demonstrated applicability to biological investigations."
 
 **Key contributions.**
-- A novel ODE framework for middle-ear pressure-regulation that introduces continuous, rate-dependent Eustachian-tube aperture collapse during fast hypobaric descent — a regime not captured by existing binary open/locked models.
-- An ABC-SMC calibration pipeline anchored to a 7,271-exposure operational registry, transferable across independent military aviation-medicine cohorts without refitting.
-- Global sensitivity analysis (Sobol) revealing the aperture half-pressure as the dominant parameter for per-exposure barotrauma variance — a directly actionable target for screening and training-policy intervention.
 
-**Previous dissemination.** This work has not been previously published and is not under consideration elsewhere. An open-source implementation (MIT license) is available at https://github.com/strikerdlm/barotrauma_model.
+1. A continuous, rate-dependent Eustachian-tube aperture-collapse function that resolves a known regime gap of Kanick–Doyle's binary lock model when descent rates exceed cabin physiology by 5–30×.
+2. An ABC-SMC calibration pipeline anchored to a 7,271-exposure operational registry (Colombian Aerospace Force, 2010–2026) that transfers across three independent published military-aviation cohorts within the observed Wilson 95% CI for two of three benchmarks, with no refitting.
+3. A global Saltelli–Sobol decomposition that ranks the aperture half-pressure ($S_T \approx 0.99$) as the single highest-leverage empirical refinement target — a directly actionable conclusion for screening and chamber-training policy.
 
-**Suggested reviewers.** We respectfully suggest the following individuals as potential reviewers because of their expertise in mathematical biology, computational physiology, and otological mechanics. We confirm that none are from our institution and that there are no conflicts of interest:
+**Originality and prior dissemination.** This work has not been previously published and is not under consideration elsewhere. An open-source MIT-licensed implementation is available at <https://github.com/strikerdlm/barotrauma_model>; the tagged release `v2.2.1-manuscript` corresponds to the state described in this submission, and a permanent DOI-assigned snapshot will be deposited on Zenodo prior to publication.
 
-1. **[Reviewer 1 Name]**, **[Institution]**, **[Country]** — **[Email]**
-   Expertise: mathematical physiology, biomechanics, ODE modeling
+**Compliance.** The manuscript complies with the journal's guidelines on data availability, code availability, ICMJE authorship, and the CRediT taxonomy, all of which are documented in the "Statements and Declarations" section. Reporting follows TRIPOD 2015; the completed 28-item checklist is provided as Supplementary File S1. Publication of this work was authorized by the Colombian Aerospace Force.
 
-2. **[Reviewer 2 Name]**, **[Institution]**, **[Country]** — **[Email]**
-   Expertise: Eustachian-tube dysfunction, otological modeling, pressure-regulation
+**Suggested reviewers.** The candidates listed below are proposed for their expertise in ODE-based physiology, Eustachian-tube mechanics, Bayesian computation, and aerospace medicine. None are at the authors' institution and no conflicts of interest are known to the authors.
 
-3. **[Reviewer 3 Name]**, **[Institution]**, **[Country]** — **[Email]**
-   Expertise: Bayesian computation, parameter estimation, sensitivity analysis
+1. **Samir N. Ghadiali, PhD** — Department of Biomedical Engineering, The Ohio State University, Columbus, OH, USA. Expertise: computational mechanics of the Eustachian tube and lung; finite-element pressure-regulation modelling.
 
-4. **[Reviewer 4 Name]** (optional), **[Institution]**, **[Country]** — **[Email]**
-   Expertise: aerospace medicine, altitude physiology, barotrauma
+2. **Cuneyt M. Alper, MD** — Department of Otolaryngology, University of Pittsburgh School of Medicine, Pittsburgh, PA, USA. Expertise: middle-ear pressure regulation, tympanometry, mastoid-volume physiology.
 
-All authors have approved the final version of the manuscript and agree to its submission to the *Bulletin of Mathematical Biology*. The manuscript complies with the journal's guidelines on data availability, code availability, and authorship contributions (CRediT taxonomy), all of which are documented in the "Statements and Declarations" section.
+3. **Tina Toni, PhD** — Imperial College London, London, UK. Expertise: Approximate Bayesian Computation Sequential Monte Carlo for deterministic biological models; original author of the ABC-SMC algorithm used here.
 
-We thank you for your consideration and look forward to your response.
+4. **Andrea Saltelli, PhD** — European Centre for Governance in Complexity / Universitat Oberta de Catalunya. Expertise: Sobol global sensitivity analysis for mathematical models in the life sciences.
+
+5. *(Optional, aerospace-medicine reviewer)* **Sarah J. Lindfors, MD, PhD** — Karolinska Institutet, Stockholm, Sweden. Expertise: epidemiology of middle-ear barotrauma in aircrew; URI as risk factor.
+
+We have no opposed reviewers.
+
+We thank you for considering this submission and look forward to the editorial decision.
 
 Sincerely,
 
-**[Corresponding Author Full Name]**
-[Title / Position]
-[Institution]
-[Email]
-[ORCID]
-
----
-
-## Notes for Customization
-
-- Fill in bracketed placeholders before sending.
-- Verify each suggested reviewer's institutional email or provide a link to their publication record / author ID.
-- Aim for an international mix (different countries/institutions).
-- If any reviewer should be excluded, add the optional opposed-reviewer paragraph.
-
----
-
-*Generated by bmb-submission skill v1.0.0*
+Diego L. Malpica, MD
+On behalf of both authors
+diego.malpica@fac.mil.co
+ORCID 0000-0002-2257-4940
