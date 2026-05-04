@@ -231,3 +231,13 @@ docs/Cohort FAC/**/*.csv
 
 # User-supplied reference materials (local-only, not for version control)
 Old_docx/
+
+# LaTeX build artifacts (keep only .tex, .bib, .bst, .pdf under version control)
+docs/submission/*.aux
+docs/submission/*.bbl
+docs/submission/*.blg
+docs/submission/*.out
+docs/submission/*.toc
+docs/submission/*.fls
+docs/submission/*.fdb_latexmk
+docs/submission/*.synctex.gz
