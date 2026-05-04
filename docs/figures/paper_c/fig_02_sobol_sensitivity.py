@@ -65,7 +65,7 @@ for i, r in enumerate(PARAMS_REV):
         "value": r[1],
         "itemStyle": {"color": colors[i], "borderColor": "#000", "borderWidth": 0.6},
         "label": {"show": True, "position": "right",
-                  "fontFamily": FONT_FAMILY, "fontSize": 11, "color": "#000",
+                  "fontFamily": FONT_FAMILY, "fontSize": 28, "color": "#000",
                   "fontWeight": "bold",
                   "formatter": annot[i],
                   "distance": 6},
@@ -80,12 +80,12 @@ opt = {
     "animation": False,
     "title": {
         "text": f"Total-order Sobol sensitivity index (Saltelli, N = {N_SAMPLES})",
-        "left": "center", "top": 10,
+        "left": "center", "top": 20,
         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_TITLE, "fontWeight": "normal"},
     },
     "graphic": [
         # X-axis title (bottom-center)
-        {"type": "text", "left": "center", "bottom": 38, "z": 100,
+        {"type": "text", "left": "center", "bottom": 76, "z": 100,
          "style": {
              "text": "Total-order Sobol index  S_T",
              "font": f"{FONT_SIZE_AXIS_TITLE}px Arial,sans-serif",
@@ -93,15 +93,15 @@ opt = {
              "textAlign": "center",
          }},
         # Footnote on the small-N artifact
-        {"type": "text", "left": "center", "bottom": 12, "z": 100,
+        {"type": "text", "left": "center", "bottom": 24, "z": 100,
          "style": {
              "text": f"Per-exposure p_barotitis at moderate-risk reference patient · N={N_SAMPLES} Saltelli base · {N_EVALS} evaluations · scrambled-Sobol QMC, seed 2026",
-             "font": f"9px Arial,sans-serif",
+             "font": f"22px Arial,sans-serif",
              "fill": "#444",
              "textAlign": "center",
          }},
     ],
-    "grid": {"left": 30, "right": 90, "top": 50, "bottom": 80, "containLabel": True},
+    "grid": {"left": 60, "right": 180, "top": 100, "bottom": 160, "containLabel": True},
     "xAxis": {
         "type": "value", "min": 0, "max": X_MAX,
         "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
@@ -115,7 +115,7 @@ opt = {
         "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
         "axisTick": {"show": False},
         "axisLabel": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_LABEL, "color": "#000",
-                      "interval": 0, "lineHeight": 12},
+                      "interval": 0, "lineHeight": 38},
         "splitLine": {"show": False},
     },
     "series": [
@@ -130,8 +130,8 @@ result = render(
     opt,
     out_dir=OUT_DIR,
     slug="fig_02_sobol_sensitivity",
-    width_mm=120,
-    height_mm=80,
+    width_mm=140,
+    height_mm=110,
     emit_tiff=True,
 )
 print("Rendered:", result["png"])

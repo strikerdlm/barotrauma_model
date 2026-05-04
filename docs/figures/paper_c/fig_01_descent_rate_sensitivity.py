@@ -66,17 +66,17 @@ def rupt_label(v):
 
 baro_label_data = [{"value": [r, y], "label": {"show": y > 0.0,
                     "position": "top",
-                    "fontFamily": FONT_FAMILY, "fontSize": 9, "color": "#000",
+                    "fontFamily": FONT_FAMILY, "fontSize": 24, "color": "#000",
                     "formatter": baro_label(y)}}
                    for r, y in zip(rates, p_baro)]
 rupt_label_data = [{"value": [r, y], "label": {"show": y > 0.0,
                     "position": "bottom",
-                    "fontFamily": FONT_FAMILY, "fontSize": 9, "color": "#000",
+                    "fontFamily": FONT_FAMILY, "fontSize": 24, "color": "#000",
                     "formatter": rupt_label(y)}}
                    for r, y in zip(rates, p_rupt)]
 dp_label_data = [{"value": [r, y], "label": {"show": True,
                     "position": "top",
-                    "fontFamily": FONT_FAMILY, "fontSize": 9, "color": "#000",
+                    "fontFamily": FONT_FAMILY, "fontSize": 24, "color": "#000",
                     "formatter": str(y)}}
                  for r, y in zip(rates, dp_max)]
 
@@ -85,29 +85,29 @@ opt = {
     "textStyle": {"fontFamily": FONT_FAMILY, "color": "#000000"},
     "animation": False,
     "title": [
-        {"text": "A", "left": 8, "top": 6,
-         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 16, "fontWeight": "bold"}},
+        {"text": "A", "left": 16, "top": 12,
+         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 44, "fontWeight": "bold"}},
         {"text": "Peak |ΔP| vs descent rate (25,000-ft descent, healthy patient)",
-         "left": "center", "top": 8,
+         "left": "center", "top": 16,
          "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_TITLE, "fontWeight": "normal"}},
-        {"text": "B", "left": 8, "top": 836,
-         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 16, "fontWeight": "bold"}},
+        {"text": "B", "left": 16, "top": 836,
+         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 44, "fontWeight": "bold"}},
         {"text": "Per-exposure clinical-outcome probability vs descent rate",
          "left": "center", "top": 838,
          "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_TITLE, "fontWeight": "normal"}},
     ],
     "grid": [
         # Panel A — top
-        {"left": 60, "right": 30, "top": 38, "height": 700, "containLabel": True},
+        {"left": 120, "right": 60, "top": 76, "height": 700, "containLabel": True},
         # Panel B — bottom
-        {"left": 60, "right": 30, "top": 870, "height": 660, "containLabel": True},
+        {"left": 120, "right": 60, "top": 870, "height": 660, "containLabel": True},
     ],
     "legend": [
         # Panel A threshold legend (top-left of plot)
         {"data": ["Barotitis Θ=18.4", "Baromyringitis Θ=95.6", "Rupture Θ=150"],
-         "left": 90, "top": 70,
+         "left": 180, "top": 140,
          "orient": "vertical",
-         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 9, "color": "#000"},
+         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 24, "color": "#000"},
          "itemWidth": 22, "itemHeight": 2, "icon": "rect",
          "selectedMode": False,
          "padding": [4, 8, 4, 8],
@@ -115,9 +115,9 @@ opt = {
          "borderColor": "#bbb", "borderWidth": 0.5},
         # Panel B outcome legend (top-right of plot)
         {"data": ["Barotitis", "Rupture"],
-         "right": 50, "top": 880,
+         "right": 100, "top": 880,
          "orient": "vertical",
-         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 10, "color": "#000"},
+         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 26, "color": "#000"},
          "itemWidth": 16, "itemHeight": 8,
          "padding": [4, 8, 4, 8],
          "backgroundColor": "rgba(255,255,255,0.85)",
@@ -126,7 +126,7 @@ opt = {
     "xAxis": [
         # Panel A x — log scale
         {"type": "log", "min": 200, "max": 12000, "gridIndex": 0,
-         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 30,
+         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 54,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"lineStyle": {"color": "#000", "width": 1}, "length": 4},
@@ -135,7 +135,7 @@ opt = {
          "splitLine": {"lineStyle": {"color": "#E5E5E5", "width": 0.5, "type": "dashed"}}},
         # Panel B x — log scale
         {"type": "log", "min": 200, "max": 12000, "gridIndex": 1,
-         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 30,
+         "name": "Descent rate (ft/min)", "nameLocation": "middle", "nameGap": 54,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"lineStyle": {"color": "#000", "width": 1}, "length": 4},
@@ -145,14 +145,14 @@ opt = {
     ],
     "yAxis": [
         {"type": "value", "min": 0, "max": 450, "interval": 100, "gridIndex": 0,
-         "name": "Peak |ΔP| (mmHg)", "nameLocation": "middle", "nameGap": 42, "nameRotate": 90,
+         "name": "Peak |ΔP| (mmHg)", "nameLocation": "middle", "nameGap": 75, "nameRotate": 90,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"show": True, "lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"show": True, "lineStyle": {"color": "#000", "width": 1}},
          "axisLabel": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_LABEL, "color": "#000"},
          "splitLine": {"lineStyle": {"color": "#E5E5E5", "width": 0.5, "type": "dashed"}}},
         {"type": "value", "min": 0, "max": 12, "interval": 2, "gridIndex": 1,
-         "name": "Probability (%)", "nameLocation": "middle", "nameGap": 38, "nameRotate": 90,
+         "name": "Probability (%)", "nameLocation": "middle", "nameGap": 68, "nameRotate": 90,
          "nameTextStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_AXIS_TITLE, "color": "#000"},
          "axisLine": {"show": True, "lineStyle": {"color": "#000", "width": 1}},
          "axisTick": {"show": True, "lineStyle": {"color": "#000", "width": 1}},

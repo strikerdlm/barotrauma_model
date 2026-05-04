@@ -37,10 +37,15 @@ PALETTE = {
 # Typography — AMHP requires Arial; sans-serif fallback chain
 # ---------------------------------------------------------------------------
 FONT_FAMILY = "Arial, Helvetica, 'Liberation Sans', sans-serif"
-FONT_SIZE_AXIS_LABEL = 11      # axis tick labels
-FONT_SIZE_AXIS_TITLE = 12      # axis names
-FONT_SIZE_TITLE = 13           # subtitle / panel title
-FONT_SIZE_LEGEND = 11
+# Font sizes are LOGICAL pixels on a canvas of width_mm × (300/25.4) px.
+# At canvas width 120 mm and LaTeX \includegraphics width=\textwidth (~160 mm),
+# logical-px-per-printed-mm ≈ 1417/160 = 8.86. To hit 11 pt printed (3.88 mm)
+# we need ≈ 34 logical px. Values below target ~10–13 pt at the printed size.
+FONT_SIZE_AXIS_LABEL = 32      # axis tick labels  -> ~10 pt printed
+FONT_SIZE_AXIS_TITLE = 36      # axis names         -> ~11 pt printed
+FONT_SIZE_TITLE = 40           # subtitle / panel title -> ~12 pt printed
+FONT_SIZE_LEGEND = 30          # legend             -> ~9 pt printed
+FONT_SIZE_DATA_LABEL = 24      # in-plot data labels -> ~7 pt printed
 
 # ---------------------------------------------------------------------------
 # Default dimensions (mm × scale = px). AMHP: column widths

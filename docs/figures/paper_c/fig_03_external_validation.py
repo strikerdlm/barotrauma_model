@@ -51,7 +51,7 @@ def within(lo, hi, sim):
 ROWS = []
 for label, n, ev, obs, lo, hi, sim, role in COHORTS:
     inside = within(lo, hi, sim)
-    status = "within CI" if inside else f"+{sim-hi:.2f} pp outside"
+    status = "within CI" if inside else f"+{sim-hi:.2f} pp"
     ROWS.append({
         "label": label,
         "n": n, "ev": ev,
@@ -59,7 +59,7 @@ for label, n, ev, obs, lo, hi, sim, role in COHORTS:
         "sim": sim,
         "role": role,
         "inside": inside,
-        "annot_right": f"k={ev}/{n:,}  ·  sim {sim:.2f}%  ({status})",
+        "annot_right": f"k={ev}/{n:,} · sim {sim:.2f}% · {status}",
     })
 
 ROWS_REV = list(reversed(ROWS))
@@ -93,26 +93,26 @@ opt = {
     "animation": False,
     "title": {
         "text": "External validation: observed vs simulated per-exposure barotitis (%)",
-        "left": "center", "top": 8,
+        "left": "center", "top": 16,
         "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": FONT_SIZE_TITLE, "fontWeight": "normal"},
     },
     "graphic": [{
-        "type": "text", "left": "center", "bottom": 14, "z": 100,
+        "type": "text", "left": "center", "bottom": 28, "z": 100,
         "style": {
             "text": "Observed (filled circles) with Wilson 95% CI · simulated point (diamonds: green = within CI, orange = outside)",
-            "font": f"9px Arial,sans-serif",
+            "font": f"22px Arial,sans-serif",
             "fill": "#000",
             "textAlign": "center",
         },
     }],
     "legend": {
         "data": ["Observed (anchor)", "Observed (external)", "Simulated (within CI)", "Simulated (outside CI)"],
-        "left": "center", "top": 32,
-        "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 10, "color": "#000"},
+        "left": "center", "top": 64,
+        "textStyle": {"fontFamily": FONT_FAMILY, "fontSize": 26, "color": "#000"},
         "itemWidth": 14, "itemHeight": 10,
         "selectedMode": False,
     },
-    "grid": {"left": 200, "right": 280, "top": 70, "bottom": 60, "containLabel": True},
+    "grid": {"left": 280, "right": 720, "top": 200, "bottom": 200, "containLabel": True},
     "xAxis": {
         "type": "value", "min": 0, "max": X_MAX,
         "name": "",
@@ -183,7 +183,7 @@ ANNOT_RIGHT_JS = """function(params, api){
   return { type: 'text', style: {
     text: api.value(2),
     x: x + 10, y: y,
-    fontSize: 10, fontFamily: 'Arial,sans-serif',
+    fontSize: 26, fontFamily: 'Arial,sans-serif',
     fill: '#000', textAlign: 'left', textVerticalAlign: 'middle'
   }};
 }"""
@@ -194,7 +194,7 @@ result = render(
     out_dir=OUT_DIR,
     slug="fig_03_external_validation",
     width_mm=170,
-    height_mm=75,
+    height_mm=110,
     render_item_replacements={
         "RENDERWHISKER": WHISKER_JS,
         "RENDERANNOT": ANNOT_RIGHT_JS,
