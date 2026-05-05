@@ -1,4 +1,0 @@
-source,event,numerator,denominator,rate_pct,wilson_lo_pct,wilson_hi_pct
-director_log,barotrauma,12,706,1.7,0.97,2.95
-director_log,any_medical_emergency_per_run,20,98,20.41,13.62,29.43
-preflight,barotrauma,4,1046,0.38,0.15,0.98
