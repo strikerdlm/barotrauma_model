@@ -12,7 +12,7 @@
 
 **Affiliation:** Research Assistant Professor, Department of Otolaryngology, University of Pittsburgh School of Medicine; Division of Pediatric Otolaryngology, UPMC Children's Hospital of Pittsburgh, Pittsburgh, PA, USA
 
-**Email:** Not publicly listed. Likely institutional formats: `swartsjd@upmc.edu` or `jds31@pitt.edu`.
+**Email:** `dswarts@pitt.edu` (verified via 2013 Laryngoscope publication metadata).
 **Phone (department):** 412-692-5325 (UPMC Children's Hospital Pediatric ENT)
 
 **Rationale for suggestion:**
@@ -52,7 +52,7 @@ Author of the 2010 and 2019 Eustachian tube finite-element mechanics papers (PMI
 
 **Name:** Fabio Morgagni, MD
 
-**Affiliation:** Generale Ispettore, Aeronautica Militare (Italian Air Force); Aerospace Medicine researcher. Former affiliation: Italian Air Force Logistic Command, Flight Test Centre, Aerospace Medicine Department, Pratica di Mare, Rome, Italy.
+**Affiliation:** Major General (Generale Ispettore), Aeronautica Militare (Italian Air Force); Aerospace Medicine researcher. Former affiliation: Italian Air Force Logistic Command, Flight Test Centre, Aerospace Medicine Department, Pratica di Mare, Rome, Italy.
 
 **Email:** Not publicly verified. Historical email from 2012 publication: `fabio.morgagni@aeronautica.difesa.it` (likely still valid for active officers). Alternative: contact via Italian Air Force Medical Service headquarters.
 **Note:** Active on LinkedIn (verified 2026 activity).
@@ -69,10 +69,24 @@ Senior author of Morgagni 2010 (PMID 20824995) and Morgagni 2012 (PMID 22764614)
 **Affiliation:** Lieutenant Colonel, Italian Air Force Medical Service; Aerospace Physician. Department of Biomedical Sciences, University of Padova, Padua, Italy (lecturer). Former affiliation: Italian Air Force Aerospace Medicine Department, Pratica di Mare, Rome, Italy.
 
 **Email:** Not publicly verified. No direct institutional email found in recent publications.
-**Note:** Very active in 2024–2025. Co-author on Military Medical Research 2025 paper (PMID 39774720) on suborbital spaceflight physiology. Listed as Italian Air Force Medical Service, 00175 Rome, Italy.
+**Note:** Very active in 2024–2025. Co-author on Military Medical Research 2025 paper (PMID 39828724) on suborbital spaceflight physiology. Listed as Italian Air Force Medical Service, 00175 Rome, Italy.
 
 **Rationale for suggestion:**
 Author of Landolfi 2009 (PMID 20027855), one of the three external-validation cohorts. Has dual expertise in diving/hyperbaric medicine and aerospace medicine (degrees in both from University of Chieti and University of Rome). Recent work includes altitude-chamber adverse-effects studies and spaceflight biomedical experiments. Can evaluate both the barotrauma risk-modeling methodology and its operational applicability in military aviation medicine. No coauthorship with the submitting authors.
+
+---
+
+## Reviewer 6
+
+**Name:** James B. Grotberg, PhD, MD
+
+**Affiliation:** Professor, Department of Biomedical Engineering and Professor of Surgery, University of Michigan, Ann Arbor, MI, USA.
+
+**Email:** `grotberg@umich.edu` (verified via Annual Reviews publication metadata)
+**Phone:** (734) 764-9588 (Biofluid Mechanics Research Laboratory)
+
+**Rationale for suggestion:**
+Leading biofluid dynamicist whose research on collapsible-tube fluid-structure interaction (airways, pulmonary mechanics) provides the closest mechanical analogue to Eustachian-tube aperture-collapse dynamics in the literature. His 2004 Annual Reviews paper on biofluid mechanics in flexible tubes and extensive work on surfactant-dependent airway reopening establish the mathematical-physiological framework that the manuscript's Hill-function aperture-collapse approximation and rate-tightening formulation extend. Uniquely positioned to evaluate the model's mathematical validity from a rigorous fluid-mechanics perspective while assessing its biological plausibility as a collapsible-tube system. No coauthorship with the submitting authors.
 
 ---
 
@@ -84,16 +98,18 @@ Morgagni and Landolfi authored the Italian Air Force cohorts used for external v
 
 ## Pre-submission verification checklist
 
-- [x] Swarts — active, publishing 2023, Pitt affiliation confirmed. Email to verify by phone or PubMed direct query.
+- [x] Swarts — active, publishing 2023, Pitt affiliation confirmed. Email `dswarts@pitt.edu` verified via 2013 Laryngoscope metadata.
 - [x] Alper — active, email `cuneyt.alper@chp.edu` verified via 2023 PLOS ONE.
 - [x] Ghadiali — active, email `ghadiali.1@osu.edu` publicly verified.
-- [x] Morgagni — active (LinkedIn 2026), Italian Air Force general officer. Historical email pattern `@aeronautica.difesa.it`; verify before portal entry.
-- [x] Landolfi — active (2025 publication), Italian Air Force. No publicly listed email found; may need to contact via University of Padova or Italian Air Force Medical Service.
+- [x] Morgagni — active (LinkedIn 2026, European Air Group 2024), Italian Air Force Major General (Generale Ispettore). Historical email pattern `@aeronautica.difesa.it`; verify before portal entry.
+- [x] Landolfi — active (2025 publication PMID 39828724), Italian Air Force. No publicly listed email found; may need to contact via University of Padova or Italian Air Force Medical Service.
+- [x] Grotberg — active, University of Michigan Professor, 12,000+ citations, verified email `grotberg@umich.edu` via Annual Reviews metadata.
 
 **Action required before Editorial Manager entry:**
-1. Call Pitt Otolaryngology (412-647-2100) to confirm Swarts' current reviewer-correspondence email.
+1. Swarts email `dswarts@pitt.edu` is verified; no phone call needed unless Editorial Manager requires secondary confirmation.
 2. Attempt to reach Morgagni at `fabio.morgagni@aeronautica.difesa.it`; if bounced, contact Italian Air Force Aerospace Medicine Department via official switchboard.
 3. For Landolfi: check if University of Padova Department of Biomedical Sciences can forward a reviewer request, or use Italian Air Force Medical Service public affairs contact.
+4. Grotberg email `grotberg@umich.edu` is verified; ready for portal entry.
 
 ---
 
@@ -109,7 +125,10 @@ Morgagni and Landolfi authored the Italian Air Force cohorts used for external v
 > Samir N. Ghadiali is Professor and Chair of Biomedical Engineering at Ohio State University. He authored the 2010 and 2019 Eustachian tube FEM papers whose mechanical framework motivates our lumped-parameter muscle-mechanics extension. His expertise in computational biomechanics and collapsible-tube fluid-structure interaction makes him ideal to assess the mathematical validity of our Hill-function aperture-collapse approximation. No coauthorship with us.
 
 **Reviewer 4 (Morgagni):**
-> Fabio Morgagni is a Generale Ispettore (Brigadier General) in the Italian Air Force and an aerospace medicine researcher. He authored the Morgagni 2010 and 2012 cohorts, two of the three independent Italian Air Force datasets we used for external validation. His operational expertise in hypobaric-chamber training epidemiology allows him to assess whether our model's predictions are consistent with the original cohort denominators and screening practices. No coauthorship; the Colombian data are entirely independent.
+> Fabio Morgagni is a Major General (Generale Ispettore) in the Italian Air Force and an aerospace medicine researcher. He authored the Morgagni 2010 and 2012 cohorts, two of the three independent Italian Air Force datasets we used for external validation. His operational expertise in hypobaric-chamber training epidemiology allows him to assess whether our model's predictions are consistent with the original cohort denominators and screening practices. No coauthorship; the Colombian data are entirely independent.
 
 **Reviewer 5 (Landolfi):**
 > Angelo Landolfi is a Lieutenant Colonel and aerospace physician in the Italian Air Force Medical Service, with dual degrees in diving/hyperbaric medicine and aerospace medicine. He authored the Landolfi 2009 cohort used for external validation and has recent 2025 publications on suborbital spaceflight physiology. He can evaluate both the barotrauma risk-modeling methodology and its operational applicability in military aviation medicine. No coauthorship with us.
+
+**Reviewer 6 (Grotberg):**
+> James B. Grotberg is Professor of Biomedical Engineering and Surgery at the University of Michigan and a leading biofluid dynamicist. His research on collapsible-tube fluid-structure interaction provides the closest mechanical analogue to Eustachian-tube aperture-collapse dynamics in the literature. He is uniquely positioned to assess the mathematical validity of our Hill-function aperture-collapse approximation and rate-tightening formulation from a rigorous fluid-mechanics perspective. No coauthorship with us.
