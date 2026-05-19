@@ -71,15 +71,8 @@ Three manuscripts are in active development from this codebase:
 - **Article type:** Original Research — computational prediction model development + external validation
 - **Reporting:** TRIPOD 2015 ([checklist S1](docs/submission/supplementary_S1_tripod_checklist.md))
 - **Word count:** ~3,400 body · 248-word abstract · 24 refs · 4 tables · 4 figures (max permitted)
-- **Submission target:** *Aerospace Medicine and Human Performance* (AMHP) — primary track
-  - Status: 5 FAIL items pending from 2026-04-18 compliance audit ([`docs/submission/2026-04-18_amhp_compliance_audit.md`](docs/submission/2026-04-18_amhp_compliance_audit.md))
-  - Portal: <https://www.editorialmanager.com/AMHP/>
-- **Journal decision tree** if AMHP rejects (by score):
-  - Tier A: Otology & Neurotology (Q1, score 84) · European Archives ORL (Q1, score 83)
-  - Tier B: Auris Nasus Larynx (Q2, score 81 — 3 cited papers, strongest scope lineage)
-  - Tier C: Journal of Applied Physiology (Q1, score 80, S2O = $0 APC)
-  - Full analysis: [`docs/2026-04-19_journal-scout_meb-model.md`](docs/2026-04-19_journal-scout_meb-model.md)
-- **Cover letters:** [`docs/cover_letter.md`](docs/cover_letter.md) (AMHP) · [`docs/cover_letter_fac_cohort.md`](docs/cover_letter_fac_cohort.md) · [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
+- **Status:** Under submission review
+- **Cover letters:** [`docs/cover_letter.md`](docs/cover_letter.md) · [`docs/cover_letter_fac_cohort.md`](docs/cover_letter_fac_cohort.md) · [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
 
 ### Paper 2 — FAC cohort epidemiology
 
@@ -111,7 +104,7 @@ Three manuscripts are in active development from this codebase:
 - **Headline metrics** (corrected, expected out-of-sample): AUC 0.813 (95% CI 0.717–0.859); at Youden threshold sensitivity 63.6%, specificity 91.9%, PPV 15.2%, NPV 99.1%, LR+ 6.5, LR− 0.39, DOR 17
 - **Per-flag univariable** (no fitted coefficients, no optimism penalty): recent_respiratory LR+ 17.4 [9.05–33.63] is the strongest individual discriminator; anaemia/bleeding and malaise/fever/fatigue are pathognomonic (specificity 100%, LR+ ∞)
 - **Cover letter:** [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
-- **Submission target:** *BMJ Open* — pending submission playbook
+- **Status:** Under preparation for submission
 
 ---
 
@@ -292,12 +285,12 @@ barotrauma_model/
 │   ├── test_v2_career.py
 │   └── test_v2_kanick_doyle_fig3.py
 ├── docs/
-│   ├── manuscript.md             # Paper 1 — prediction model (active AMHP submission)
+│   ├── manuscript.md             # Paper 1 — prediction model (under submission)
 │   ├── manuscript_fac_cohort.md  # Paper 2 — FAC cohort epidemiology
 │   ├── manuscript_preflight_fidelity.md  # Paper 3 — preflight screening instrument
 │   ├── manuscript_author_page.md # Depersonalized title page for Editorial Manager
 │   ├── model_card.md             # Inputs / outputs / assumptions / limitations
-│   ├── cover_letter.md           # AMHP cover letter (Paper 1)
+│   ├── cover_letter.md           # Cover letter (Paper 1)
 │   ├── cover_letter_fac_cohort.md         # Paper 2 cover letter
 │   ├── cover_letter_preflight_fidelity.md # Paper 3 cover letter
 │   ├── 2026-04-19_journal-scout_meb-model.md  # Journal scout report (all candidates)
@@ -316,7 +309,7 @@ barotrauma_model/
 │   │       ├── fig_04_uri_pet_interaction.{py,svg,png,tiff}
 │   │       └── data/uri_pet_grid.json
 │   ├── research_notes/           # 7 structured literature briefs
-│   └── submission/               # AMHP compliance audit, upload playbook, TRIPOD S1
+│   └── submission/               # Compliance audit, upload playbook, TRIPOD S1
 ├── api/                          # FastAPI sidecar (Python) — JSON prediction endpoint
 ├── frontend/                     # React/TS dashboard (Vite + Tailwind + ECharts)
 ├── models/

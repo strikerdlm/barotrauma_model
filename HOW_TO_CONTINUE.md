@@ -20,9 +20,9 @@ compliance. The remaining work is operational, not scientific.
 
 | Paper | Manuscript | Figures (TIFF, 600 dpi) | Cover letter | Reporting | Target |
 |---|---|---|---|---|---|
-| **1 — Physics-informed model** | `docs/manuscript.md` | 4 in `docs/figures/paper_c/` | `docs/cover_letter.md` | TRIPOD 2015 (`docs/submission/supplementary_S1_tripod_checklist.md`) | AMHP — primary; Otology & Neurotology / Eur Arch ORL / Auris Nasus Larynx / J Appl Physiol — fallback tiers (see `docs/2026-04-19_journal-scout_meb-model.md`) |
-| **2 — FAC cohort epidemiology** | `docs/manuscript_fac_cohort.md` | 4 in `docs/figures/paper_b/` (figs 1-4) | `docs/cover_letter_fac_cohort.md` | STROBE 2007 (`docs/submission/strobe_checklist_fac_cohort.md`) | AMHP (companion to Paper 1) |
-| **3 — Preflight screening** | `docs/manuscript_preflight_fidelity.md` | 2 in `docs/figures/paper_b/` (figs 2 + 5) | `docs/cover_letter_preflight_fidelity.md` | TRIPOD 2015 (prediction-model component) | BMJ Open (cover letter says so) |
+| **1 — Physics-informed model** | `docs/manuscript.md` | 4 in `docs/figures/paper_c/` | `docs/cover_letter.md` | TRIPOD 2015 (`docs/submission/supplementary_S1_tripod_checklist.md`) | Under submission review |
+| **2 — FAC cohort epidemiology** | `docs/manuscript_fac_cohort.md` | 4 in `docs/figures/paper_b/` (figs 1-4) | `docs/cover_letter_fac_cohort.md` | STROBE 2007 (`docs/submission/strobe_checklist_fac_cohort.md`) | Under preparation for submission |
+| **3 — Preflight screening** | `docs/manuscript_preflight_fidelity.md` | 2 in `docs/figures/paper_b/` (figs 2 + 5) | `docs/cover_letter_preflight_fidelity.md` | TRIPOD 2015 (prediction-model component) | Under preparation for submission |
 
 **Headline numbers (all reproducible from committed scripts):**
 
@@ -49,18 +49,18 @@ compliance. The remaining work is operational, not scientific.
 Operational, not scientific. Roughly half a day of focused work per
 paper.
 
-### Paper 1 — AMHP submission (most progressed)
+### Paper 1 — submission (most progressed)
 
-The *only* blocking items are documented in
+The *only* blocking items are documented in the compliance audit at
 `docs/submission/2026-04-18_amhp_compliance_audit.md` (5 FAILs as of
 2026-04-18, since reduced; re-run the audit before submission). Once
 those clear:
 
 1. **Convert manuscript to .docx** — `pandoc docs/manuscript.md -o
-   docs/submission/manuscript.docx` (or use the `amhp-submit` skill).
+   docs/submission/manuscript.docx`.
 2. **Convert cover letter to .pdf** — `pandoc docs/cover_letter.md
    --pdf-engine=xelatex -o docs/submission/cover_letter.pdf`.
-3. **Sign the four AMHP forms** (Author Checklist, Copyright Release,
+3. **Sign the required journal forms** (Author Checklist, Copyright Release,
    COI; skip Color Surcharge — B&W requested).
 4. **DIMAE ethics memo** — secure a one-page memo from the DIMAE
    ethics office confirming retrospective de-identified-registry
@@ -68,10 +68,10 @@ those clear:
 5. **Verify reviewer emails** (Kanick, Alper, Ghadiali, Morgagni,
    Landolfi) — see
    `docs/submission/2026-04-18_reviewer_verification_checklist.md`.
-6. **Upload via Editorial Manager** — file order in
+6. **Upload via the submission portal** — file order in
    `docs/submission/2026-04-18_upload_playbook.md` Step 6 (now
    includes all 4 figures: fig_01..fig_04 in `docs/figures/paper_c/`).
-7. **PDF proof check**, **submit**, save the AMHP manuscript ID.
+7. **PDF proof check**, **submit**, save the manuscript ID.
 8. **Tag the repository** as `v2.3.0-paper1-submitted` once the
    acknowledgement email lands.
 
@@ -86,7 +86,7 @@ submission playbook. Concrete remaining work:
 2. **Pandoc → .docx + .pdf** as for Paper 1.
 3. **Cover letter** is at `docs/cover_letter_fac_cohort.md` — already
    updated to "4 figures" in this session.
-4. **Reuse** the AMHP forms / ethics memo — same author, same DIMAE
+4. **Reuse** the submission forms / ethics memo — same author, same DIMAE
    programme, same data boundary.
 5. **Submit after Paper 1** so the prediction-model paper has the
    epidemiology paper to cite as a non-preprint companion (currently
@@ -97,9 +97,9 @@ submission playbook. Concrete remaining work:
    `docs/submission/strobe_checklist_fac_cohort.md` is already drafted;
    re-verify after the §3 / §4 prose changes from this session.
 
-### Paper 3 — Preflight screening (BMJ Open)
+### Paper 3 — Preflight screening
 
-The cover letter says BMJ Open. Concrete remaining work:
+Concrete remaining work:
 
 1. **Create a TRIPOD checklist** for the prediction-model component.
    Use the Paper 1 TRIPOD S1 as the template; the multivariable Path C
@@ -107,8 +107,7 @@ The cover letter says BMJ Open. Concrete remaining work:
    correction) means most TRIPOD items are now actually answered (they
    were previously unanswerable because §2.7 said "no model fitted").
    Save as `docs/submission/tripod_checklist_preflight_fidelity.md`.
-2. **Create a submission playbook** for BMJ Open (different portal
-   from AMHP — uses ScholarOne):
+2. **Create a submission playbook** for the target journal:
    `docs/submission/2026-XX-XX_paper3_upload_playbook.md`. List the
    2 TIFFs (`fig_02_denial_forest.tiff`, `fig_05_preflight_roc.tiff`),
    the 4 tables, the cover letter, ethics memo, and the analysis-script
@@ -146,20 +145,19 @@ file paths and the AUC numbers are stale. Use the **What remains for
 publication** section above as the authoritative current task list;
 keep the historical content for context.
 
-**Complete the AMHP submission portal upload and sign the four required
-forms; immediately afterward, start the v2.3.0 roadmap informed by the
+**Complete the submission portal upload and sign the required forms;
+immediately afterward, start the v2.3.0 roadmap informed by the
 2025–2026 literature scan.**
 
 The manuscript, cover letter, author page, and two TIFF figures are
 ready (`docs/manuscript.md`, `docs/cover_letter.md`,
-`docs/manuscript_author_page.md`, `docs/figures/`). All five AMHP
-compliance FAILs were resolved 2026-04-19 in commit `d2f439f`. The
-remaining blocking actions are operational, not scientific.
+`docs/manuscript_author_page.md`, `docs/figures/`). Compliance FAILs
+were resolved 2026-04-19 in commit `d2f439f`. The remaining blocking
+actions are operational, not scientific.
 
 Concrete actions, in strict order:
 
-1. **Forms** — download the four AMHP forms from Editorial Manager and
-   sign each:
+1. **Forms** — download and sign the required journal forms:
    - Author Checklist (corresponding author)
    - Copyright Release Form (author)
    - Conflict of Interest Form (author)
@@ -168,11 +166,9 @@ Concrete actions, in strict order:
 2. **IRB / ethics documentation** — secure a DIMAE ethics-board memo
    confirming de-identified-registry approval for the FAC cohort data.
    Upload as supplementary material.
-3. **Editorial Manager submission** — use the `amhp-submit` skill's
-   `upload` mode for the step-by-step portal walkthrough. Files in
-   required order: cover_letter → manuscript → manuscript_author_page →
-   figure1 → figure2 → signed forms. Select article type "Research
-   Article".
+3. **Submission portal upload** — file order: cover_letter → manuscript
+   → manuscript_author_page → figure1 → figure2 → signed forms.
+   Select article type "Research Article".
 4. **Suggest reviewers** in the portal — the five candidates already
    drafted in `docs/cover_letter.md`: Kanick (replaced Doyle — deceased),
    Alper, Ghadiali, Fabio Morgagni, Angelo Landolfi. Ghadiali's email
@@ -181,12 +177,10 @@ Concrete actions, in strict order:
    needs a live check. Alper, Kanick, Landolfi emails still require
    verification before portal entry — see
    `docs/submission/2026-04-18_reviewer_verification_checklist.md`.
-5. **PDF proof review** — download and verify the system-generated PDF
-   in Editorial Manager: title page depersonalized, double-spaced,
-   page-numbered, tables Roman-numerated after references, figures
-   NOT embedded in body.
-6. **Submit** and save the AMHP manuscript ID from the acknowledgment
-   email.
+5. **PDF proof review** — download and verify the system-generated PDF:
+   title page depersonalized, double-spaced, page-numbered, tables
+   Roman-numerated after references, figures NOT embedded in body.
+6. **Submit** and save the manuscript ID from the acknowledgment email.
 7. **GitHub Release** — tag the current repository state as
    `v2.2.1-manuscript` with a release note linking the manuscript PDF.
 
@@ -194,8 +188,7 @@ Concrete actions, in strict order:
 
 - **WARN-1** — re-export `docs/figures/figure1_descent_rate_sensitivity.tiff`
   and `figure2_sobol_indices.tiff` as 8-bit grayscale with alpha
-  flattened against white (AMHP IFA for B&W print). Current files are
-  RGB with alpha.
+  flattened against white (B&W print). Current files are RGB with alpha.
 - **WARN-2** — verify author counts on refs 11 (Doyle 1999 *Laryngoscope*,
   7 authors — `et al.` OK per NLM) and 16 (Chen 2022 *Eur Arch
   Otorhinolaryngol*) and expand any with ≤6 authors to full NLM lists.
@@ -225,13 +218,13 @@ v2.3.0, informed by the 2025–2026 literature scan
   (12-mo) as the prior; flag the sham-controlled null for calibration
   against the S1 return-to-normal-ΔP behavior.
 
-Only after the AMHP manuscript is in review (likely ~2 weeks after
+Only after the manuscript is in review (likely ~2 weeks after
 submission) should the v2.3.0 **code** work begin. Do not start it
 concurrently with the submission — a moving model confuses reviewers.
 
 **Parallel data-prep track — starts now, no collision with the v2.2.1
 submission:** the FAC 5.8% cohort paper (§1 below) is the single
-highest-leverage publication queued after the AMHP manuscript and is
+highest-leverage publication queued after the Paper 1 manuscript and is
 also the empirical anchor for v2.3.0 re-calibration. The raw data lives
 under `docs/Cohort FAC/`:
 
