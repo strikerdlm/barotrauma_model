@@ -50,8 +50,22 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     } catch {
       detail = await res.text();
     }
+    // A 404 whose body is exactly Starlette's default {"detail":"Not Found"}
+    // means the route is missing — i.e. a *different* FastAPI app is answering
+    // on :8000, not this one. (A real backend 404, e.g. an unknown preset key,
+    // carries a descriptive detail and must not get this hint.)
+    const routeMissing =
+      res.status === 404 &&
+      typeof detail === 'object' &&
+      detail !== null &&
+      (detail as { detail?: unknown }).detail === 'Not Found';
+    const hint = routeMissing
+      ? ' — is the barotrauma API the process on :8000? Verify with ' +
+        '`curl localhost:8000/api/health` (expect "version":"2.2.1"); ' +
+        'a different server may be answering on that port.'
+      : '';
     throw new ApiError(
-      `API ${res.status} at ${path}: ${JSON.stringify(detail)}`,
+      `API ${res.status} at ${path}: ${JSON.stringify(detail)}${hint}`,
       res.status,
       detail,
     );

@@ -157,6 +157,105 @@ Available chamber profiles:
 
 ---
 
+## Interactive dashboard (React frontend + FastAPI backend)
+
+The web dashboard is a **two-process** application. The physics never runs in
+the browser — the React/TypeScript UI (`frontend/`) calls a thin FastAPI
+sidecar (`api/`) that wraps `barotrauma.v2`, so the Python engine stays the
+single source of truth.
+
+```
+browser → http://localhost:3000  (Vite dev server, React UI)
+                │  Vite proxies every /api/* request to ↓
+                └────────────────────→ http://localhost:8000  (uvicorn → api.main:app → barotrauma.v2)
+```
+
+**Both processes must be running.** If you start only the frontend, every
+`/api/*` call fails: the Vite proxy returns `API 500` (nothing on `:8000`), or
+`API 404 …{"detail":"Not Found"}` if a *different* server happens to occupy
+`:8000`. See [Troubleshooting](#troubleshooting-the-dashboard) below.
+
+### Prerequisites
+
+- **Python ≥ 3.8** in a virtual environment (do **not** use a bare system /
+  Homebrew Python — those usually have no `fastapi`, which is the most common
+  cause of a dead backend).
+- **Node.js ≥ 18** and npm (verified on Node 22 / npm 10).
+
+### Step by step
+
+**Terminal 1 — start the backend (from the repository root):**
+
+```bash
+cd barotrauma_model
+python3 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r api/requirements.txt   # fastapi, uvicorn, pydantic, numpy
+uvicorn api.main:app --reload --port 8000
+```
+
+Run `uvicorn` **from the repository root** so the `api.main:app` import string
+resolves and `barotrauma.v2` is importable. Confirm it is up:
+
+```bash
+curl http://localhost:8000/api/health
+# → {"status":"ok","version":"2.2.1"}
+```
+
+**Terminal 2 — start the frontend:**
+
+```bash
+cd barotrauma_model/frontend
+npm install            # first run only
+npm run dev
+```
+
+Then open **http://localhost:3000**. The chamber-profile picker populates from
+`GET /api/scenarios`, and **Run simulation** posts to `POST /api/simulate`.
+The Vite proxy (`frontend/vite.config.ts`) forwards `/api/*` to `:8000`, so no
+CORS or base-URL configuration is needed in development.
+
+### Verify the full path (optional)
+
+With both servers up, exercise the same loop the UI uses — *through the proxy*:
+
+```bash
+curl http://localhost:3000/api/scenarios          # 10 presets
+curl -X POST http://localhost:3000/api/simulate \
+  -H 'Content-Type: application/json' \
+  -d '{"patient":{},"profile":{"preset":"fac_bogota_default"},"options":{}}'
+```
+
+### Troubleshooting the dashboard
+
+| Symptom in the UI / console | Cause | Fix |
+|---|---|---|
+| `Failed to load presets: API 404 at /api/scenarios: {"detail":"Not Found"}` and/or `API 404 at /api/simulate` | A *different* FastAPI app is answering on `:8000` (e.g. another project that also defaults to port 8000). The exact `{"detail":"Not Found"}` body is Starlette's default 404 — it can only come from a live server that lacks these routes, so the wrong backend is up. | Stop the other server (or see "port in use" below) and start this one (Terminal 1). Confirm it is the right one: `curl localhost:8000/api/health` must return `…"version":"2.2.1"`. |
+| `Failed to load presets: API 500 at /api/scenarios …` (and the **dev-server** terminal logs a proxy / `ECONNREFUSED` error) | **Nothing is listening on `:8000`.** The Vite proxy cannot reach the backend and returns HTTP 500. This is the symptom when you forgot to start the backend at all. | Start the backend in Terminal 1 and leave it running; reload the page. |
+| `Network error calling /api/scenarios … Is the Python API running on :8000?` | `fetch` itself could not connect — i.e. there is **no dev proxy** in front of the request. Happens in a production build, or when `VITE_API_BASE` points at an unreachable host. | Ensure the API host in `VITE_API_BASE` is reachable; in dev, just use the proxy (leave `VITE_API_BASE` unset). |
+| Backend won't start: `ModuleNotFoundError: No module named 'fastapi'` | `uvicorn` was launched in a Python without the API deps (system/Homebrew interpreter). | `source .venv/bin/activate`, then `pip install -r api/requirements.txt`, then re-run `uvicorn`. |
+| Backend won't start: `ModuleNotFoundError: No module named 'numpy'` | Older `api/requirements.txt` omitted numpy (the engine needs it). | Pull latest, then `pip install -r api/requirements.txt` (numpy is now listed). |
+| `uvicorn` errors with `[Errno 98] address already in use` | Port 8000 is taken (often another project's API — the same situation that produces the 404 row above). | Stop the other process, or run the backend on a free port — `uvicorn api.main:app --port 8010` — and point the frontend at it with `VITE_API_BASE=http://localhost:8010 npm run dev`. |
+
+### Production build
+
+```bash
+cd frontend
+npm run build        # static bundle in frontend/dist/
+```
+
+The built bundle has no dev proxy, so set the API origin at build/serve time:
+
+```bash
+VITE_API_BASE=https://your-api-host npm run build
+```
+
+`VITE_API_BASE` is read in `frontend/src/lib/v2api.ts`; when unset (dev), all
+calls are same-origin and ride the Vite proxy. See [`api/README.md`](api/README.md)
+for the full endpoint contract and request/response shapes.
+
+---
+
 ## Model states
 
 ### URI timecourse

@@ -2,6 +2,15 @@
 
 A modern, publication-ready TypeScript frontend for analyzing middle ear barotrauma risk during hypobaric chamber training and flight operations.
 
+> **Requires the Python backend.** The default (v2) dashboard does **not** run
+> the physics in the browser — it calls the FastAPI sidecar in [`../api/`](../api/),
+> which wraps the authoritative `barotrauma.v2` engine. You must start **both**
+> the backend (`uvicorn api.main:app --port 8000`) and this dev server. If you
+> start only the frontend, the dashboard cannot load presets — the Vite proxy
+> returns `API 500` (nothing on `:8000`), or `API 404` if another server is.
+> Full step-by-step (two terminals) and troubleshooting are in the
+> [repository README](../README.md#interactive-dashboard-react-frontend--fastapi-backend).
+
 ## Features
 
 ### Publication-Ready Visualizations
@@ -40,19 +49,37 @@ All visualizations include:
 
 ## Quick Start
 
+**1. Start the backend first** (separate terminal, from the repo root):
+
 ```bash
-# Install dependencies
+cd ..
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r api/requirements.txt
+uvicorn api.main:app --reload --port 8000     # leave running
+```
+
+**2. Then start this frontend:**
+
+```bash
+# Install dependencies (first run only)
 npm install
 
-# Run development server
+# Run development server → http://localhost:3000
+# Vite proxies /api/* to the backend on :8000
 npm run dev
 
-# Build for production
-npm run build
+# Build for production (set API origin if not same-origin)
+VITE_API_BASE=https://your-api-host npm run build
 
 # Preview production build
 npm run preview
 ```
+
+If the chamber-profile picker stays empty (`API 500` from the proxy when nothing
+is on `:8000`, or `API 404` when a different server is), the backend is not the
+process on `:8000`. Confirm with `curl localhost:8000/api/health` → it must
+return `…"version":"2.2.1"`. See the
+[repository README troubleshooting table](../README.md#troubleshooting-the-dashboard).
 
 ## Project Structure
 
@@ -87,7 +114,15 @@ frontend/
 
 ## Simulation Model
 
-The TypeScript simulation engine implements a physics-informed, physiology-constrained model:
+**The default v2 dashboard does not compute physics in the browser.** It posts
+patient + profile + options to `POST /api/simulate` and renders whatever the
+Python `barotrauma.v2` engine returns (trace + three-outcome risk with CIs).
+The API client lives in [`src/lib/v2api.ts`](src/lib/v2api.ts); request/response
+shapes are documented in [`../api/README.md`](../api/README.md).
+
+The in-browser TypeScript engine (`src/lib/simulation.ts`) below powers **only**
+the frozen **v1 legacy** view (reachable via the "View v1 legacy" button), kept
+for reproducibility against the pre-2026 single-risk model:
 
 1. **Boyle's Law**: P₁V₁ = P₂V₂ for gas pressure-volume relationships
 2. **ET Function**: Equalization rate = f(dysfunction, ΔP, descent_rate)
