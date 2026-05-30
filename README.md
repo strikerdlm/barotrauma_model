@@ -225,6 +225,14 @@ curl -X POST http://localhost:3000/api/simulate \
   -H 'Content-Type: application/json' \
   -d '{"patient":{},"profile":{"preset":"fac_bogota_default"},"options":{}}'
 ```
+### Summary
+Terminal 1 — backend, leave it running (do NOT Ctrl+C it):
+cd E:\Github\barotrauma_model
+python -m uvicorn api.main:app --port 8000
+Then, in any window, confirm which server owns :8000:
+curl.exe http://localhost:8000/api/health
+- {"status":"ok","version":"2.2.1"} → correct backend is up. Good.
+- A different body / Not Found → another program holds :8000 (see below). Your own uvicorn would have failed to bind with address already in use — check Terminal 1 for that.
 
 ### Troubleshooting the dashboard
 
