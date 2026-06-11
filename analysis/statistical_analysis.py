@@ -31,7 +31,7 @@ class StatisticalAnalyzer:
         """
         self.confidence_level = confidence_level
         
-        # Risk categories based on paper
+        # Legacy risk categories retained for exploratory summaries.
         self.risk_categories = {
             'low': (0.0, 0.05),
             'moderate': (0.05, 0.25),
@@ -109,4 +109,4 @@ class StatisticalAnalyzer:
         return {
             age: self.assess_risk(results)
             for age, results in age_results.items()
-        } 
+        }

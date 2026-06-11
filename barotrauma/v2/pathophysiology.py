@@ -6,9 +6,7 @@ URI / Patulous-ET / comorbidity state machine. Converts the qualitative
 patient state into numeric modifiers applied to ET function during a
 chamber exposure.
 
-Sources:
-- docs/research_notes/02_uri_et_dysfunction.md — URI modifier table, 9 states.
-- docs/research_notes/03_patulous_et.md — Patulous ET 4-state model.
+Citation notes for the numerical modifiers live in ``constants.py``.
 """
 
 from __future__ import annotations
@@ -100,7 +98,7 @@ def _rhinitis_modifiers(rhinitis: ChronicRhinitis) -> Modifiers:
 
 # -------------------------------------------------- Patulous ET part ---
 def _pet_modifiers(pet: PetState, *, uri: UriState, habitual_sniffer: bool) -> Modifiers:
-    """Patulous ET state machine. See docs/research_notes/03 §4."""
+    """Patulous ET state machine."""
     if pet == "normal":
         return Modifiers()
 
@@ -168,7 +166,6 @@ def _apply_medication(
 
     # Paradoxical worsening: oral/topical decongestants in PET shrink peritubal
     # soft tissue → more patent → worse autophony and worse MEB risk in S2/S3.
-    # (docs/research_notes/03 §7)
     decongestant = med in ("pseudoephedrine_oral", "oxymetazoline_topical")
     if decongestant and pet in ("s1", "s2", "s3"):
         rr = 1.4                                    # 40% worse, not better

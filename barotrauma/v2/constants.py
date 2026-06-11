@@ -93,7 +93,7 @@ ET_SEVERITY_FGE_MULT = {
 }
 
 # ------------------------------------------------- Patulous ET (PET) -
-# Four-state model (Ikeda 2020, Shindo 2025; see docs/research_notes/03).
+# Four-state model (Ikeda 2020, Shindo 2025).
 # All pressures referenced to ambient.
 PET_S1_OPENING_MMHG: float = 200.0 * MMHG_PER_DAPA      # ≈1.5 mmHg — "patent"
 PET_S1_CLOSING_MMHG: float = 0.1 * MMHG_PER_DAPA        # effectively never closes
@@ -109,7 +109,8 @@ PET_PREV_MAX: float = 0.070
 
 # --------------------------------------------- URI timecourse modifiers -
 # Multipliers applied to ET function during acute URI.
-# Source: docs/research_notes/02_uri_et_dysfunction.md Table (brief 02).
+# URI timecourse table assembled from the cited ETD/URI literature and
+# calibrated as pathophysiology priors rather than direct measurements.
 URI_MODIFIERS: dict[str, dict[str, float]] = {
     "none": dict(
         ra_mult=1.0, po_shift_mmHg=0.0, pet_offset_mmHg=0.0,
@@ -167,7 +168,7 @@ MEDICATION_RR: dict[str, float] = {
 
 # ------------------------------------- v2.3.0 covariate RRs (additive) -
 # New patient-state categorical covariates introduced in v2.3.0 from the
-# 2025-2026 literature scan (docs/research_notes/06_2025_2026_updates.md).
+# 2025-2026 literature scan summarized in the inline citations below.
 # Each multiplies the composite per-descent RR. Applied only when the
 # patient flag is True; default False → RR 1.0, no change.
 #
@@ -277,8 +278,8 @@ F_O2: float = 0.21
 # 2010-2020 + 2025-2026. Pooled n = 173 clinical barotrauma events in 7,271
 # chamber exposures; per-exposure rate 2.38% (Wilson 95% CI 2.06-2.75%);
 # projected 3-exposure career rate 6.97%.
-# Source: Malpica et al. (FAC internal, de-identified; see
-# `docs/Cohort FAC/analysis/phase2_summary.md §5`).
+# Source: FAC internal de-identified operational summary maintained outside
+# this repository.
 # Used as the primary calibration anchor. URI and ET dysfunction dominate RFs.
 FAC_TARGET_MEB_PREVALENCE: float = 0.0697     # 6.97% (career-3 projection)
 FAC_COHORT_YEARS: int = 16

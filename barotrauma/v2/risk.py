@@ -25,7 +25,7 @@ effects on tissue stiffness). The hazard rate constants r_i are calibrated
 (see ``calibration.py``) to reproduce the FAC cohort prevalence of 5.8%
 per individual over a 10-year career (~3–5 exposures), equivalent to a
 per-exposure baseline of ~1.5–2.5% in pre-screened aircrew (Italian AF
-Morgagni 2010/2012 per-exposure, see docs/research_notes/04).
+Morgagni 2010/2012 per-exposure; see ``calibration.py``).
 """
 
 from __future__ import annotations

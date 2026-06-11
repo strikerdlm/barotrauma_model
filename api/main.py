@@ -42,7 +42,7 @@ app = FastAPI(
     description=(
         "Sidecar exposing ``barotrauma.v2`` to the React/TypeScript "
         "dashboard. Single source of truth — the Python physics engine "
-        "is authoritative. See ``docs/model_card.md`` for scope."
+        "is authoritative. See ``README.md`` for scope and roadmap."
     ),
 )
 

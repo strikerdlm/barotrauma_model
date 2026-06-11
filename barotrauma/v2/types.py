@@ -30,11 +30,11 @@ UriState = Literal[
     "day_15_21",
     "day_22_28",
 ]
-"""URI temporal state. See docs/research_notes/02_uri_et_dysfunction.md §2."""
+"""URI temporal state used by the pathophysiology modifier layer."""
 
 PetState = Literal["normal", "s1", "s2", "s3", "s4"]
 """Patulous ET state. S1 baseline-patent · S2 PET+edema · S3 sniffer · S4 post-plug.
-See docs/research_notes/03_patulous_et.md §4."""
+The state machine is implemented in ``pathophysiology._pet_modifiers``."""
 
 EtSeverity = Literal["normal", "mild", "moderate", "severe"]
 """Obstructive ET dysfunction severity (independent of PET / URI)."""
@@ -151,7 +151,8 @@ class PatientState:
     valsalva_interval_s: float = 60.0   # every ~60 s in chamber trainees
     habitual_sniffer: bool = False      # Shindo 2025 type-B/C tymp in 42.6%
 
-    # v2.3.0 covariates (docs/research_notes/06_2025_2026_updates.md)
+    # v2.3.0 covariates from the 2025-2026 literature scan; citation notes
+    # for the corresponding RRs live in constants.py.
     sensory_neuropathy: bool = False
     """Voigt 2025 (PMID 41429031): risk factor for MEB in HBOT pooled MA.
     RR applied in pathophysiology.modifiers_for_patient via

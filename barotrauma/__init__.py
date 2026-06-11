@@ -12,7 +12,7 @@ Two API surfaces are exposed:
   dominant modifiable risk factor). Physics core extends Kanick & Doyle 2005
   with Doyle 2017 species-resolved gas exchange, Alper 2020 Eustachian-tube
   parameter distributions, and a multi-state URI / Patulous ET pathophysiology
-  module. See ``barotrauma.v2`` and ``docs/model_card.md``.
+  module. See ``barotrauma.v2`` and the repository README.
 
 * ``barotrauma.legacy`` — frozen v1 stack (deterministic abstract model, no
   real-cohort calibration). Kept for reproducibility of prior analyses. Do

@@ -87,6 +87,13 @@ return `…"version":"2.2.1"`. See the
 frontend/
 ├── src/
 │   ├── components/
+│   │   ├── v2/               # API-backed v2 patient/profile/risk UI
+│   │   │   ├── PatientBuilder.tsx
+│   │   │   ├── ProfilePicker.tsx
+│   │   │   ├── ProbabilityTrio.tsx
+│   │   │   ├── TrajectoryChart.tsx
+│   │   │   ├── TmDisplacementChart.tsx
+│   │   │   └── ClinicalDecisionSupport.tsx
 │   │   ├── charts/           # ECharts visualization components
 │   │   │   ├── RiskGauge.tsx
 │   │   │   ├── PressureDynamics.tsx
@@ -100,13 +107,16 @@ frontend/
 │   │   │   ├── Slider.tsx
 │   │   │   ├── TabGroup.tsx
 │   │   │   └── ReferencesPanel.tsx
-│   │   └── Dashboard.tsx     # Main dashboard component
+│   │   ├── V2Dashboard.tsx   # Default API-backed dashboard
+│   │   └── Dashboard.tsx     # Frozen v1 legacy dashboard
 │   ├── lib/
-│   │   ├── simulation.ts     # Barotrauma simulation engine
+│   │   ├── v2api.ts          # FastAPI client for barotrauma.v2
+│   │   ├── simulation.ts     # Legacy in-browser v1 engine
 │   │   ├── references.ts     # Scientific references database
 │   │   └── chartTheme.ts     # ECharts theme configuration
 │   ├── types/
-│   │   └── simulation.ts     # TypeScript type definitions
+│   │   ├── v2.ts             # API-backed v2 request/response types
+│   │   └── simulation.ts     # Legacy v1 type definitions
 │   └── App.tsx
 ├── tailwind.config.js        # Tailwind theme extensions
 └── vite.config.ts            # Vite configuration

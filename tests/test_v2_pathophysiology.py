@@ -38,10 +38,10 @@ def test_allergic_rhinitis_plus_uri_is_compound():
 
 def test_decongestant_is_paradoxical_in_patulous():
     """
-    Oral pseudoephedrine normally RR 0.70 (Mirza 2005, protective). In PET
+    Oral pseudoephedrine normally RR 0.90 (Moayedi 2025 update). In PET
     the effect flips: the medication carries RR 1.4 (paradoxical worsening)
-    rather than 0.7. Compare medication-vs-no-medication within the same
-    PET state. See docs/research_notes/03 §7.
+    rather than 0.9. Compare medication-vs-no-medication within the same
+    PET state.
     """
     pet_no_med = modifiers_for_patient(
         PatientState(uri="none", pet="s1", medication="none")
@@ -51,7 +51,7 @@ def test_decongestant_is_paradoxical_in_patulous():
     )
     # In PET the medication should WORSEN (higher RR), not improve
     assert pet_with_med.per_descent_rr > pet_no_med.per_descent_rr
-    # ratio should be ~1.4 (the paradoxical RR) not ~0.7 (the protective one)
+    # ratio should be ~1.4 (the paradoxical RR) not ~0.9 (the healthy-ear one)
     ratio = pet_with_med.per_descent_rr / pet_no_med.per_descent_rr
     assert ratio == pytest.approx(1.4, rel=0.01)
 

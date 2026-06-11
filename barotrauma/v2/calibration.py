@@ -16,7 +16,7 @@ CLI usage::
 The per-individual career rate (5.8%) is consistent with a ~2% per-exposure
 rate across ~3 career chamber exposures — which matches Italian AF
 per-exposure rates of 1.5–2.5% in pre-screened aircrew (Morgagni 2010/2012;
-Landolfi 2009). See docs/research_notes/04.
+Landolfi 2009).
 
 Calibration approach
 --------------------

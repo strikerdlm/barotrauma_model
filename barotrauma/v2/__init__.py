@@ -24,14 +24,12 @@ Physics core: Kanick & Doyle 2005 (PMID 15608090) + Doyle 2017 species-
 resolved gas exchange (PMID 28917121) + Alper 2020 parameter distributions
 (PMID 32176133). Pathophysiology modifiers: URI state-machine from Buchman
 1994, McBride 1989, Doyle 1999, Chen 2022; Patulous ET 4-state from Ikeda
-2020/2024, Shindo 2025. See ``docs/research_notes/`` for the structured
-literature briefs that underpin every constant.
+2020/2024, Shindo 2025. Constants and priors carry inline citation notes in
+``barotrauma.v2.constants``.
 
 See also
 --------
 - ``barotrauma.legacy`` — the v1 stack (frozen, reproducibility-only).
-- ``docs/model_card.md`` — inputs, outputs, assumptions, known limitations.
-- ``CHANGELOG.md`` — version history.
 """
 
 from __future__ import annotations

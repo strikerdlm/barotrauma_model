@@ -2,7 +2,7 @@
 
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-2.2.1-informational.svg)](CHANGELOG.md)
+![Version](https://img.shields.io/badge/version-2.2.1-informational.svg)
 
 Physics-informed, pathophysiology-aware middle-ear barotrauma (MEB) risk simulator. Calibrated to the Colombian Aerospace Force (FAC) DIMAE hypobaric-chamber registry 2010–2026 — 173 MEB events in 7,271 exposures (2.38% per-exposure; projected 6.97% career-3 prevalence); URI and ET dysfunction are the dominant risk factors. Externally validated against three published Italian Air Force cohorts without refitting.
 
@@ -347,15 +347,11 @@ barotrauma_model/
 │   ├── Literature/               # Structured literature PDFs / note files
 │   └── middle_ear_model-matlab/  # Original MATLAB reference implementation
 ├── analysis/
-│   ├── scripts/                  # Reproducible analysis scripts
-│   │   └── preflight_roc.py      # Penalised logreg + bootstrap optimism correction
-│   └── results/                  # JSON outputs that drive figure scripts (single source of truth)
-│       └── preflight_roc_logreg.json
+│   ├── quick_analysis.py         # Legacy exploratory analysis helper
+│   ├── statistical_analysis.py   # Legacy summary statistics helper
+│   └── results/                  # Quick-analysis outputs kept for reference
 ├── app/                          # Streamlit dashboard (legacy prototype)
-├── CHANGELOG.md                  # Full semantic-version history
-├── HOW_TO_CONTINUE.md            # Prioritized next iterations
 ├── MIGRATION.md                  # v1 → v2 API migration guide
-├── FUTURE_WORK.md                # v1-era roadmap (mostly superseded by v2)
 └── README.md
 ```
 
@@ -377,7 +373,7 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 - **Refactor the PET/rhinitis/URI interaction state machine.** PET-S1 should not simply hard-zero the pressure gradient when allergic rhinitis, chronic rhinosinusitis, acute URI, recumbency, or sniffing behavior can produce intermittent obstruction or paradoxical closure. Add transition tests for PET-S1 + rhinitis/URI and PET-S2/S3 states instead of relying on a single override.
 - **Split BDET benefit from post-BDET PET complication risk.** Obstructive ETD improvement after balloon dilation and post-procedure patulous symptoms are clinically different states. Model them separately, with tests that severe preoperative inflammation and repeat procedures can increase PET-like risk while successful dilatory-ETD treatment lowers active resistance.
 - **Decide and document stochastic reproducibility.** The public docstring says `rng_seed=None` is deterministic, but `np.random.default_rng(None)` is nondeterministic. Either change the default to a fixed seed for reproducible science outputs, or document nondeterminism and require explicit seeds in examples, calibration, validation, and generated reports.
-- **Clarify the Doyle 2017 gas-exchange scope.** The README describes species-resolved gas exchange as part of the core, while `simulate(..., gas_exchange_full=False)` defaults to trans-mucosal-only behavior. Decide whether full multi-pathway gas exchange is the default scientific model or an optional long-exposure extension, then align docs, model card, and validation tests.
+- **Clarify the Doyle 2017 gas-exchange scope.** The README describes species-resolved gas exchange as part of the core, while `simulate(..., gas_exchange_full=False)` defaults to trans-mucosal-only behavior. Decide whether full multi-pathway gas exchange is the default scientific model or an optional long-exposure extension, then align README guidance and validation tests.
 
 ### P2 - robustness and maintainability
 

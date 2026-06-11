@@ -127,5 +127,5 @@ fixed (re-implement against v2 instead).
 - If you have v1-trained artifacts (e.g. saved `sklearn` pipelines from
   `ml_risk_model.py`) you want to re-use verbatim. v2 does not yet ship an
   ML head; training a v2 ML head requires a new labeled cohort.
-- If you have an accepted / submitted manuscript whose results must be
-  reproducible bit-for-bit from the v1 code path.
+- If you have archived v1 analyses or operational records whose outputs must
+  remain reproducible bit-for-bit from the v1 code path.
