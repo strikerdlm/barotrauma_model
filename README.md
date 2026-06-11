@@ -3,7 +3,6 @@
 [![Python](https://img.shields.io/badge/python-3.8%2B-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Version](https://img.shields.io/badge/version-2.2.1-informational.svg)](CHANGELOG.md)
-[![TRIPOD 2015](https://img.shields.io/badge/reporting-TRIPOD%202015-green.svg)](docs/submission/supplementary_S1_tripod_checklist.md)
 
 Physics-informed, pathophysiology-aware middle-ear barotrauma (MEB) risk simulator. Calibrated to the Colombian Aerospace Force (FAC) DIMAE hypobaric-chamber registry 2010–2026 — 173 MEB events in 7,271 exposures (2.38% per-exposure; projected 6.97% career-3 prevalence); URI and ET dysfunction are the dominant risk factors. Externally validated against three published Italian Air Force cohorts without refitting.
 
@@ -44,67 +43,6 @@ It returns:
 - **Hazard model**: three-threshold cumulative hazard anchored to the FAC 2.38% per-exposure pooled rate and checked against Italian AF per-exposure barotitis cohorts (Morgagni 2010/2012, Landolfi 2009).
 - **Medication effects**: Moayedi 2025 ([PMID 40819351](https://pubmed.ncbi.nlm.nih.gov/40819351/)) placebo-controlled HBOT RCT revised the pseudoephedrine RR from 0.70 → 0.90 (null preventive effect in chamber/HBOT context). Paradoxical decongestant worsening in PET retained at RR 1.40.
 - Every constant and modifier in `barotrauma/v2/constants.py` has a citation.
-
-Full literature briefs live in [`docs/research_notes/`](docs/research_notes/):
-
-| File | Content |
-|------|---------|
-| [`01_mathematical_models.md`](docs/research_notes/01_mathematical_models.md) | Post-Kanick-Doyle physics models, Doyle 2017, Ghadiali FEM |
-| [`02_uri_et_dysfunction.md`](docs/research_notes/02_uri_et_dysfunction.md) | URI temporal modifier table with effect sizes |
-| [`03_patulous_et.md`](docs/research_notes/03_patulous_et.md) | PET 4-state model, JOS criteria, PHI-10 |
-| [`04_chamber_epidemiology.md`](docs/research_notes/04_chamber_epidemiology.md) | FAC anchor, Italian AF, Israeli AF, chamber incidence data |
-| [`05_ml_bayesian_hazard.md`](docs/research_notes/05_ml_bayesian_hazard.md) | ABC-SMC, Thalmann LEM, conformal prediction |
-| [`06_2025_2026_updates.md`](docs/research_notes/06_2025_2026_updates.md) | 2025–2026 literature scan — 10 actionable findings |
-| [`07_v23_scope_rationale.md`](docs/research_notes/07_v23_scope_rationale.md) | Rationale for deferring Zhang 2025 and Holm 2026 from v2.3.0 |
-
----
-
-## Associated manuscripts
-
-Three manuscripts are in active development from this codebase:
-
-### Paper 1 — Prediction model (primary, under submission)
-
-**Title:** *Physics-Informed Middle Ear Barotrauma Risk for Hypobaric Chamber Training: A Computational Prediction Model Calibrated to the Colombian Aerospace Force Cohort and Externally Validated Against Italian Air Force Cohorts*
-
-- **File:** [`docs/manuscript.md`](docs/manuscript.md)
-- **Article type:** Original Research — computational prediction model development + external validation
-- **Reporting:** TRIPOD 2015 ([checklist S1](docs/submission/supplementary_S1_tripod_checklist.md))
-- **Word count:** ~3,400 body · 248-word abstract · 24 refs · 4 tables · 4 figures (max permitted)
-- **Status:** Under submission review
-- **Cover letters:** [`docs/cover_letter.md`](docs/cover_letter.md) · [`docs/cover_letter_fac_cohort.md`](docs/cover_letter_fac_cohort.md) · [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
-
-### Paper 2 — FAC cohort epidemiology
-
-**Title:** *Sixteen-Year Incidence of Ear Barotrauma in a Hypobaric-Chamber Training Program at 2,640 m Baseline Altitude: Colombian Aerospace Force 2010–2026 Cohort*
-
-- **File:** [`docs/manuscript_fac_cohort.md`](docs/manuscript_fac_cohort.md)
-- **Reporting:** STROBE 2007 ([checklist](docs/submission/strobe_checklist_fac_cohort.md))
-- **Word count:** abstract + 16-year pooled incidence body · 22 refs · 4 tables · 4 figures (max permitted)
-- **Figures (TIFF, 600 dpi):** [`docs/figures/paper_b/`](docs/figures/paper_b/)
-  - Fig 1 — incidence time-series (per-year 2010–2020 + per-quarter 2025–2026 with Wilson CIs)
-  - Fig 2 — preflight denial-rate forest plot (13 screening flags, ranked by discrimination)
-  - Fig 3 — international cohort comparison (FAC vs Italian/Israeli AF, 7 cohorts)
-  - Fig 4 — vital signs distribution at 2,640 m baseline (BP categories + SpO₂ histogram)
-- **Cover letter:** [`docs/cover_letter_fac_cohort.md`](docs/cover_letter_fac_cohort.md)
-- Reports the 7,271-exposure DIMAE registry underlying the model's calibration anchor
-- Headline finding: pooled 2.38% per-exposure incidence sits within the published Italian AF envelope despite the 2,640 m baseline altitude
-
-### Paper 3 — Preflight screening instrument
-
-**Title:** *Preflight Fidelity and Discriminatory Performance of the DIMAE Microsoft Forms Screening Instrument*
-
-- **File:** [`docs/manuscript_preflight_fidelity.md`](docs/manuscript_preflight_fidelity.md)
-- **Reporting:** TRIPOD 2015 for the prediction-model component
-- **Word count:** ~3,500 body · 4 tables · 2 figures
-- **Figures (TIFF, 600 dpi):** [`docs/figures/paper_b/`](docs/figures/paper_b/)
-  - Fig 1 — denial-rate forest plot (shared with Paper 2 Fig 2)
-  - Fig 2 — preflight ROC curve (multivariable battery, AUC corrected = 0.813)
-- **Analysis:** [`analysis/scripts/preflight_roc.py`](analysis/scripts/preflight_roc.py) — penalised L2-ridge logistic regression with Harrell–Steyerberg bootstrap optimism correction (1,000 reps, seed 2026); raw curve and per-flag diagnostic-test metrics persisted at [`analysis/results/preflight_roc_logreg.json`](analysis/results/preflight_roc_logreg.json)
-- **Headline metrics** (corrected, expected out-of-sample): AUC 0.813 (95% CI 0.717–0.859); at Youden threshold sensitivity 63.6%, specificity 91.9%, PPV 15.2%, NPV 99.1%, LR+ 6.5, LR− 0.39, DOR 17
-- **Per-flag univariable** (no fitted coefficients, no optimism penalty): recent_respiratory LR+ 17.4 [9.05–33.63] is the strongest individual discriminator; anaemia/bleeding and malaise/fever/fatigue are pathognomonic (specificity 100%, LR+ ∞)
-- **Cover letter:** [`docs/cover_letter_preflight_fidelity.md`](docs/cover_letter_preflight_fidelity.md)
-- **Status:** Under preparation for submission
 
 ---
 
@@ -346,7 +284,18 @@ pytest tests/test_v2_physics.py tests/test_v2_pathophysiology.py \
 pytest tests/test_v2_calibration.py
 ```
 
-The full v2 suite covers 122 tests: physics monotonicity, pathophysiology modifier composition, hazard-model properties, active-resistance clearance, aperture asymmetry and rate tightening, external validation against Italian AF benchmarks, ABC-SMC convergence, Sobol sensitivity, Kanick-Doyle 2005 Fig 3 pinned baseline, calibration convergence, muscle mechanics, Doyle 2017 multi-pathway gas exchange, and career-simulation API.
+The full v2 suite covers 123 tests: physics monotonicity, pathophysiology modifier composition, hazard-model properties, active-resistance clearance, aperture asymmetry and rate tightening, external validation against Italian AF benchmarks, ABC-SMC convergence, Sobol sensitivity, Kanick-Doyle 2005 Fig 3 pinned baseline, calibration convergence, muscle mechanics, Doyle 2017 multi-pathway gas exchange, and career-simulation API.
+
+---
+
+## Change Tracking
+
+| Date | Reference | Scope |
+|---|---|---|
+| 2026-06-11 | README cleanup | Removed external writing references from this repository README; this README now tracks codebase changes only. |
+| 2026-06-11 | `abb78c5` | Persist post-event middle-ear effective volume after ET/PET/lock pressure corrections; regenerated the Kanick-Doyle/Groth fixture. |
+| 2026-06-11 | `40716c6` | Replaced the high-altitude pressure approximation with ISA pressure altitude; recalibrated hazards and refreshed validation priors. |
+| 2026-06-11 | `652a7f0` | Added the evidence-backed model upgrade roadmap and seeded quick-start outputs. |
 
 ---
 
@@ -392,40 +341,14 @@ barotrauma_model/
 │   ├── test_v2_ml_hybrid.py
 │   ├── test_v2_career.py
 │   └── test_v2_kanick_doyle_fig3.py
-├── docs/
-│   ├── manuscript.md             # Paper 1 — prediction model (under submission)
-│   ├── manuscript_fac_cohort.md  # Paper 2 — FAC cohort epidemiology
-│   ├── manuscript_preflight_fidelity.md  # Paper 3 — preflight screening instrument
-│   ├── manuscript_author_page.md # Depersonalized title page for Editorial Manager
-│   ├── model_card.md             # Inputs / outputs / assumptions / limitations
-│   ├── cover_letter.md           # Cover letter (Paper 1)
-│   ├── cover_letter_fac_cohort.md         # Paper 2 cover letter
-│   ├── cover_letter_preflight_fidelity.md # Paper 3 cover letter
-│   ├── 2026-04-19_journal-scout_meb-model.md  # Journal scout report (all candidates)
-│   ├── figures/
-│   │   ├── _shared/                  # ECharts theme + SVG→PNG→TIFF render pipeline
-│   │   ├── paper_b/                  # 5 figures for Papers 2 & 3 (FAC cohort + preflight)
-│   │   │   ├── fig_01_incidence_timeseries.{py,svg,png,tiff}
-│   │   │   ├── fig_02_denial_forest.{py,svg,png,tiff}
-│   │   │   ├── fig_03_international_comparison.{py,svg,png,tiff}
-│   │   │   ├── fig_04_vitals_distribution.{py,svg,png,tiff}
-│   │   │   └── fig_05_preflight_roc.{py,svg,png,tiff}
-│   │   └── paper_c/                  # 4 figures for Paper 1 (physics-informed model)
-│   │       ├── fig_01_descent_rate_sensitivity.{py,svg,png,tiff}
-│   │       ├── fig_02_sobol_sensitivity.{py,svg,png,tiff}
-│   │       ├── fig_03_external_validation.{py,svg,png,tiff}
-│   │       ├── fig_04_uri_pet_interaction.{py,svg,png,tiff}
-│   │       └── data/uri_pet_grid.json
-│   ├── research_notes/           # 7 structured literature briefs
-│   └── submission/               # Compliance audit, upload playbook, TRIPOD S1
 ├── api/                          # FastAPI sidecar (Python) — JSON prediction endpoint
 ├── frontend/                     # React/TS dashboard (Vite + Tailwind + ECharts)
 ├── models/
 │   ├── Literature/               # Structured literature PDFs / note files
 │   └── middle_ear_model-matlab/  # Original MATLAB reference implementation
 ├── analysis/
-│   ├── scripts/                  # Reproducible analysis scripts (TRIPOD-grade)
-│   │   └── preflight_roc.py      # Paper 3 — penalised logreg + bootstrap optimism correction
+│   ├── scripts/                  # Reproducible analysis scripts
+│   │   └── preflight_roc.py      # Penalised logreg + bootstrap optimism correction
 │   └── results/                  # JSON outputs that drive figure scripts (single source of truth)
 │       └── preflight_roc_logreg.json
 ├── app/                          # Streamlit dashboard (legacy prototype)
@@ -445,7 +368,7 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 ### P0 - physics correctness
 
 - **Completed: replace the high-altitude pressure model with ISA/U.S. Standard Atmosphere pressure altitude.** The v2 Python converter and frontend helper now use the standard-atmosphere lapse-rate relation and pin 0 ft, Bogota 8,530 ft, 25,000 ft (~282 mmHg), and 35,000 ft (~179 mmHg). Pressure altitude is foundational for chamber profiles, and Kanick-Doyle explicitly models middle-ear response to cabin-pressure change.
-- **Regenerate all downstream artifacts after the atmosphere fix.** `calibrated.json`, the Kanick-Doyle/Groth fixture, and Italian validation priors were refreshed with the ISA correction. Before the next methods release, also recompute `abc_posterior.json`, `sobol_indices.json`, manuscript figures, and any exported validation tables. A pressure change of this size alters peak |delta P|, time over threshold, hazard scaling, and external-transfer behavior.
+- **Regenerate all downstream artifacts after the atmosphere fix.** `calibrated.json`, the Kanick-Doyle/Groth fixture, and Italian validation priors were refreshed with the ISA correction. Before the next methods release, also recompute `abc_posterior.json`, `sobol_indices.json`, analysis figures, and any exported validation tables. A pressure change of this size alters peak |delta P|, time over threshold, hazard scaling, and external-transfer behavior.
 - **Completed: make middle-ear volume state PV-consistent after every ET event.** The integrator now recomputes effective volume after passive venting, swallow, Valsalva, PET override, and pressure-lock updates before persisting the next state; the Kanick-Doyle/Groth fixture was regenerated after this correction. Doyle's formal pressure-regulation model treats pressure, compartment volume, gas composition, and pathway flows as coupled state variables.
 - **Wire patient-specific tympanic-membrane anatomy into compliance, or remove those public fields.** `PatientAnatomy.tm_area_cm2` and `tm_stiffness_mmHg_per_ml` are currently accepted but do not affect `tm_displacement_ml()`. Kanick-Doyle identifies the ratio of maximum tympanic-membrane displacement to middle-ear volume as a relevant buffer, so exposed anatomy should either influence the simulation or be excluded from the API.
 
@@ -453,14 +376,14 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 
 - **Refactor the PET/rhinitis/URI interaction state machine.** PET-S1 should not simply hard-zero the pressure gradient when allergic rhinitis, chronic rhinosinusitis, acute URI, recumbency, or sniffing behavior can produce intermittent obstruction or paradoxical closure. Add transition tests for PET-S1 + rhinitis/URI and PET-S2/S3 states instead of relying on a single override.
 - **Split BDET benefit from post-BDET PET complication risk.** Obstructive ETD improvement after balloon dilation and post-procedure patulous symptoms are clinically different states. Model them separately, with tests that severe preoperative inflammation and repeat procedures can increase PET-like risk while successful dilatory-ETD treatment lowers active resistance.
-- **Decide and document stochastic reproducibility.** The public docstring says `rng_seed=None` is deterministic, but `np.random.default_rng(None)` is nondeterministic. Either change the default to a fixed seed for reproducible science outputs, or document nondeterminism and require explicit seeds in examples, calibration, validation, and manuscripts.
+- **Decide and document stochastic reproducibility.** The public docstring says `rng_seed=None` is deterministic, but `np.random.default_rng(None)` is nondeterministic. Either change the default to a fixed seed for reproducible science outputs, or document nondeterminism and require explicit seeds in examples, calibration, validation, and generated reports.
 - **Clarify the Doyle 2017 gas-exchange scope.** The README describes species-resolved gas exchange as part of the core, while `simulate(..., gas_exchange_full=False)` defaults to trans-mucosal-only behavior. Decide whether full multi-pathway gas exchange is the default scientific model or an optional long-exposure extension, then align docs, model card, and validation tests.
 
 ### P2 - robustness and maintainability
 
 - **Correct optional ET muscle-mechanics timing before making it a default.** The `et_muscle.py` comments describe recent-swallow priming, but the current timing formula increases the boost with time since last swallow; its initial sentinel can also saturate adhesion when enabled. Add directionality tests before using it in production calibration.
 - **Add validity-envelope checks for extreme altitude and gas composition.** Guard against negative nitrogen fractions and nonphysical default total pressure in `GasComposition`, and reject or explicitly document chamber profiles outside the validated altitude range.
-- **Restore or remove broken methodology links.** The README references `docs/research_notes/` and `docs/model_card.md`, but those paths are absent in the current tree. Either restore the source documents or replace those links with the living roadmap and generated validation artifacts.
+- **Keep README links repo-local and current.** Remove stale links when files leave this repository; use the living roadmap, tests, and generated validation artifacts as the source of truth for this codebase.
 - **Synchronize calibration claims and examples.** Keep the README, `calibration.py` defaults, `calibrated.json`, tests, and quick-start outputs on the same FAC target and seed. Add a CI check that executes the quick-start snippets and fails on drift.
 
 ### Evidence links used for this roadmap
@@ -479,7 +402,7 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 
 ## Known limitations (v2.2.1)
 
-- **FAC anchor is unpublished.** The DIMAE 2010–2026 pooled rate (2.38% per-exposure / 6.97% career-3) is an internal institutional prior pending peer review. Papers 1 and 2 in preparation; treat as calibration prior, not cited external validation.
+- **FAC anchor is unpublished.** The DIMAE 2010–2026 pooled rate (2.38% per-exposure / 6.97% career-3) is an internal institutional prior pending peer review. Treat it as a calibration prior, not cited external validation.
 - **TM rupture threshold (150 mmHg) is conservative.** Biomechanical studies report higher real rupture pressures (~600–750 mmHg). `p_rupture` should be read as "imminent rupture risk" / comparative profile ranking, not an absolute clinical probability.
 - **`p_barotitis` is not monotonic in descent rate in isolation.** With the v2.1 aperture model and peak-weighted hazard exponent (n = 1.8), the barotitis peak lies in the 2,000–3,000 ft/min zone, matching Italian AF chamber data. The rupture probability and peak |ΔP| are monotonic. Compare the full triple (`p_barotitis`, `p_baromyringitis`, `p_rupture`), not `p_barotitis` alone.
 - **No per-subject ML head.** `ml_hybrid.py` is an unfit scaffold. No clinical individual-level tympanometry or FRT data are integrated.
@@ -487,8 +410,6 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 - **Full time-varying R_A (Ghadiali FEM) is not implemented.** Static Kanick-Doyle R_A and active-open duration now scale per-swallow clearance, and `et_muscle.py` provides a lumped time-varying approximation; the full 2-D FEM is not run per integration step.
 - **No inter-exposure carry-over.** `career.simulate_career` composes independent `simulate()` calls; ME gas-composition and mucosal-fatigue state reset between exposures.
 - **Population priors are FAC-demographic.** Re-calibrate before applying to pediatric, geriatric, or diving populations.
-
-See [`docs/model_card.md`](docs/model_card.md) for the full assumption table, modeler-prior list, and v2.3.0 deferred-items analysis.
 
 ---
 
@@ -503,5 +424,3 @@ MIT. See [LICENSE](LICENSE).
 If you use this software, please cite:
 
 > Malpica DL, Farfán MA (2026). *Physics-informed middle-ear barotrauma risk prediction for hypobaric-chamber training, anchored to the Colombian Aerospace Force cohort.* `barotrauma_model` v2.2.1. Subdirectorate of Aerospace Sciences, Direction of Aerospace Medicine (DIMAE), Colombian Aerospace Force. https://github.com/strikerdlm/barotrauma_model
-
-Once published, cite the journal paper (Paper 1) as the primary reference for the model methodology. The software repository is the reference for the open-source implementation.
