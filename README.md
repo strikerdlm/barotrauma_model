@@ -127,17 +127,18 @@ from barotrauma.v2 import simulate, PatientState, EtFunction
 from barotrauma.v2.scenarios import FAC_BOGOTA_DEFAULT, USAFSAM_TYPE_I
 
 # Healthy pilot, FAC chamber profile
-result = simulate(PatientState(), FAC_BOGOTA_DEFAULT)
-print(result.risk.p_barotitis)            # ~0.024 (2.4%)
+result = simulate(PatientState(), FAC_BOGOTA_DEFAULT, rng_seed=2026)
+print(result.risk.p_barotitis)            # ~0.0035 (0.35%)
 print(result.risk.risk_category())        # "low"
-print(result.risk.dominant_risk_factor)   # "Baseline"
+print(result.risk.dominant_risk_factor)   # "Descent profile pressure exposure"
 
 # Pilot with peak-URI (day 4–7) and allergic rhinitis, USAFSAM Type I
 risky = PatientState(uri="day_4_7", rhinitis="allergic")
-r2 = simulate(risky, USAFSAM_TYPE_I)
-print(r2.risk.p_barotitis)               # ~0.08 → HIGH
+r2 = simulate(risky, USAFSAM_TYPE_I, rng_seed=2026)
+print(r2.risk.p_barotitis)                # ~0.99
+print(r2.risk.risk_category())            # "very_high"
 print(r2.risk.dominant_risk_factor)       # "Acute URI (day_4_7)"
-print(r2.risk.recommended_max_descent_ft_min)
+print(r2.risk.recommended_max_descent_ft_min)  # 600
 ```
 
 Available chamber profiles:
@@ -434,6 +435,45 @@ barotrauma_model/
 ├── FUTURE_WORK.md                # v1-era roadmap (mostly superseded by v2)
 └── README.md
 ```
+
+---
+
+## Model Upgrade Roadmap
+
+This roadmap reflects a second-pass methods audit completed in June 2026. Evidence checks were run with Consensus and paper-search before committing these items. Any P0 or P1 change that shifts pressure trajectories should be followed by fixture regeneration, FAC cohort recalibration, Sobol-cache refresh, and external-validation reruns.
+
+### P0 - physics correctness
+
+- **Replace the high-altitude pressure model with ISA/U.S. Standard Atmosphere pressure altitude.** The current v2 exponential approximation gives ~329.6 mmHg at 25,000 ft, while the tropospheric pressure-altitude value is ~282 mmHg. Add pinned checks for 0 ft, Bogota 8,530 ft, 25,000 ft, and 35,000 ft, then update Python, API fixtures, frontend helpers, and validation fixtures together. Pressure altitude is foundational for chamber profiles, and Kanick-Doyle explicitly models middle-ear response to cabin-pressure change.
+- **Regenerate calibration and validation artifacts after the atmosphere fix.** Recompute `calibrated.json`, `abc_posterior.json`, `sobol_indices.json`, Kanick-Doyle/Groth fixtures, and Italian-cohort validation summaries. A pressure change of this size will alter peak |delta P|, time over threshold, hazard scaling, and the apparent agreement with validation cohorts.
+- **Make middle-ear volume state PV-consistent after every ET event.** Recompute effective volume after passive venting, swallow, Valsalva, PET override, and pressure-lock updates before persisting the next state. Doyle's formal pressure-regulation model treats pressure, compartment volume, gas composition, and pathway flows as coupled state variables; the integrator should not carry a stale Boyle-law volume after an equalization event.
+- **Wire patient-specific tympanic-membrane anatomy into compliance, or remove those public fields.** `PatientAnatomy.tm_area_cm2` and `tm_stiffness_mmHg_per_ml` are currently accepted but do not affect `tm_displacement_ml()`. Kanick-Doyle identifies the ratio of maximum tympanic-membrane displacement to middle-ear volume as a relevant buffer, so exposed anatomy should either influence the simulation or be excluded from the API.
+
+### P1 - methods and clinical-state fidelity
+
+- **Refactor the PET/rhinitis/URI interaction state machine.** PET-S1 should not simply hard-zero the pressure gradient when allergic rhinitis, chronic rhinosinusitis, acute URI, recumbency, or sniffing behavior can produce intermittent obstruction or paradoxical closure. Add transition tests for PET-S1 + rhinitis/URI and PET-S2/S3 states instead of relying on a single override.
+- **Split BDET benefit from post-BDET PET complication risk.** Obstructive ETD improvement after balloon dilation and post-procedure patulous symptoms are clinically different states. Model them separately, with tests that severe preoperative inflammation and repeat procedures can increase PET-like risk while successful dilatory-ETD treatment lowers active resistance.
+- **Decide and document stochastic reproducibility.** The public docstring says `rng_seed=None` is deterministic, but `np.random.default_rng(None)` is nondeterministic. Either change the default to a fixed seed for reproducible science outputs, or document nondeterminism and require explicit seeds in examples, calibration, validation, and manuscripts.
+- **Clarify the Doyle 2017 gas-exchange scope.** The README describes species-resolved gas exchange as part of the core, while `simulate(..., gas_exchange_full=False)` defaults to trans-mucosal-only behavior. Decide whether full multi-pathway gas exchange is the default scientific model or an optional long-exposure extension, then align docs, model card, and validation tests.
+
+### P2 - robustness and maintainability
+
+- **Correct optional ET muscle-mechanics timing before making it a default.** The `et_muscle.py` comments describe recent-swallow priming, but the current timing formula increases the boost with time since last swallow; its initial sentinel can also saturate adhesion when enabled. Add directionality tests before using it in production calibration.
+- **Add validity-envelope checks for extreme altitude and gas composition.** Guard against negative nitrogen fractions and nonphysical default total pressure in `GasComposition`, and reject or explicitly document chamber profiles outside the validated altitude range.
+- **Restore or remove broken methodology links.** The README references `docs/research_notes/` and `docs/model_card.md`, but those paths are absent in the current tree. Either restore the source documents or replace those links with the living roadmap and generated validation artifacts.
+- **Synchronize calibration claims and examples.** Keep the README, `calibration.py` defaults, `calibrated.json`, tests, and quick-start outputs on the same FAC target and seed. Add a CI check that executes the quick-start snippets and fails on drift.
+
+### Evidence links used for this roadmap
+
+- Kanick S. C. & Doyle W. J. (2005), *Barotrauma during air travel: predictions of a mathematical model*: [doi:10.1152/japplphysiol.00974.2004](https://doi.org/10.1152/japplphysiol.00974.2004), [PMID 15608090](https://pubmed.ncbi.nlm.nih.gov/15608090/).
+- Doyle W. J. (2017), *A formal description of middle ear pressure-regulation*: [doi:10.1016/j.heares.2017.08.005](https://doi.org/10.1016/j.heares.2017.08.005), [PMID 28917121](https://pubmed.ncbi.nlm.nih.gov/28917121/).
+- U.S. Standard Atmosphere reference table: [doi:10.21236/ada320208](https://doi.org/10.21236/ada320208).
+- Mandel E. M. et al. (2016), age-6 ET function/FGE comparison: [doi:10.1177/0194599815620149](https://doi.org/10.1177/0194599815620149), [PMID 26626132](https://pubmed.ncbi.nlm.nih.gov/26626132/).
+- Ward B. K., Ashry Y., & Poe D. S. (2017), PETD demographics and comorbidities: [doi:10.1097/MAO.0000000000001543](https://doi.org/10.1097/MAO.0000000000001543), [PMID 28796094](https://pubmed.ncbi.nlm.nih.gov/28796094/).
+- Juszczak H. M. & Loftus P. A. (2020), allergy and ETD review: [doi:10.1007/s11882-020-00951-3](https://doi.org/10.1007/s11882-020-00951-3).
+- Poe D. et al. (2018), balloon dilation randomized controlled trial: [doi:10.1002/lary.26827](https://doi.org/10.1002/lary.26827), [PMID 28940574](https://pubmed.ncbi.nlm.nih.gov/28940574/).
+- Hubbell R. D. et al. (2023), PETD symptoms following balloon dilation: [doi:10.1002/lary.30659](https://doi.org/10.1002/lary.30659), [PMID 36929856](https://pubmed.ncbi.nlm.nih.gov/36929856/).
+- Raymond K. M. et al. (2022), systematic review of ET procedures for baro-challenge ETD: [Consensus record](https://consensus.app/papers/a-systematic-review-of-eustachian-tube-procedures-for-raymond-shih/c975a43f8fa65e9487abebb1e75a3aff/?utm_source=chatgpt).
 
 ---
 
