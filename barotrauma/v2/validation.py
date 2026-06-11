@@ -56,16 +56,17 @@ class CohortBenchmark:
         return _wilson_ci(self.observed_prevalence, self.n_subjects)
 
 
-# Pre-screened aircrew priors: Italian AF bars flying with URI; ETD is
-# filtered by pre-chamber tympanometry. These priors are therefore tighter
-# than the FAC trainee default.
+# Pre-screened aircrew priors: Italian AF pre-chamber screening bars active
+# URI and filters ETD by tympanometry. The residual recent-URI fraction is
+# therefore a transfer prior for resolving/asymptomatic cases, not a general
+# population prevalence.
 ITALIAN_AF_PRESCREENED = CohortPriors(
-    uri_none=1.0 - 0.015 - 0.05,                # ~1.5% active, ~5% recent
-    uri_day_1_3=0.015 * 0.5,
-    uri_day_4_7=0.015 * 0.5,
-    uri_day_8_14=0.05 * 0.5,
-    uri_day_15_21=0.05 * 0.3,
-    uri_day_22_28=0.05 * 0.2,
+    uri_none=1.0 - 0.02,                        # active URI excluded; ~2% recent
+    uri_day_1_3=0.0,
+    uri_day_4_7=0.0,
+    uri_day_8_14=0.02 * 0.5,
+    uri_day_15_21=0.02 * 0.3,
+    uri_day_22_28=0.02 * 0.2,
     ar_prev=0.10,                                # lower than general pop
     crs_prev=0.015,
     pet_prev=0.005,

@@ -63,19 +63,69 @@ export const TM_COMPLIANCE_ML_PER_MMHG = TM_MAX_DISPLACEMENT_ML / 100.0;
 /** Standard atmospheric pressure at sea level (mmHg) */
 export const P0_MMHG = 760.0;
 
-/** Scale height for barometric formula (ft) */
+/** Legacy scale height for the old isothermal barometric approximation (ft) */
 export const SCALE_HEIGHT_FT = 29921.0;
+
+/** Feet-to-meter conversion */
+export const FT_TO_M = 0.3048;
+
+/** ISA sea-level temperature (K) */
+export const ISA_SEA_LEVEL_TEMP_K = 288.15;
+
+/** ISA tropospheric lapse rate (K/m) */
+export const ISA_TROPOSPHERIC_LAPSE_K_PER_M = 0.0065;
+
+/** ISA tropopause pressure-altitude boundary (m) */
+export const ISA_TROPOPAUSE_ALT_M = 11000.0;
+
+/** Standard gravity (m/s^2) */
+export const ACCEL_G_M_S2 = 9.80665;
+
+/** Dry-air molar mass (kg/mol) */
+export const ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL = 0.0289644;
+
+/** Universal gas constant (J/mol/K) */
+export const ISA_GAS_CONSTANT_J_PER_MOL_K = 8.3144598;
+
+const ISA_TROPOSPHERE_EXPONENT =
+  (ACCEL_G_M_S2 * ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL) /
+  (ISA_GAS_CONSTANT_J_PER_MOL_K * ISA_TROPOSPHERIC_LAPSE_K_PER_M);
+
+const ISA_TROPOPAUSE_TEMP_K =
+  ISA_SEA_LEVEL_TEMP_K - ISA_TROPOSPHERIC_LAPSE_K_PER_M * ISA_TROPOPAUSE_ALT_M;
+
+const ISA_TROPOPAUSE_PRESSURE_MMHG =
+  P0_MMHG *
+  Math.pow(ISA_TROPOPAUSE_TEMP_K / ISA_SEA_LEVEL_TEMP_K, ISA_TROPOSPHERE_EXPONENT);
 
 // ============================================================================
 // Utility Functions
 // ============================================================================
 
 /**
- * Convert altitude to pressure using standard atmosphere model
- * P = P₀ × exp(-h/H) where H ≈ 29,921 ft
+ * Convert pressure altitude to pressure using the U.S. Standard Atmosphere.
  */
 export function altitudeToPressureMmHg(altitudeFt: number): number {
-  return P0_MMHG * Math.exp(-altitudeFt / SCALE_HEIGHT_FT);
+  const altitudeM = altitudeFt * FT_TO_M;
+  if (altitudeM <= ISA_TROPOPAUSE_ALT_M) {
+    return (
+      P0_MMHG *
+      Math.pow(
+        1.0 - (ISA_TROPOSPHERIC_LAPSE_K_PER_M * altitudeM) / ISA_SEA_LEVEL_TEMP_K,
+        ISA_TROPOSPHERE_EXPONENT
+      )
+    );
+  }
+
+  return (
+    ISA_TROPOPAUSE_PRESSURE_MMHG *
+    Math.exp(
+      (-ACCEL_G_M_S2 *
+        ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL *
+        (altitudeM - ISA_TROPOPAUSE_ALT_M)) /
+        (ISA_GAS_CONSTANT_J_PER_MOL_K * ISA_TROPOPAUSE_TEMP_K)
+    )
+  );
 }
 
 /**
@@ -149,7 +199,7 @@ function categorizeRisk(score: number): RiskCategory {
  * Simulate hypobaric chamber descent and calculate barotrauma risk
  * 
  * Physics:
- * - Ambient pressure rises during descent (exponential with altitude)
+ * - Ambient pressure rises during descent (ISA pressure altitude)
  * - Middle ear attempts to equalize via Eustachian tube
  * - Negative ΔP indicates tympanic membrane pulled inward
  * - ET dysfunction reduces equalization rate

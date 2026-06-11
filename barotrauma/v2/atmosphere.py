@@ -2,8 +2,8 @@
 barotrauma.v2.atmosphere
 ========================
 
-Altitude ↔ pressure utilities. Uses the isothermal standard-atmosphere fit
-matching Kanick-Doyle 2005 (P = P0·exp(-z/H), H = 29921 ft).
+Altitude ↔ pressure utilities. Uses the 1976 U.S. Standard Atmosphere
+pressure-altitude relationship for the troposphere and lower stratosphere.
 """
 
 from __future__ import annotations
@@ -13,18 +13,85 @@ from typing import Iterable
 import numpy as np
 from numpy.typing import NDArray
 
-from .constants import P0_MMHG, SCALE_HEIGHT_FT
+from .constants import ACCEL_G_M_S2, P0_MMHG
 from .types import ChamberProfile
+
+FT_TO_M: float = 0.3048
+ISA_SEA_LEVEL_TEMP_K: float = 288.15
+ISA_TROPOSPHERIC_LAPSE_K_PER_M: float = 0.0065
+ISA_TROPOPAUSE_ALT_M: float = 11_000.0
+ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL: float = 0.0289644
+ISA_GAS_CONSTANT_J_PER_MOL_K: float = 8.3144598
+
+ISA_TROPOSPHERE_EXPONENT: float = (
+    ACCEL_G_M_S2
+    * ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL
+    / (ISA_GAS_CONSTANT_J_PER_MOL_K * ISA_TROPOSPHERIC_LAPSE_K_PER_M)
+)
+ISA_TROPOPAUSE_TEMP_K: float = (
+    ISA_SEA_LEVEL_TEMP_K
+    - ISA_TROPOSPHERIC_LAPSE_K_PER_M * ISA_TROPOPAUSE_ALT_M
+)
+ISA_TROPOPAUSE_PRESSURE_MMHG: float = P0_MMHG * (
+    ISA_TROPOPAUSE_TEMP_K / ISA_SEA_LEVEL_TEMP_K
+) ** ISA_TROPOSPHERE_EXPONENT
 
 
 def altitude_to_pressure_mmHg(altitude_ft: float | NDArray[np.float64]) -> NDArray[np.float64] | float:
-    """Standard atmosphere isothermal fit: P(z) = P0·exp(-z/H)."""
-    return P0_MMHG * np.exp(-np.asarray(altitude_ft) / SCALE_HEIGHT_FT)
+    """
+    Convert pressure altitude in feet to ambient pressure in mmHg.
+
+    Implements the U.S. Standard Atmosphere lapse-rate relation through the
+    troposphere and the isothermal lower-stratosphere relation above 11 km.
+    This covers the model's chamber profiles up to at least 50,000 ft.
+    """
+    altitude_arr = np.asarray(altitude_ft, dtype=np.float64)
+    altitude_m = altitude_arr * FT_TO_M
+    pressure = np.empty_like(altitude_m, dtype=np.float64)
+
+    in_troposphere = altitude_m <= ISA_TROPOPAUSE_ALT_M
+    pressure[in_troposphere] = P0_MMHG * (
+        1.0
+        - ISA_TROPOSPHERIC_LAPSE_K_PER_M
+        * altitude_m[in_troposphere]
+        / ISA_SEA_LEVEL_TEMP_K
+    ) ** ISA_TROPOSPHERE_EXPONENT
+
+    pressure[~in_troposphere] = ISA_TROPOPAUSE_PRESSURE_MMHG * np.exp(
+        -ACCEL_G_M_S2
+        * ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL
+        * (altitude_m[~in_troposphere] - ISA_TROPOPAUSE_ALT_M)
+        / (ISA_GAS_CONSTANT_J_PER_MOL_K * ISA_TROPOPAUSE_TEMP_K)
+    )
+    return float(pressure) if pressure.ndim == 0 else pressure
 
 
 def pressure_to_altitude_ft(pressure_mmHg: float | NDArray[np.float64]) -> NDArray[np.float64] | float:
     """Inverse of altitude_to_pressure_mmHg."""
-    return -SCALE_HEIGHT_FT * np.log(np.asarray(pressure_mmHg) / P0_MMHG)
+    pressure_arr = np.asarray(pressure_mmHg, dtype=np.float64)
+    if np.any(pressure_arr <= 0.0):
+        raise ValueError("pressure_mmHg must be positive")
+
+    altitude_m = np.empty_like(pressure_arr, dtype=np.float64)
+    in_troposphere = pressure_arr >= ISA_TROPOPAUSE_PRESSURE_MMHG
+    altitude_m[in_troposphere] = (
+        ISA_SEA_LEVEL_TEMP_K
+        / ISA_TROPOSPHERIC_LAPSE_K_PER_M
+        * (
+            1.0
+            - (pressure_arr[in_troposphere] / P0_MMHG)
+            ** (1.0 / ISA_TROPOSPHERE_EXPONENT)
+        )
+    )
+
+    altitude_m[~in_troposphere] = ISA_TROPOPAUSE_ALT_M - (
+        ISA_GAS_CONSTANT_J_PER_MOL_K
+        * ISA_TROPOPAUSE_TEMP_K
+        / (ACCEL_G_M_S2 * ISA_DRY_AIR_MOLAR_MASS_KG_PER_MOL)
+    ) * np.log(pressure_arr[~in_troposphere] / ISA_TROPOPAUSE_PRESSURE_MMHG)
+
+    altitude_ft = altitude_m / FT_TO_M
+    return float(altitude_ft) if altitude_ft.ndim == 0 else altitude_ft
 
 
 def discretize_profile(

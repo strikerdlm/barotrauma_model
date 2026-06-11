@@ -31,7 +31,7 @@ PA_PER_MMHG: float = 133.322
 
 # ------------------------------------------------------ atmosphere -----
 P0_MMHG: float = 760.0                    # Sea-level pressure
-SCALE_HEIGHT_FT: float = 29921.0          # US Std Atmosphere isothermal fit
+SCALE_HEIGHT_FT: float = 29921.0          # Legacy isothermal fit; v2 uses ISA in atmosphere.py
 ACCEL_G_M_S2: float = 9.80665             # Standard gravity
 
 # -------------------------------------------------------- ME volumes ---

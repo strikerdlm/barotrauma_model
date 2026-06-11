@@ -26,16 +26,18 @@ from barotrauma.v2 import constants as C
 
 
 def test_altitude_pressure_monotonic():
-    from barotrauma.v2.atmosphere import altitude_to_pressure_mmHg
+    from barotrauma.v2.atmosphere import altitude_to_pressure_mmHg, pressure_to_altitude_ft
 
-    # Sea level ≈ 760 mmHg
-    assert abs(float(altitude_to_pressure_mmHg(0.0)) - 760.0) < 0.01
-    # 25,000 ft ≈ 282 mmHg per KD2005 Table 3 / standard tables
-    assert 270.0 < float(altitude_to_pressure_mmHg(25000)) < 340.0
+    # U.S. Standard Atmosphere pressure-altitude checkpoints.
+    assert float(altitude_to_pressure_mmHg(0.0)) == pytest.approx(760.0, abs=0.01)
+    assert float(altitude_to_pressure_mmHg(8530.0)) == pytest.approx(553.17, abs=0.05)
+    assert float(altitude_to_pressure_mmHg(25000.0)) == pytest.approx(282.03, abs=0.05)
+    assert float(altitude_to_pressure_mmHg(35000.0)) == pytest.approx(178.84, abs=0.05)
     # Strict monotonic decrease
     alts = np.array([0, 5000, 10000, 15000, 20000, 25000, 30000, 35000])
     ps = altitude_to_pressure_mmHg(alts.astype(float))
     assert np.all(np.diff(ps) < 0)
+    assert pressure_to_altitude_ft(ps) == pytest.approx(alts, abs=0.05)
 
 
 def test_groth_1986_parity_order_of_magnitude():

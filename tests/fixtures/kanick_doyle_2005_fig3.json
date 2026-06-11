@@ -3,8 +3,8 @@
   "patient": "PatientState() \u2014 healthy baseline (all defaults)",
   "rng_seed": 2026,
   "dt_s": 0.1,
-  "max_abs_delta_p_mmHg": 17.885688220017187,
-  "p_barotitis": 0.0,
+  "max_abs_delta_p_mmHg": 19.591362472650417,
+  "p_barotitis": 1.608316628209927e-06,
   "risk_category": "low",
   "samples": [
     {
@@ -16,98 +16,98 @@
     {
       "t_s": 5.0,
       "altitude_ft": 160.0,
-      "p_ambient_mmHg": 755.9468114058734,
-      "delta_p_mmHg": 2.721950784949513
+      "p_ambient_mmHg": 755.6160612323642,
+      "delta_p_mmHg": 2.9451868849480434
     },
     {
       "t_s": 10.0,
       "altitude_ft": 320.0,
-      "p_ambient_mmHg": 751.9152390456672,
-      "delta_p_mmHg": 5.919518789090262
+      "p_ambient_mmHg": 751.252621559868,
+      "delta_p_mmHg": 6.587619553361378
     },
     {
       "t_s": 15.0,
       "altitude_ft": 480.0,
-      "p_ambient_mmHg": 747.9051676369174,
-      "delta_p_mmHg": 9.92959019784007
+      "p_ambient_mmHg": 746.909607571917,
+      "delta_p_mmHg": 10.934958785216054
     },
     {
       "t_s": 20.0,
       "altitude_ft": 640.0,
-      "p_ambient_mmHg": 743.9164825119775,
-      "delta_p_mmHg": 13.918275322780005
+      "p_ambient_mmHg": 742.5869460402677,
+      "delta_p_mmHg": 15.261852166512313
     },
     {
       "t_s": 25.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.568375124317527
     },
     {
       "t_s": 30.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.572427265926308
     },
     {
       "t_s": 35.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.576392970830852
     },
     {
       "t_s": 40.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.580274437978233
     },
     {
       "t_s": 45.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.584073808819085
     },
     {
       "t_s": 50.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 17.885688220017187
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 19.587793168818393
     },
     {
       "t_s": 55.0,
       "altitude_ft": 800.0,
-      "p_ambient_mmHg": 739.9490696147403,
-      "delta_p_mmHg": 12.162267989611685
+      "p_ambient_mmHg": 738.284563918771,
+      "delta_p_mmHg": 13.322175493271555
     },
     {
       "t_s": 60.0,
       "altitude_ft": 640.0,
-      "p_ambient_mmHg": 743.9164825119775,
-      "delta_p_mmHg": 8.194855092374496
+      "p_ambient_mmHg": 742.5869460402677,
+      "delta_p_mmHg": 9.036232882304603
     },
     {
       "t_s": 65.0,
       "altitude_ft": 480.0,
-      "p_ambient_mmHg": 747.9051676369174,
-      "delta_p_mmHg": 4.3020382854809895
+      "p_ambient_mmHg": 746.909607571917,
+      "delta_p_mmHg": 4.729657419851264
     },
     {
       "t_s": 70.0,
       "altitude_ft": 320.0,
-      "p_ambient_mmHg": 751.9152390456672,
-      "delta_p_mmHg": 1.5917641578936355
+      "p_ambient_mmHg": 751.252621559868,
+      "delta_p_mmHg": 1.7303499874267345
     },
     {
       "t_s": 75.0,
       "altitude_ft": 160.0,
-      "p_ambient_mmHg": 755.9468114058734,
-      "delta_p_mmHg": -1.1295483935622315
+      "p_ambient_mmHg": 755.6160612323642,
+      "delta_p_mmHg": -1.207966955005645
     },
     {
       "t_s": 79.0,
       "altitude_ft": 32.0,
-      "p_ambient_mmHg": 759.1876274281608,
-      "delta_p_mmHg": -3.314870068346522
+      "p_ambient_mmHg": 759.1215687890198,
+      "delta_p_mmHg": -3.5675095276235425
     }
   ]
 }

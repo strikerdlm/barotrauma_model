@@ -128,14 +128,14 @@ from barotrauma.v2.scenarios import FAC_BOGOTA_DEFAULT, USAFSAM_TYPE_I
 
 # Healthy pilot, FAC chamber profile
 result = simulate(PatientState(), FAC_BOGOTA_DEFAULT, rng_seed=2026)
-print(result.risk.p_barotitis)            # ~0.0035 (0.35%)
+print(result.risk.p_barotitis)            # ~0.0038 (0.38%)
 print(result.risk.risk_category())        # "low"
 print(result.risk.dominant_risk_factor)   # "Descent profile pressure exposure"
 
 # Pilot with peak-URI (day 4–7) and allergic rhinitis, USAFSAM Type I
 risky = PatientState(uri="day_4_7", rhinitis="allergic")
 r2 = simulate(risky, USAFSAM_TYPE_I, rng_seed=2026)
-print(r2.risk.p_barotitis)                # ~0.99
+print(r2.risk.p_barotitis)                # ~0.997
 print(r2.risk.risk_category())            # "very_high"
 print(r2.risk.dominant_risk_factor)       # "Acute URI (day_4_7)"
 print(r2.risk.recommended_max_descent_ft_min)  # 600
@@ -328,9 +328,9 @@ Results are written to `barotrauma/v2/calibrated.json` and auto-loaded on next i
 
 | Cohort | Observed | Simulated | Status |
 |--------|----------|-----------|--------|
-| Morgagni 2012 (25k ft) | 2.3% [1.13–4.62%] | 3.31% | Inside Wilson 95% CI |
-| Landolfi 2009 | 2.4% [1.22–4.66%] | 3.37% | Inside Wilson 95% CI |
-| Morgagni 2010 (mixed) | 1.5% [0.96–2.34%] | 3.27% (+0.91 pp) | Outside Wilson CI; within mixed-denominator tolerance |
+| Morgagni 2012 (25k ft) | 2.3% [1.13–4.62%] | 3.79% | Inside Wilson 95% CI |
+| Landolfi 2009 | 2.4% [1.22–4.66%] | 3.79% | Inside Wilson 95% CI |
+| Morgagni 2010 (mixed) | 1.5% [0.96–2.34%] | 3.79% (+2.29 pp) | Outside Wilson CI; within mixed-denominator tolerance |
 
 ---
 
@@ -444,8 +444,8 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 
 ### P0 - physics correctness
 
-- **Replace the high-altitude pressure model with ISA/U.S. Standard Atmosphere pressure altitude.** The current v2 exponential approximation gives ~329.6 mmHg at 25,000 ft, while the tropospheric pressure-altitude value is ~282 mmHg. Add pinned checks for 0 ft, Bogota 8,530 ft, 25,000 ft, and 35,000 ft, then update Python, API fixtures, frontend helpers, and validation fixtures together. Pressure altitude is foundational for chamber profiles, and Kanick-Doyle explicitly models middle-ear response to cabin-pressure change.
-- **Regenerate calibration and validation artifacts after the atmosphere fix.** Recompute `calibrated.json`, `abc_posterior.json`, `sobol_indices.json`, Kanick-Doyle/Groth fixtures, and Italian-cohort validation summaries. A pressure change of this size will alter peak |delta P|, time over threshold, hazard scaling, and the apparent agreement with validation cohorts.
+- **Completed: replace the high-altitude pressure model with ISA/U.S. Standard Atmosphere pressure altitude.** The v2 Python converter and frontend helper now use the standard-atmosphere lapse-rate relation and pin 0 ft, Bogota 8,530 ft, 25,000 ft (~282 mmHg), and 35,000 ft (~179 mmHg). Pressure altitude is foundational for chamber profiles, and Kanick-Doyle explicitly models middle-ear response to cabin-pressure change.
+- **Regenerate all downstream artifacts after the atmosphere fix.** `calibrated.json`, the Kanick-Doyle/Groth fixture, and Italian validation priors were refreshed with the ISA correction. Before the next methods release, also recompute `abc_posterior.json`, `sobol_indices.json`, manuscript figures, and any exported validation tables. A pressure change of this size alters peak |delta P|, time over threshold, hazard scaling, and external-transfer behavior.
 - **Make middle-ear volume state PV-consistent after every ET event.** Recompute effective volume after passive venting, swallow, Valsalva, PET override, and pressure-lock updates before persisting the next state. Doyle's formal pressure-regulation model treats pressure, compartment volume, gas composition, and pathway flows as coupled state variables; the integrator should not carry a stale Boyle-law volume after an equalization event.
 - **Wire patient-specific tympanic-membrane anatomy into compliance, or remove those public fields.** `PatientAnatomy.tm_area_cm2` and `tm_stiffness_mmHg_per_ml` are currently accepted but do not affect `tm_displacement_ml()`. Kanick-Doyle identifies the ratio of maximum tympanic-membrane displacement to middle-ear volume as a relevant buffer, so exposed anatomy should either influence the simulation or be excluded from the API.
 

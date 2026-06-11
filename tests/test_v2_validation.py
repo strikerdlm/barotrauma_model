@@ -45,11 +45,11 @@ def test_morgagni_2010_within_2_5pp_of_observed():
     than the formal CI check because the exact denominator mix is
     unpublished.
 
-    Tolerance was widened from ±2pp to ±2.5pp in v2.2.1 when the FAC
-    calibration anchor was re-fit against the pooled 2010-2026 cohort
-    (2.38% per-exposure / 6.97% career-3); the higher anchor uplifts every
-    Italian AF transfer and pushes Morgagni 2010 from +1.1pp to ~+1.8pp
-    outside. See `docs/Cohort FAC/analysis/phase2_summary.md §5`.
+    After the ISA pressure-altitude correction, this remains the loosest
+    external-transfer check because the exact screened/unscreened denominator
+    mix is unpublished. The stricter Italian pre-screening prior excludes
+    active URI, but the FAC 2.38% per-exposure anchor still uplifts this
+    benchmark toward the top of the allowed band.
     """
     b = validation.BENCHMARKS["morgagni_2010"]
     r = validation.validate_against_cohort(b, n_simulated=300, dt_s=0.5,
