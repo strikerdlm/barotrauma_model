@@ -3,8 +3,8 @@
   "patient": "PatientState() \u2014 healthy baseline (all defaults)",
   "rng_seed": 2026,
   "dt_s": 0.1,
-  "max_abs_delta_p_mmHg": 19.591362472650417,
-  "p_barotitis": 1.608316628209927e-06,
+  "max_abs_delta_p_mmHg": 17.62807413923474,
+  "p_barotitis": 0.0,
   "risk_category": "low",
   "samples": [
     {
@@ -17,97 +17,97 @@
       "t_s": 5.0,
       "altitude_ft": 160.0,
       "p_ambient_mmHg": 755.6160612323642,
-      "delta_p_mmHg": 2.9451868849480434
+      "delta_p_mmHg": 2.2623356091843334
     },
     {
       "t_s": 10.0,
       "altitude_ft": 320.0,
       "p_ambient_mmHg": 751.252621559868,
-      "delta_p_mmHg": 6.587619553361378
+      "delta_p_mmHg": 4.591027108385788
     },
     {
       "t_s": 15.0,
       "altitude_ft": 480.0,
       "p_ambient_mmHg": 746.909607571917,
-      "delta_p_mmHg": 10.934958785216054
+      "delta_p_mmHg": 8.942403653279825
     },
     {
       "t_s": 20.0,
       "altitude_ft": 640.0,
       "p_ambient_mmHg": 742.5869460402677,
-      "delta_p_mmHg": 15.261852166512313
+      "delta_p_mmHg": 13.273247003051551
     },
     {
       "t_s": 25.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.568375124317527
+      "delta_p_mmHg": 17.5836348121901
     },
     {
       "t_s": 30.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.572427265926308
+      "delta_p_mmHg": 17.5914688571429
     },
     {
       "t_s": 35.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.576392970830852
+      "delta_p_mmHg": 17.599135629818306
     },
     {
       "t_s": 40.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.580274437978233
+      "delta_p_mmHg": 17.60663938633411
     },
     {
       "t_s": 45.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.584073808819085
+      "delta_p_mmHg": 17.613984271518234
     },
     {
       "t_s": 50.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 19.587793168818393
+      "delta_p_mmHg": 17.6211743218347
     },
     {
       "t_s": 55.0,
       "altitude_ft": 800.0,
       "p_ambient_mmHg": 738.284563918771,
-      "delta_p_mmHg": 13.322175493271555
+      "delta_p_mmHg": 11.987185158397637
     },
     {
       "t_s": 60.0,
       "altitude_ft": 640.0,
       "p_ambient_mmHg": 742.5869460402677,
-      "delta_p_mmHg": 9.036232882304603
+      "delta_p_mmHg": 7.703284407196406
     },
     {
       "t_s": 65.0,
       "altitude_ft": 480.0,
       "p_ambient_mmHg": 746.909607571917,
-      "delta_p_mmHg": 4.729657419851264
+      "delta_p_mmHg": 3.913044316578521
     },
     {
       "t_s": 70.0,
       "altitude_ft": 320.0,
       "p_ambient_mmHg": 751.252621559868,
-      "delta_p_mmHg": 1.7303499874267345
+      "delta_p_mmHg": 1.6587696992277188
     },
     {
       "t_s": 75.0,
       "altitude_ft": 160.0,
       "p_ambient_mmHg": 755.6160612323642,
-      "delta_p_mmHg": -1.207966955005645
+      "delta_p_mmHg": -0.5997030877448424
     },
     {
       "t_s": 79.0,
       "altitude_ft": 32.0,
       "p_ambient_mmHg": 759.1215687890198,
-      "delta_p_mmHg": -3.5675095276235425
+      "delta_p_mmHg": -2.4093897296500018
     }
   ]
 }

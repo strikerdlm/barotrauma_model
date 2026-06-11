@@ -135,7 +135,7 @@ print(result.risk.dominant_risk_factor)   # "Descent profile pressure exposure"
 # Pilot with peak-URI (day 4–7) and allergic rhinitis, USAFSAM Type I
 risky = PatientState(uri="day_4_7", rhinitis="allergic")
 r2 = simulate(risky, USAFSAM_TYPE_I, rng_seed=2026)
-print(r2.risk.p_barotitis)                # ~0.997
+print(r2.risk.p_barotitis)                # ~1.0
 print(r2.risk.risk_category())            # "very_high"
 print(r2.risk.dominant_risk_factor)       # "Acute URI (day_4_7)"
 print(r2.risk.recommended_max_descent_ft_min)  # 600
@@ -446,7 +446,7 @@ This roadmap reflects a second-pass methods audit completed in June 2026. Eviden
 
 - **Completed: replace the high-altitude pressure model with ISA/U.S. Standard Atmosphere pressure altitude.** The v2 Python converter and frontend helper now use the standard-atmosphere lapse-rate relation and pin 0 ft, Bogota 8,530 ft, 25,000 ft (~282 mmHg), and 35,000 ft (~179 mmHg). Pressure altitude is foundational for chamber profiles, and Kanick-Doyle explicitly models middle-ear response to cabin-pressure change.
 - **Regenerate all downstream artifacts after the atmosphere fix.** `calibrated.json`, the Kanick-Doyle/Groth fixture, and Italian validation priors were refreshed with the ISA correction. Before the next methods release, also recompute `abc_posterior.json`, `sobol_indices.json`, manuscript figures, and any exported validation tables. A pressure change of this size alters peak |delta P|, time over threshold, hazard scaling, and external-transfer behavior.
-- **Make middle-ear volume state PV-consistent after every ET event.** Recompute effective volume after passive venting, swallow, Valsalva, PET override, and pressure-lock updates before persisting the next state. Doyle's formal pressure-regulation model treats pressure, compartment volume, gas composition, and pathway flows as coupled state variables; the integrator should not carry a stale Boyle-law volume after an equalization event.
+- **Completed: make middle-ear volume state PV-consistent after every ET event.** The integrator now recomputes effective volume after passive venting, swallow, Valsalva, PET override, and pressure-lock updates before persisting the next state; the Kanick-Doyle/Groth fixture was regenerated after this correction. Doyle's formal pressure-regulation model treats pressure, compartment volume, gas composition, and pathway flows as coupled state variables.
 - **Wire patient-specific tympanic-membrane anatomy into compliance, or remove those public fields.** `PatientAnatomy.tm_area_cm2` and `tm_stiffness_mmHg_per_ml` are currently accepted but do not affect `tm_displacement_ml()`. Kanick-Doyle identifies the ratio of maximum tympanic-membrane displacement to middle-ear volume as a relevant buffer, so exposed anatomy should either influence the simulation or be excluded from the API.
 
 ### P1 - methods and clinical-state fidelity

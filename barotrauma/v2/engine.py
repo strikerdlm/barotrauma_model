@@ -181,6 +181,7 @@ def simulate(
         if modifiers.is_patulous_patent and not modifiers.patulous_unstable:
             me.p_me_mmHg = p_amb_i
             me.gas = rescale_gas_to_total(me.gas, me.p_me_mmHg)
+            me.v_me_effective_ml = effective_me_volume_ml(0.0, patient.anatomy)
             delta_p[i] = 0.0
             p_me[i] = me.p_me_mmHg
             tm_disp[i] = 0.0
@@ -256,6 +257,7 @@ def simulate(
         # --- 6) commit state ---------------------------------------------
         me.p_me_mmHg = p_amb_i + dp
         me.gas = rescale_gas_to_total(me.gas, me.p_me_mmHg)
+        me.v_me_effective_ml = effective_me_volume_ml(dp, patient.anatomy)
         delta_p[i] = dp
         p_me[i] = me.p_me_mmHg
         tm_disp[i] = tm_displacement_ml(dp, patient.anatomy)

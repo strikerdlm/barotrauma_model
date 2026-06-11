@@ -18,7 +18,10 @@ from barotrauma.v2 import (
     RAPID_DESCENT_10K_FT_MIN,
     SLOW_DESCENT_1K_FT_MIN,
     USAFSAM_TYPE_I,
+    ChamberProfile,
+    ChamberSegment,
     EtFunction,
+    PatientAnatomy,
     PatientState,
     simulate,
 )
@@ -108,3 +111,32 @@ def test_trace_length_and_shape():
     assert len(t) == len(result.trace.delta_p_mmHg)
     # Time is strictly increasing
     assert np.all(np.diff(t) > 0)
+
+
+def test_passive_vent_commit_recomputes_effective_volume_for_next_step():
+    """
+    A passive ET opening mutates ΔP instantaneously. The next Boyle update must
+    start from the post-vent TM displacement, not from the larger pre-vent
+    displacement that triggered opening.
+    """
+    profile = ChamberProfile(
+        name="ascent-hold passive vent regression",
+        start_altitude_ft=0.0,
+        segments=(
+            ChamberSegment(duration_s=0.5, end_altitude_ft=2000.0, label="ascent"),
+            ChamberSegment(duration_s=2.0, end_altitude_ft=2000.0, label="hold"),
+        ),
+    )
+    patient = PatientState(
+        anatomy=PatientAnatomy(tm_max_displacement_ml=0.5),
+        enable_valsalva=False,
+    )
+
+    result = simulate(patient, profile, dt_s=0.1, rng_seed=2026)
+    vent_idx = int(np.where(result.trace.et_open)[0][-1])
+    assert result.trace.altitude_ft[vent_idx] == pytest.approx(2000.0)
+    assert result.trace.delta_p_mmHg[vent_idx] == pytest.approx(patient.et.closing_mmHg)
+
+    first_hold_idx = vent_idx + 1
+    assert result.trace.altitude_ft[first_hold_idx] == pytest.approx(2000.0)
+    assert result.trace.delta_p_mmHg[first_hold_idx] < patient.et.closing_mmHg + 0.01
