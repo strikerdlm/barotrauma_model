@@ -6,6 +6,8 @@
 
 Physics-informed, pathophysiology-aware middle-ear barotrauma (MEB) risk simulator. Calibrated to the Colombian Aerospace Force (FAC) DIMAE hypobaric-chamber registry 2010–2026 — 173 MEB events in 7,271 exposures (2.38% per-exposure; projected 6.97% career-3 prevalence); URI and ET dysfunction are the dominant risk factors. Externally validated against three published Italian Air Force cohorts without refitting.
 
+**Repository boundary:** this repo is for model code, tests, APIs, dashboards, reproducibility outputs, and project-level markdown. Manuscript submission packages, rejection tracking, cover letters, journal-specific files, and upload-ready artifacts belong in `/root/repos/manuscripts/barotrauma` and remote `https://github.com/strikerdlm/manuscripts`. See [`MANUSCRIPT_BOUNDARY.md`](MANUSCRIPT_BOUNDARY.md).
+
 **Authors:**
 - **Dr. Diego L. Malpica, MD** — Aerospace Medicine, DIMAE, Colombian Aerospace Force ([ORCID 0000-0002-2257-4940](https://orcid.org/0000-0002-2257-4940))
 - **Dr. Marian A. Farfán, MD** — Aerospace Medicine, DIMAE, Colombian Aerospace Force

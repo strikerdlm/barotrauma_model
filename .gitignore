@@ -1,5 +1,6 @@
 # Submission packages live in the manuscripts repo, not here
 submissions/
+manuscripts/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
